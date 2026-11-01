@@ -1,20 +1,26 @@
 import React from 'react';
-import { Language, PageView } from '@/types';
+import { Language, PageView, HeaderFooterSettings } from '@/types';
+import { useHeaderFooter } from '@/hooks/useHeaderFooter';
 
 interface HeaderProps {
   currentView: PageView;
   setCurrentView: (view: PageView) => void;
   language?: Language;
   setLanguage?: (lang: Language) => void;
-  cartItems?: any[];
-  onOpenOrderPad?: () => void;
-  onOpenReservation?: () => void;
+  settings?: HeaderFooterSettings | null;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   currentView,
   setCurrentView,
+  settings: propSettings,
 }) => {
+  const { settings: fetchedSettings } = useHeaderFooter();
+  const settings = propSettings || fetchedSettings;
+
+  const logoSrc = settings?.logoUrl || '/images/common/1-removebg-preview.png';
+  const phoneNumber = settings?.phoneNumber || '039 376 2717';
+  const showHotline = settings?.hotlineVisible !== false;
 
   return (
     <header className="fixed top-0 w-full z-50 bg-[#fbf9f6]/95 backdrop-blur-xl border-b border-[#eae8e5] shadow-[0_1px_8px_rgba(0,0,0,0.03)]">
@@ -28,14 +34,14 @@ export const Header: React.FC<HeaderProps> = ({
           className="flex items-center text-left group cursor-pointer shrink-0 z-10 py-1"
         >
           <img
-            src="/images/common/1-removebg-preview.png"
+            src={logoSrc}
             alt="봄돈까스 CUTLET SPRING"
             className="h-14 sm:h-20 md:h-24 w-auto object-contain"
           />
         </button>
 
-        {/* Center: Navigation Tabs (Home & Menu) */}
-        <nav className="absolute left-1/2 -translate-x-1/2 flex items-center gap-5 sm:gap-10 md:gap-12 z-10">
+        {/* Center: Navigation Tabs (Home, Menu) */}
+        <nav className="absolute left-1/2 -translate-x-1/2 flex items-center gap-6 sm:gap-10 md:gap-12 z-10">
           <button
             onClick={() => {
               setCurrentView('home');
@@ -64,19 +70,21 @@ export const Header: React.FC<HeaderProps> = ({
           </button>
         </nav>
 
-        {/* Right Info: Phone Number strictly aligned to the right (Icon-only on mobile, full number on sm+) */}
+        {/* Right Info: Phone Number strictly aligned to the right (No Admin link!) */}
         <div className="flex items-center justify-end shrink-0 z-10">
-          <a
-            href="tel:0393762717"
-            aria-label="Call 039 376 2717"
-            title="039 376 2717"
-            className="flex items-center justify-center gap-2 p-2 sm:px-4 sm:py-2.5 border border-[#eae8e5] bg-[#f5f3f0] hover:bg-[#eae8e5] text-[#1b1c1a] hover:text-[#af101a] rounded-lg transition-colors font-label-md tracking-wider font-bold shadow-2xs"
-          >
-            <span className="material-symbols-outlined text-[19px] sm:text-[21px] text-[#af101a]">call</span>
-            <span className="hidden sm:inline font-price-numeral tracking-tight text-xs sm:text-sm md:text-[15px] font-bold whitespace-nowrap">
-              039 376 2717
-            </span>
-          </a>
+          {showHotline && (
+            <a
+              href={`tel:${phoneNumber.replace(/\s+/g, '')}`}
+              aria-label={`Call ${phoneNumber}`}
+              title={phoneNumber}
+              className="flex items-center justify-center gap-2 p-2 sm:px-4 sm:py-2.5 border border-[#eae8e5] bg-[#f5f3f0] hover:bg-[#eae8e5] text-[#1b1c1a] hover:text-[#af101a] rounded-lg transition-colors font-label-md tracking-wider font-bold shadow-2xs"
+            >
+              <span className="material-symbols-outlined text-[19px] sm:text-[21px] text-[#af101a]">call</span>
+              <span className="hidden sm:inline font-price-numeral tracking-tight text-xs sm:text-sm md:text-[15px] font-bold whitespace-nowrap">
+                {phoneNumber}
+              </span>
+            </a>
+          )}
         </div>
       </div>
     </header>
