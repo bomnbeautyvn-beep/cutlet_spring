@@ -72,3 +72,4 @@ public class HybridCsrfTokenRepository implements CsrfTokenRepository {
         return null;
     }
 }
+
