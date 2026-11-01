@@ -30,8 +30,24 @@ export default function App() {
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
-  // Dedicated Admin routing: /admin or /admin/login
-  const isAdminRoute = routePath.startsWith('/admin');
+  // Dedicated Admin routing: /admin, /admin/login, or /fe/admin
+  const isAdminRoute = routePath.startsWith('/admin') || routePath.startsWith('/fe/admin');
+
+  // When unauthenticated, entering any admin route navigates to /admin/login
+  useEffect(() => {
+    if (isAdminRoute && !isAuthenticated && routePath !== '/admin/login') {
+      window.history.replaceState(null, '', '/admin/login');
+      setRoutePath('/admin/login');
+    }
+  }, [isAdminRoute, isAuthenticated, routePath]);
+
+  // When authenticated, if at /admin/login or /fe/admin, normalize to /admin
+  useEffect(() => {
+    if (isAdminRoute && isAuthenticated && (routePath === '/admin/login' || routePath.startsWith('/fe/admin'))) {
+      window.history.replaceState(null, '', '/admin');
+      setRoutePath('/admin');
+    }
+  }, [isAdminRoute, isAuthenticated, routePath]);
 
   if (isAdminRoute) {
     if (!isAuthenticated) {
@@ -58,11 +74,6 @@ export default function App() {
           </div>
         </div>
       );
-    }
-
-    // Authenticated admin: if at /admin/login, normalize to /admin
-    if (routePath === '/admin/login') {
-      window.history.replaceState(null, '', '/admin');
     }
 
     return (
