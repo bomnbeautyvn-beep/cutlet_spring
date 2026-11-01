@@ -1,4 +1,8 @@
 spring:
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://${DB_HOST:postgres}:${DB_PORT:5432}/${DB_NAME:${POSTGRES_DB:cutlet_spring}}}
     username: ${SPRING_DATASOURCE_USERNAME:${DB_USERNAME:${POSTGRES_USER:cutlet_user}}}

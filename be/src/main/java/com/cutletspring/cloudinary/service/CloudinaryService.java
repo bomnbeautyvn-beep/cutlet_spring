@@ -36,8 +36,6 @@ public class CloudinaryService {
             "image/gif"
     );
 
-    private static final long MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
-
     public CloudinaryUploadResult uploadImage(MultipartFile file) {
         validateFile(file);
 
@@ -110,10 +108,6 @@ public class CloudinaryService {
     private void validateFile(MultipartFile file) {
         if (file == null || file.isEmpty()) {
             throw new BadRequestException("Image file cannot be empty");
-        }
-
-        if (file.getSize() > MAX_FILE_SIZE) {
-            throw new BadRequestException("Image file size exceeds the 10MB limit");
         }
 
         String contentType = file.getContentType();
