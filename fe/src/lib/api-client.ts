@@ -18,6 +18,11 @@ export const apiClient = {
     return res.data;
   },
 
+  patch: async <T>(url: string, data?: unknown, config?: AxiosRequestConfig): Promise<ApiResponse<T>> => {
+    const res = await api.patch<ApiResponse<T>>(url, data, config);
+    return res.data;
+  },
+
   delete: async <T>(url: string, config?: AxiosRequestConfig): Promise<ApiResponse<T>> => {
     const res = await api.delete<ApiResponse<T>>(url, config);
     return res.data;

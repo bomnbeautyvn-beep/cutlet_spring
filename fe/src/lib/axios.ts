@@ -3,16 +3,32 @@ import { API_BASE_URL } from '@/constants/api.constants';
 
 export const api: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
   },
   timeout: 15000,
 });
 
+/**
+ * Extracts CSRF token from document cookie populated by Spring Security's CookieCsrfTokenRepository
+ */
+function getCsrfTokenFromCookie(): string | null {
+  if (typeof document === 'undefined') return null;
+  const match = document.cookie.match(/(?:^|;\s*)XSRF-TOKEN=([^;]*)/);
+  return match ? decodeURIComponent(match[1]) : null;
+}
+
 // Request interceptor
 api.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    // Inject auth token or session header if available in the future
+    const method = config.method?.toUpperCase();
+    if (method && ['POST', 'PUT', 'PATCH', 'DELETE'].includes(method)) {
+      const token = getCsrfTokenFromCookie();
+      if (token && !config.headers['X-XSRF-TOKEN']) {
+        config.headers['X-XSRF-TOKEN'] = token;
+      }
+    }
     return config;
   },
   (error) => Promise.reject(error)
@@ -22,7 +38,6 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response: AxiosResponse) => response,
   (error) => {
-    // Log or handle standard API errors
     const customError = {
       message: error.response?.data?.message || error.message || 'An unexpected error occurred',
       status: error.response?.status,
