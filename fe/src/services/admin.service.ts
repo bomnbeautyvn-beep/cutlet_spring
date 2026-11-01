@@ -1,8 +1,8 @@
 import { apiClient } from '@/lib/api-client';
 import { api } from '@/lib/axios';
 import { API_ENDPOINTS } from '@/constants/api.constants';
-import { MenuItem, MenuCategory, RestaurantSettings } from '@/types';
-export type { RestaurantSettings };
+import { MenuItem, MenuCategory, RestaurantSettings, EmailConfig, UpdateEmailConfigPayload, SendTestEmailPayload } from '@/types';
+export type { RestaurantSettings, EmailConfig, UpdateEmailConfigPayload, SendTestEmailPayload };
 
 export interface PageResult<T> {
   content: T[];
@@ -225,6 +225,29 @@ export const adminService = {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
     return res.data?.data;
+  },
+
+  /**
+   * Dynamic Email & SMTP Configuration Management
+   */
+  async getEmailConfig(): Promise<EmailConfig> {
+    const res = await apiClient.get<EmailConfig>(API_ENDPOINTS.ADMIN.EMAIL.GET);
+    return res.data;
+  },
+
+  async updateEmailConfig(payload: UpdateEmailConfigPayload): Promise<EmailConfig> {
+    const res = await apiClient.put<EmailConfig>(API_ENDPOINTS.ADMIN.EMAIL.UPDATE, payload);
+    return res.data;
+  },
+
+  async testSmtpConnection(): Promise<{ success: boolean; message: string }> {
+    const res = await apiClient.post<void>(API_ENDPOINTS.ADMIN.EMAIL.TEST_CONNECTION);
+    return { success: !!res.success, message: res.message || 'SMTP connection verified successfully' };
+  },
+
+  async sendTestEmail(payload: SendTestEmailPayload): Promise<{ success: boolean; message: string }> {
+    const res = await apiClient.post<void>(API_ENDPOINTS.ADMIN.EMAIL.SEND_TEST, payload);
+    return { success: !!res.success, message: res.message || 'Test email dispatched successfully' };
   },
 
   /**

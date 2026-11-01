@@ -104,5 +104,11 @@ export const API_ENDPOINTS = {
       RESET_PASSWORD: (id: string) => `/admin/accounts/${id}/reset-password`,
       AUDIT_LOGS: '/admin/accounts/audit-logs',
     },
+    EMAIL: {
+      GET: '/admin/settings/email',
+      UPDATE: '/admin/settings/email',
+      TEST_CONNECTION: '/admin/settings/email/test-connection',
+      SEND_TEST: '/admin/settings/email/send-test',
+    },
   },
 } as const;
