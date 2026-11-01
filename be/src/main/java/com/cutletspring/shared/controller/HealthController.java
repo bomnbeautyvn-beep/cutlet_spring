@@ -19,7 +19,8 @@ import java.util.Map;
 
 /**
  * Public health check and keep-alive ping controller.
- * Accessible without authentication to support monitoring tools (e.g. UptimeRobot, cron jobs, Render keep-alive).
+ * Accessible without authentication to support monitoring tools (e.g.
+ * UptimeRobot, cron jobs, Render keep-alive).
  */
 @RestController
 @Tag(name = "Health Check", description = "Public health check and keep-alive ping endpoints")
@@ -29,11 +30,8 @@ public class HealthController {
 
     private final DataSource dataSource;
 
-    @Operation(
-            summary = "Health check and keep-alive ping",
-            description = "Returns operational status, uptime, and database connectivity. Designed for auto-pinging services."
-    )
-    @GetMapping({"/api/health", "/health"})
+    @Operation(summary = "Health check and keep-alive ping", description = "Returns operational status, uptime, and database connectivity. Designed for auto-pinging services.")
+    @GetMapping({ "/api/health", "/health" })
     public ResponseEntity<Map<String, Object>> checkHealth() {
         Map<String, Object> response = new LinkedHashMap<>();
         response.put("status", "UP");
@@ -50,11 +48,8 @@ public class HealthController {
         return ResponseEntity.ok(response);
     }
 
-    @Operation(
-            summary = "Lightweight HEAD ping",
-            description = "Returns HTTP 200 without payload for bandwidth-efficient keep-alive pings."
-    )
-    @RequestMapping(value = {"/api/health", "/health"}, method = RequestMethod.HEAD)
+    @Operation(summary = "Lightweight HEAD ping", description = "Returns HTTP 200 without payload for bandwidth-efficient keep-alive pings.")
+    @RequestMapping(value = { "/api/health", "/health" }, method = RequestMethod.HEAD)
     public ResponseEntity<Void> pingHead() {
         return ResponseEntity.ok().build();
     }
