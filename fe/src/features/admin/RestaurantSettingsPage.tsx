@@ -4,8 +4,11 @@ import { RestaurantSettingsTabs } from './restaurant/components/RestaurantSettin
 import { RestaurantProfileTab } from './restaurant/components/RestaurantProfileTab';
 import { RestaurantHoursTab } from './restaurant/components/RestaurantHoursTab';
 import { RestaurantPoliciesTab } from './restaurant/components/RestaurantPoliciesTab';
+import { EmailSmtpSettingsTab } from './restaurant/components/EmailSmtpSettingsTab';
 
 export const RestaurantSettingsPage: React.FC = () => {
+  const [isEmailDirty, setIsEmailDirty] = React.useState(false);
+
   const {
     activeTab,
     setActiveTab,
@@ -18,6 +21,17 @@ export const RestaurantSettingsPage: React.FC = () => {
     handleLogoUpload,
     handleBannerUpload,
   } = useRestaurantSettingsForm();
+
+  const handleTabChange = (newTab: any) => {
+    if (activeTab === newTab) return;
+    if (activeTab === 'email' && isEmailDirty) {
+      const confirmLeave = window.confirm(
+        'You have unsaved changes in your Email & SMTP configuration. Are you sure you want to leave without saving?'
+      );
+      if (!confirmLeave) return;
+    }
+    setActiveTab(newTab);
+  };
 
   if (isLoading) {
     return (
@@ -36,30 +50,34 @@ export const RestaurantSettingsPage: React.FC = () => {
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <h1 className="font-headline-md text-2xl font-bold text-[#1b1c1a]">
-            Restaurant Profile &amp; Settings
+            {activeTab === 'email' ? 'Email & SMTP Gateway Configuration' : 'Restaurant Profile & Settings'}
           </h1>
           <p className="text-xs text-[#585757] mt-0.5">
-            Configure 4-language atelier profile, service hours, dining policies, and Cloudinary branding assets
+            {activeTab === 'email'
+              ? 'Manage dynamic database-backed SMTP transport, encryption keys, sender identity, and test delivery'
+              : 'Configure 4-language atelier profile, service hours, dining policies, and Cloudinary branding assets'}
           </p>
         </div>
 
-        <button
-          onClick={handleSave}
-          disabled={isSaving}
-          className="px-6 py-2.5 bg-[#af101a] hover:bg-[#d32f2f] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center gap-2 cursor-pointer disabled:opacity-50 shrink-0"
-        >
-          {isSaving ? (
-            <>
-              <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-              <span>Saving...</span>
-            </>
-          ) : (
-            <>
-              <span className="material-symbols-outlined text-[18px]">save</span>
-              <span>Save Configuration</span>
-            </>
-          )}
-        </button>
+        {activeTab !== 'email' && (
+          <button
+            onClick={handleSave}
+            disabled={isSaving}
+            className="px-6 py-2.5 bg-[#af101a] hover:bg-[#d32f2f] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center gap-2 cursor-pointer disabled:opacity-50 shrink-0"
+          >
+            {isSaving ? (
+              <>
+                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                <span>Saving...</span>
+              </>
+            ) : (
+              <>
+                <span className="material-symbols-outlined text-[18px]">save</span>
+                <span>Save Configuration</span>
+              </>
+            )}
+          </button>
+        )}
       </div>
 
       {/* Floating Feedback Toast */}
@@ -79,27 +97,31 @@ export const RestaurantSettingsPage: React.FC = () => {
       )}
 
       {/* Navigation Tabs */}
-      <RestaurantSettingsTabs activeTab={activeTab} onTabChange={setActiveTab} />
+      <RestaurantSettingsTabs activeTab={activeTab} onTabChange={handleTabChange} />
 
       {/* Form Content */}
-      <form onSubmit={handleSave} className="space-y-6">
-        {activeTab === 'profile' && (
-          <RestaurantProfileTab
-            formData={formData}
-            onChange={handleChange}
-            onLogoUpload={handleLogoUpload}
-            onBannerUpload={handleBannerUpload}
-          />
-        )}
+      {activeTab === 'email' ? (
+        <EmailSmtpSettingsTab onDirtyChange={setIsEmailDirty} />
+      ) : (
+        <form onSubmit={handleSave} className="space-y-6">
+          {activeTab === 'profile' && (
+            <RestaurantProfileTab
+              formData={formData}
+              onChange={handleChange}
+              onLogoUpload={handleLogoUpload}
+              onBannerUpload={handleBannerUpload}
+            />
+          )}
 
-        {activeTab === 'hours' && (
-          <RestaurantHoursTab formData={formData} onChange={handleChange} />
-        )}
+          {activeTab === 'hours' && (
+            <RestaurantHoursTab formData={formData} onChange={handleChange} />
+          )}
 
-        {activeTab === 'policies' && (
-          <RestaurantPoliciesTab formData={formData} onChange={handleChange} />
-        )}
-      </form>
+          {activeTab === 'policies' && (
+            <RestaurantPoliciesTab formData={formData} onChange={handleChange} />
+          )}
+        </form>
+      )}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export type SettingsTab = 'profile' | 'hours' | 'policies';
+export type SettingsTab = 'profile' | 'hours' | 'policies' | 'email';
 
 interface RestaurantSettingsTabsProps {
   activeTab: SettingsTab;
@@ -12,7 +12,7 @@ export const RestaurantSettingsTabs: React.FC<RestaurantSettingsTabsProps> = ({
   onTabChange,
 }) => {
   return (
-    <div className="flex items-center gap-2 border-b border-[#eae8e5] pb-2">
+    <div className="flex items-center gap-2 border-b border-[#eae8e5] pb-2 flex-wrap">
       <button
         type="button"
         onClick={() => onTabChange('profile')}
@@ -50,6 +50,19 @@ export const RestaurantSettingsTabs: React.FC<RestaurantSettingsTabsProps> = ({
       >
         <span className="material-symbols-outlined text-[16px]">policy</span>
         <span>Dining Policies &amp; Capacities</span>
+      </button>
+
+      <button
+        type="button"
+        onClick={() => onTabChange('email')}
+        className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-2 ${
+          activeTab === 'email'
+            ? 'bg-[#1b1c1a] text-white shadow-xs'
+            : 'text-[#585757] hover:bg-[#f5f3f0]'
+        }`}
+      >
+        <span className="material-symbols-outlined text-[16px]">mail</span>
+        <span>Email &amp; SMTP</span>
       </button>
     </div>
   );
