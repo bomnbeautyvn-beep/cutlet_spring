@@ -116,6 +116,7 @@ public class SecurityConfig {
                         // Restricted to full ADMIN role only
                         .requestMatchers("/api/admin/restaurant/**").hasRole("ADMIN")
                         .requestMatchers("/api/admin/accounts/**").hasRole("ADMIN")
+                        .requestMatchers("/api/admin/settings/**").hasRole("ADMIN")
                         // Admin endpoints accessible by both ADMIN and STAFF
                         .requestMatchers("/api/admin/**").hasAnyRole("ADMIN", "STAFF")
                         .anyRequest().authenticated()
