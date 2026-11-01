@@ -29,7 +29,8 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     "tags": [
       "Chef Signature",
       "Atelier Selection"
-    ]
+    ],
+    "nameVi": "Set Đặc Quyền Cutlet Spring"
   },
   {
     "id": "half-and-half-pork-cutlet",
@@ -54,7 +55,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     "tags": [
       "Best Seller",
       "Duo Cut"
-    ]
+    ],
+    "portionEn": "1 serving (Loin & Tenderloin)",
+    "portionKr": "1인분 (등심 & 안심)",
+    "portionVi": "Phần 1 người (Thăn ngoại & Thăn nội)",
+    "portionJp": "1人前 (ロース & ヒレ)"
   },
   {
     "id": "pork-tenderloin-cutlet-set",
@@ -79,7 +84,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     "tags": [
       "Best Seller",
       "Super Tender"
-    ]
+    ],
+    "portionEn": "1 serving (Tenderloin 6pcs)",
+    "portionKr": "1인분 (안심 6조각)",
+    "portionVi": "Phần 1 người (Thăn nội 6 miếng)",
+    "portionJp": "1人前 (ヒレ 6個)"
   },
   {
     "id": "sasami-katsu-chicken",
@@ -102,7 +111,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     ],
     "tags": [
       "Chicken Tenderloin"
-    ]
+    ],
+    "portionEn": "1 serving (Chicken tenderloin)",
+    "portionKr": "1인분 (닭안심)",
+    "portionVi": "Phần 1 người (Ức gà phi lê)",
+    "portionJp": "1人前 (鶏ささみ)"
   },
   {
     "id": "cheese-king-katsu",
@@ -127,7 +140,12 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     "tags": [
       "Best Seller",
       "20 MIN PREP"
-    ]
+    ],
+    "nameVi": "Katsu Vua Phô Mai",
+    "portionEn": "1 serving (4 large cheese pieces)",
+    "portionKr": "1인분 (치즈 4조각)",
+    "portionVi": "Phần 1 người (4 miếng phô mai lớn)",
+    "portionJp": "1人前 (特大チーズ4個)"
   },
   {
     "id": "all-star-atelier-set",
@@ -154,7 +172,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     "tags": [
       "Limited",
       "20 MIN PREP"
-    ]
+    ],
+    "portionEn": "Set for 1-2 persons",
+    "portionKr": "1-2인 세트",
+    "portionVi": "Set cho 1-2 người",
+    "portionJp": "1-2名様用セット"
   },
   {
     "id": "double-tender-duo-set",
@@ -179,7 +201,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     ],
     "tags": [
       "MUST TRY"
-    ]
+    ],
+    "portionEn": "1 serving (Chicken & Pork duo)",
+    "portionKr": "1인분 (치킨 & 안심 듀오)",
+    "portionVi": "Phần 1 người (Cặp đôi Heo & Gà)",
+    "portionJp": "1人前 (チキン & 豚ヒレ デュオ)"
   },
   {
     "id": "korean-style-retro-tonkatsu",
@@ -211,7 +237,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     ],
     "tags": [
       "Classic Sauce"
-    ]
+    ],
+    "portionEn": "1 serving (Choice of S or L)",
+    "portionKr": "1인분 (S 또는 L 선택)",
+    "portionVi": "Phần 1 người (Tuỳ chọn S hoặc L)",
+    "portionJp": "1人前 (SまたはL選択)"
   },
   {
     "id": "half-half-korean-retro-katsu",
@@ -237,7 +267,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     "tags": [
       "2 Sauces",
       "Dual Flavor"
-    ]
+    ],
+    "portionEn": "1 serving (Classic & Spicy)",
+    "portionKr": "1인분 (일반 & 매운 소스)",
+    "portionVi": "Phần 1 người (Sốt thường & Sốt cay)",
+    "portionJp": "1人前 (クラシック & 辛口ソース)"
   },
   {
     "id": "spicy-korean-retro-katsu",
@@ -273,7 +307,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     "tags": [
       "Spicy Sauce",
       "Shin Ramyun Heat"
-    ]
+    ],
+    "portionEn": "1 serving (Choice of S or L)",
+    "portionKr": "1인분 (S 또는 L 선택)",
+    "portionVi": "Phần 1 người (Tuỳ chọn S hoặc L)",
+    "portionJp": "1人前 (SまたはL選択)"
   },
   {
     "id": "cheese-bomb-katsu",
@@ -316,7 +354,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     "tags": [
       "Cheese Loaded",
       "3 Sauce Styles"
-    ]
+    ],
+    "portionEn": "1 serving (Rich mozzarella poured)",
+    "portionKr": "1인분 (모짜렐라 듬뿍)",
+    "portionVi": "Phần 1 người (Ngập phô mai mozzarella)",
+    "portionJp": "1人前 (たっぷりモッツァレラチーズ)"
   },
   {
     "id": "pork-tenderloin-katsu-curry-rice",
@@ -351,7 +393,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     ],
     "tags": [
       "MILD LEVEL"
-    ]
+    ],
+    "portionEn": "1 serving (Cutlet & Rice bowl)",
+    "portionKr": "1인분 (카츠 & 밥 세트)",
+    "portionVi": "Phần 1 người (Cơm cà ri katsu thăn nội)",
+    "portionJp": "1人前 (ヒレカツ & ライス)"
   },
   {
     "id": "pork-loin-katsu-curry-rice",
@@ -375,7 +421,12 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     ],
     "tags": [
       "MILD LEVEL"
-    ]
+    ],
+    "descriptionJp": "サクサクの豚ロースカツに自家製熟成カレーを合わせた満足感ある一皿。",
+    "portionEn": "1 serving (Cutlet & Rice bowl)",
+    "portionKr": "1인분 (카츠 & 밥 세트)",
+    "portionVi": "Phần 1 người (Cơm cà ri katsu thăn ngoại)",
+    "portionJp": "1人前 (ロースカツ & ライス)"
   },
   {
     "id": "chicken-cutlet-curry-rice",
@@ -401,7 +452,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     "tags": [
       "MILD LEVEL",
       "Tartar & Chili"
-    ]
+    ],
+    "portionEn": "1 serving (Chicken & Rice bowl)",
+    "portionKr": "1인분 (치킨카츠 & 밥 세트)",
+    "portionVi": "Phần 1 người (Cơm cà ri katsu gà)",
+    "portionJp": "1人前 (チキンカツ & ライス)"
   },
   {
     "id": "cold-buckwheat-noodle-set",
@@ -426,7 +481,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     "tags": [
       "Best Seller",
       "Soba + Cutlet"
-    ]
+    ],
+    "portionEn": "Set for 1 person (Noodles & Cutlet)",
+    "portionKr": "1인 세트 (모밀 & 카츠)",
+    "portionVi": "Set 1 người (Mì soba lạnh & Katsu)",
+    "portionJp": "1名様用セット (ざるそば & カツ)"
   },
   {
     "id": "cold-buckwheat-noodle",
@@ -450,7 +509,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     "tags": [
       "Best Seller",
       "Cold Soba"
-    ]
+    ],
+    "portionEn": "1 bowl (Cold soba noodles)",
+    "portionKr": "1그릇 (냉모밀 단품)",
+    "portionVi": "1 tô (Mì soba lạnh)",
+    "portionJp": "1杯 (ざるそば単品)"
   },
   {
     "id": "jjolmyeon-set-with-cutlet",
@@ -477,7 +540,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     "tags": [
       "Full Set",
       "Noodle & Cutlet"
-    ]
+    ],
+    "portionEn": "Set for 1 person (Noodles & Cutlet)",
+    "portionKr": "1인 세트 (쫄면 & 카츠)",
+    "portionVi": "Set 1 người (Mì jjolmyeon cay & Katsu)",
+    "portionJp": "1名様用セット (チョルミョン & カツ)"
   },
   {
     "id": "jjolmyeon-a-la-carte",
@@ -502,7 +569,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     ],
     "tags": [
       "Spicy Chewy Noodles"
-    ]
+    ],
+    "portionEn": "1 bowl (Spicy chewy noodles)",
+    "portionKr": "1그릇 (매콤 쫄면 단품)",
+    "portionVi": "1 tô (Mì cay jjolmyeon)",
+    "portionJp": "1杯 (旨辛チョルミョン単品)"
   },
   {
     "id": "addon-tenderloin-1pc",
@@ -524,7 +595,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     ],
     "tags": [
       "Add-on"
-    ]
+    ],
+    "portionEn": "1 piece (Tenderloin cutlet)",
+    "portionKr": "1조각 (특안심)",
+    "portionVi": "1 miếng (Thăn nội chiên)",
+    "portionJp": "1個 (特選ヒレカツ)"
   },
   {
     "id": "addon-cheese-katsu-1pc",
@@ -547,7 +622,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     ],
     "tags": [
       "Add-on"
-    ]
+    ],
+    "portionEn": "1 piece (Cheese katsu)",
+    "portionKr": "1조각 (치즈카츠)",
+    "portionVi": "1 miếng (Katsu phô mai)",
+    "portionJp": "1個 (チーズカツ)"
   },
   {
     "id": "addon-king-tiger-shrimp",
@@ -570,7 +649,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     ],
     "tags": [
       "Add-on"
-    ]
+    ],
+    "portionEn": "1 piece (Fried King Tiger prawn)",
+    "portionKr": "1마리 (킹타이거 새우)",
+    "portionVi": "1 con (Tôm sú King Tiger)",
+    "portionJp": "1尾 (キングタイガーエビフライ)"
   },
   {
     "id": "addon-cream-soup-broth",
@@ -592,7 +675,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     ],
     "tags": [
       "Add-on"
-    ]
+    ],
+    "portionEn": "1 bowl (Heritage cream soup)",
+    "portionKr": "1그릇 (경양식 크림스프)",
+    "portionVi": "1 chén (Súp kem kiểu cổ điển)",
+    "portionJp": "1杯 (レトロクリームスープ)"
   },
   {
     "id": "addon-artisan-pearl-rice",
@@ -614,7 +701,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     ],
     "tags": [
       "Add-on"
-    ]
+    ],
+    "portionEn": "1 bowl (Steamed Koshihikari pearl rice)",
+    "portionKr": "1공기 (고시히카리 쌀밥)",
+    "portionVi": "1 chén (Cơm trắng Koshihikari)",
+    "portionJp": "1杯 (コシヒカリご飯)"
   },
   {
     "id": "addon-macaroni-salad",
@@ -636,7 +727,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     ],
     "tags": [
       "Add-on"
-    ]
+    ],
+    "portionEn": "1 small plate (Creamy macaroni)",
+    "portionKr": "1접시 (마카로니 샐러드)",
+    "portionVi": "1 đĩa nhỏ (Salad nui macaroni)",
+    "portionJp": "1皿 (マカロニサラダ)"
   },
   {
     "id": "addon-korean-tonkatsu-sauce",
@@ -658,7 +753,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     ],
     "tags": [
       "Sauce"
-    ]
+    ],
+    "portionEn": "1 dish (House demi-glace sauce)",
+    "portionKr": "1종지 (수제 경양식 소스)",
+    "portionVi": "1 chén nhỏ (Sốt Tonkatsu kiểu Hàn)",
+    "portionJp": "1皿 (自家製デミグラスソース)"
   },
   {
     "id": "addon-spicy-korean-tonkatsu-sauce",
@@ -684,7 +783,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     "tags": [
       "Sauce",
       "Spicy"
-    ]
+    ],
+    "portionEn": "1 dish (Spicy demi sauce)",
+    "portionKr": "1종지 (매운 경양식 소스)",
+    "portionVi": "1 chén nhỏ (Sốt Tonkatsu cay kiểu Hàn)",
+    "portionJp": "1皿 (旨辛デミグラスソース)"
   },
   {
     "id": "addon-curry-sauce-bowl",
@@ -706,7 +809,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     ],
     "tags": [
       "Sauce"
-    ]
+    ],
+    "portionEn": "1 bowl (Aged Japanese curry sauce)",
+    "portionKr": "1공기 (숙성 카레 소스)",
+    "portionVi": "1 chén (Sốt cà ri Nhật Bản ủ)",
+    "portionJp": "1杯 (熟成カレーソース)"
   },
   {
     "id": "addon-tartar-sauce",
@@ -728,7 +835,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     ],
     "tags": [
       "Sauce"
-    ]
+    ],
+    "portionEn": "1 dish (Handmade fresh herb tartar)",
+    "portionKr": "1종지 (수제 타르타르 소스)",
+    "portionVi": "1 chén nhỏ (Sốt Tartar tươi)",
+    "portionJp": "1皿 (自家製タルタルソース)"
   },
   {
     "id": "addon-tonkatsu-sauce",
@@ -750,7 +861,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     ],
     "tags": [
       "Sauce"
-    ]
+    ],
+    "portionEn": "1 dish (Japanese tonkatsu sauce)",
+    "portionKr": "1종지 (정통 돈카츠 소스)",
+    "portionVi": "1 chén nhỏ (Sốt Tonkatsu Nhật)",
+    "portionJp": "1皿 (本格とんかつソース)"
   },
   {
     "id": "addon-sweet-chili-sauce",
@@ -772,7 +887,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     ],
     "tags": [
       "Sauce"
-    ]
+    ],
+    "portionEn": "1 dish (Sweet chili dip)",
+    "portionKr": "1종지 (스위트 칠리 소스)",
+    "portionVi": "1 chén nhỏ (Sốt ớt ngọt)",
+    "portionJp": "1皿 (スイートチリソース)"
   },
   {
     "id": "coca-cola-zero-sprite",
@@ -794,7 +913,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     ],
     "tags": [
       "Soda"
-    ]
+    ],
+    "portionEn": "1 can (330ml)",
+    "portionKr": "1캔 (330ml)",
+    "portionVi": "1 lon (330ml)",
+    "portionJp": "1缶 (330ml)"
   },
   {
     "id": "dasani-pure-water",
@@ -816,7 +939,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     ],
     "tags": [
       "Water"
-    ]
+    ],
+    "portionEn": "1 bottle (500ml)",
+    "portionKr": "1병 (500ml)",
+    "portionVi": "1 chai (500ml)",
+    "portionJp": "1本 (500ml)"
   },
   {
     "id": "strawberry-kombucha",
@@ -839,7 +966,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     "tags": [
       "Kombucha",
       "Fermented"
-    ]
+    ],
+    "portionEn": "1 glass / bottle (330ml)",
+    "portionKr": "1잔 (330ml)",
+    "portionVi": "1 ly / chai (330ml)",
+    "portionJp": "1杯 (330ml)"
   },
   {
     "id": "passion-fruit-kombucha",
@@ -862,7 +993,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     "tags": [
       "Kombucha",
       "Fermented"
-    ]
+    ],
+    "portionEn": "1 glass / bottle (330ml)",
+    "portionKr": "1잔 (330ml)",
+    "portionVi": "1 ly / chai (330ml)",
+    "portionJp": "1杯 (330ml)"
   },
   {
     "id": "unsweetened-fresh-juice",
@@ -885,7 +1020,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     "tags": [
       "100% Juice",
       "No Sugar"
-    ]
+    ],
+    "portionEn": "1 glass (Cold pressed, 330ml)",
+    "portionKr": "1잔 (착즙 주스, 330ml)",
+    "portionVi": "1 ly (Nước ép tươi, 330ml)",
+    "portionJp": "1杯 (生搾りジュース, 330ml)"
   },
   {
     "id": "soursop-nectar",
@@ -907,7 +1046,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     ],
     "tags": [
       "100% Freshly Squeezed"
-    ]
+    ],
+    "portionEn": "1 glass (Tropical nectar, 330ml)",
+    "portionKr": "1잔 (사워솝 넥타, 330ml)",
+    "portionVi": "1 ly (Sinh tố mãng cầu, 330ml)",
+    "portionJp": "1杯 (サワーソップネクター, 330ml)"
   },
   {
     "id": "sapporo-draft-beer",
@@ -929,7 +1072,11 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     ],
     "tags": [
       "Draft Beer"
-    ]
+    ],
+    "portionEn": "1 cold draft mug (500ml)",
+    "portionKr": "생맥주 1잔 (500ml)",
+    "portionVi": "1 ly bia tươi ướp lạnh (500ml)",
+    "portionJp": "生ビール1杯 (500ml)"
   },
   {
     "id": "dr-pepper",
@@ -951,8 +1098,10 @@ export const MOCK_MENU_ITEMS: MenuItem[] = [
     ],
     "tags": [
       "Soda"
-    ]
+    ],
+    "portionEn": "1 can (330ml)",
+    "portionKr": "1캔 (330ml)",
+    "portionVi": "1 lon (330ml)",
+    "portionJp": "1缶 (330ml)"
   }
 ];
-
-export const MENU_ITEMS = MOCK_MENU_ITEMS;

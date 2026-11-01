@@ -19,7 +19,13 @@ const ITEM_OBJECT_POSITIONS: Record<string, string> = {
 };
 
 export const DishCard: React.FC<DishCardProps> = ({ item, isFeatured, onSelectItem }) => {
-  const hasImage = Boolean(item.image && item.image.startsWith('/images/menu/'));
+  const hasImage = Boolean(
+    item.image &&
+      (item.image.startsWith('/images/menu/') ||
+        item.image.startsWith('http://') ||
+        item.image.startsWith('https://') ||
+        item.image.startsWith('/'))
+  );
   const objectPosition = item.imagePosition || ITEM_OBJECT_POSITIONS[item.id] || 'center 60%';
 
   return (

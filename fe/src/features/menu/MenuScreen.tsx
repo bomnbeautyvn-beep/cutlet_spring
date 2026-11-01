@@ -1,6 +1,8 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
-import { MenuItem, Language, CartItem } from '@/types';
-import { MENU_ITEMS } from '@/data';
+import { MenuItem, Language } from '@/types';
+import { useMenu } from '@/hooks/useMenu';
+import { useUIStore } from '@/stores/ui.store';
+import { ItemDetailModal } from '@/features/menu/ItemDetailModal';
 import {
   DishCard,
   CompactItemCard,
@@ -10,43 +12,43 @@ import {
 
 interface MenuScreenProps {
   language?: Language;
-  onSelectItem?: (item: MenuItem, initialOptions?: any) => void;
-  cartItems?: CartItem[];
-  onOpenOrderPad?: () => void;
+  onSelectItem?: (item: MenuItem) => void;
 }
 
 export const MenuScreen: React.FC<MenuScreenProps> = () => {
+  const { items, isLoading, error, refetch } = useMenu();
+  const { selectedItemForModal, openItemDetail, closeItemDetail } = useUIStore();
   const [activeCategory, setActiveCategory] = useState<string>('cat-japanese');
   const isClickScrolling = useRef(false);
 
-  // Group items by category
+  // Group items dynamically by category from real backend
   const japaneseItems = useMemo(
-    () => MENU_ITEMS.filter((i) => i.category === 'japanese'),
-    []
+    () => items.filter((i) => i.category === 'japanese'),
+    [items]
   );
   const koreanItems = useMemo(
-    () => MENU_ITEMS.filter((i) => i.category === 'korean'),
-    []
+    () => items.filter((i) => i.category === 'korean'),
+    [items]
   );
   const curryItems = useMemo(
-    () => MENU_ITEMS.filter((i) => i.category === 'curry'),
-    []
+    () => items.filter((i) => i.category === 'curry'),
+    [items]
   );
   const noodleItems = useMemo(
-    () => MENU_ITEMS.filter((i) => i.category === 'noodles'),
-    []
+    () => items.filter((i) => i.category === 'noodles'),
+    [items]
   );
   const addonItems = useMemo(
-    () => MENU_ITEMS.filter((i) => i.category === 'addons'),
-    []
+    () => items.filter((i) => i.category === 'addons'),
+    [items]
   );
   const sauceItems = useMemo(
-    () => MENU_ITEMS.filter((i) => i.category === 'sauces'),
-    []
+    () => items.filter((i) => i.category === 'sauces'),
+    [items]
   );
   const drinkItems = useMemo(
-    () => MENU_ITEMS.filter((i) => i.category === 'drinks'),
-    []
+    () => items.filter((i) => i.category === 'drinks'),
+    [items]
   );
 
   // Scroll-spy: seamlessly tracks current viewing section as user scrolls
@@ -129,6 +131,38 @@ export const MenuScreen: React.FC<MenuScreenProps> = () => {
 
   return (
     <div className="flex flex-col w-full pb-16">
+      {/* Detail Modal */}
+      {selectedItemForModal && (
+        <ItemDetailModal
+          item={selectedItemForModal}
+          onClose={closeItemDetail}
+        />
+      )}
+
+      {/* Loading state indicator */}
+      {isLoading && (
+        <div className="flex items-center justify-center py-12 gap-3 text-[#af101a]">
+          <div className="w-6 h-6 border-2 border-[#af101a] border-t-transparent rounded-full animate-spin" />
+          <span className="font-menu-bar text-sm uppercase tracking-wider font-semibold text-[#5b403d]">
+            Curating Atelier Catalog...
+          </span>
+        </div>
+      )}
+
+      {/* Error state */}
+      {error && !isLoading && items.length === 0 && (
+        <div className="max-w-md mx-auto my-8 p-6 bg-red-50 border border-red-200 rounded-xl text-center space-y-3">
+          <span className="material-symbols-outlined text-3xl text-[#af101a]">error_outline</span>
+          <p className="text-sm text-red-700 font-medium">{error}</p>
+          <button
+            onClick={() => refetch()}
+            className="px-4 py-2 bg-[#af101a] text-white text-xs font-bold uppercase rounded-lg shadow hover:bg-[#d32f2f] transition-colors cursor-pointer"
+          >
+            Retry Loading
+          </button>
+        </div>
+      )}
+
       {/* Main Body Grid: Sticky Left Category Index & Right Food Spreads */}
       <div className="max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-3 sm:py-6 lg:py-8 w-full">
         <div className="flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-8 xl:gap-12">
@@ -154,6 +188,7 @@ export const MenuScreen: React.FC<MenuScreenProps> = () => {
                     key={item.id}
                     item={item}
                     isFeatured={item.isChefSignature}
+                    onSelectItem={openItemDetail}
                   />
                 ))}
               </div>
@@ -171,6 +206,7 @@ export const MenuScreen: React.FC<MenuScreenProps> = () => {
                   <DishCard
                     key={item.id}
                     item={item}
+                    onSelectItem={openItemDetail}
                   />
                 ))}
               </div>
@@ -187,6 +223,7 @@ export const MenuScreen: React.FC<MenuScreenProps> = () => {
                   <DishCard
                     key={item.id}
                     item={item}
+                    onSelectItem={openItemDetail}
                   />
                 ))}
               </div>
@@ -203,6 +240,7 @@ export const MenuScreen: React.FC<MenuScreenProps> = () => {
                   <DishCard
                     key={item.id}
                     item={item}
+                    onSelectItem={openItemDetail}
                   />
                 ))}
               </div>
@@ -219,6 +257,7 @@ export const MenuScreen: React.FC<MenuScreenProps> = () => {
                   <CompactItemCard
                     key={item.id}
                     item={item}
+                    onSelectItem={openItemDetail}
                   />
                 ))}
               </div>
@@ -235,6 +274,7 @@ export const MenuScreen: React.FC<MenuScreenProps> = () => {
                   <CompactItemCard
                     key={item.id}
                     item={item}
+                    onSelectItem={openItemDetail}
                   />
                 ))}
               </div>
@@ -251,6 +291,7 @@ export const MenuScreen: React.FC<MenuScreenProps> = () => {
                   <CompactItemCard
                     key={item.id}
                     item={item}
+                    onSelectItem={openItemDetail}
                   />
                 ))}
               </div>

@@ -3,13 +3,23 @@ import { MenuItem } from '@/types';
 
 interface CompactItemCardProps {
   item: MenuItem;
+  onSelectItem?: (item: MenuItem) => void;
 }
 
-export const CompactItemCard: React.FC<CompactItemCardProps> = ({ item }) => {
-  const hasImage = Boolean(item.image && item.image.startsWith('/images/menu/'));
+export const CompactItemCard: React.FC<CompactItemCardProps> = ({ item, onSelectItem }) => {
+  const hasImage = Boolean(
+    item.image &&
+      (item.image.startsWith('/images/menu/') ||
+        item.image.startsWith('http://') ||
+        item.image.startsWith('https://') ||
+        item.image.startsWith('/'))
+  );
 
   return (
-    <div className="group flex flex-col justify-between h-full pb-3 cursor-pointer">
+    <div
+      onClick={() => onSelectItem?.(item)}
+      className="group flex flex-col justify-between h-full pb-3 cursor-pointer"
+    >
       <div className="space-y-2.5">
         {/* Top Image Frame - Locked Aspect Ratio & No Radius */}
         {hasImage ? (

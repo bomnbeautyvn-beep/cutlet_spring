@@ -1,8 +1,32 @@
 export type DishCategory = 'japanese' | 'korean' | 'curry' | 'noodles' | 'addons' | 'sauces' | 'drinks';
 
+export interface MenuCategory {
+  id: string;
+  code: string;
+  name: string;
+  description?: string;
+  displayOrder: number;
+  active: boolean;
+}
+
 export interface MenuSizeOption {
+  id?: string;
   label: string;
   price: number;
+  displayOrder?: number;
+}
+
+export interface MenuSauceOption {
+  id?: string;
+  name: string;
+  displayOrder?: number;
+}
+
+export interface MenuAddon {
+  id?: string;
+  name: string;
+  price: number;
+  displayOrder?: number;
 }
 
 export interface MenuItem {
@@ -16,11 +40,12 @@ export interface MenuItem {
   price: number; // in thousands VND, e.g. 200 = 200.000 VND
   priceFormatted?: string;
   prepTimeMinutes?: number;
-  image: string;
+  image?: string;
+  imagePublicId?: string;
   imagePosition?: string;
-  altText: string;
-  descriptionEn: string;
-  descriptionKr: string;
+  altText?: string;
+  descriptionEn?: string;
+  descriptionKr?: string;
   descriptionVi?: string;
   descriptionJp?: string;
   portionEn?: string;
@@ -37,7 +62,10 @@ export interface MenuItem {
   spiceNote?: string;
   sizes?: MenuSizeOption[];
   sauceOptions?: string[];
+  addons?: MenuAddon[];
   subBullet1?: string;
   subBullet2?: string;
   features?: string[];
+  active?: boolean;
+  displayOrder?: number;
 }
