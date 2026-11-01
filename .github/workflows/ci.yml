@@ -1,0 +1,65 @@
+name: Monorepo Continuous Integration
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  backend-test:
+    name: Backend Tests & Build (Java 21)
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./be
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21 (Eclipse Temurin)
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Make Maven Wrapper Executable
+        run: chmod +x ./mvnw
+
+      - name: Compile and Run Unit & Integration Tests
+        run: ./mvnw clean test -B
+
+      - name: Package Spring Boot Application
+        run: ./mvnw package -DskipTests -B
+
+  frontend-test:
+    name: Frontend Lint & Build (React 19)
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./fe
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: ./fe/package-lock.json
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run Type Checking & Lint
+        run: npm run lint
+
+      - name: Build Production Distribution
+        run: npm run build
+
