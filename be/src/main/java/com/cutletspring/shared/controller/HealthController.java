@@ -1,20 +1,15 @@
 package com.cutletspring.shared.controller;
 
+import com.cutletspring.shared.service.HealthService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.sql.DataSource;
-import java.lang.management.ManagementFactory;
-import java.sql.Connection;
-import java.time.Instant;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -25,52 +20,19 @@ import java.util.Map;
 @RestController
 @Tag(name = "Health Check", description = "Public health check and keep-alive ping endpoints")
 @RequiredArgsConstructor
-@Slf4j
 public class HealthController {
 
-    private final DataSource dataSource;
+    private final HealthService healthService;
 
     @Operation(summary = "Health check and keep-alive ping", description = "Returns operational status, uptime, and database connectivity. Designed for auto-pinging services.")
     @GetMapping({ "/api/health", "/health" })
     public ResponseEntity<Map<String, Object>> checkHealth() {
-        Map<String, Object> response = new LinkedHashMap<>();
-        response.put("status", "UP");
-        response.put("message", "Cutlet Spring Atelier Backend is operational");
-        response.put("timestamp", Instant.now().toString());
-        response.put("service", "cutlet-spring-be");
-
-        long uptimeMillis = ManagementFactory.getRuntimeMXBean().getUptime();
-        response.put("uptimeSeconds", uptimeMillis / 1000);
-
-        String dbStatus = checkDatabase(response);
-        response.put("database", dbStatus);
-
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(healthService.checkHealth());
     }
 
     @Operation(summary = "Lightweight HEAD ping", description = "Returns HTTP 200 without payload for bandwidth-efficient keep-alive pings.")
     @RequestMapping(value = { "/api/health", "/health" }, method = RequestMethod.HEAD)
     public ResponseEntity<Void> pingHead() {
         return ResponseEntity.ok().build();
-    }
-
-    private String checkDatabase(Map<String, Object> response) {
-        try (Connection conn = dataSource.getConnection()) {
-            if (conn.isValid(2)) {
-                try (var stmt = conn.createStatement()) {
-                    var rs = stmt.executeQuery("SELECT count(*) FROM admins");
-                    if (rs.next()) {
-                        response.put("adminAccounts", rs.getInt(1));
-                    }
-                } catch (Exception e) {
-                    response.put("adminCheckError", e.getMessage());
-                }
-                return "CONNECTED";
-            }
-            return "DEGRADED";
-        } catch (Exception e) {
-            log.warn("Database health check ping error: {}", e.getMessage());
-            return "UNAVAILABLE: " + e.getMessage();
-        }
     }
 }

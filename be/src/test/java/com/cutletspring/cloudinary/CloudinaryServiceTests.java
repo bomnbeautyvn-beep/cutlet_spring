@@ -3,6 +3,7 @@ package com.cutletspring.cloudinary;
 import com.cloudinary.Cloudinary;
 import com.cutletspring.cloudinary.dto.CloudinaryUploadResult;
 import com.cutletspring.cloudinary.service.CloudinaryService;
+import com.cutletspring.cloudinary.service.CloudinaryServiceImpl;
 import com.cutletspring.shared.exception.BadRequestException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -18,7 +19,7 @@ class CloudinaryServiceTests {
     @BeforeEach
     void setUp() {
         Cloudinary cloudinary = new Cloudinary();
-        cloudinaryService = new CloudinaryService(cloudinary);
+        cloudinaryService = new CloudinaryServiceImpl(cloudinary);
     }
 
     @Test
