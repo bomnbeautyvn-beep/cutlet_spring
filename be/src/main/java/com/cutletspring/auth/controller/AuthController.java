@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping({"/api/auth", "/auth"})
 @RequiredArgsConstructor
 @Tag(name = "Authentication", description = "Admin authentication, session persistence, and CSRF token initialization")
 public class AuthController {

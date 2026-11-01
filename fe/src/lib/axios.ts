@@ -10,6 +10,16 @@ export const api: AxiosInstance = axios.create({
   timeout: 15000,
 });
 
+let inMemoryCsrfToken: string | null = null;
+
+export function setCsrfToken(token: string | null): void {
+  inMemoryCsrfToken = token;
+}
+
+export function getCsrfToken(): string | null {
+  return inMemoryCsrfToken || getCsrfTokenFromCookie();
+}
+
 /**
  * Extracts CSRF token from document cookie populated by Spring Security's CookieCsrfTokenRepository
  */
@@ -24,7 +34,7 @@ api.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     const method = config.method?.toUpperCase();
     if (method && ['POST', 'PUT', 'PATCH', 'DELETE'].includes(method)) {
-      const token = getCsrfTokenFromCookie();
+      const token = getCsrfToken();
       if (token && !config.headers['X-XSRF-TOKEN']) {
         config.headers['X-XSRF-TOKEN'] = token;
       }
@@ -36,7 +46,13 @@ api.interceptors.request.use(
 
 // Response interceptor
 api.interceptors.response.use(
-  (response: AxiosResponse) => response,
+  (response: AxiosResponse) => {
+    const headerToken = response.headers?.['x-xsrf-token'] || response.headers?.['X-XSRF-TOKEN'];
+    if (headerToken && typeof headerToken === 'string') {
+      setCsrfToken(headerToken);
+    }
+    return response;
+  },
   (error) => {
     const customError = {
       message: error.response?.data?.message || error.message || 'An unexpected error occurred',

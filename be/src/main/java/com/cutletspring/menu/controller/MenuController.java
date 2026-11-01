@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/menu")
+@RequestMapping({"/api/menu", "/menu"})
 @RequiredArgsConstructor
 @Tag(name = "Public Menu", description = "Endpoints for viewing Cutlet Spring tonkatsu catalog, categories, and featured dishes")
 public class MenuController {

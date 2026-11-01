@@ -25,6 +25,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -40,7 +41,7 @@ import java.util.List;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    @Value("${cors.allowed-origins:http://localhost:3000,http://localhost:5173}")
+    @Value("${cors.allowed-origins:${CORSALLOWS:http://localhost:5173,http://localhost:3000,http://localhost:80,https://cutletspring.vercel.app}}")
     private String allowedOrigins;
 
     private final ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules();
@@ -77,22 +78,12 @@ public class SecurityConfig {
                 .map(String::trim)
                 .map(origin -> origin.endsWith("/") ? origin.substring(0, origin.length() - 1) : origin)
                 .filter(origin -> !origin.isEmpty())
+                .distinct()
                 .toList();
 
-        List<String> patterns = new ArrayList<>(List.of(
-                "http://localhost:*",
-                "https://*.vercel.app",
-                "https://vercel.app",
-                "https://*.onrender.com"
-        ));
-        for (String origin : origins) {
-            if (!patterns.contains(origin)) {
-                patterns.add(origin);
-            }
-        }
-        configuration.setAllowedOriginPatterns(patterns);
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-XSRF-TOKEN", "Accept", "Origin", "X-Requested-With", "Cookie"));
+        configuration.setAllowedOriginPatterns(origins);
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "HEAD"));
+        configuration.setAllowedHeaders(List.of("*"));
         configuration.setExposedHeaders(List.of("Set-Cookie", "X-XSRF-TOKEN"));
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(3600L);
@@ -104,11 +95,20 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, SecurityContextRepository securityContextRepository) throws Exception {
+        CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
+        requestHandler.setCsrfRequestAttributeName(null);
+
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                        .ignoringRequestMatchers("/api/auth/login", "/api/auth/logout", "/api/health", "/health")
+                        .csrfTokenRequestHandler(requestHandler)
+                        .ignoringRequestMatchers(
+                                "/api/auth/login", "/auth/login",
+                                "/api/auth/logout", "/auth/logout",
+                                "/api/auth/csrf", "/auth/csrf",
+                                "/api/health", "/health"
+                        )
                 )
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
                 .securityContext(context -> context.securityContextRepository(securityContextRepository))
@@ -118,24 +118,26 @@ public class SecurityConfig {
                         .sessionRegistry(sessionRegistry())
                 )
                 .authorizeHttpRequests(auth -> auth
+                        // Public CORS preflight requests
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         // Public health check and keep-alive ping
                         .requestMatchers("/api/health", "/health").permitAll()
                         // Change password for logged in admin or staff
-                        .requestMatchers("/api/auth/change-password").hasAnyRole("ADMIN", "STAFF")
+                        .requestMatchers("/api/auth/change-password", "/auth/change-password").hasAnyRole("ADMIN", "STAFF")
                         // Public endpoints
-                        .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/public/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/restaurant/settings").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/menu/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/categories/**").permitAll()
+                        .requestMatchers("/api/auth/**", "/auth/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/public/**", "/public/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/restaurant/settings", "/restaurant/settings").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/menu/**", "/menu/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/categories/**", "/categories/**").permitAll()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
                         .requestMatchers("/actuator/**").permitAll()
                         // Restricted to full ADMIN role only
-                        .requestMatchers("/api/admin/restaurant/**").hasRole("ADMIN")
-                        .requestMatchers("/api/admin/accounts/**").hasRole("ADMIN")
-                        .requestMatchers("/api/admin/settings/**").hasRole("ADMIN")
+                        .requestMatchers("/api/admin/restaurant/**", "/admin/restaurant/**").hasRole("ADMIN")
+                        .requestMatchers("/api/admin/accounts/**", "/admin/accounts/**").hasRole("ADMIN")
+                        .requestMatchers("/api/admin/settings/**", "/admin/settings/**").hasRole("ADMIN")
                         // Admin endpoints accessible by both ADMIN and STAFF
-                        .requestMatchers("/api/admin/**").hasAnyRole("ADMIN", "STAFF")
+                        .requestMatchers("/api/admin/**", "/admin/**").hasAnyRole("ADMIN", "STAFF")
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling(ex -> ex

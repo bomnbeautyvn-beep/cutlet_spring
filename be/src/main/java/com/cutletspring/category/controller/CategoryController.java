@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/categories")
+@RequestMapping({"/api/categories", "/categories"})
 @RequiredArgsConstructor
 @Tag(name = "Menu Categories", description = "Public endpoints for menu categories")
 public class CategoryController {

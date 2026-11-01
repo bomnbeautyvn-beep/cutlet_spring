@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/restaurant")
+@RequestMapping({"/api/restaurant", "/restaurant"})
 @RequiredArgsConstructor
 @Tag(name = "Restaurant Information", description = "Public endpoints for Cutlet Spring atelier profile, service hours, and dining policies")
 public class RestaurantSettingsController {

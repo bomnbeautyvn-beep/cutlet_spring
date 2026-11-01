@@ -1,5 +1,6 @@
 import { apiClient } from '@/lib/api-client';
 import { API_ENDPOINTS } from '@/constants/api.constants';
+import { setCsrfToken } from '@/lib/axios';
 
 export interface AdminUser {
   id: string;
@@ -20,6 +21,9 @@ export const authService = {
    */
   async initCsrf(): Promise<CsrfResponse> {
     const res = await apiClient.get<CsrfResponse>(API_ENDPOINTS.AUTH.CSRF);
+    if (res.data?.token) {
+      setCsrfToken(res.data.token);
+    }
     return res.data;
   },
 
