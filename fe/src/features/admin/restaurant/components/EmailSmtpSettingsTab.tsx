@@ -26,6 +26,7 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
   const [isTestingConnection, setIsTestingConnection] = useState(false);
   const [isSendingTest, setIsSendingTest] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showAdvanced, setShowAdvanced] = useState(false);
 
   // Modals
   const [isTestEmailModalOpen, setIsTestEmailModalOpen] = useState(false);
@@ -107,6 +108,16 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
+  const handleUsernameChange = (val: string) => {
+    setFormData((prev) => {
+      const next = { ...prev, username: val };
+      if (!prev.fromEmail || prev.fromEmail === 'noreply@cutletspring.com' || prev.fromEmail === prev.username) {
+        next.fromEmail = val;
+      }
+      return next;
+    });
+  };
+
   const applyPreset = (preset: 'gmail587' | 'ssl465') => {
     if (preset === 'gmail587') {
       setFormData((prev) => ({
@@ -143,15 +154,15 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
     if (!formData.port || formData.port < 1 || formData.port > 65535) {
       return 'Port must be a valid number between 1 and 65535.';
     }
+    if (!formData.username || !formData.username.trim()) {
+      return 'Vui lòng nhập tài khoản Gmail / Email gửi.';
+    }
     if (!formData.fromEmail || !formData.fromEmail.trim()) {
-      return 'Sender From Email is required.';
+      formData.fromEmail = formData.username.trim();
     }
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.fromEmail.trim())) {
-      return 'Sender From Email must be a valid email address.';
-    }
-    if (formData.smtpAuth && (!formData.username || !formData.username.trim())) {
-      return 'SMTP Username is required when authentication is enabled.';
+      return 'Địa chỉ email người gửi không hợp lệ.';
     }
     return null;
   };
@@ -394,102 +405,106 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
         </div>
       </div>
 
-      {/* 2. SMTP Server Configuration Card */}
-      <div className="bg-white p-6 rounded-2xl border border-[#eae8e5] shadow-xs space-y-6">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-          <div>
-            <h3 className="text-xs font-bold uppercase tracking-wider text-[#1b1c1a] flex items-center gap-2">
-              <span className="material-symbols-outlined text-[#af101a] text-lg">dns</span>
-              <span>SMTP Server &amp; Authentication</span>
-            </h3>
-            <p className="text-[11px] text-[#585757] mt-0.5">
-              Configure outgoing mail server host, port, protocol security, and authentication credentials
-            </p>
+      {/* 2. SMTP Server Configuration Card - Simplified Email & Password */}
+      <div className="bg-white p-6 rounded-2xl border border-[#eae8e5] shadow-xs space-y-5">
+        <div>
+          <h3 className="text-xs font-bold uppercase tracking-wider text-[#1b1c1a] flex items-center gap-2">
+            <span className="material-symbols-outlined text-[#af101a] text-lg">mail</span>
+            <span>Tài khoản gửi Email (Gmail SMTP)</span>
+          </h3>
+          <p className="text-[11px] text-[#585757] mt-0.5">
+            Chỉ cần nhập tài khoản Gmail và Mật khẩu ứng dụng (Google App Password) để gửi email khôi phục mật khẩu và thông báo hệ thống.
+          </p>
+        </div>
+
+        {/* Hướng dẫn lấy Mật khẩu ứng dụng từ Google (Google App Password) */}
+        <div className="p-4 bg-blue-50/70 border border-blue-200/80 rounded-2xl space-y-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+            <div className="flex items-center gap-2 text-blue-950 font-bold text-xs uppercase tracking-wider">
+              <span className="material-symbols-outlined text-blue-600 text-lg">key</span>
+              <span>Hướng dẫn lấy Mật khẩu ứng dụng Google (16 ký tự)</span>
+            </div>
+            <a
+              href="https://myaccount.google.com/apppasswords"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-[11px] uppercase tracking-wider transition-colors shadow-xs w-fit cursor-pointer"
+            >
+              <span>Mở Google App Passwords</span>
+              <span className="material-symbols-outlined text-[15px]">open_in_new</span>
+            </a>
           </div>
 
-          {/* Quick Preset Buttons */}
-          <div className="flex items-center gap-2">
-            <span className="text-[10px] text-[#585757] uppercase font-bold">Presets:</span>
-            <button
-              type="button"
-              onClick={() => applyPreset('gmail587')}
-              className="px-2.5 py-1 text-[10px] font-bold bg-[#fbf9f6] hover:bg-[#eae8e5] text-[#1b1c1a] border border-[#eae8e5] rounded-lg transition-colors cursor-pointer"
-            >
-              Gmail / 587 (STARTTLS)
-            </button>
-            <button
-              type="button"
-              onClick={() => applyPreset('ssl465')}
-              className="px-2.5 py-1 text-[10px] font-bold bg-[#fbf9f6] hover:bg-[#eae8e5] text-[#1b1c1a] border border-[#eae8e5] rounded-lg transition-colors cursor-pointer"
-            >
-              SSL / 465 (Direct SSL)
-            </button>
+          <div className="text-xs text-blue-900 space-y-1.5 leading-relaxed bg-white/70 p-3 rounded-xl border border-blue-100">
+            <div className="flex items-start gap-2">
+              <span className="font-bold text-blue-700 shrink-0">Bước 1:</span>
+              <span>
+                Đảm bảo tài khoản Google đã bật <strong>Xác minh 2 bước</strong> tại{' '}
+                <a
+                  href="https://myaccount.google.com/signinoptions/two-step-verification"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-blue-800 font-semibold inline-flex items-center gap-0.5"
+                >
+                  myaccount.google.com/signinoptions/two-step-verification
+                  <span className="material-symbols-outlined text-[12px]">open_in_new</span>
+                </a>.
+              </span>
+            </div>
+            <div className="flex items-start gap-2">
+              <span className="font-bold text-blue-700 shrink-0">Bước 2:</span>
+              <span>
+                Truy cập liên kết{' '}
+                <a
+                  href="https://myaccount.google.com/apppasswords"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-blue-800 font-semibold inline-flex items-center gap-0.5"
+                >
+                  myaccount.google.com/apppasswords
+                  <span className="material-symbols-outlined text-[12px]">open_in_new</span>
+                </a> (hoặc bấm nút xanh bên trên).
+              </span>
+            </div>
+            <div className="flex items-start gap-2">
+              <span className="font-bold text-blue-700 shrink-0">Bước 3:</span>
+              <span>
+                Nhập tên ứng dụng bất kỳ (ví dụ: <code className="bg-blue-100/80 px-1.5 py-0.5 rounded text-blue-950 font-bold">Cutlet Spring</code>) rồi nhấn <strong>Tạo (Create)</strong>.
+              </span>
+            </div>
+            <div className="flex items-start gap-2">
+              <span className="font-bold text-blue-700 shrink-0">Bước 4:</span>
+              <span>
+                Google sẽ hiển thị mã gồm <strong>16 ký tự</strong> (ví dụ: <code className="bg-amber-100/80 text-amber-950 px-1.5 py-0.5 rounded font-mono font-bold">abcd efgh ijkl mnop</code>). Sao chép và dán vào ô <em>Mật khẩu ứng dụng</em> bên dưới.
+              </span>
+            </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {/* Host */}
-          <div className="sm:col-span-2">
-            <label className="block text-xs font-bold text-[#1b1c1a] mb-1.5 uppercase tracking-wider">
-              SMTP Host <span className="text-[#af101a]">*</span>
-            </label>
-            <input
-              type="text"
-              required
-              value={formData.host}
-              onChange={(e) => handleFieldChange('host', e.target.value)}
-              placeholder="e.g. smtp.gmail.com"
-              className="w-full px-3.5 py-2.5 text-xs bg-white border border-[#eae8e5] rounded-xl focus:border-[#af101a] focus:ring-1 focus:ring-[#af101a] outline-none font-mono transition-all"
-            />
-          </div>
-
-          {/* Port */}
-          <div>
-            <label className="block text-xs font-bold text-[#1b1c1a] mb-1.5 uppercase tracking-wider">
-              SMTP Port <span className="text-[#af101a]">*</span>
-            </label>
-            <input
-              type="number"
-              required
-              value={formData.port}
-              onChange={(e) => {
-                const p = parseInt(e.target.value, 10) || 587;
-                handleFieldChange('port', p);
-                if (p === 465) {
-                  handleFieldChange('smtpStarttls', false);
-                } else if (p === 587) {
-                  handleFieldChange('smtpStarttls', true);
-                }
-              }}
-              min={1}
-              max={65535}
-              className="w-full px-3.5 py-2.5 text-xs bg-white border border-[#eae8e5] rounded-xl focus:border-[#af101a] focus:ring-1 focus:ring-[#af101a] outline-none font-mono transition-all"
-            />
-          </div>
-        </div>
-
+        {/* 2 Fields: Email & App Password */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {/* Username */}
+          {/* Email / Gmail Account */}
           <div>
             <label className="block text-xs font-bold text-[#1b1c1a] mb-1.5 uppercase tracking-wider">
-              SMTP Username / Account <span className="text-[#af101a]">*</span>
+              Tài khoản Gmail / Email gửi (Username) <span className="text-[#af101a]">*</span>
             </label>
             <input
-              type="text"
+              type="email"
+              required
               value={formData.username}
-              onChange={(e) => handleFieldChange('username', e.target.value)}
-              placeholder="e.g. admin@cutletspring.com"
-              className="w-full px-3.5 py-2.5 text-xs bg-white border border-[#eae8e5] rounded-xl focus:border-[#af101a] focus:ring-1 focus:ring-[#af101a] outline-none transition-all"
+              onChange={(e) => handleUsernameChange(e.target.value)}
+              placeholder="e.g. myapah7605@gmail.com"
+              className="w-full px-3.5 py-2.5 text-xs bg-white border border-[#eae8e5] rounded-xl focus:border-[#af101a] focus:ring-1 focus:ring-[#af101a] outline-none transition-all placeholder:text-gray-400"
             />
             <p className="text-[10px] text-[#8f6f6c] mt-1">
-              For Gmail, use your Google Account or Workspace email.
+              Địa chỉ Gmail dùng để xác thực và gửi thư ra bên ngoài
             </p>
           </div>
 
-          {/* Password */}
+          {/* Password / App Password */}
           <div>
             <label className="block text-xs font-bold text-[#1b1c1a] mb-1.5 uppercase tracking-wider">
-              SMTP Password / App Password
+              Mật khẩu ứng dụng (Google App Password)
             </label>
             <div className="relative">
               <input
@@ -498,8 +513,8 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
                 onChange={(e) => handleFieldChange('password', e.target.value)}
                 placeholder={
                   config?.passwordConfigured
-                    ? '•••••••• (Preserved - leave blank to keep)'
-                    : 'Enter SMTP App Password'
+                    ? '•••••••••••••••• (Đã lưu an toàn - để trống nếu không đổi)'
+                    : 'Dán 16 ký tự mật khẩu ứng dụng tại đây'
                 }
                 className="w-full pl-3.5 pr-10 py-2.5 text-xs bg-white border border-[#eae8e5] rounded-xl focus:border-[#af101a] focus:ring-1 focus:ring-[#af101a] outline-none font-mono transition-all placeholder:text-[#8f6f6c]"
               />
@@ -507,6 +522,7 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 cursor-pointer"
+                title={showPassword ? 'Ẩn mật khẩu' : 'Hiển thị mật khẩu'}
               >
                 <span className="material-symbols-outlined text-[18px]">
                   {showPassword ? 'visibility_off' : 'visibility'}
@@ -515,58 +531,118 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
             </div>
             <p className="text-[10px] text-[#8f6f6c] mt-1">
               {config?.passwordConfigured
-                ? 'An encrypted password is saved. Leave blank to preserve it, or enter a new value to update.'
-                : 'For Gmail, generate a 16-character App Password under Google Account Security.'}
+                ? 'Mật khẩu đã được mã hóa AES-256-GCM. Để trống nếu không muốn thay đổi.'
+                : 'Dán mật khẩu ứng dụng 16 ký tự được cấp từ Google.'}
             </p>
           </div>
         </div>
 
-        {/* Protocols & Flags */}
-        <div className="p-4 bg-[#fbf9f6] rounded-xl border border-[#eae8e5] grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {/* SMTP Auth */}
-          <label className="flex items-center gap-3 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={formData.smtpAuth}
-              onChange={(e) => handleFieldChange('smtpAuth', e.target.checked)}
-              className="w-4 h-4 rounded text-[#af101a] focus:ring-[#af101a] border-[#eae8e5]"
-            />
-            <div>
-              <span className="text-xs font-bold text-[#1b1c1a] block">SMTP Authentication</span>
-              <span className="text-[10px] text-[#585757]">Require username/password login</span>
-            </div>
-          </label>
-
-          {/* STARTTLS */}
-          <label className="flex items-center gap-3 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={formData.smtpStarttls}
-              onChange={(e) => handleFieldChange('smtpStarttls', e.target.checked)}
-              className="w-4 h-4 rounded text-[#af101a] focus:ring-[#af101a] border-[#eae8e5]"
-            />
-            <div>
-              <span className="text-xs font-bold text-[#1b1c1a] block">STARTTLS Enabled</span>
-              <span className="text-[10px] text-[#585757]">Opportunistic TLS upgrade (Port 587)</span>
-            </div>
-          </label>
-
-          {/* SSL/TLS Direct Indicator */}
-          <div className="flex items-center gap-2">
+        {/* Tùy chọn máy chủ nâng cao (ẩn mặc định) */}
+        <div className="pt-2 border-t border-[#eae8e5]/80">
+          <button
+            type="button"
+            onClick={() => setShowAdvanced(!showAdvanced)}
+            className="flex items-center gap-1.5 text-xs font-bold text-[#585757] hover:text-[#af101a] transition-colors cursor-pointer select-none"
+          >
             <span
-              className={`inline-block w-2.5 h-2.5 rounded-full ${
-                isSslDirect ? 'bg-emerald-500' : 'bg-gray-300'
-              }`}
-            />
-            <div>
-              <span className="text-xs font-bold text-[#1b1c1a] block">
-                {isSslDirect ? 'Direct SSL/TLS Active' : 'STARTTLS Mode'}
-              </span>
-              <span className="text-[10px] text-[#585757]">
-                {isSslDirect ? 'Direct SSL socket factory (Port 465)' : 'RFC 3207 standard STARTTLS'}
-              </span>
+              className="material-symbols-outlined text-[18px] transition-transform duration-200"
+              style={{ transform: showAdvanced ? 'rotate(180deg)' : 'none' }}
+            >
+              expand_more
+            </span>
+            <span>Tùy chọn máy chủ nâng cao (Host, Port, STARTTLS)</span>
+            <span className="text-[10px] font-normal text-[#8f6f6c]">
+              (Mặc định: smtp.gmail.com:587 STARTTLS)
+            </span>
+          </button>
+
+          {showAdvanced && (
+            <div className="mt-4 p-4 bg-[#fbf9f6] rounded-xl border border-[#eae8e5] space-y-4 animate-fade-in">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <span className="text-xs font-bold text-[#1b1c1a] uppercase tracking-wider">
+                  Cấu hình kết nối máy chủ
+                </span>
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] text-[#585757] uppercase font-bold">Mẫu nhanh:</span>
+                  <button
+                    type="button"
+                    onClick={() => applyPreset('gmail587')}
+                    className="px-2.5 py-1 text-[10px] font-bold bg-white hover:bg-[#eae8e5] text-[#1b1c1a] border border-[#eae8e5] rounded-lg transition-colors cursor-pointer shadow-2xs"
+                  >
+                    Gmail / 587 (STARTTLS)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => applyPreset('ssl465')}
+                    className="px-2.5 py-1 text-[10px] font-bold bg-white hover:bg-[#eae8e5] text-[#1b1c1a] border border-[#eae8e5] rounded-lg transition-colors cursor-pointer shadow-2xs"
+                  >
+                    SSL / 465 (Direct SSL)
+                  </button>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="sm:col-span-2">
+                  <label className="block text-xs font-bold text-[#1b1c1a] mb-1 uppercase tracking-wider">
+                    SMTP Host
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.host}
+                    onChange={(e) => handleFieldChange('host', e.target.value)}
+                    placeholder="smtp.gmail.com"
+                    className="w-full px-3 py-2 text-xs bg-white border border-[#eae8e5] rounded-xl font-mono outline-none focus:border-[#af101a]"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-[#1b1c1a] mb-1 uppercase tracking-wider">
+                    SMTP Port
+                  </label>
+                  <input
+                    type="number"
+                    value={formData.port}
+                    onChange={(e) => {
+                      const p = parseInt(e.target.value, 10) || 587;
+                      handleFieldChange('port', p);
+                      if (p === 465) handleFieldChange('smtpStarttls', false);
+                      else if (p === 587) handleFieldChange('smtpStarttls', true);
+                    }}
+                    min={1}
+                    max={65535}
+                    className="w-full px-3 py-2 text-xs bg-white border border-[#eae8e5] rounded-xl font-mono outline-none focus:border-[#af101a]"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-[#eae8e5]">
+                <label className="flex items-center gap-2.5 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={formData.smtpAuth}
+                    onChange={(e) => handleFieldChange('smtpAuth', e.target.checked)}
+                    className="w-4 h-4 rounded text-[#af101a] border-[#eae8e5]"
+                  />
+                  <div>
+                    <span className="text-xs font-bold text-[#1b1c1a] block">Xác thực SMTP (Auth)</span>
+                    <span className="text-[10px] text-[#585757]">Bắt buộc đăng nhập username/password</span>
+                  </div>
+                </label>
+
+                <label className="flex items-center gap-2.5 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={formData.smtpStarttls}
+                    onChange={(e) => handleFieldChange('smtpStarttls', e.target.checked)}
+                    className="w-4 h-4 rounded text-[#af101a] border-[#eae8e5]"
+                  />
+                  <div>
+                    <span className="text-xs font-bold text-[#1b1c1a] block">Kích hoạt STARTTLS</span>
+                    <span className="text-[10px] text-[#585757]">Nâng cấp bảo mật kết nối TLS (Port 587)</span>
+                  </div>
+                </label>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
 
