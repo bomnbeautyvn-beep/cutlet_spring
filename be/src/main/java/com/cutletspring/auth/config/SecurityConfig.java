@@ -25,6 +25,8 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.CsrfException;
+import org.springframework.security.web.csrf.CsrfTokenRepository;
 import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.cors.CorsConfiguration;
@@ -43,6 +45,12 @@ public class SecurityConfig {
 
     @Value("${cors.allowed-origins:${CORSALLOWS:http://localhost:5173,http://localhost:3000,http://localhost:80,https://cutletspring.vercel.app}}")
     private String allowedOrigins;
+
+    @Value("${server.servlet.session.cookie.same-site:${SESSION_COOKIE_SAME_SITE:Lax}}")
+    private String cookieSameSite;
+
+    @Value("${server.servlet.session.cookie.secure:${SESSION_COOKIE_SECURE:false}}")
+    private boolean cookieSecure;
 
     private final ObjectMapper objectMapper = new ObjectMapper().findAndRegisterModules();
 
@@ -94,6 +102,18 @@ public class SecurityConfig {
     }
 
     @Bean
+    public CsrfTokenRepository csrfTokenRepository() {
+        CookieCsrfTokenRepository cookieRepo = CookieCsrfTokenRepository.withHttpOnlyFalse();
+        cookieRepo.setCookieCustomizer(customizer -> {
+            customizer.sameSite(cookieSameSite);
+            customizer.secure(cookieSecure || "None".equalsIgnoreCase(cookieSameSite));
+            customizer.path("/");
+            customizer.httpOnly(false);
+        });
+        return new HybridCsrfTokenRepository(cookieRepo);
+    }
+
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, SecurityContextRepository securityContextRepository) throws Exception {
         CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
         requestHandler.setCsrfRequestAttributeName(null);
@@ -101,7 +121,7 @@ public class SecurityConfig {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf
-                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                        .csrfTokenRepository(csrfTokenRepository())
                         .csrfTokenRequestHandler(requestHandler)
                         .ignoringRequestMatchers(
                                 "/api/auth/login", "/auth/login",
@@ -155,10 +175,13 @@ public class SecurityConfig {
                         .accessDeniedHandler((request, response, accessDeniedException) -> {
                             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
                             response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+                            String message = (accessDeniedException instanceof CsrfException)
+                                    ? "Invalid or missing CSRF token"
+                                    : "Access denied. Admin privileges required.";
                             ApiErrorResponse error = ApiErrorResponse.builder()
                                     .success(false)
                                     .code("FORBIDDEN")
-                                    .message("Access denied. Admin privileges required.")
+                                    .message(message)
                                     .timestamp(Instant.now())
                                     .build();
                             response.getWriter().write(objectMapper.writeValueAsString(error));

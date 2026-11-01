@@ -1,5 +1,6 @@
 package com.cutletspring.auth.controller;
 
+import com.cutletspring.auth.config.HybridCsrfTokenRepository;
 import com.cutletspring.auth.dto.request.ChangePasswordRequest;
 import com.cutletspring.auth.dto.request.ForgotPasswordRequest;
 import com.cutletspring.auth.dto.request.LoginRequest;
@@ -47,6 +48,12 @@ public class AuthController {
     @GetMapping("/csrf")
     public ResponseEntity<ApiResponse<Map<String, String>>> getCsrfToken(HttpServletRequest request) {
         CsrfToken csrfToken = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
+        if (csrfToken != null) {
+            jakarta.servlet.http.HttpSession session = request.getSession(false);
+            if (session != null) {
+                session.setAttribute(HybridCsrfTokenRepository.CSRF_SESSION_ATTR, csrfToken);
+            }
+        }
         String token = csrfToken != null ? csrfToken.getToken() : "";
         String headerName = csrfToken != null ? csrfToken.getHeaderName() : "X-XSRF-TOKEN";
         return ResponseEntity.ok(ApiResponse.success("CSRF token initialized", Map.of(
@@ -70,6 +77,17 @@ public class AuthController {
         context.setAuthentication(authentication);
         SecurityContextHolder.setContext(context);
         securityContextRepository.saveContext(context, request, response);
+
+        // Associate CSRF token with the newly authenticated session
+        jakarta.servlet.http.HttpSession session = request.getSession(true);
+        CsrfToken csrfToken = (CsrfToken) request.getAttribute(CsrfToken.class.getName());
+        if (csrfToken != null) {
+            session.setAttribute(HybridCsrfTokenRepository.CSRF_SESSION_ATTR, csrfToken);
+            String token = csrfToken.getToken();
+            if (token != null && !token.isEmpty()) {
+                response.setHeader("X-XSRF-TOKEN", token);
+            }
+        }
 
         Admin admin = adminRepository.findByEmail(loginRequest.getEmail())
                 .orElseThrow(() -> new BadCredentialsException("Admin record not found"));

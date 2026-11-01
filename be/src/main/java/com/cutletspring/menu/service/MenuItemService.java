@@ -107,7 +107,7 @@ public class MenuItemService {
                 .portionKr(request.getPortionKr())
                 .portionJp(request.getPortionJp())
                 .basePrice(request.getBasePrice())
-                .prepTimeMinutes(request.getPrepTimeMinutes() > 0 ? request.getPrepTimeMinutes() : 15)
+                .prepTimeMinutes(request.getPrepTimeMinutes() != null && request.getPrepTimeMinutes() > 0 ? request.getPrepTimeMinutes() : 15)
                 .imageUrl(request.getImageUrl())
                 .imagePublicId(request.getImagePublicId())
                 .altText(request.getAltText())
@@ -193,7 +193,7 @@ public class MenuItemService {
         item.setPortionKr(request.getPortionKr());
         item.setPortionJp(request.getPortionJp());
         item.setBasePrice(request.getBasePrice());
-        item.setPrepTimeMinutes(request.getPrepTimeMinutes() > 0 ? request.getPrepTimeMinutes() : 15);
+        item.setPrepTimeMinutes(request.getPrepTimeMinutes() != null && request.getPrepTimeMinutes() > 0 ? request.getPrepTimeMinutes() : 15);
         if (request.getImageUrl() != null) item.setImageUrl(request.getImageUrl());
         if (request.getImagePublicId() != null) item.setImagePublicId(request.getImagePublicId());
         item.setAltText(request.getAltText());

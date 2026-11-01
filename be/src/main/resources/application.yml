@@ -29,6 +29,7 @@ app:
 
 server:
   port: ${BACKEND_PORT:8080}
+  forward-headers-strategy: ${FORWARD_HEADERS_STRATEGY:framework}
   servlet:
     session:
       timeout: ${SESSION_TIMEOUT:8h}

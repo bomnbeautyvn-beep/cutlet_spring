@@ -4,6 +4,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -20,6 +21,10 @@ public class CsrfCookieFilter extends OncePerRequestFilter {
             String token = csrfToken.getToken();
             if (token != null && !token.isEmpty()) {
                 response.setHeader("X-XSRF-TOKEN", token);
+                HttpSession session = request.getSession(false);
+                if (session != null) {
+                    session.setAttribute(HybridCsrfTokenRepository.CSRF_SESSION_ATTR, csrfToken);
+                }
             }
         }
         filterChain.doFilter(request, response);

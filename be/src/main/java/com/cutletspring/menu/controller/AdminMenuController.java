@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping("/api/admin/menu")
+@RequestMapping({"/api/admin/menu", "/admin/menu"})
 @RequiredArgsConstructor
 @Tag(name = "Admin Menu Management", description = "Administrative endpoints for dish catalog, options, pricing, and Cloudinary image asset synchronization")
 public class AdminMenuController {

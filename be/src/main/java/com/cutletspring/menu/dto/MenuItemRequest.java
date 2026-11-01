@@ -62,7 +62,7 @@ public class MenuItemRequest {
     private int basePrice;
 
     @Builder.Default
-    private int prepTimeMinutes = 15;
+    private Integer prepTimeMinutes = 15;
 
     private String imageUrl;
     private String imagePublicId;

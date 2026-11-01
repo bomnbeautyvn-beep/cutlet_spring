@@ -42,6 +42,14 @@ export const authService = {
       email,
       password,
     });
+
+    // Refresh and sync CSRF token for the authenticated session
+    try {
+      await this.initCsrf();
+    } catch {
+      // ignore
+    }
+
     return res.data;
   },
 
