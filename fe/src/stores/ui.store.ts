@@ -4,17 +4,11 @@ import { PageView, Language, MenuItem } from '@/types';
 interface UIState {
   currentView: PageView;
   language: Language;
-  isOrderPadOpen: boolean;
-  isReservationOpen: boolean;
   selectedItemForModal: MenuItem | null;
   modalInitialOptions: any | null;
 
   setCurrentView: (view: PageView) => void;
   setLanguage: (lang: Language) => void;
-  openOrderPad: () => void;
-  closeOrderPad: () => void;
-  openReservation: () => void;
-  closeReservation: () => void;
   openItemDetail: (item: MenuItem, initialOptions?: any) => void;
   closeItemDetail: () => void;
 }
@@ -22,8 +16,6 @@ interface UIState {
 export const useUIStore = create<UIState>((set) => ({
   currentView: 'home',
   language: 'EN',
-  isOrderPadOpen: false,
-  isReservationOpen: false,
   selectedItemForModal: null,
   modalInitialOptions: null,
 
@@ -35,12 +27,6 @@ export const useUIStore = create<UIState>((set) => ({
   },
 
   setLanguage: (language) => set({ language }),
-
-  openOrderPad: () => set({ isOrderPadOpen: true }),
-  closeOrderPad: () => set({ isOrderPadOpen: false }),
-
-  openReservation: () => set({ isReservationOpen: true }),
-  closeReservation: () => set({ isReservationOpen: false }),
 
   openItemDetail: (item, initialOptions = null) =>
     set({
