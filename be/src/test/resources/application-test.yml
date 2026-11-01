@@ -21,6 +21,8 @@ cloudinary:
   folder: test-folder
 
 app:
+  config:
+    encryption-key: "c2VjdXJlLXRlc3QtZW5jcnlwdGlvbi1rZXktMTIzNDU2"
   mail:
     enabled: false
     from: test@cutletspring.com
