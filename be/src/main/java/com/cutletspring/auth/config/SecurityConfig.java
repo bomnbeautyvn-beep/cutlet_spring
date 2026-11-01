@@ -31,6 +31,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -74,10 +75,24 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
         List<String> origins = Arrays.stream(allowedOrigins.split(","))
                 .map(String::trim)
+                .map(origin -> origin.endsWith("/") ? origin.substring(0, origin.length() - 1) : origin)
+                .filter(origin -> !origin.isEmpty())
                 .toList();
-        configuration.setAllowedOrigins(origins);
+
+        List<String> patterns = new ArrayList<>(List.of(
+                "http://localhost:*",
+                "https://*.vercel.app",
+                "https://vercel.app",
+                "https://*.onrender.com"
+        ));
+        for (String origin : origins) {
+            if (!patterns.contains(origin)) {
+                patterns.add(origin);
+            }
+        }
+        configuration.setAllowedOriginPatterns(patterns);
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-XSRF-TOKEN", "Accept", "Origin", "X-Requested-With"));
+        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-XSRF-TOKEN", "Accept", "Origin", "X-Requested-With", "Cookie"));
         configuration.setExposedHeaders(List.of("Set-Cookie", "X-XSRF-TOKEN"));
         configuration.setAllowCredentials(true);
         configuration.setMaxAge(3600L);

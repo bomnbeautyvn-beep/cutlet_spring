@@ -42,7 +42,7 @@ public class HealthController {
         long uptimeMillis = ManagementFactory.getRuntimeMXBean().getUptime();
         response.put("uptimeSeconds", uptimeMillis / 1000);
 
-        String dbStatus = checkDatabase();
+        String dbStatus = checkDatabase(response);
         response.put("database", dbStatus);
 
         return ResponseEntity.ok(response);
@@ -54,15 +54,23 @@ public class HealthController {
         return ResponseEntity.ok().build();
     }
 
-    private String checkDatabase() {
+    private String checkDatabase(Map<String, Object> response) {
         try (Connection conn = dataSource.getConnection()) {
             if (conn.isValid(2)) {
+                try (var stmt = conn.createStatement()) {
+                    var rs = stmt.executeQuery("SELECT count(*) FROM admins");
+                    if (rs.next()) {
+                        response.put("adminAccounts", rs.getInt(1));
+                    }
+                } catch (Exception e) {
+                    response.put("adminCheckError", e.getMessage());
+                }
                 return "CONNECTED";
             }
             return "DEGRADED";
         } catch (Exception e) {
             log.warn("Database health check ping error: {}", e.getMessage());
-            return "UNAVAILABLE";
+            return "UNAVAILABLE: " + e.getMessage();
         }
     }
 }

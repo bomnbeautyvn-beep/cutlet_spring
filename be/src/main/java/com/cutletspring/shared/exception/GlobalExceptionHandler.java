@@ -1,6 +1,7 @@
 package com.cutletspring.shared.exception;
 
 import com.cutletspring.shared.response.ApiErrorResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
@@ -17,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
@@ -137,10 +139,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiErrorResponse> handleGenericException(Exception ex) {
+        log.error("Unhandled server exception: ", ex);
         ApiErrorResponse response = ApiErrorResponse.builder()
                 .success(false)
                 .code("INTERNAL_SERVER_ERROR")
-                .message("An unexpected server error occurred. Please try again later.")
+                .message("Server error: " + ex.getClass().getSimpleName() + ": " + ex.getMessage())
                 .timestamp(Instant.now())
                 .build();
 
