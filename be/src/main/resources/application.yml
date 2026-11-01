@@ -21,7 +21,7 @@ spring:
 
 app:
   config:
-    encryption-key: ${APP_CONFIG_ENCRYPTION_KEY:}
+    encryption-key: ${APP_CONFIG_ENCRYPTION_KEY:CutletSpringSecretAesEncryptionKey2026!}
   mail:
     from: ${APP_MAIL_FROM:noreply@cutletspring.com}
     from-name: ${APP_MAIL_FROM_NAME:Cutlet Spring Security}
