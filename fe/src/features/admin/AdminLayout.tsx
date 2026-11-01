@@ -3,8 +3,6 @@ import { AdminSidebar, AdminSection } from '@/features/admin/AdminSidebar';
 import { AdminHeader } from '@/features/admin/AdminHeader';
 import { AdminDashboard } from '@/features/admin/AdminDashboard';
 import { MenuManagementPage } from '@/features/admin/MenuManagementPage';
-import { WalkInOrderDesk } from '@/features/admin/WalkInOrderDesk';
-import { CounterTheaterSeating } from '@/features/admin/CounterTheaterSeating';
 import { RestaurantSettingsPage } from '@/features/admin/RestaurantSettingsPage';
 import { AccountManagementPage } from '@/features/admin/AccountManagementPage';
 import { HomepageCmsPage } from '@/features/admin/cms/HomepageCmsPage';
@@ -20,6 +18,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onExitToPublicSite }) 
   const isAdmin = admin?.role === 'ROLE_ADMIN' || admin?.role === 'ADMIN';
 
   const [currentSection, setCurrentSection] = useState<AdminSection>('dashboard');
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
   const [isNewDishModalOpen, setIsNewDishModalOpen] = useState(false);
 
@@ -28,8 +27,6 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onExitToPublicSite }) 
     dashboard: 'Atelier Dashboard & Metrics',
     menu: 'Menu Catalog Management',
     homepage: 'Homepage Content Management & CMS',
-    orders: 'Walk-In Order Desk',
-    seating: 'Chef Counter Theater & Hall Seating',
     settings: 'Restaurant Profile & Operating Settings',
     accounts: 'Account Credentials & Security Audit',
   };
@@ -40,14 +37,26 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onExitToPublicSite }) 
       return;
     }
     setCurrentSection(section);
+    setIsMobileSidebarOpen(false);
   };
 
   return (
-    <div className="min-h-screen bg-[#fbf9f6] flex flex-row">
+    <div className="min-h-screen bg-[#fbf9f6] flex flex-row relative">
+      {/* Mobile Drawer Backdrop */}
+      {isMobileSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/60 backdrop-blur-xs z-40 lg:hidden transition-opacity"
+          onClick={() => setIsMobileSidebarOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
       {/* Sidebar Navigation */}
       <AdminSidebar
         currentSection={currentSection}
         onSelectSection={handleSelectSection}
+        isOpen={isMobileSidebarOpen}
+        onClose={() => setIsMobileSidebarOpen(false)}
       />
 
       {/* Main Right Area */}
@@ -57,6 +66,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onExitToPublicSite }) 
           currentSectionTitle={sectionTitles[currentSection]}
           onChangePasswordClick={() => setIsChangePasswordOpen(true)}
           onExitToPublicSite={onExitToPublicSite}
+          onToggleSidebar={() => setIsMobileSidebarOpen((prev) => !prev)}
         />
 
         {/* Dynamic Section Content */}
@@ -79,10 +89,6 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onExitToPublicSite }) 
           )}
 
           {currentSection === 'homepage' && isAdmin && <HomepageCmsPage />}
-
-          {currentSection === 'orders' && <WalkInOrderDesk />}
-
-          {currentSection === 'seating' && <CounterTheaterSeating />}
 
           {currentSection === 'settings' && isAdmin && <RestaurantSettingsPage />}
 

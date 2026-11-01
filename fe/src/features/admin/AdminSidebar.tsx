@@ -1,16 +1,20 @@
 import React from 'react';
 import { useAuthStore } from '@/stores/auth.store';
 
-export type AdminSection = 'dashboard' | 'menu' | 'homepage' | 'orders' | 'seating' | 'settings' | 'accounts';
+export type AdminSection = 'dashboard' | 'menu' | 'homepage' | 'settings' | 'accounts';
 
 interface AdminSidebarProps {
   currentSection: AdminSection;
   onSelectSection: (section: AdminSection) => void;
+  isOpen?: boolean;
+  onClose?: () => void;
 }
 
 export const AdminSidebar: React.FC<AdminSidebarProps> = ({
   currentSection,
   onSelectSection,
+  isOpen = false,
+  onClose,
 }) => {
   const { admin } = useAuthStore();
   const isAdmin = admin?.role === 'ROLE_ADMIN' || admin?.role === 'ADMIN';
@@ -42,18 +46,6 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
       adminOnly: true,
     },
     {
-      id: 'orders',
-      label: 'Walk-In Order Desk',
-      sublabel: 'Ticket Queue & Counter Prep',
-      icon: 'point_of_sale',
-    },
-    {
-      id: 'seating',
-      label: 'Counter Theater',
-      sublabel: 'Counter & Hall Capacity',
-      icon: 'chair_alt',
-    },
-    {
       id: 'settings',
       label: 'Restaurant Settings',
       sublabel: 'Profile, Hours & Policies',
@@ -70,27 +62,43 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
   ];
 
   return (
-    <aside className="w-64 bg-[#1b1c1a] text-[#fbf9f6] flex flex-col shrink-0 border-r border-[#2b2a28] min-h-screen">
+    <aside
+      className={`fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] lg:w-64 bg-[#1b1c1a] text-[#fbf9f6] flex flex-col shrink-0 border-r border-[#2b2a28] min-h-screen transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 ${
+        isOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'
+      }`}
+    >
       {/* Brand Header */}
-      <div className="p-6 border-b border-white/10 flex items-center gap-3">
-        <div className="w-10 h-10 rounded-xl bg-[#af101a] flex items-center justify-center text-white shadow-lg shrink-0">
-          <span className="material-symbols-outlined text-[22px]">restaurant</span>
+      <div className="p-5 sm:p-6 border-b border-white/10 flex items-center justify-between gap-3">
+        <div className="flex items-center gap-3 min-w-0">
+          <div className="w-10 h-10 rounded-xl bg-[#af101a] flex items-center justify-center text-white shadow-lg shrink-0">
+            <span className="material-symbols-outlined text-[22px]">restaurant</span>
+          </div>
+          <div className="min-w-0">
+            <span className="font-kr-serif text-xs text-[#feae2c] font-bold block leading-tight">
+              봄돈까스
+            </span>
+            <h1 className="font-headline-sm text-sm font-bold tracking-wider text-white uppercase leading-tight truncate">
+              Cutlet Spring
+            </h1>
+            <span className="text-[10px] text-white/50 tracking-widest uppercase">
+              Atelier Portal
+            </span>
+          </div>
         </div>
-        <div>
-          <span className="font-kr-serif text-xs text-[#feae2c] font-bold block leading-tight">
-            봄돈까스
-          </span>
-          <h1 className="font-headline-sm text-sm font-bold tracking-wider text-white uppercase leading-tight">
-            Cutlet Spring
-          </h1>
-          <span className="text-[10px] text-white/50 tracking-widest uppercase">
-            Atelier Portal
-          </span>
-        </div>
+
+        {/* Close Button on Mobile */}
+        <button
+          type="button"
+          onClick={onClose}
+          className="p-1.5 rounded-lg text-white/60 hover:text-white hover:bg-white/10 lg:hidden cursor-pointer"
+          aria-label="Close sidebar"
+        >
+          <span className="material-symbols-outlined text-[20px]">close</span>
+        </button>
       </div>
 
       {/* Navigation */}
-      <nav className="p-3 space-y-1 flex-1">
+      <nav className="p-3 space-y-1 flex-1 overflow-y-auto">
         {navItems.map((item) => {
           if (item.adminOnly && !isAdmin) return null;
           const isActive = currentSection === item.id;
@@ -98,7 +106,10 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
           return (
             <button
               key={item.id}
-              onClick={() => onSelectSection(item.id)}
+              onClick={() => {
+                onSelectSection(item.id);
+                onClose?.();
+              }}
               className={`w-full text-left px-3 py-2.5 rounded-xl transition-all flex items-center gap-3 cursor-pointer group ${
                 isActive
                   ? 'bg-[#af101a] text-white font-bold shadow-md'
