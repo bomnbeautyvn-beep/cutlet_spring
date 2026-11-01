@@ -93,7 +93,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                        .ignoringRequestMatchers("/api/auth/login", "/api/auth/logout")
+                        .ignoringRequestMatchers("/api/auth/login", "/api/auth/logout", "/api/health", "/health")
                 )
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
                 .securityContext(context -> context.securityContextRepository(securityContextRepository))
@@ -103,6 +103,8 @@ public class SecurityConfig {
                         .sessionRegistry(sessionRegistry())
                 )
                 .authorizeHttpRequests(auth -> auth
+                        // Public health check and keep-alive ping
+                        .requestMatchers("/api/health", "/health").permitAll()
                         // Change password for logged in admin or staff
                         .requestMatchers("/api/auth/change-password").hasAnyRole("ADMIN", "STAFF")
                         // Public endpoints
