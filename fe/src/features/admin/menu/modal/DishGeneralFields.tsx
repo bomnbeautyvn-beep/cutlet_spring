@@ -23,6 +23,10 @@ interface DishGeneralFieldsProps {
   onFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   active: boolean;
   onActiveChange: (val: boolean) => void;
+  sizes?: Array<{ id?: string; label: string; price: number; displayOrder?: number }>;
+  onAddSize?: (label?: string, price?: number) => void;
+  onRemoveSize?: (index: number) => void;
+  onUpdateSize?: (index: number, field: 'label' | 'price', value: string | number) => void;
 }
 
 export const DishGeneralFields: React.FC<DishGeneralFieldsProps> = ({
@@ -47,6 +51,10 @@ export const DishGeneralFields: React.FC<DishGeneralFieldsProps> = ({
   onFileChange,
   active,
   onActiveChange,
+  sizes,
+  onAddSize,
+  onRemoveSize,
+  onUpdateSize,
 }) => {
   return (
     <div className="space-y-4 animate-fade-in">
@@ -119,6 +127,82 @@ export const DishGeneralFields: React.FC<DishGeneralFieldsProps> = ({
             className="w-full px-3.5 py-2.5 text-sm bg-[#fbf9f6] border border-[#eae8e5] rounded-xl focus:outline-none focus:border-[#af101a]"
           />
         </div>
+      </div>
+
+      {/* Portion Sizes & Tiered Pricing Section */}
+      <div className="p-4 bg-[#fbf9f6] rounded-xl border border-[#eae8e5] space-y-3">
+        <div className="flex items-center justify-between">
+          <div>
+            <span className="block text-xs font-bold uppercase tracking-wider text-[#585757]">
+              Portion Sizes &amp; Pricing (Khẩu phần &amp; Giá theo Size)
+            </span>
+            <span className="text-[11px] text-[#8f6f6c]">
+              Optional: Add different sizes (e.g. Regular, Large, 200g, Set 2 người) with specific prices
+            </span>
+          </div>
+          {onAddSize && (
+            <button
+              type="button"
+              onClick={() => onAddSize('', basePrice)}
+              className="px-3 py-1.5 bg-white hover:bg-[#eae8e5] text-[#af101a] border border-[#eae8e5] rounded-lg text-xs font-bold uppercase tracking-wider transition-colors shadow-2xs flex items-center gap-1 cursor-pointer"
+            >
+              <span className="material-symbols-outlined text-[16px]">add</span>
+              <span>Add Size</span>
+            </button>
+          )}
+        </div>
+
+        {sizes && sizes.length > 0 ? (
+          <div className="space-y-2.5">
+            {sizes.map((s, idx) => (
+              <div key={idx} className="flex items-center gap-2 bg-white p-2.5 rounded-xl border border-[#eae8e5] shadow-2xs">
+                <div className="flex-1">
+                  <label className="block text-[10px] font-bold uppercase text-[#8f6f6c] mb-0.5">
+                    Size Name / Label
+                  </label>
+                  <input
+                    type="text"
+                    value={s.label}
+                    onChange={(e) => onUpdateSize && onUpdateSize(idx, 'label', e.target.value)}
+                    placeholder="e.g. Standard, Large, 200g, Set 2 người"
+                    className="w-full px-2.5 py-1.5 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-lg focus:outline-none focus:border-[#af101a]"
+                  />
+                </div>
+                <div className="w-36">
+                  <label className="block text-[10px] font-bold uppercase text-[#8f6f6c] mb-0.5">
+                    Price (.000 VND)
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="number"
+                      value={s.price}
+                      onChange={(e) => onUpdateSize && onUpdateSize(idx, 'price', Number(e.target.value))}
+                      min={0}
+                      className="w-full px-2.5 py-1.5 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-lg focus:outline-none focus:border-[#af101a]"
+                    />
+                    <span className="absolute right-2 top-1.5 text-[10px] text-[#8f6f6c] font-bold">
+                      k
+                    </span>
+                  </div>
+                </div>
+                {onRemoveSize && (
+                  <button
+                    type="button"
+                    onClick={() => onRemoveSize(idx)}
+                    title="Remove size option"
+                    className="mt-4 p-1.5 text-gray-400 hover:text-red-600 rounded-lg hover:bg-red-50 transition-colors cursor-pointer"
+                  >
+                    <span className="material-symbols-outlined text-[18px]">delete</span>
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-2 text-xs text-[#8f6f6c] italic">
+            No size tiers added. Orders will use the single Base Price above ({basePrice}.000 VND).
+          </div>
+        )}
       </div>
 
       {/* Badges & Special Attributes */}

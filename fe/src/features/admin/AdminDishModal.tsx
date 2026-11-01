@@ -133,6 +133,10 @@ export const AdminDishModal: React.FC<AdminDishModalProps> = ({ dish, onClose, o
               onFileChange={form.handleFileChange}
               active={form.active}
               onActiveChange={form.setActive}
+              sizes={form.sizes}
+              onAddSize={form.addSize}
+              onRemoveSize={form.removeSize}
+              onUpdateSize={form.updateSize}
             />
           )}
         </form>

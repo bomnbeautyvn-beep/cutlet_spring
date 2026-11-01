@@ -27,6 +27,29 @@ export function useAdminDishForm({ dish, onSaved, onClose }: UseAdminDishFormPro
   const [spiceLevel, setSpiceLevel] = useState<number>(dish?.spiceLevel || 0);
   const [spiceNote, setSpiceNote] = useState(dish?.spiceNote || '');
 
+  // Size Options & Tiered Pricing
+  const [sizes, setSizes] = useState<Array<{ id?: string; label: string; price: number; displayOrder?: number }>>(
+    () => dish?.sizes?.map((s, i) => ({ ...s, displayOrder: s.displayOrder || i + 1 })) || []
+  );
+
+  const addSize = (label: string = '', price: number = basePrice) => {
+    setSizes((prev) => [...prev, { label, price, displayOrder: prev.length + 1 }]);
+  };
+
+  const removeSize = (index: number) => {
+    setSizes((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const updateSize = (index: number, field: 'label' | 'price', value: string | number) => {
+    setSizes((prev) => {
+      const next = [...prev];
+      if (next[index]) {
+        next[index] = { ...next[index], [field]: value };
+      }
+      return next;
+    });
+  };
+
   // English (EN)
   const [nameEn, setNameEn] = useState(dish?.nameEn || '');
   const [descriptionEn, setDescriptionEn] = useState(dish?.descriptionEn || '');
@@ -147,6 +170,13 @@ export function useAdminDishForm({ dish, onSaved, onClose }: UseAdminDishFormPro
       spiceLevel: isSpicy ? spiceLevel : 0,
       spiceNote: isSpicy ? spiceNote.trim() : undefined,
       active,
+      sizes: sizes
+        .filter((s) => s.label.trim().length > 0 && Number(s.price) >= 0)
+        .map((s, idx) => ({
+          label: s.label.trim(),
+          price: Number(s.price),
+          displayOrder: idx + 1,
+        })),
     };
 
     try {
@@ -198,6 +228,12 @@ export function useAdminDishForm({ dish, onSaved, onClose }: UseAdminDishFormPro
     setSpiceLevel,
     spiceNote,
     setSpiceNote,
+    // Sizes
+    sizes,
+    setSizes,
+    addSize,
+    removeSize,
+    updateSize,
     // Languages
     nameEn,
     setNameEn,
