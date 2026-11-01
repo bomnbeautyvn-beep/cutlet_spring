@@ -23,6 +23,9 @@ interface DishGeneralFieldsProps {
   onFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   active: boolean;
   onActiveChange: (val: boolean) => void;
+  hasSizes: boolean;
+  onHasSizesChange: (val: boolean) => void;
+  sizesError?: string;
   sizes?: Array<{ id?: string; label: string; price: number; displayOrder?: number }>;
   onAddSize?: (label?: string, price?: number) => void;
   onRemoveSize?: (index: number) => void;
@@ -51,6 +54,9 @@ export const DishGeneralFields: React.FC<DishGeneralFieldsProps> = ({
   onFileChange,
   active,
   onActiveChange,
+  hasSizes,
+  onHasSizesChange,
+  sizesError,
   sizes,
   onAddSize,
   onRemoveSize,
@@ -130,77 +136,141 @@ export const DishGeneralFields: React.FC<DishGeneralFieldsProps> = ({
       </div>
 
       {/* Portion Sizes & Tiered Pricing Section */}
-      <div className="p-4 bg-[#fbf9f6] rounded-xl border border-[#eae8e5] space-y-3">
-        <div className="flex items-center justify-between">
-          <div>
-            <span className="block text-xs font-bold uppercase tracking-wider text-[#585757]">
-              Portion Sizes &amp; Pricing (Khẩu phần &amp; Giá theo Size)
-            </span>
-            <span className="text-[11px] text-[#8f6f6c]">
-              Optional: Add different sizes (e.g. Regular, Large, 200g, Set 2 người) with specific prices
-            </span>
+      <div
+        className={`p-4 rounded-xl border transition-all duration-200 space-y-3 ${
+          hasSizes ? 'bg-[#fbf9f6] border-[#af101a]/30 shadow-xs' : 'bg-[#fbf9f6]/60 border-[#eae8e5]'
+        }`}
+      >
+        <div className="flex items-center justify-between gap-3">
+          <div className="space-y-0.5">
+            <div className="flex items-center gap-2">
+              <span className={`material-symbols-outlined text-[18px] ${hasSizes ? 'text-[#af101a]' : 'text-[#8f6f6c]'}`}>
+                straighten
+              </span>
+              <span className="block text-xs font-bold uppercase tracking-wider text-[#1b1c1a]">
+                Món có phân loại kích cỡ (Size)?
+              </span>
+            </div>
+            <p className="text-[11px] text-[#8f6f6c]">
+              Bật nếu món có nhiều kích cỡ hoặc khẩu phần khác nhau (ví dụ: Vừa, Lớn, 200g, Set 2 người) kèm mức giá riêng
+            </p>
           </div>
-          {onAddSize && (
-            <button
-              type="button"
-              onClick={() => onAddSize('', basePrice)}
-              className="px-3 py-1.5 bg-white hover:bg-[#eae8e5] text-[#af101a] border border-[#eae8e5] rounded-lg text-xs font-bold uppercase tracking-wider transition-colors shadow-2xs flex items-center gap-1 cursor-pointer"
-            >
-              <span className="material-symbols-outlined text-[16px]">add</span>
-              <span>Add Size</span>
-            </button>
-          )}
+
+          <label className="relative inline-flex items-center cursor-pointer shrink-0">
+            <input
+              type="checkbox"
+              checked={hasSizes}
+              onChange={(e) => onHasSizesChange(e.target.checked)}
+              className="sr-only peer"
+            />
+            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#af101a]"></div>
+          </label>
         </div>
 
-        {sizes && sizes.length > 0 ? (
-          <div className="space-y-2.5">
-            {sizes.map((s, idx) => (
-              <div key={idx} className="flex items-center gap-2 bg-white p-2.5 rounded-xl border border-[#eae8e5] shadow-2xs">
-                <div className="flex-1">
-                  <label className="block text-[10px] font-bold uppercase text-[#8f6f6c] mb-0.5">
-                    Size Name / Label
-                  </label>
-                  <input
-                    type="text"
-                    value={s.label}
-                    onChange={(e) => onUpdateSize && onUpdateSize(idx, 'label', e.target.value)}
-                    placeholder="e.g. Standard, Large, 200g, Set 2 người"
-                    className="w-full px-2.5 py-1.5 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-lg focus:outline-none focus:border-[#af101a]"
-                  />
-                </div>
-                <div className="w-36">
-                  <label className="block text-[10px] font-bold uppercase text-[#8f6f6c] mb-0.5">
-                    Price (.000 VND)
-                  </label>
-                  <div className="relative">
-                    <input
-                      type="number"
-                      value={s.price}
-                      onChange={(e) => onUpdateSize && onUpdateSize(idx, 'price', Number(e.target.value))}
-                      min={0}
-                      className="w-full px-2.5 py-1.5 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-lg focus:outline-none focus:border-[#af101a]"
-                    />
-                    <span className="absolute right-2 top-1.5 text-[10px] text-[#8f6f6c] font-bold">
-                      k
-                    </span>
+        {/* Khi tắt: hiển thị thông báo 1 mức giá chuẩn duy nhất */}
+        {!hasSizes && (
+          <div className="flex items-center gap-2 p-2.5 bg-white/80 rounded-lg border border-dashed border-[#eae8e5] text-xs text-[#8f6f6c]">
+            <span className="material-symbols-outlined text-[16px] text-emerald-600">check_circle</span>
+            <span>
+              Món áp dụng <strong>1 mức giá chuẩn duy nhất ({basePrice}.000 VND)</strong>. Bật nút bên trên để mở danh sách nhập các size.
+            </span>
+          </div>
+        )}
+
+        {/* Khi bật: sổ xuống danh sách input size */}
+        {hasSizes && (
+          <div className="pt-2 border-t border-[#eae8e5] space-y-3 animate-fade-in">
+            <div className="flex items-center justify-between">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-[#585757]">
+                  Danh sách kích cỡ &amp; giá bán (.000 VND)
+                </span>
+                <span className="block text-[10px] text-[#8f6f6c]">
+                  Khách hàng sẽ lựa chọn kích cỡ khi đặt món
+                </span>
+              </div>
+              {onAddSize && (
+                <button
+                  type="button"
+                  onClick={() => onAddSize('', basePrice)}
+                  className="px-3 py-1.5 bg-white hover:bg-[#eae8e5] text-[#af101a] border border-[#eae8e5] rounded-lg text-xs font-bold uppercase tracking-wider transition-colors shadow-2xs flex items-center gap-1 cursor-pointer"
+                >
+                  <span className="material-symbols-outlined text-[16px]">add</span>
+                  <span>Thêm size mới</span>
+                </button>
+              )}
+            </div>
+
+            {sizesError && (
+              <div className="p-2.5 bg-red-50 border border-red-200 text-red-700 text-xs rounded-lg flex items-center gap-1.5 animate-fade-in">
+                <span className="material-symbols-outlined text-[16px]">error</span>
+                <span>{sizesError}</span>
+              </div>
+            )}
+
+            {sizes && sizes.length > 0 ? (
+              <div className="space-y-2.5">
+                {sizes.map((s, idx) => (
+                  <div key={idx} className="flex items-center gap-2 bg-white p-2.5 rounded-xl border border-[#eae8e5] shadow-2xs">
+                    <div className="flex-1">
+                      <label className="block text-[10px] font-bold uppercase text-[#8f6f6c] mb-0.5">
+                        Tên kích cỡ / Size #{idx + 1}
+                      </label>
+                      <input
+                        type="text"
+                        value={s.label}
+                        onChange={(e) => onUpdateSize && onUpdateSize(idx, 'label', e.target.value)}
+                        placeholder="e.g. Tiêu chuẩn (Standard), Phần Lớn (Large), 200g, Set 2 người"
+                        className="w-full px-2.5 py-1.5 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-lg focus:outline-none focus:border-[#af101a]"
+                      />
+                    </div>
+                    <div className="w-36">
+                      <label className="block text-[10px] font-bold uppercase text-[#8f6f6c] mb-0.5">
+                        Giá (.000 VND)
+                      </label>
+                      <div className="relative">
+                        <input
+                          type="number"
+                          value={s.price}
+                          onChange={(e) => onUpdateSize && onUpdateSize(idx, 'price', Number(e.target.value))}
+                          min={0}
+                          className="w-full px-2.5 py-1.5 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-lg focus:outline-none focus:border-[#af101a]"
+                        />
+                        <span className="absolute right-2 top-1.5 text-[10px] text-[#8f6f6c] font-bold">
+                          k
+                        </span>
+                      </div>
+                    </div>
+                    {onRemoveSize && (
+                      <button
+                        type="button"
+                        onClick={() => onRemoveSize(idx)}
+                        title="Xóa kích cỡ này"
+                        className="mt-4 p-1.5 text-gray-400 hover:text-red-600 rounded-lg hover:bg-red-50 transition-colors cursor-pointer"
+                      >
+                        <span className="material-symbols-outlined text-[18px]">delete</span>
+                      </button>
+                    )}
                   </div>
-                </div>
-                {onRemoveSize && (
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-4 px-3 bg-white/60 rounded-xl border border-dashed border-[#eae8e5] space-y-2">
+                <span className="material-symbols-outlined text-2xl text-gray-300">straighten</span>
+                <p className="text-xs text-[#8f6f6c]">
+                  Chưa có size nào. Bấm <strong>Thêm size mới</strong> bên trên để bắt đầu thêm các kích cỡ cho món ăn.
+                </p>
+                {onAddSize && (
                   <button
                     type="button"
-                    onClick={() => onRemoveSize(idx)}
-                    title="Remove size option"
-                    className="mt-4 p-1.5 text-gray-400 hover:text-red-600 rounded-lg hover:bg-red-50 transition-colors cursor-pointer"
+                    onClick={() => onAddSize('Phần tiêu chuẩn', basePrice)}
+                    className="px-3 py-1.5 bg-[#af101a] text-white rounded-lg text-xs font-semibold cursor-pointer shadow-2xs hover:bg-[#8d0d15] transition-colors"
                   >
-                    <span className="material-symbols-outlined text-[18px]">delete</span>
+                    + Thêm size tiêu chuẩn ({basePrice}k)
                   </button>
                 )}
               </div>
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-2 text-xs text-[#8f6f6c] italic">
-            No size tiers added. Orders will use the single Base Price above ({basePrice}.000 VND).
+            )}
           </div>
         )}
       </div>

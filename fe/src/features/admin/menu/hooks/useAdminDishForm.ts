@@ -28,9 +28,23 @@ export function useAdminDishForm({ dish, onSaved, onClose }: UseAdminDishFormPro
   const [spiceNote, setSpiceNote] = useState(dish?.spiceNote || '');
 
   // Size Options & Tiered Pricing
+  const [hasSizes, setHasSizes] = useState<boolean>(
+    () => Boolean(dish?.sizes && dish.sizes.length > 0)
+  );
+
   const [sizes, setSizes] = useState<Array<{ id?: string; label: string; price: number; displayOrder?: number }>>(
     () => dish?.sizes?.map((s, i) => ({ ...s, displayOrder: s.displayOrder || i + 1 })) || []
   );
+
+  const toggleHasSizes = (enabled: boolean) => {
+    setHasSizes(enabled);
+    if (enabled && sizes.length === 0) {
+      setSizes([
+        { label: 'Phần tiêu chuẩn (Standard)', price: basePrice, displayOrder: 1 },
+        { label: 'Phần lớn (Large)', price: basePrice > 0 ? basePrice + 30 : 200, displayOrder: 2 },
+      ]);
+    }
+  };
 
   const addSize = (label: string = '', price: number = basePrice) => {
     setSizes((prev) => [...prev, { label, price, displayOrder: prev.length + 1 }]);
@@ -85,7 +99,9 @@ export function useAdminDishForm({ dish, onSaved, onClose }: UseAdminDishFormPro
   const isKoValid = Boolean(nameKr.trim() && descriptionKr.trim() && portionKr.trim());
   const isViValid = Boolean(nameVi.trim() && descriptionVi.trim() && portionVi.trim());
   const isJaValid = Boolean(nameJp.trim() && descriptionJp.trim() && portionJp.trim());
-  const isGeneralValid = basePrice > 0;
+  const isGeneralValid =
+    basePrice > 0 &&
+    (!hasSizes || sizes.some((s) => s.label.trim().length > 0 && Number(s.price) >= 0));
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -116,6 +132,13 @@ export function useAdminDishForm({ dish, onSaved, onClose }: UseAdminDishFormPro
 
     if (!basePrice || basePrice <= 0) errors.basePrice = 'Base price must be greater than zero';
 
+    if (hasSizes) {
+      const validSizes = sizes.filter((s) => s.label.trim().length > 0 && Number(s.price) >= 0);
+      if (validSizes.length === 0) {
+        errors.sizes = 'Vui lòng nhập ít nhất một kích cỡ hợp lệ hoặc tắt tùy chọn chia size.';
+      }
+    }
+
     setValidationErrors(errors);
 
     if (errors.en || errors.nameEn || errors.descriptionEn || errors.portionEn) {
@@ -126,7 +149,7 @@ export function useAdminDishForm({ dish, onSaved, onClose }: UseAdminDishFormPro
       setActiveTab('vi');
     } else if (errors.ja || errors.nameJp || errors.descriptionJp || errors.portionJp) {
       setActiveTab('ja');
-    } else if (errors.basePrice) {
+    } else if (errors.basePrice || errors.sizes) {
       setActiveTab('general');
     }
 
@@ -170,13 +193,15 @@ export function useAdminDishForm({ dish, onSaved, onClose }: UseAdminDishFormPro
       spiceLevel: isSpicy ? spiceLevel : 0,
       spiceNote: isSpicy ? spiceNote.trim() : undefined,
       active,
-      sizes: sizes
-        .filter((s) => s.label.trim().length > 0 && Number(s.price) >= 0)
-        .map((s, idx) => ({
-          label: s.label.trim(),
-          price: Number(s.price),
-          displayOrder: idx + 1,
-        })),
+      sizes: hasSizes
+        ? sizes
+            .filter((s) => s.label.trim().length > 0 && Number(s.price) >= 0)
+            .map((s, idx) => ({
+              label: s.label.trim(),
+              price: Number(s.price),
+              displayOrder: idx + 1,
+            }))
+        : [],
     };
 
     try {
@@ -229,6 +254,8 @@ export function useAdminDishForm({ dish, onSaved, onClose }: UseAdminDishFormPro
     spiceNote,
     setSpiceNote,
     // Sizes
+    hasSizes,
+    toggleHasSizes,
     sizes,
     setSizes,
     addSize,
