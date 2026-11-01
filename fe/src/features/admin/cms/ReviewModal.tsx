@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { GoogleReview, SaveGoogleReviewRequest } from '@/types';
-import { cmsService } from '@/services/cms.service';
+import React from 'react';
+import { GoogleReview } from '@/types';
+import { useReviewForm } from './reviews/hooks/useReviewForm';
 
 interface ReviewModalProps {
   isOpen: boolean;
@@ -15,93 +15,14 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
   onSaved,
   review,
 }) => {
-  const [saving, setSaving] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-  const [formData, setFormData] = useState<SaveGoogleReviewRequest>({
-    reviewerName: '',
-    reviewerInitials: '',
-    reviewerMetadata: 'Local Guide · 45 reviews',
-    rating: 5,
-    reviewLanguage: 'VI',
-    reviewContent: '',
-    reviewDate: '1 week ago',
-    ownerResponse: '',
-    ownerResponseDate: '1 week ago',
-    reviewUrl: 'https://www.google.com/maps/place/%EB%B4%84%EB%8F%88%EA%B9%8C%EC%8A%A4+-+Cutlet+Spring/@10.8037915,106.7400647,17z/data=!3m1!4b1!4m6!3m5!1s0x3175271d5aaa7cd9:0xb1108e646ddecb55!8m2!3d10.8037915!4d106.7449356!16s%2Fg%2F11vd_ltq6h',
-    isFeatured: true,
-    isActive: true,
-    displayOrder: 1,
+  const { formData, setFormData, saving, errorMessage, handleSubmit } = useReviewForm({
+    review,
+    isOpen,
+    onSaved,
+    onClose,
   });
 
-  useEffect(() => {
-    if (review) {
-      setFormData({
-        id: review.id,
-        reviewerName: review.reviewerName || '',
-        reviewerInitials: review.reviewerInitials || '',
-        reviewerAvatarUrl: review.reviewerAvatarUrl || '',
-        reviewerMetadata: review.reviewerMetadata || '',
-        rating: review.rating || 5,
-        reviewLanguage: review.reviewLanguage || 'VI',
-        reviewContent: review.reviewContent || '',
-        reviewDate: review.reviewDate || '',
-        ownerResponse: review.ownerResponse || '',
-        ownerResponseDate: review.ownerResponseDate || '',
-        reviewUrl: review.reviewUrl || '',
-        isFeatured: review.isFeatured,
-        isActive: review.isActive,
-        displayOrder: review.displayOrder,
-      });
-    } else {
-      setFormData({
-        reviewerName: '',
-        reviewerInitials: '',
-        reviewerMetadata: 'Local Guide · 45 reviews',
-        rating: 5,
-        reviewLanguage: 'VI',
-        reviewContent: '',
-        reviewDate: 'Recent',
-        ownerResponse: '',
-        ownerResponseDate: 'Recent',
-        reviewUrl: 'https://www.google.com/maps/place/%EB%B4%84%EB%8F%88%EA%B9%8C%EC%8A%A4+-+Cutlet+Spring/@10.8037915,106.7400647,17z/data=!3m1!4b1!4m6!3m5!1s0x3175271d5aaa7cd9:0xb1108e646ddecb55!8m2!3d10.8037915!4d106.7449356!16s%2Fg%2F11vd_ltq6h',
-        isFeatured: true,
-        isActive: true,
-        displayOrder: 1,
-      });
-    }
-    setErrorMessage(null);
-  }, [review, isOpen]);
-
   if (!isOpen) return null;
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      setSaving(true);
-      setErrorMessage(null);
-
-      if (!formData.reviewerName?.trim() || !formData.reviewContent?.trim() || !formData.reviewDate?.trim()) {
-        setErrorMessage('Reviewer Name, Review Content, and Date are required.');
-        setSaving(false);
-        return;
-      }
-
-      if (review?.id) {
-        await cmsService.updateAdminReview(review.id, formData);
-      } else {
-        await cmsService.createAdminReview(formData);
-      }
-
-      onSaved();
-      onClose();
-    } catch (err: unknown) {
-      console.error(err);
-      setErrorMessage(err instanceof Error ? err.message : 'Failed to save review');
-    } finally {
-      setSaving(false);
-    }
-  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
@@ -123,7 +44,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-full flex items-center justify-center text-[#585757] hover:bg-[#eae8e5] transition-colors"
+            className="w-8 h-8 rounded-full flex items-center justify-center text-[#585757] hover:bg-[#eae8e5] transition-colors cursor-pointer"
           >
             <span className="material-symbols-outlined text-[20px]">close</span>
           </button>
@@ -161,7 +82,9 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
                 type="text"
                 maxLength={4}
                 value={formData.reviewerInitials || ''}
-                onChange={(e) => setFormData({ ...formData, reviewerInitials: e.target.value.toUpperCase() })}
+                onChange={(e) =>
+                  setFormData({ ...formData, reviewerInitials: e.target.value.toUpperCase() })
+                }
                 className="w-full px-3 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs font-semibold focus:outline-none focus:border-[#af101a]"
                 placeholder="Auto-generated if empty"
               />
@@ -266,7 +189,9 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
                 type="number"
                 min="1"
                 value={formData.displayOrder}
-                onChange={(e) => setFormData({ ...formData, displayOrder: parseInt(e.target.value) || 1 })}
+                onChange={(e) =>
+                  setFormData({ ...formData, displayOrder: parseInt(e.target.value) || 1 })
+                }
                 className="w-full px-3 py-1.5 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs font-bold focus:outline-none focus:border-[#af101a]"
               />
             </div>
@@ -330,4 +255,3 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
     </div>
   );
 };
-
