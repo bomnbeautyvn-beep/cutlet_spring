@@ -56,6 +56,8 @@ public class MenuItemResponse {
     private List<MenuItemSizeOptionDto> sizes;
     private List<String> sauceOptions;
     private List<MenuItemAddonDto> addons;
+    private List<com.cutletspring.badge.dto.BadgeResponse> badges;
+    private List<String> badgeIds;
     private boolean active;
     private int displayOrder;
 

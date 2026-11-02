@@ -29,6 +29,13 @@ public class AdminCategoryController {
         return ResponseEntity.ok(ApiResponse.success(categories));
     }
 
+    @Operation(summary = "Get Category by ID", description = "Retrieves category metadata by its unique identifier")
+    @GetMapping("/{id}")
+    public ResponseEntity<ApiResponse<CategoryResponse>> getCategoryById(@PathVariable String id) {
+        CategoryResponse category = categoryService.getCategoryById(id);
+        return ResponseEntity.ok(ApiResponse.success(category));
+    }
+
     @Operation(summary = "Create Category", description = "Creates a new menu category")
     @PostMapping
     public ResponseEntity<ApiResponse<CategoryResponse>> createCategory(@Valid @RequestBody CategoryRequest request) {
@@ -47,11 +54,22 @@ public class AdminCategoryController {
         return ResponseEntity.ok(ApiResponse.success("Category updated successfully", updated));
     }
 
-    @Operation(summary = "Delete Category", description = "Soft-deletes a menu category by setting active to false")
+    @Operation(summary = "Toggle Category Status", description = "Activates or deactivates a menu category")
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<ApiResponse<CategoryResponse>> setCategoryStatus(
+            @PathVariable String id,
+            @RequestBody java.util.Map<String, Boolean> payload
+    ) {
+        boolean active = payload != null && Boolean.TRUE.equals(payload.get("active"));
+        CategoryResponse updated = categoryService.setCategoryStatus(id, active);
+        return ResponseEntity.ok(ApiResponse.success("Category status updated successfully", updated));
+    }
+
+    @Operation(summary = "Delete Category", description = "Safely deletes an unreferenced menu category")
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Void>> deleteCategory(@PathVariable String id) {
         categoryService.deleteCategory(id);
-        return ResponseEntity.ok(ApiResponse.success("Category deactivated successfully", null));
+        return ResponseEntity.ok(ApiResponse.success("Category deleted successfully", null));
     }
 }
 

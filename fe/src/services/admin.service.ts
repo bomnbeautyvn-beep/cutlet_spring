@@ -39,6 +39,7 @@ export interface MenuItemPayload {
   isSpicy?: boolean;
   spiceLevel?: number;
   spiceNote?: string;
+  badgeIds?: string[];
   active?: boolean;
   displayOrder?: number;
   dishTypes?: string[];
@@ -186,6 +187,45 @@ export const adminService = {
   async getCategories(): Promise<MenuCategory[]> {
     const res = await apiClient.get<MenuCategory[]>(API_ENDPOINTS.ADMIN.CATEGORIES.LIST);
     return res.data || [];
+  },
+
+  /**
+   * Retrieves single category by ID
+   */
+  async getCategoryById(id: string): Promise<MenuCategory> {
+    const res = await apiClient.get<MenuCategory>(API_ENDPOINTS.ADMIN.CATEGORIES.DETAIL(id));
+    return res.data;
+  },
+
+  /**
+   * Creates a new menu category
+   */
+  async createCategory(payload: { code: string; name: string; description?: string; displayOrder?: number; active?: boolean }): Promise<MenuCategory> {
+    const res = await apiClient.post<MenuCategory>(API_ENDPOINTS.ADMIN.CATEGORIES.CREATE, payload);
+    return res.data;
+  },
+
+  /**
+   * Updates an existing menu category
+   */
+  async updateCategory(id: string, payload: { code: string; name: string; description?: string; displayOrder?: number; active?: boolean }): Promise<MenuCategory> {
+    const res = await apiClient.put<MenuCategory>(API_ENDPOINTS.ADMIN.CATEGORIES.UPDATE(id), payload);
+    return res.data;
+  },
+
+  /**
+   * Toggles category active status
+   */
+  async setCategoryStatus(id: string, active: boolean): Promise<MenuCategory> {
+    const res = await api.patch(API_ENDPOINTS.ADMIN.CATEGORIES.SET_STATUS(id), { active });
+    return res.data?.data;
+  },
+
+  /**
+   * Deletes a category safely
+   */
+  async deleteCategory(id: string): Promise<void> {
+    await apiClient.delete<void>(API_ENDPOINTS.ADMIN.CATEGORIES.DELETE(id));
   },
 
   /**

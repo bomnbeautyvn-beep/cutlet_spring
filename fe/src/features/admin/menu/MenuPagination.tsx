@@ -21,18 +21,18 @@ export const MenuPagination: React.FC<MenuPaginationProps> = ({
         Showing page {pageResult.number + 1} of {pageResult.totalPages} (Total{' '}
         {pageResult.totalElements} dishes)
       </span>
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-2">
         <button
           onClick={() => onPageChange(Math.max(0, currentPage - 1))}
           disabled={currentPage === 0}
-          className="px-3 py-1.5 bg-white border border-[#eae8e5] rounded-lg font-bold text-xs hover:bg-[#eae8e5] disabled:opacity-40 cursor-pointer"
+          className="px-3 py-1.5 bg-white border border-[#eae8e5] rounded-none font-bold text-xs hover:bg-[#eae8e5] disabled:opacity-40 cursor-pointer transition-colors"
         >
           Previous
         </button>
         <button
           onClick={() => onPageChange(Math.min(pageResult.totalPages - 1, currentPage + 1))}
           disabled={currentPage >= pageResult.totalPages - 1}
-          className="px-3 py-1.5 bg-white border border-[#eae8e5] rounded-lg font-bold text-xs hover:bg-[#eae8e5] disabled:opacity-40 cursor-pointer"
+          className="px-3 py-1.5 bg-white border border-[#eae8e5] rounded-none font-bold text-xs hover:bg-[#eae8e5] disabled:opacity-40 cursor-pointer transition-colors"
         >
           Next
         </button>
@@ -40,4 +40,3 @@ export const MenuPagination: React.FC<MenuPaginationProps> = ({
     </div>
   );
 };
-

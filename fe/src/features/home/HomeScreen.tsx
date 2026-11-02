@@ -69,14 +69,16 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           />
         );
       case 'location':
-      case 'info':
         return (
           <LocationMapSection
-            key={key}
+            key="location"
             language={language}
             restaurant={data?.restaurant}
           />
         );
+      case 'info':
+        // Restaurant information is integrated inside LocationMapSection
+        return null;
       default:
         return null;
     }

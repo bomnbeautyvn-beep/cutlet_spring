@@ -24,7 +24,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="fixed top-0 w-full z-50 bg-[#fbf9f6]/95 backdrop-blur-xl border-b border-[#eae8e5] shadow-[0_1px_8px_rgba(0,0,0,0.03)]">
-      <div className="h-20 sm:h-28 max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 relative flex items-center justify-between">
+      <div className="h-14 sm:h-20 max-w-[1600px] w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 relative flex items-center justify-between">
         {/* Left Side: Brand Logo */}
         <button
           onClick={() => {
@@ -36,7 +36,7 @@ export const Header: React.FC<HeaderProps> = ({
           <img
             src={logoSrc}
             alt="봄돈까스 CUTLET SPRING"
-            className="h-14 sm:h-20 md:h-24 w-auto object-contain"
+            className="h-9 sm:h-12 md:h-14 w-auto object-contain"
           />
         </button>
 
@@ -49,7 +49,7 @@ export const Header: React.FC<HeaderProps> = ({
             }}
             className={`font-menu-bar text-sm sm:text-base md:text-lg uppercase tracking-wider transition-all cursor-pointer ${
               currentView === 'home'
-                ? 'text-[#af101a] font-bold border-b-2 border-[#af101a] pb-1'
+                ? 'text-[#af101a] font-bold border-b-2 border-[#af101a] pb-0.5'
                 : 'text-[#5b403d] hover:text-[#1b1c1a]'
             }`}
           >
@@ -62,7 +62,7 @@ export const Header: React.FC<HeaderProps> = ({
             }}
             className={`font-menu-bar text-sm sm:text-base md:text-lg uppercase tracking-wider transition-all cursor-pointer ${
               currentView === 'menu'
-                ? 'text-[#af101a] font-bold border-b-2 border-[#af101a] pb-1'
+                ? 'text-[#af101a] font-bold border-b-2 border-[#af101a] pb-0.5'
                 : 'text-[#5b403d] hover:text-[#1b1c1a]'
             }`}
           >
@@ -77,10 +77,10 @@ export const Header: React.FC<HeaderProps> = ({
               href={`tel:${phoneNumber.replace(/\s+/g, '')}`}
               aria-label={`Call ${phoneNumber}`}
               title={phoneNumber}
-              className="flex items-center justify-center gap-2 p-2 sm:px-4 sm:py-2.5 border border-[#eae8e5] bg-[#f5f3f0] hover:bg-[#eae8e5] text-[#1b1c1a] hover:text-[#af101a] rounded-lg transition-colors font-label-md tracking-wider font-bold shadow-2xs"
+              className="flex items-center justify-center gap-2 p-1.5 sm:px-3.5 sm:py-2 border border-[#eae8e5] bg-[#f5f3f0] hover:bg-[#eae8e5] text-[#1b1c1a] hover:text-[#af101a] rounded-none transition-colors font-label-md tracking-wider font-bold shadow-2xs"
             >
-              <span className="material-symbols-outlined text-[19px] sm:text-[21px] text-[#af101a]">call</span>
-              <span className="hidden sm:inline font-price-numeral tracking-tight text-xs sm:text-sm md:text-[15px] font-bold whitespace-nowrap">
+              <span className="material-symbols-outlined text-[17px] sm:text-[19px] text-[#af101a]">call</span>
+              <span className="hidden sm:inline font-price-numeral tracking-tight text-xs sm:text-sm md:text-[14px] font-bold whitespace-nowrap">
                 {phoneNumber}
               </span>
             </a>

@@ -7,6 +7,43 @@ export interface MenuCategory {
   description?: string;
   displayOrder: number;
   active: boolean;
+  assignedCount?: number;
+}
+
+export interface CategoryPayload {
+  code: string;
+  name: string;
+  description?: string;
+  displayOrder?: number;
+  active?: boolean;
+}
+
+export interface MenuBadge {
+  id: string;
+  code: string;
+  name: string;
+  nameVi?: string;
+  nameKr?: string;
+  nameJp?: string;
+  description?: string;
+  badgeColor?: string;
+  icon?: string;
+  displayOrder: number;
+  active: boolean;
+  assignedCount?: number;
+}
+
+export interface BadgeRequest {
+  code: string;
+  name: string;
+  nameVi?: string;
+  nameKr?: string;
+  nameJp?: string;
+  description?: string;
+  badgeColor?: string;
+  icon?: string;
+  displayOrder?: number;
+  active?: boolean;
 }
 
 export interface MenuSizeOption {
@@ -67,6 +104,8 @@ export interface MenuItem {
   sizes?: MenuSizeOption[];
   sauceOptions?: string[];
   addons?: MenuAddon[];
+  badges?: MenuBadge[];
+  badgeIds?: string[];
   subBullet1?: string;
   subBullet2?: string;
   features?: string[];

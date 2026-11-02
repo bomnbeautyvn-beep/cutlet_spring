@@ -17,5 +17,7 @@ public interface MenuCategoryService {
 
     CategoryResponse updateCategory(String id, CategoryRequest request);
 
+    CategoryResponse setCategoryStatus(String id, boolean active);
+
     void deleteCategory(String id);
 }

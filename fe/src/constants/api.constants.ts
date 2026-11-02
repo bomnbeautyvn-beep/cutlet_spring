@@ -22,6 +22,10 @@ export const API_ENDPOINTS = {
     LIST: '/categories',
     DETAIL: (id: string) => `/categories/${id}`,
   },
+  BADGES: {
+    LIST: '/badges',
+    DETAIL: (id: string) => `/badges/${id}`,
+  },
   RESTAURANT: {
     SETTINGS: '/restaurant/settings',
   },
@@ -84,9 +88,19 @@ export const API_ENDPOINTS = {
     },
     CATEGORIES: {
       LIST: '/admin/categories',
+      DETAIL: (id: string) => `/admin/categories/${id}`,
       CREATE: '/admin/categories',
       UPDATE: (id: string) => `/admin/categories/${id}`,
+      SET_STATUS: (id: string) => `/admin/categories/${id}/status`,
       DELETE: (id: string) => `/admin/categories/${id}`,
+    },
+    BADGES: {
+      LIST: '/admin/badges',
+      DETAIL: (id: string) => `/admin/badges/${id}`,
+      CREATE: '/admin/badges',
+      UPDATE: (id: string) => `/admin/badges/${id}`,
+      SET_STATUS: (id: string) => `/admin/badges/${id}/status`,
+      DELETE: (id: string) => `/admin/badges/${id}`,
     },
     RESTAURANT: {
       SETTINGS: '/admin/restaurant/settings',

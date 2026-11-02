@@ -1,5 +1,7 @@
 package com.cutletspring.menu.service;
 
+import com.cutletspring.badge.entity.MenuBadge;
+import com.cutletspring.badge.repository.MenuBadgeRepository;
 import com.cutletspring.category.entity.MenuCategory;
 import com.cutletspring.category.repository.MenuCategoryRepository;
 import com.cutletspring.cloudinary.dto.CloudinaryUploadResult;
@@ -35,6 +37,7 @@ public class MenuItemServiceImpl implements MenuItemService {
 
     private final MenuItemRepository menuItemRepository;
     private final MenuCategoryRepository categoryRepository;
+    private final MenuBadgeRepository badgeRepository;
     private final MenuItemMapper menuItemMapper;
     private final CloudinaryService cloudinaryService;
 
@@ -131,6 +134,7 @@ public class MenuItemServiceImpl implements MenuItemService {
                 .sizes(new ArrayList<>())
                 .sauceOptions(new ArrayList<>())
                 .addons(new ArrayList<>())
+                .badges(new HashSet<>())
                 .build();
 
         // Attach sizes
@@ -171,6 +175,9 @@ public class MenuItemServiceImpl implements MenuItemService {
                         .build());
             }
         }
+
+        // Synchronize Atelier Badges
+        syncMenuItemBadges(item, request);
 
         MenuItem saved = menuItemRepository.save(item);
         return menuItemMapper.toResponse(saved);
@@ -259,8 +266,46 @@ public class MenuItemServiceImpl implements MenuItemService {
             }
         }
 
+        // Synchronize Atelier Badges
+        syncMenuItemBadges(item, request);
+
         MenuItem updated = menuItemRepository.save(item);
         return menuItemMapper.toResponse(updated);
+    }
+
+    private void syncMenuItemBadges(MenuItem item, MenuItemRequest request) {
+        if (request.getBadgeIds() != null) {
+            item.getBadges().clear();
+            for (String badgeId : request.getBadgeIds()) {
+                badgeRepository.findById(badgeId).ifPresent(item.getBadges()::add);
+            }
+            // Sync boolean flags based on attached badges
+            boolean isChef = item.getBadges().stream().anyMatch(b -> "chef-signature".equalsIgnoreCase(b.getId()) || "chef-signature".equalsIgnoreCase(b.getCode()));
+            boolean isBest = item.getBadges().stream().anyMatch(b -> "best-seller".equalsIgnoreCase(b.getId()) || "best-seller".equalsIgnoreCase(b.getCode()));
+            boolean isLim = item.getBadges().stream().anyMatch(b -> "limited-batch".equalsIgnoreCase(b.getId()) || "limited-batch".equalsIgnoreCase(b.getCode()));
+            boolean isSp = item.getBadges().stream().anyMatch(b -> "spicy-glaze".equalsIgnoreCase(b.getId()) || "spicy-glaze".equalsIgnoreCase(b.getCode()));
+            item.setChefSignature(isChef);
+            item.setBestSeller(isBest);
+            item.setLimited(isLim);
+            item.setSpicy(isSp);
+        } else {
+            // Synchronize relational badges from flags
+            updateBadgeMembership(item, "chef-signature", item.isChefSignature());
+            updateBadgeMembership(item, "best-seller", item.isBestSeller());
+            updateBadgeMembership(item, "limited-batch", item.isLimited());
+            updateBadgeMembership(item, "spicy-glaze", item.isSpicy());
+        }
+    }
+
+    private void updateBadgeMembership(MenuItem item, String badgeId, boolean shouldHave) {
+        if (shouldHave) {
+            boolean alreadyHas = item.getBadges().stream().anyMatch(b -> b.getId().equalsIgnoreCase(badgeId));
+            if (!alreadyHas) {
+                badgeRepository.findById(badgeId).ifPresent(item.getBadges()::add);
+            }
+        } else {
+            item.getBadges().removeIf(b -> b.getId().equalsIgnoreCase(badgeId));
+        }
     }
 
     @Override
@@ -324,4 +369,3 @@ public class MenuItemServiceImpl implements MenuItemService {
         return menuItemMapper.toResponse(item);
     }
 }
-

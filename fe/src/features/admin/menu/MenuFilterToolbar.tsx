@@ -1,4 +1,5 @@
 import React from 'react';
+import { MenuCategory } from '@/types';
 
 interface MenuFilterToolbarProps {
   searchQuery: string;
@@ -7,6 +8,7 @@ interface MenuFilterToolbarProps {
   onCategoryChange: (category: string) => void;
   selectedActive: string;
   onActiveChange: (active: string) => void;
+  categories?: MenuCategory[];
 }
 
 export const MenuFilterToolbar: React.FC<MenuFilterToolbarProps> = ({
@@ -16,15 +18,16 @@ export const MenuFilterToolbar: React.FC<MenuFilterToolbarProps> = ({
   onCategoryChange,
   selectedActive,
   onActiveChange,
+  categories = [],
 }) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-white p-4 rounded-2xl border border-[#eae8e5] shadow-xs">
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-white p-4 rounded-none border border-[#eae8e5] shadow-xs">
       <div>
         <label className="block text-[11px] font-bold uppercase tracking-wider text-[#585757] mb-1">
           Search 4 Languages
         </label>
         <div className="relative">
-          <span className="material-symbols-outlined absolute left-3 top-2.5 text-gray-400 text-[18px]">
+          <span className="material-symbols-outlined absolute left-3 top-2 text-gray-400 text-[18px]">
             search
           </span>
           <input
@@ -32,7 +35,7 @@ export const MenuFilterToolbar: React.FC<MenuFilterToolbarProps> = ({
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Search by EN, KO, VI, JA or ID..."
-            className="w-full pl-9 pr-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-xl focus:outline-none focus:border-[#af101a]"
+            className="w-full pl-9 pr-3 py-1.5 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-none focus:outline-none focus:border-[#af101a]"
           />
         </div>
       </div>
@@ -44,16 +47,26 @@ export const MenuFilterToolbar: React.FC<MenuFilterToolbarProps> = ({
         <select
           value={selectedCategory}
           onChange={(e) => onCategoryChange(e.target.value)}
-          className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-xl focus:outline-none focus:border-[#af101a]"
+          className="w-full px-3 py-1.5 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-none focus:outline-none focus:border-[#af101a] cursor-pointer"
         >
           <option value="">All Categories</option>
-          <option value="japanese">Japanese Tonkatsu</option>
-          <option value="korean">Korean Retro Tonkatsu</option>
-          <option value="curry">Curry Rice</option>
-          <option value="noodles">Artisan Noodles</option>
-          <option value="addons">Atelier Add-ons</option>
-          <option value="sauces">Signature Sauces</option>
-          <option value="drinks">Beverages &amp; Craft</option>
+          {categories.length > 0 ? (
+            categories.map((c) => (
+              <option key={c.id} value={c.code || c.id}>
+                {c.name} ({c.code})
+              </option>
+            ))
+          ) : (
+            <>
+              <option value="japanese">Japanese Tonkatsu</option>
+              <option value="korean">Korean Retro Tonkatsu</option>
+              <option value="curry">Curry Rice</option>
+              <option value="noodles">Artisan Noodles</option>
+              <option value="addons">Atelier Add-ons</option>
+              <option value="sauces">Signature Sauces</option>
+              <option value="drinks">Beverages &amp; Craft</option>
+            </>
+          )}
         </select>
       </div>
 
@@ -64,7 +77,7 @@ export const MenuFilterToolbar: React.FC<MenuFilterToolbarProps> = ({
         <select
           value={selectedActive}
           onChange={(e) => onActiveChange(e.target.value)}
-          className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-xl focus:outline-none focus:border-[#af101a]"
+          className="w-full px-3 py-1.5 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-none focus:outline-none focus:border-[#af101a] cursor-pointer"
         >
           <option value="all">All Items (Active + Inactive)</option>
           <option value="active">Active Only (Visible to Diners)</option>
@@ -74,4 +87,3 @@ export const MenuFilterToolbar: React.FC<MenuFilterToolbarProps> = ({
     </div>
   );
 };
-

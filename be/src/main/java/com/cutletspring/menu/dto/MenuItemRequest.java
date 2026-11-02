@@ -95,6 +95,8 @@ public class MenuItemRequest {
 
     private String spiceNote;
 
+    private List<String> badgeIds;
+
     private List<String> dishTypes;
     private List<String> tags;
     private List<String> features;

@@ -105,6 +105,16 @@ public class MenuItem {
     @Column(name = "spice_note")
     private String spiceNote;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "menu_item_badges",
+            joinColumns = @JoinColumn(name = "menu_item_id"),
+            inverseJoinColumns = @JoinColumn(name = "badge_id")
+    )
+    @OrderBy("displayOrder ASC")
+    @Builder.Default
+    private Set<com.cutletspring.badge.entity.MenuBadge> badges = new HashSet<>();
+
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "menu_item_dish_types", joinColumns = @JoinColumn(name = "menu_item_id"))
     @Column(name = "dish_type")

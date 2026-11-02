@@ -16,5 +16,6 @@ public class CategoryResponse {
     private String description;
     private int displayOrder;
     private boolean active;
+    private long assignedCount;
 }
 

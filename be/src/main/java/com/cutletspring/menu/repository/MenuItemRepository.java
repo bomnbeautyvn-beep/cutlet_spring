@@ -30,6 +30,7 @@ public interface MenuItemRepository extends JpaRepository<MenuItem, String>, Jpa
 
     long countByActiveTrue();
     long countByActiveFalse();
+    long countByCategoryId(String categoryId);
 
     Optional<MenuItem> findByIdAndActiveTrue(String id);
 }

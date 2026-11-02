@@ -16,14 +16,14 @@ export const DishModalFooter: React.FC<DishModalFooterProps> = ({
   return (
     <div className="p-4 sm:p-5 border-t border-[#eae8e5] bg-[#fbf9f6] flex items-center justify-between">
       <div className="text-xs text-[#8f6f6c] hidden sm:block">
-        All 4 languages (EN, KO, VI, JA) are strictly mandatory.
+        All 4 languages (VI, EN, KO, JA) are strictly mandatory.
       </div>
-      <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+      <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
         <button
           type="button"
           onClick={onClose}
           disabled={isSubmitting}
-          className="px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#585757] hover:bg-[#eae8e5] rounded-xl transition-colors cursor-pointer"
+          className="px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[#585757] hover:bg-[#eae8e5] border border-[#eae8e5] rounded-none transition-colors cursor-pointer"
         >
           Cancel
         </button>
@@ -31,7 +31,7 @@ export const DishModalFooter: React.FC<DishModalFooterProps> = ({
           type="button"
           onClick={onSubmit}
           disabled={isSubmitting}
-          className="px-6 py-2.5 bg-[#af101a] hover:bg-[#d32f2f] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center gap-2 cursor-pointer disabled:opacity-50"
+          className="px-6 py-2.5 bg-[#af101a] hover:bg-[#930010] text-white text-xs font-bold uppercase tracking-wider rounded-none transition-all shadow-xs flex items-center gap-2 cursor-pointer disabled:opacity-50"
         >
           {isSubmitting ? (
             <>
@@ -49,4 +49,3 @@ export const DishModalFooter: React.FC<DishModalFooterProps> = ({
     </div>
   );
 };
-
