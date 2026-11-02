@@ -23,22 +23,22 @@ export const DishBasicInfoSection: React.FC<DishBasicInfoSectionProps> = ({
   onActiveChange,
 }) => {
   return (
-    <div className="bg-white rounded-2xl border border-[#eae8e5] p-5 sm:p-6 shadow-xs space-y-4">
-      <div className="flex items-center justify-between pb-3 border-b border-[#eae8e5]">
+    <div className="bg-white rounded-2xl border border-[#eae8e5] p-3.5 sm:p-5 shadow-xs space-y-3.5 sm:space-y-4">
+      <div className="flex items-center justify-between pb-2.5 sm:pb-3 border-b border-[#eae8e5]">
         <div>
-          <h3 className="font-headline-sm text-base sm:text-lg font-bold text-[#1b1c1a]">
+          <h3 className="font-headline-sm text-sm sm:text-base font-bold text-[#1b1c1a]">
             Basic Information
           </h3>
-          <p className="text-xs text-[#585757]">
+          <p className="text-[11px] sm:text-xs text-[#585757]">
             System identifier slug, menu catalog category assignment, and public dining visibility
           </p>
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
         {/* Identifier / Slug */}
         <div>
-          <label className="block text-xs font-bold text-[#5b403d] uppercase tracking-wider mb-1">
+          <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1">
             Identifier (Slug / ID) *
           </label>
           <input
@@ -47,23 +47,23 @@ export const DishBasicInfoSection: React.FC<DishBasicInfoSectionProps> = ({
             onChange={(e) => onIdChange(e.target.value)}
             disabled={isEditing}
             placeholder="e.g. spring-signature-set"
-            className="w-full px-3 py-2 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs font-mono text-[#1b1c1a] focus:outline-none focus:border-[#af101a] disabled:opacity-60 disabled:bg-gray-100 cursor-text"
+            className="w-full px-3 py-1.5 sm:py-2 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs sm:text-sm font-mono text-[#1b1c1a] focus:outline-none focus:border-[#af101a] disabled:opacity-60 disabled:bg-gray-100 cursor-text"
             required
           />
-          <span className="text-[10px] text-[#8f6f6c] block mt-1">
+          <span className="text-[9px] sm:text-[10px] text-[#8f6f6c] block mt-1">
             {isEditing ? 'ID cannot be changed after creation' : 'Unique URL slug (auto-generated if blank)'}
           </span>
         </div>
 
         {/* Category Dropdown */}
         <div>
-          <label className="block text-xs font-bold text-[#5b403d] uppercase tracking-wider mb-1">
+          <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1">
             Menu Category *
           </label>
           <select
             value={categoryId}
             onChange={(e) => onCategoryChange(e.target.value)}
-            className="w-full px-3 py-2 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs font-bold text-[#1b1c1a] focus:outline-none focus:border-[#af101a] cursor-pointer"
+            className="w-full px-3 py-1.5 sm:py-2 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs sm:text-sm font-bold text-[#1b1c1a] focus:outline-none focus:border-[#af101a] cursor-pointer"
             required
           >
             {categories.map((cat) => (
@@ -72,17 +72,17 @@ export const DishBasicInfoSection: React.FC<DishBasicInfoSectionProps> = ({
               </option>
             ))}
           </select>
-          <span className="text-[10px] text-[#8f6f6c] block mt-1">
+          <span className="text-[9px] sm:text-[10px] text-[#8f6f6c] block mt-1">
             Loaded dynamically from backend categories
           </span>
         </div>
 
         {/* Visibility on Public Menu */}
         <div className="flex flex-col justify-center">
-          <label className="block text-xs font-bold text-[#5b403d] uppercase tracking-wider mb-1">
+          <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1">
             Public Menu Visibility
           </label>
-          <div className="flex items-center gap-3 pt-1">
+          <div className="flex items-center gap-2.5 sm:gap-3 pt-1">
             <label className="relative inline-flex items-center cursor-pointer">
               <input
                 type="checkbox"
@@ -90,9 +90,9 @@ export const DishBasicInfoSection: React.FC<DishBasicInfoSectionProps> = ({
                 onChange={(e) => onActiveChange(e.target.checked)}
                 className="sr-only peer"
               />
-              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:h-5 after:w-5 after:rounded-full after:transition-all peer-checked:bg-[#af101a]"></div>
+              <div className="w-10 h-5 sm:w-11 sm:h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:h-4 after:w-4 sm:after:h-5 sm:after:w-5 after:rounded-full after:transition-all peer-checked:bg-[#af101a]"></div>
             </label>
-            <span className="text-xs font-semibold text-[#1b1c1a]">
+            <span className="text-[11px] sm:text-xs font-semibold text-[#1b1c1a]">
               {active ? (
                 <span className="text-emerald-700 font-bold">Active (Visible)</span>
               ) : (

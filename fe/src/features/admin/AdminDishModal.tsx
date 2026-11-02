@@ -30,15 +30,15 @@ export const AdminDishModal: React.FC<AdminDishModalProps> = ({ dish, onClose, o
         <DishModalHeader dish={dish} isEditing={form.isEditing} onClose={onClose} />
 
         {/* Unified Single Scrollable Body */}
-        <form onSubmit={form.handleSubmit} className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
+        <form onSubmit={form.handleSubmit} className="flex-1 overflow-y-auto p-3 sm:p-5 space-y-3.5 sm:space-y-5">
           {form.errorMessage && (
-            <div className="p-3.5 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl flex items-center gap-2 animate-fade-in">
-              <span className="material-symbols-outlined text-[18px]">error</span>
+            <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl flex items-center gap-2 animate-fade-in">
+              <span className="material-symbols-outlined text-[17px]">error</span>
               <span className="font-medium">{form.errorMessage}</span>
             </div>
           )}
 
-          {/* Section 1: Pricing & Image */}
+          {/* Pricing & Image */}
           <DishPricingAndImageSection
             basePrice={form.basePrice}
             onBasePriceChange={form.setBasePrice}
@@ -57,7 +57,7 @@ export const AdminDishModal: React.FC<AdminDishModalProps> = ({ dish, onClose, o
             uploadError={form.uploadError}
           />
 
-          {/* Section 2: Basic Information */}
+          {/* Basic Information */}
           <DishBasicInfoSection
             id={form.id}
             onIdChange={form.setId}
@@ -69,7 +69,7 @@ export const AdminDishModal: React.FC<AdminDishModalProps> = ({ dish, onClose, o
             onActiveChange={form.setActive}
           />
 
-          {/* Section 3: Atelier Badges & Dining Attributes */}
+          {/* Atelier Badges & Dining Attributes */}
           <DishBadgesSection
             badges={form.badges}
             loadingBadges={form.loadingBadges}
@@ -82,7 +82,7 @@ export const AdminDishModal: React.FC<AdminDishModalProps> = ({ dish, onClose, o
             onSpiceNoteChange={form.setSpiceNote}
           />
 
-          {/* Section 4: Multilingual Menu Content */}
+          {/* Multilingual Menu Content */}
           <DishMultilingualSection
             activeLang={form.activeLangTab}
             onActiveLangChange={form.setActiveLangTab}
