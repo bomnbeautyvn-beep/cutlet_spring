@@ -32,6 +32,13 @@ app:
     from: ${APP_MAIL_FROM:noreply@cutletspring.com}
     from-name: ${APP_MAIL_FROM_NAME:Cutlet Spring Security}
     enabled: ${APP_MAIL_ENABLED:true}
+  database:
+    backup:
+      dir: ${APP_BACKUP_DIR:backups}
+      max-file-size: 104857600
+    tools:
+      pg-dump-path: ${PG_DUMP_PATH:pg_dump}
+      pg-restore-path: ${PG_RESTORE_PATH:pg_restore}
 
 server:
   port: ${BACKEND_PORT:8080}

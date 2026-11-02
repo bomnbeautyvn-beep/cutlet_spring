@@ -61,6 +61,9 @@ services:
       APP_MAIL_FROM: ${APP_MAIL_FROM:-noreply@cutletspring.com}
       APP_MAIL_FROM_NAME: ${APP_MAIL_FROM_NAME:-Cutlet Spring Security}
       APP_MAIL_ENABLED: ${APP_MAIL_ENABLED:-true}
+      APP_BACKUP_DIR: ${APP_BACKUP_DIR:-/app/backups}
+    volumes:
+      - backend_backups:/app/backups
     ports:
       - "${BACKEND_PORT:-8080}:8080"
     healthcheck:
@@ -103,6 +106,8 @@ services:
 volumes:
   postgres_data:
     name: cutlet_spring_postgres_data
+  backend_backups:
+    name: cutlet_spring_backend_backups
 
 networks:
   cutlet-network:

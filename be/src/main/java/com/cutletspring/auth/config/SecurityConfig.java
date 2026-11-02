@@ -156,6 +156,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/admin/restaurant/**", "/admin/restaurant/**").hasRole("ADMIN")
                         .requestMatchers("/api/admin/accounts/**", "/admin/accounts/**").hasRole("ADMIN")
                         .requestMatchers("/api/admin/settings/**", "/admin/settings/**").hasRole("ADMIN")
+                        .requestMatchers("/api/admin/database/**", "/admin/database/**").hasRole("ADMIN")
                         // Admin endpoints accessible by both ADMIN and STAFF
                         .requestMatchers("/api/admin/**", "/admin/**").hasAnyRole("ADMIN", "STAFF")
                         .anyRequest().authenticated()

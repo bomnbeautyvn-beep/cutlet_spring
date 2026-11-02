@@ -27,6 +27,13 @@ app:
     enabled: false
     from: test@cutletspring.com
     from-name: Cutlet Spring Test Security
+  database:
+    backup:
+      dir: target/test-backups
+      max-file-size: 104857600
+    tools:
+      pg-dump-path: pg_dump
+      pg-restore-path: pg_restore
 
 springdoc:
   api-docs:

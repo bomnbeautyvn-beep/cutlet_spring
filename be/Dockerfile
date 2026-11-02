@@ -34,6 +34,11 @@ WORKDIR /app
 # Create unprivileged system user for secure container execution
 RUN addgroup -S cutlet && adduser -S cutlet -G cutlet
 
+# Install PostgreSQL client tools (pg_dump, pg_restore) and initialize backup directory
+RUN apk add --no-cache postgresql-client && \
+    mkdir -p /app/backups && \
+    chown -R cutlet:cutlet /app/backups
+
 # Copy extracted application layers from build stage
 COPY --from=builder --chown=cutlet:cutlet /app/target/extracted/dependencies/ ./
 COPY --from=builder --chown=cutlet:cutlet /app/target/extracted/spring-boot-loader/ ./
