@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 
 interface DishPricingAndImageSectionProps {
   basePrice: number;
@@ -14,6 +14,7 @@ interface DishPricingAndImageSectionProps {
   sizesError?: string;
   imagePreview: string | null;
   onFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onDropFile?: (file: File) => void;
   uploading?: boolean;
   uploadError?: string | null;
 }
@@ -32,10 +33,42 @@ export const DishPricingAndImageSection: React.FC<DishPricingAndImageSectionProp
   sizesError,
   imagePreview,
   onFileChange,
+  onDropFile,
   uploading = false,
   uploadError,
 }) => {
   const formattedVnd = (Number(basePrice) * 1000).toLocaleString('vi-VN') + ' VND';
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  };
+
+  const handleDragEnter = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      if (onDropFile) {
+        onDropFile(e.dataTransfer.files[0]);
+      }
+    }
+  };
 
   return (
     <div className="bg-white rounded-2xl border border-[#eae8e5] p-3.5 sm:p-5 shadow-xs space-y-4 sm:space-y-5">
@@ -51,46 +84,86 @@ export const DishPricingAndImageSection: React.FC<DishPricingAndImageSectionProp
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 items-start">
-        {/* Left Column: Image Asset & Cloudinary Upload */}
+        {/* Left Column: Image Asset & Drag-and-Drop Cloudinary Upload */}
         <div className="md:col-span-5 flex flex-col items-center">
-          <div className="w-full aspect-[4/3] rounded-xl overflow-hidden bg-[#f3f1ec] border border-[#eae6df] relative flex items-center justify-center group">
+          <div
+            onDragOver={handleDragOver}
+            onDragEnter={handleDragEnter}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+            onClick={() => !uploading && fileInputRef.current?.click()}
+            className={`w-full aspect-[4/3] rounded-xl overflow-hidden relative flex items-center justify-center transition-all cursor-pointer group select-none ${
+              isDragging
+                ? 'border-2 border-dashed border-[#af101a] bg-[#af101a]/10 ring-4 ring-[#af101a]/20 scale-[1.01]'
+                : 'bg-[#f3f1ec] border border-[#eae6df] hover:border-[#af101a]/60 hover:shadow-xs'
+            }`}
+            title="Click hoặc kéo thả ảnh món ăn vào đây"
+          >
             {imagePreview ? (
               <img
                 src={imagePreview}
                 alt="Dish Visual"
-                className="w-full h-full object-cover select-none"
+                className="w-full h-full object-cover select-none pointer-events-none"
               />
             ) : (
-              <div className="flex flex-col items-center text-[#8f6f6c] gap-1.5 p-4 text-center">
-                <span className="material-symbols-outlined text-[32px] sm:text-[36px] text-[#c2bfb8]">restaurant</span>
-                <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#8f6f6c]">
-                  Atelier Presentation
+              <div className="flex flex-col items-center text-[#8f6f6c] gap-1.5 p-4 text-center pointer-events-none">
+                <span className="material-symbols-outlined text-[32px] sm:text-[36px] text-[#c2bfb8] group-hover:text-[#af101a] transition-colors">
+                  add_photo_alternate
                 </span>
-                <span className="text-[9px] sm:text-[10px] text-[#a89d91]">Chưa có hình ảnh món ăn</span>
+                <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#8f6f6c] group-hover:text-[#1b1c1a] transition-colors">
+                  Kéo thả ảnh hoặc click để chọn
+                </span>
+                <span className="text-[9px] sm:text-[10px] text-[#a89d91]">JPG, PNG, WEBP (tối đa 10MB)</span>
+              </div>
+            )}
+
+            {/* Dragging Active Overlay */}
+            {isDragging && (
+              <div className="absolute inset-0 bg-white/90 backdrop-blur-2xs flex flex-col items-center justify-center text-[#af101a] gap-2 z-20 animate-fade-in pointer-events-none">
+                <span className="material-symbols-outlined text-[42px] animate-bounce">
+                  cloud_upload
+                </span>
+                <span className="text-xs font-bold uppercase tracking-wider">
+                  Thả ảnh vào đây để tải lên
+                </span>
+              </div>
+            )}
+
+            {/* Hover overlay when image exists and not dragging */}
+            {imagePreview && !isDragging && !uploading && (
+              <div className="absolute inset-0 bg-black/45 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col items-center justify-center text-white text-[11px] sm:text-xs font-bold gap-1 pointer-events-none">
+                <span className="material-symbols-outlined text-[24px]">cloud_upload</span>
+                <span>Kéo thả hoặc click để đổi ảnh</span>
               </div>
             )}
 
             {uploading && (
-              <div className="absolute inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center text-white text-[11px] sm:text-xs font-bold gap-2">
+              <div className="absolute inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center text-white text-[11px] sm:text-xs font-bold gap-2 z-30 pointer-events-none">
                 <div className="w-3.5 h-3.5 sm:w-4 sm:h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                 <span>Uploading to Cloudinary...</span>
               </div>
             )}
           </div>
 
-          <label className="mt-2.5 sm:mt-3 w-full py-1.5 sm:py-2 px-3 border border-[#eae8e5] bg-[#f5f3f0] hover:bg-[#eae8e5] text-[11px] sm:text-xs font-bold text-[#1b1c1a] text-center cursor-pointer transition-colors flex items-center justify-center gap-1.5 rounded-lg shadow-2xs">
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={uploading}
+            className="mt-2.5 sm:mt-3 w-full py-1.5 sm:py-2 px-3 border border-[#eae8e5] bg-[#f5f3f0] hover:bg-[#eae8e5] text-[11px] sm:text-xs font-bold text-[#1b1c1a] text-center cursor-pointer transition-colors flex items-center justify-center gap-1.5 rounded-lg shadow-2xs"
+          >
             <span className="material-symbols-outlined text-[15px] sm:text-[16px] text-[#af101a]">cloud_upload</span>
-            <span>{uploading ? 'Processing Image...' : imagePreview ? 'Replace Dish Photo' : 'Upload Dish Photo'}</span>
-            <input
-              type="file"
-              accept="image/png,image/jpeg,image/webp"
-              className="hidden"
-              onChange={onFileChange}
-              disabled={uploading}
-            />
-          </label>
+            <span>{uploading ? 'Processing Image...' : imagePreview ? 'Thay đổi ảnh món ăn' : 'Chọn hoặc thả ảnh vào đây'}</span>
+          </button>
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/png,image/jpeg,image/webp"
+            className="hidden"
+            onChange={onFileChange}
+            disabled={uploading}
+          />
           <span className="text-[9px] sm:text-[10px] text-[#8f6f6c] mt-1 text-center">
-            JPEG, PNG, or WEBP. Uploads directly to Cloudinary CDN.
+            Kéo thả trực tiếp file hoặc click chọn (JPG, PNG, WEBP)
           </span>
           {uploadError && (
             <span className="text-[10px] sm:text-[11px] text-red-600 font-medium mt-1 text-center">

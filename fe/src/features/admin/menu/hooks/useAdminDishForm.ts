@@ -213,25 +213,31 @@ export function useAdminDishForm({ dish, onSaved, onClose }: UseAdminDishFormPro
     });
   };
 
+  const processSelectedFile = (file: File) => {
+    setUploadError(null);
+    // Validation
+    if (file.size > 10 * 1024 * 1024) {
+      setUploadError('Image size exceeds 10MB limit.');
+      return;
+    }
+    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+      setUploadError('Supported formats: JPG, PNG, WEBP.');
+      return;
+    }
+
+    setImageFile(file);
+    setImagePreview(URL.createObjectURL(file));
+  };
+
   // Image Upload handler
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUploadError(null);
     if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-
-      // Validation
-      if (file.size > 10 * 1024 * 1024) {
-        setUploadError('Image size exceeds 10MB limit.');
-        return;
-      }
-      if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
-        setUploadError('Supported formats: JPG, PNG, WEBP.');
-        return;
-      }
-
-      setImageFile(file);
-      setImagePreview(URL.createObjectURL(file));
+      processSelectedFile(e.target.files[0]);
     }
+  };
+
+  const handleFileDrop = (file: File) => {
+    processSelectedFile(file);
   };
 
   // Validations
@@ -392,6 +398,7 @@ export function useAdminDishForm({ dish, onSaved, onClose }: UseAdminDishFormPro
     updateSize,
     imagePreview,
     handleFileChange,
+    handleFileDrop,
     uploading,
     uploadError,
     // Section 2: Basic Info

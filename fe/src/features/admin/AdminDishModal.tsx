@@ -53,6 +53,7 @@ export const AdminDishModal: React.FC<AdminDishModalProps> = ({ dish, onClose, o
             sizesError={form.validationErrors.sizes}
             imagePreview={form.imagePreview}
             onFileChange={form.handleFileChange}
+            onDropFile={form.handleFileDrop}
             uploading={form.uploading}
             uploadError={form.uploadError}
           />
