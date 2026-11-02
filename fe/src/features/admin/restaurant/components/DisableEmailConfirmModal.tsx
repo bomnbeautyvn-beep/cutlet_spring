@@ -42,7 +42,7 @@ export const DisableEmailConfirmModal: React.FC<DisableEmailConfirmModalProps> =
           <button
             type="button"
             onClick={onClose}
-            className="px-4 py-2 text-xs font-bold text-[#585757] hover:bg-[#eae8e5] rounded-xl transition-all cursor-pointer"
+            className="px-4 py-2 text-xs font-bold text-[#585757] hover:bg-[#eae8e5] rounded transition-all cursor-pointer"
           >
             Keep Enabled
           </button>
@@ -52,7 +52,7 @@ export const DisableEmailConfirmModal: React.FC<DisableEmailConfirmModalProps> =
               onConfirm();
               onClose();
             }}
-            className="px-5 py-2 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-md cursor-pointer"
+            className="px-5 py-2 bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold uppercase tracking-wider rounded transition-all shadow-md cursor-pointer"
           >
             Yes, Disable Email Service
           </button>

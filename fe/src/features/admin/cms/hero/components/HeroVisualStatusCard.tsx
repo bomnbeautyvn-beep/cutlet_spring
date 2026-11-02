@@ -36,7 +36,7 @@ export const HeroVisualStatusCard: React.FC<HeroVisualStatusCardProps> = ({
           )}
         </div>
 
-        <label className="mt-3 w-full py-2 px-3 border border-[#eae8e5] bg-[#f5f3f0] hover:bg-[#eae8e5] rounded-xl text-xs font-bold text-[#1b1c1a] text-center cursor-pointer transition-colors flex items-center justify-center gap-1.5 shadow-2xs">
+        <label className="mt-3 w-full py-2 px-3 border border-[#eae8e5] bg-[#f5f3f0] hover:bg-[#eae8e5] rounded text-xs font-bold text-[#1b1c1a] text-center cursor-pointer transition-colors flex items-center justify-center gap-1.5 shadow-2xs">
           <span className="material-symbols-outlined text-[16px] text-[#af101a]">cloud_upload</span>
           <span>{uploading ? 'Uploading...' : 'Replace Hero Visual'}</span>
           <input
@@ -68,54 +68,20 @@ export const HeroVisualStatusCard: React.FC<HeroVisualStatusCardProps> = ({
           </label>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-xs font-bold text-[#5b403d] uppercase tracking-wider mb-1">
-              CTA Target Route (Đích đến khi bấm nút)
-            </label>
-            <div className="flex gap-2">
-              <select
-                value={['menu', 'about-us', 'reviews', 'location'].includes(formData.ctaTarget) ? formData.ctaTarget : 'custom'}
-                onChange={(e) => {
-                  if (e.target.value !== 'custom') {
-                    onFormDataChange((prev) => ({ ...prev, ctaTarget: e.target.value }));
-                  }
-                }}
-                className="w-1/2 px-2.5 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs font-medium focus:outline-none focus:border-[#af101a] cursor-pointer"
-              >
-                <option value="menu">menu (Xem Thực Đơn)</option>
-                <option value="about-us">about-us (Về Cutlet Spring)</option>
-                <option value="reviews">reviews (Đánh Giá)</option>
-                <option value="location">location (Bản Đồ)</option>
-                <option value="custom">Tùy chỉnh...</option>
-              </select>
-              <input
-                type="text"
-                value={formData.ctaTarget}
-                onChange={(e) => onFormDataChange((prev) => ({ ...prev, ctaTarget: e.target.value }))}
-                placeholder="e.g. menu"
-                className="w-1/2 px-3 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs font-medium focus:outline-none focus:border-[#af101a]"
-              />
-            </div>
-            <span className="text-[10px] text-[#8f6f6c] mt-1 block">
-              Mặc định: 'menu' để chuyển hướng sang thực đơn khi khách click nút kêu gọi
-            </span>
-          </div>
-          <div>
-            <label className="block text-xs font-bold text-[#5b403d] uppercase tracking-wider mb-1">
-              Metric 1 (Wet Aging - Thời gian ủ thịt)
-            </label>
-            <input
-              type="text"
-              value={formData.metric1Value}
-              onChange={(e) => onFormDataChange((prev) => ({ ...prev, metric1Value: e.target.value }))}
-              placeholder="120h"
-              className="w-full px-3 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs font-medium focus:outline-none focus:border-[#af101a]"
-            />
-            <span className="text-[10px] text-[#8f6f6c] mt-1 block">
-              Hiển thị số liệu nổi bật ở góc dưới bên trái của khối Hero
-            </span>
-          </div>
+        <div>
+          <label className="block text-xs font-bold text-[#5b403d] uppercase tracking-wider mb-1">
+            Metric 1 (Wet Aging - Thời gian ủ thịt)
+          </label>
+          <input
+            type="text"
+            value={formData.metric1Value}
+            onChange={(e) => onFormDataChange((prev) => ({ ...prev, metric1Value: e.target.value }))}
+            placeholder="120h"
+            className="w-full px-3 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs font-medium focus:outline-none focus:border-[#af101a]"
+          />
+          <span className="text-[10px] text-[#8f6f6c] mt-1 block">
+            Hiển thị số liệu nổi bật ở góc dưới bên trái của khối Hero (Nút CTA luôn mặc định chuyển hướng sang Thực Đơn #menu).
+          </span>
         </div>
       </div>
     </div>

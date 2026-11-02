@@ -150,14 +150,14 @@ export const BadgeModal: React.FC<BadgeModalProps> = ({ badge, onClose, onSaved 
               <button
                 type="button"
                 onClick={() => setShowExitConfirm(false)}
-                className="px-3 py-1 bg-[#af101a] text-white text-[11px] font-bold rounded-lg cursor-pointer"
+                className="px-3 py-1 bg-[#af101a] text-white text-[11px] font-bold rounded cursor-pointer"
               >
                 Tiếp tục sửa
               </button>
               <button
                 type="button"
                 onClick={onClose}
-                className="px-3 py-1 border border-amber-300 bg-white text-gray-700 text-[11px] font-bold rounded-lg cursor-pointer"
+                className="px-3 py-1 border border-amber-300 bg-white text-gray-700 text-[11px] font-bold rounded cursor-pointer"
               >
                 Hủy bỏ và thoát
               </button>
@@ -371,14 +371,14 @@ export const BadgeModal: React.FC<BadgeModalProps> = ({ badge, onClose, onSaved 
               type="button"
               onClick={handleRequestClose}
               disabled={isSubmitting}
-              className="px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#585757] hover:bg-[#eae8e5] border border-[#eae8e5] rounded-lg cursor-pointer"
+              className="px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#585757] hover:bg-[#eae8e5] border border-[#eae8e5] rounded cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`px-5 py-2 bg-[#af101a] hover:bg-[#930010] text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-xs flex items-center gap-2 cursor-pointer disabled:opacity-50 ${
+              className={`px-5 py-2 bg-[#af101a] hover:bg-[#930010] text-white text-xs font-bold uppercase tracking-wider rounded shadow-xs flex items-center gap-2 cursor-pointer disabled:opacity-50 ${
                 isDirty ? 'ring-2 ring-amber-400 ring-offset-1 animate-gentle-shake' : ''
               }`}
             >

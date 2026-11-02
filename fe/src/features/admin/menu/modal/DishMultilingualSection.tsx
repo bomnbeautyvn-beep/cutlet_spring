@@ -107,7 +107,7 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
                 key={lang}
                 type="button"
                 onClick={() => onActiveLangChange(lang)}
-                className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap ${
+                className={`px-2.5 py-1.5 rounded text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap ${
                   isActive
                     ? 'bg-[#af101a] text-white shadow-xs'
                     : 'text-[#5b403d] hover:text-[#1b1c1a] hover:bg-white/70'

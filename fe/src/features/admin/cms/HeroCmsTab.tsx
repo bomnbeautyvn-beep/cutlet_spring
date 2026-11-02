@@ -99,7 +99,7 @@ export const HeroCmsTab: React.FC = () => {
         <button
           type="submit"
           disabled={saving}
-          className={`px-6 py-2.5 rounded-xl bg-[#af101a] hover:bg-[#930010] text-white font-label-md text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 shadow-md cursor-pointer disabled:opacity-50 ${
+          className={`px-6 py-2.5 rounded bg-[#af101a] hover:bg-[#930010] text-white font-label-md text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 shadow-md cursor-pointer disabled:opacity-50 ${
             isDirty ? 'ring-2 ring-amber-400 ring-offset-2 animate-gentle-shake' : ''
           }`}
         >

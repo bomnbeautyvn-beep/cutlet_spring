@@ -70,7 +70,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               <button
                 type="button"
                 onClick={handleCtaClick}
-                className="px-6 py-3.5 bg-[#af101a] text-white font-label-lg text-xs md:text-sm uppercase tracking-wider rounded-lg shadow-md hover:bg-[#d32f2f] transition-all flex items-center gap-2 cursor-pointer"
+                className="px-6 py-3.5 bg-[#af101a] text-white font-label-lg text-xs md:text-sm uppercase tracking-wider rounded shadow-md hover:bg-[#d32f2f] transition-all flex items-center gap-2 cursor-pointer"
               >
                 <span>{ctaText}</span>
                 <span className="material-symbols-outlined text-[18px]">arrow_forward</span>

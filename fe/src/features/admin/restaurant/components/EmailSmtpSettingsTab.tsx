@@ -273,7 +273,7 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
             type="button"
             onClick={() => handleSave()}
             disabled={isSaving}
-            className="px-4 py-1.5 bg-[#af101a] hover:bg-[#930010] text-white font-bold rounded-xl text-[11px] uppercase tracking-wider cursor-pointer transition-all shadow-xs shrink-0 self-end sm:self-auto flex items-center gap-1.5"
+            className="px-4 py-1.5 bg-[#af101a] hover:bg-[#930010] text-white font-bold rounded text-[11px] uppercase tracking-wider cursor-pointer transition-all shadow-xs shrink-0 self-end sm:self-auto flex items-center gap-1.5"
           >
             <span className="material-symbols-outlined text-[15px]">save</span>
             <span>Save Changes</span>
@@ -437,7 +437,7 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
               href="https://myaccount.google.com/apppasswords"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-[11px] uppercase tracking-wider transition-colors shadow-xs w-fit cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded text-[11px] uppercase tracking-wider transition-colors shadow-xs w-fit cursor-pointer"
             >
               <span>Mở Google App Passwords</span>
               <span className="material-symbols-outlined text-[15px]">open_in_new</span>
@@ -576,14 +576,14 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
                   <button
                     type="button"
                     onClick={() => applyPreset('gmail587')}
-                    className="px-2.5 py-1 text-[10px] font-bold bg-white hover:bg-[#eae8e5] text-[#1b1c1a] border border-[#eae8e5] rounded-lg transition-colors cursor-pointer shadow-2xs"
+                    className="px-2.5 py-1 text-[10px] font-bold bg-white hover:bg-[#eae8e5] text-[#1b1c1a] border border-[#eae8e5] rounded transition-colors cursor-pointer shadow-2xs"
                   >
                     Gmail / 587 (STARTTLS)
                   </button>
                   <button
                     type="button"
                     onClick={() => applyPreset('ssl465')}
-                    className="px-2.5 py-1 text-[10px] font-bold bg-white hover:bg-[#eae8e5] text-[#1b1c1a] border border-[#eae8e5] rounded-lg transition-colors cursor-pointer shadow-2xs"
+                    className="px-2.5 py-1 text-[10px] font-bold bg-white hover:bg-[#eae8e5] text-[#1b1c1a] border border-[#eae8e5] rounded transition-colors cursor-pointer shadow-2xs"
                   >
                     SSL / 465 (Direct SSL)
                   </button>
@@ -713,7 +713,7 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
             type="button"
             onClick={handleTestConnection}
             disabled={isTestingConnection || isSaving}
-            className="px-4 py-2.5 bg-[#fbf9f6] hover:bg-[#eae8e5] text-[#1b1c1a] border border-[#eae8e5] text-xs font-bold uppercase tracking-wider rounded-xl transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
+            className="px-4 py-2.5 bg-[#fbf9f6] hover:bg-[#eae8e5] text-[#1b1c1a] border border-[#eae8e5] text-xs font-bold uppercase tracking-wider rounded transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
           >
             {isTestingConnection ? (
               <>
@@ -733,7 +733,7 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
             type="button"
             onClick={() => setIsTestEmailModalOpen(true)}
             disabled={!formData.enabled || isSaving || isSendingTest}
-            className="px-4 py-2.5 bg-[#fbf9f6] hover:bg-[#eae8e5] text-[#1b1c1a] border border-[#eae8e5] text-xs font-bold uppercase tracking-wider rounded-xl transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
+            className="px-4 py-2.5 bg-[#fbf9f6] hover:bg-[#eae8e5] text-[#1b1c1a] border border-[#eae8e5] text-xs font-bold uppercase tracking-wider rounded transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
           >
             <span className="material-symbols-outlined text-[16px]">send</span>
             <span>Send Test Email</span>
@@ -744,7 +744,7 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
             type="button"
             onClick={() => handleSave()}
             disabled={isSaving}
-            className="px-6 py-2.5 bg-[#af101a] hover:bg-[#d32f2f] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center gap-2 cursor-pointer disabled:opacity-50"
+            className="px-6 py-2.5 bg-[#af101a] hover:bg-[#d32f2f] text-white text-xs font-bold uppercase tracking-wider rounded transition-all shadow-md flex items-center gap-2 cursor-pointer disabled:opacity-50"
           >
             {isSaving ? (
               <>

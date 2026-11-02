@@ -54,14 +54,14 @@ export const AdminDishModal: React.FC<AdminDishModalProps> = ({ dish, onClose, o
                 <button
                   type="button"
                   onClick={() => setShowExitConfirm(false)}
-                  className="px-4 py-2 bg-[#af101a] text-white text-xs font-bold uppercase tracking-wider rounded-xl hover:bg-[#930010] shadow-xs cursor-pointer"
+                  className="px-4 py-2 bg-[#af101a] text-white text-xs font-bold uppercase tracking-wider rounded hover:bg-[#930010] shadow-xs cursor-pointer"
                 >
                   Tiếp tục chỉnh sửa
                 </button>
                 <button
                   type="button"
                   onClick={onClose}
-                  className="px-4 py-2 border border-[#eae8e5] text-[#585757] text-xs font-bold uppercase tracking-wider rounded-xl hover:bg-gray-100 cursor-pointer"
+                  className="px-4 py-2 border border-[#eae8e5] text-[#585757] text-xs font-bold uppercase tracking-wider rounded hover:bg-gray-100 cursor-pointer"
                 >
                   Xác nhận thoát
                 </button>

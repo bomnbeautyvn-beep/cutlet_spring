@@ -61,7 +61,7 @@ export const UnsavedChangesNotice: React.FC<UnsavedChangesNoticeProps> = ({
             type="button"
             onClick={onDiscard}
             disabled={isSaving}
-            className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-amber-800 hover:text-amber-950 hover:bg-amber-100 rounded-lg transition-colors cursor-pointer disabled:opacity-50"
+            className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-amber-800 hover:text-amber-950 hover:bg-amber-100 rounded transition-colors cursor-pointer disabled:opacity-50"
           >
             Hủy thay đổi
           </button>
@@ -71,7 +71,7 @@ export const UnsavedChangesNotice: React.FC<UnsavedChangesNoticeProps> = ({
             type="button"
             onClick={onSave}
             disabled={isSaving}
-            className="px-4 py-1.5 bg-[#af101a] hover:bg-[#930010] text-white text-[11px] font-bold uppercase tracking-wider rounded-xl shadow-xs transition-all flex items-center gap-1.5 cursor-pointer disabled:opacity-50 hover:shadow-md"
+            className="px-4 py-1.5 bg-[#af101a] hover:bg-[#930010] text-white text-[11px] font-bold uppercase tracking-wider rounded shadow-xs transition-all flex items-center gap-1.5 cursor-pointer disabled:opacity-50 hover:shadow-md"
           >
             {isSaving ? (
               <>

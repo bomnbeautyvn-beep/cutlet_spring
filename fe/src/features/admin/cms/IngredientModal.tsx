@@ -84,14 +84,14 @@ export const IngredientModal: React.FC<IngredientModalProps> = ({
               <button
                 type="button"
                 onClick={() => setShowExitConfirm(false)}
-                className="px-4 py-1.5 bg-[#af101a] text-white text-xs font-bold uppercase tracking-wider rounded-xl hover:bg-[#930010] cursor-pointer"
+                className="px-4 py-1.5 bg-[#af101a] text-white text-xs font-bold uppercase tracking-wider rounded hover:bg-[#930010] cursor-pointer"
               >
                 Tiếp tục chỉnh sửa
               </button>
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-1.5 border border-[#eae8e5] bg-white text-gray-700 text-xs font-bold uppercase tracking-wider rounded-xl hover:bg-gray-100 cursor-pointer"
+                className="px-4 py-1.5 border border-[#eae8e5] bg-white text-gray-700 text-xs font-bold uppercase tracking-wider rounded hover:bg-gray-100 cursor-pointer"
               >
                 Thoát không lưu
               </button>
@@ -146,14 +146,14 @@ export const IngredientModal: React.FC<IngredientModalProps> = ({
                 type="button"
                 onClick={handleRequestClose}
                 disabled={saving}
-                className="px-4 py-2 font-bold uppercase tracking-wider text-gray-600 hover:bg-gray-100 rounded-xl cursor-pointer"
+                className="px-4 py-2 font-bold uppercase tracking-wider text-gray-600 hover:bg-gray-100 rounded cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={saving}
-                className={`px-5 py-2.5 bg-[#af101a] hover:bg-[#d32f2f] text-white font-bold uppercase tracking-wider rounded-xl shadow-md cursor-pointer flex items-center gap-2 disabled:opacity-50 ${
+                className={`px-5 py-2.5 bg-[#af101a] hover:bg-[#d32f2f] text-white font-bold uppercase tracking-wider rounded shadow-md cursor-pointer flex items-center gap-2 disabled:opacity-50 ${
                   isDirty ? 'ring-2 ring-amber-400 ring-offset-1 animate-gentle-shake' : ''
                 }`}
               >

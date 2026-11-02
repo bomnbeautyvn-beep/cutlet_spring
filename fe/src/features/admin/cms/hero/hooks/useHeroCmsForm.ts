@@ -144,9 +144,14 @@ export function useHeroCmsForm() {
     try {
       setSaving(true);
       setMessage(null);
-      const updated = await cmsService.updateAdminHero(formData);
+      const payload: UpdateHomepageHeroRequest = {
+        ...formData,
+        ctaTarget: 'menu',
+      };
+      const updated = await cmsService.updateAdminHero(payload);
       setHero(updated);
-      setInitialData(formData);
+      setInitialData(payload);
+      setFormData(payload);
       setMessage({ text: 'Hero & Introduction updated successfully!', type: 'success' });
     } catch (err: unknown) {
       console.error(err);

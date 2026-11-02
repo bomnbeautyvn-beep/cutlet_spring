@@ -77,7 +77,7 @@ export const RestaurantSettingsPage: React.FC<RestaurantSettingsPageProps> = ({
           <button
             onClick={handleSave}
             disabled={isSaving}
-            className={`px-6 py-2.5 bg-[#af101a] hover:bg-[#d32f2f] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center gap-2 cursor-pointer disabled:opacity-50 shrink-0 ${
+            className={`px-6 py-2.5 bg-[#af101a] hover:bg-[#d32f2f] text-white text-xs font-bold uppercase tracking-wider rounded transition-all shadow-md flex items-center gap-2 cursor-pointer disabled:opacity-50 shrink-0 ${
               isDirty ? 'ring-2 ring-amber-400 ring-offset-2 animate-gentle-shake' : ''
             }`}
           >

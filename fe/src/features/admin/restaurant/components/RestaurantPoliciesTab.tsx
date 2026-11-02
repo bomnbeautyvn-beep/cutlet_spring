@@ -100,7 +100,7 @@ export const RestaurantPoliciesTab: React.FC<RestaurantPoliciesTabProps> = ({
           <button
             type="button"
             onClick={onNavigateToHomepage}
-            className="px-4 py-2 bg-white hover:bg-[#eae8e5] text-[#1b1c1a] border border-[#eae8e5] text-xs font-bold uppercase tracking-wider rounded-xl transition-all flex items-center gap-2 cursor-pointer shadow-2xs shrink-0"
+            className="px-4 py-2 bg-white hover:bg-[#eae8e5] text-[#1b1c1a] border border-[#eae8e5] text-xs font-bold uppercase tracking-wider rounded transition-all flex items-center gap-2 cursor-pointer shadow-2xs shrink-0"
           >
             <span className="material-symbols-outlined text-[16px] text-[#af101a]">open_in_new</span>
             <span>Xem Tại Homepage CMS</span>

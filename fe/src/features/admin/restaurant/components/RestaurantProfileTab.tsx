@@ -45,7 +45,7 @@ export const RestaurantProfileTab: React.FC<RestaurantProfileTabProps> = ({
             <button
               type="button"
               onClick={onNavigateToHomepage}
-              className="px-4 py-2.5 bg-[#af101a] hover:bg-[#930010] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all flex items-center gap-2 cursor-pointer shadow-xs shrink-0"
+              className="px-4 py-2.5 bg-[#af101a] hover:bg-[#930010] text-white text-xs font-bold uppercase tracking-wider rounded transition-all flex items-center gap-2 cursor-pointer shadow-xs shrink-0"
             >
               <span className="material-symbols-outlined text-[16px]">edit_note</span>
               <span>Chỉnh Sửa Tại Homepage CMS</span>

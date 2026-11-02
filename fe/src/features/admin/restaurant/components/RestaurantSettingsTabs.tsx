@@ -16,7 +16,7 @@ export const RestaurantSettingsTabs: React.FC<RestaurantSettingsTabsProps> = ({
       <button
         type="button"
         onClick={() => onTabChange('hours')}
-        className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-2 ${
+        className={`px-4 py-2 rounded text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-2 ${
           activeTab === 'hours'
             ? 'bg-[#1b1c1a] text-white shadow-xs'
             : 'text-[#585757] hover:bg-[#f5f3f0]'
@@ -29,7 +29,7 @@ export const RestaurantSettingsTabs: React.FC<RestaurantSettingsTabsProps> = ({
       <button
         type="button"
         onClick={() => onTabChange('policies')}
-        className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-2 ${
+        className={`px-4 py-2 rounded text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-2 ${
           activeTab === 'policies'
             ? 'bg-[#1b1c1a] text-white shadow-xs'
             : 'text-[#585757] hover:bg-[#f5f3f0]'
@@ -42,7 +42,7 @@ export const RestaurantSettingsTabs: React.FC<RestaurantSettingsTabsProps> = ({
       <button
         type="button"
         onClick={() => onTabChange('email')}
-        className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-2 ${
+        className={`px-4 py-2 rounded text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-2 ${
           activeTab === 'email'
             ? 'bg-[#1b1c1a] text-white shadow-xs'
             : 'text-[#585757] hover:bg-[#f5f3f0]'
@@ -55,7 +55,7 @@ export const RestaurantSettingsTabs: React.FC<RestaurantSettingsTabsProps> = ({
       <button
         type="button"
         onClick={() => onTabChange('profile')}
-        className={`px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-2 ${
+        className={`px-4 py-2 rounded text-xs font-bold uppercase tracking-wider transition-all cursor-pointer flex items-center gap-2 ${
           activeTab === 'profile'
             ? 'bg-[#1b1c1a] text-white shadow-xs'
             : 'text-[#8f6f6c] hover:bg-[#f5f3f0]'
