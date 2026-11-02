@@ -38,6 +38,7 @@ export function useIngredientModalForm({
   });
 
   const [currentImageUrl, setCurrentImageUrl] = useState<string | undefined>(undefined);
+  const [imageFile, setImageFile] = useState<File | null>(null);
 
   useEffect(() => {
     if (ingredient) {
@@ -59,6 +60,7 @@ export function useIngredientModalForm({
         isActive: ingredient.isActive,
       });
       setCurrentImageUrl(ingredient.imageUrl);
+      setImageFile(null);
     } else {
       setFormData({
         nameEn: '',
@@ -77,6 +79,7 @@ export function useIngredientModalForm({
         isActive: true,
       });
       setCurrentImageUrl(undefined);
+      setImageFile(null);
     }
     setErrorMessage(null);
   }, [ingredient, isOpen]);
@@ -109,10 +112,18 @@ export function useIngredientModalForm({
         return;
       }
 
+      let savedId = ingredient?.id;
       if (ingredient?.id) {
         await cmsService.updateAdminIngredient(ingredient.id, formData);
       } else {
-        await cmsService.createAdminIngredient(formData);
+        const created = await cmsService.createAdminIngredient(formData);
+        savedId = created?.id;
+      }
+
+      // If a local image file was staged, upload to Cloudinary
+      if (imageFile && savedId) {
+        setUploading(true);
+        await cmsService.uploadIngredientImage(savedId, imageFile);
       }
 
       onSaved();
@@ -122,30 +133,54 @@ export function useIngredientModalForm({
       setErrorMessage(err instanceof Error ? err.message : 'Failed to save ingredient');
     } finally {
       setSaving(false);
+      setUploading(false);
     }
   };
 
-  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    if (!ingredient?.id) {
-      setErrorMessage('Please create the ingredient first before uploading an image.');
+  const processFile = async (file: File) => {
+    // Basic validation
+    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
+      setErrorMessage('Chỉ chấp nhận file định dạng JPG, PNG hoặc WEBP');
+      return;
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      setErrorMessage('Kích thước ảnh không được vượt quá 10MB');
       return;
     }
 
-    try {
-      setUploading(true);
-      setErrorMessage(null);
-      const updated = await cmsService.uploadIngredientImage(ingredient.id, file);
-      setCurrentImageUrl(updated.imageUrl);
-      onSaved();
-    } catch (err: unknown) {
-      console.error(err);
-      setErrorMessage('Failed to upload image. Please verify file format.');
-    } finally {
-      setUploading(false);
+    setErrorMessage(null);
+
+    // If editing existing ingredient, upload directly to Cloudinary
+    if (ingredient?.id) {
+      try {
+        setUploading(true);
+        const updated = await cmsService.uploadIngredientImage(ingredient.id, file);
+        setCurrentImageUrl(updated.imageUrl);
+        setImageFile(null);
+        onSaved();
+      } catch (err: unknown) {
+        console.error(err);
+        setErrorMessage('Failed to upload image. Please verify file format.');
+      } finally {
+        setUploading(false);
+      }
+    } else {
+      // If creating new ingredient, store file and show instant object preview
+      setImageFile(file);
+      const previewUrl = URL.createObjectURL(file);
+      setCurrentImageUrl(previewUrl);
     }
+  };
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      processFile(file);
+    }
+  };
+
+  const handleFileDrop = (file: File) => {
+    processFile(file);
   };
 
   return {
@@ -159,6 +194,7 @@ export function useIngredientModalForm({
     currentImageUrl,
     handleSubmit,
     handleImageUpload,
+    handleFileDrop,
   };
 }
 

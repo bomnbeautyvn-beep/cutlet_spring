@@ -12,8 +12,8 @@ export const PhilosophyCard: React.FC<PhilosophyCardProps> = ({ item, language }
   return (
     <div className="flex flex-col justify-between space-y-4">
       <div>
-        {/* Top Image Frame */}
-        <div className="w-full h-44 rounded-xl overflow-hidden bg-[#f3f1ec] border border-[#eae6df] flex flex-col items-center justify-center mb-4 select-none shrink-0 relative group">
+        {/* Top Image Frame - 30% longer vertically (~230px) with subtle rounded corners */}
+        <div className="w-full h-56 sm:h-[230px] rounded-lg overflow-hidden bg-[#f3f1ec] border border-[#eae6df] flex flex-col items-center justify-center mb-4 select-none shrink-0 relative group shadow-2xs">
           {item.imageUrl ? (
             <img
               src={item.imageUrl}

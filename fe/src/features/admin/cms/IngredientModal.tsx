@@ -28,6 +28,7 @@ export const IngredientModal: React.FC<IngredientModalProps> = ({
     currentImageUrl,
     handleSubmit,
     handleImageUpload,
+    handleFileDrop,
   } = useIngredientModalForm({ ingredient, isOpen, onSaved, onClose });
 
   if (!isOpen) return null;
@@ -70,6 +71,7 @@ export const IngredientModal: React.FC<IngredientModalProps> = ({
             currentImageUrl={currentImageUrl}
             uploading={uploading}
             onImageUpload={handleImageUpload}
+            onDropFile={handleFileDrop}
             formData={formData}
             onFormDataChange={setFormData}
             isEditing={Boolean(ingredient?.id)}

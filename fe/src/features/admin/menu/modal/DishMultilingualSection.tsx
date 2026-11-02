@@ -264,7 +264,9 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
             <span>한국인 고객 및 헤리티지 표기</span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 items-start">
+          {/* 2x2 Grid Layout for Korean */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 items-start">
+            {/* Row 1, Col 1: Name */}
             <div>
               <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
                 메뉴명 (KO) *
@@ -282,21 +284,24 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
               {errors.nameKr && <span className="text-[10px] text-red-600 block mt-1">{errors.nameKr}</span>}
             </div>
 
-            {onNameKrSubtitleChange && (
-              <div>
-                <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
-                  소제목 / 부제 (Optional)
-                </label>
-                <input
-                  type="text"
-                  value={nameKrSubtitle}
-                  onChange={(e) => onNameKrSubtitleChange(e.target.value)}
-                  placeholder="예: (히레카츠)"
-                  className="w-full px-3 py-1.5 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs font-medium text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
-                />
-              </div>
-            )}
+            {/* Row 1, Col 2: Subtitle */}
+            <div>
+              <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
+                소제목 / 부제 (Optional)
+              </label>
+              <input
+                type="text"
+                value={nameKrSubtitle}
+                onChange={(e) => onNameKrSubtitleChange && onNameKrSubtitleChange(e.target.value)}
+                placeholder="예: (히레카츠)"
+                className="w-full px-3 py-1.5 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs font-medium text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
+              />
+              <span className="text-[10px] text-[#8f6f6c] block mt-1 whitespace-nowrap">
+                Phụ đề món ăn (tùy chọn)
+              </span>
+            </div>
 
+            {/* Row 2, Col 1: Portion */}
             <div>
               <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
                 포션 정보 (KO) *
@@ -313,23 +318,24 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
               />
               {errors.portionKr && <span className="text-[10px] text-red-600 block mt-1">{errors.portionKr}</span>}
             </div>
-          </div>
 
-          <div>
-            <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
-              메뉴 설명 (KO) *
-            </label>
-            <textarea
-              rows={3}
-              value={descriptionKr}
-              onChange={(e) => onDescriptionKrChange(e.target.value)}
-              placeholder="한국어로 메뉴의 특징, 튀김 기법과 조리법을 상세히 입력하세요..."
-              className={`w-full px-3 py-1.5 rounded-lg border bg-[#fbf9f6] text-xs leading-relaxed text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
-                errors.descriptionKr ? 'border-red-500 bg-red-50/20' : 'border-[#eae8e5]'
-              }`}
-              required
-            />
-            {errors.descriptionKr && <span className="text-[10px] text-red-600 block mt-1">{errors.descriptionKr}</span>}
+            {/* Row 2, Col 2: Description */}
+            <div>
+              <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
+                메뉴 설명 (KO) *
+              </label>
+              <textarea
+                rows={3}
+                value={descriptionKr}
+                onChange={(e) => onDescriptionKrChange(e.target.value)}
+                placeholder="한국어로 메뉴의 특징, 튀김 기법과 조리법을 상세히 입력하세요..."
+                className={`w-full px-3 py-1.5 rounded-lg border bg-[#fbf9f6] text-xs leading-relaxed text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
+                  errors.descriptionKr ? 'border-red-500 bg-red-50/20' : 'border-[#eae8e5]'
+                }`}
+                required
+              />
+              {errors.descriptionKr && <span className="text-[10px] text-red-600 block mt-1">{errors.descriptionKr}</span>}
+            </div>
           </div>
         </div>
       )}

@@ -66,9 +66,6 @@ export const MenuTableRow: React.FC<MenuTableRowProps> = ({
               {dish.nameVi && dish.nameJp && <span>•</span>}
               {dish.nameJp && <span className="font-jp-serif">{dish.nameJp}</span>}
             </div>
-            <span className="text-[10px] text-[#8f6f6c] font-mono">
-              {dish.id}
-            </span>
 
             {/* Atelier Badges: Dynamic & Legacy Harmonized */}
             <div className="flex items-center gap-1.5 flex-wrap mt-1.5">
@@ -131,9 +128,9 @@ export const MenuTableRow: React.FC<MenuTableRowProps> = ({
       {/* Price */}
       <td className="py-3 px-4">
         <span className="font-price-numeral font-bold text-sm text-[#1b1c1a]">
-          {dish.priceFormatted || `${dish.price}.000`}
+          {dish.priceFormatted ? dish.priceFormatted.replace(/\s*VND/gi, '').trim() : `${dish.price}.000`}
         </span>
-        <span className="text-[10px] text-[#8f6f6c] ml-1">VND</span>
+        <span className="text-[11px] font-semibold text-[#8f6f6c] ml-1">VND</span>
       </td>
 
       {/* Interactive Toggle Switch */}

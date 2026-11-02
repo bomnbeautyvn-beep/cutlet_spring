@@ -23,8 +23,8 @@ export const IngredientCard: React.FC<IngredientCardProps> = ({
       }`}
     >
       <div>
-        {/* Visual Frame */}
-        <div className="w-full h-40 rounded-xl overflow-hidden bg-[#f3f1ec] border border-[#eae6df] mb-4 relative flex items-center justify-center group">
+        {/* Visual Frame - 30% longer with subtle rounded corners */}
+        <div className="w-full h-52 rounded-lg overflow-hidden bg-[#f3f1ec] border border-[#eae6df] mb-4 relative flex items-center justify-center group shadow-2xs">
           {item.imageUrl ? (
             <img
               src={item.imageUrl}

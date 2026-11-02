@@ -85,24 +85,27 @@ export const DishBasicInfoSection: React.FC<DishBasicInfoSectionProps> = ({
           <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
             Public Menu Visibility
           </label>
-          <div className="flex items-center gap-2.5 pt-1">
-            <label className="relative inline-flex items-center cursor-pointer">
+          <div className="h-[34px] px-3 py-1.5 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] flex items-center justify-between">
+            <span className="text-xs font-semibold text-[#1b1c1a] whitespace-nowrap">
+              {active ? (
+                <span className="text-emerald-700 font-bold">Active (Visible)</span>
+              ) : (
+                <span className="text-gray-500 font-medium">Draft (Hidden)</span>
+              )}
+            </span>
+            <label className="relative inline-flex items-center cursor-pointer ml-2">
               <input
                 type="checkbox"
                 checked={active}
                 onChange={(e) => onActiveChange(e.target.checked)}
                 className="sr-only peer"
               />
-              <div className="w-10 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:h-4 after:w-4 after:rounded-full after:transition-all peer-checked:bg-[#af101a]"></div>
+              <div className="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:h-4 after:w-4 after:rounded-full after:transition-all peer-checked:bg-[#af101a]"></div>
             </label>
-            <span className="text-xs font-semibold text-[#1b1c1a] whitespace-nowrap">
-              {active ? (
-                <span className="text-emerald-700 font-bold">Active (Visible)</span>
-              ) : (
-                <span className="text-gray-500">Draft (Hidden)</span>
-              )}
-            </span>
           </div>
+          <span className="text-[10px] text-[#8f6f6c] block mt-1 whitespace-nowrap truncate">
+            {active ? 'Hiển thị trên thực đơn khách hàng' : 'Đang ẩn khỏi thực đơn trực tuyến'}
+          </span>
         </div>
       </div>
     </div>

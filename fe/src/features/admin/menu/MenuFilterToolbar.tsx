@@ -26,8 +26,8 @@ export const MenuFilterToolbar: React.FC<MenuFilterToolbarProps> = ({
         <label className="block text-[11px] font-bold uppercase tracking-wider text-[#585757] mb-1">
           Search 4 Languages
         </label>
-        <div className="relative">
-          <span className="material-symbols-outlined absolute left-3 top-2.5 text-gray-400 text-[18px]">
+        <div className="relative flex items-center">
+          <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[18px] pointer-events-none select-none flex items-center justify-center leading-none">
             search
           </span>
           <input
