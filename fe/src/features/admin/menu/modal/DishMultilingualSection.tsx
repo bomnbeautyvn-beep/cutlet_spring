@@ -95,8 +95,8 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
           </p>
         </div>
 
-        {/* 4-Language Tabs - Softened Modern Atelier Styling */}
-        <div className="inline-flex flex-wrap p-1 sm:p-1.5 bg-[#f5f3f0] rounded-xl border border-[#eae8e5] gap-1">
+        {/* 4-Language Tabs: 2x2 Grid Layout (VN ENG / HÀN NHẬT) */}
+        <div className="grid grid-cols-2 gap-1 p-1 bg-[#f5f3f0] rounded-xl border border-[#eae8e5] w-full sm:w-[280px] shrink-0">
           {(['VI', 'EN', 'KR', 'JP'] as Language[]).map((lang) => {
             const isComplete = languageStatus[lang];
             const isActive = activeLang === lang;
@@ -106,10 +106,10 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
                 key={lang}
                 type="button"
                 onClick={() => onActiveLangChange(lang)}
-                className={`px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg text-[11px] sm:text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                className={`px-2.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 whitespace-nowrap ${
                   isActive
                     ? 'bg-[#af101a] text-white shadow-xs'
-                    : 'text-[#5b403d] hover:text-[#1b1c1a] hover:bg-white/60'
+                    : 'text-[#5b403d] hover:text-[#1b1c1a] hover:bg-white/70'
                 }`}
               >
                 <span>
