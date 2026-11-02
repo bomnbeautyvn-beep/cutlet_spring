@@ -69,3 +69,4 @@ public class MaintenanceModeFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 }
+

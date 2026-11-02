@@ -22,3 +22,4 @@ public class ConfirmRestoreRequest {
     @NotNull(message = "Warning confirmation must be checked")
     private Boolean confirmedWarning;
 }
+

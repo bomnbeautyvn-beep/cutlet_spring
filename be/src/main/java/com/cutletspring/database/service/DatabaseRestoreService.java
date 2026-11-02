@@ -15,3 +15,4 @@ public interface DatabaseRestoreService {
 
     DatabaseJobDto getActiveJob();
 }
+

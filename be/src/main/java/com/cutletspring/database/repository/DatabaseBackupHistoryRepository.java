@@ -14,3 +14,4 @@ public interface DatabaseBackupHistoryRepository extends JpaRepository<DatabaseB
 
     Optional<DatabaseBackupHistory> findFirstByStatusOrderByCreatedAtDesc(String status);
 }
+

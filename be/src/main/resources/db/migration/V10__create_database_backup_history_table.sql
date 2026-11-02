@@ -15,3 +15,4 @@ CREATE TABLE IF NOT EXISTS database_backup_history (
 
 CREATE INDEX IF NOT EXISTS idx_db_backup_created_at ON database_backup_history(created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_db_backup_status ON database_backup_history(status);
+

@@ -24,3 +24,4 @@ public class DatabaseBackupProperties {
         private String pgRestorePath = "pg_restore";
     }
 }
+

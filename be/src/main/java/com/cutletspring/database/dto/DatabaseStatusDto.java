@@ -26,3 +26,4 @@ public class DatabaseStatusDto {
     private String maintenanceReason;
     private DatabaseJobDto activeJob;
 }
+

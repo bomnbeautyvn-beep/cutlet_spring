@@ -21,3 +21,4 @@ public class DatabaseJobDto {
     private Instant completedAt;
     private String error;
 }
+
