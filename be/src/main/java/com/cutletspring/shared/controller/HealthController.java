@@ -25,9 +25,9 @@ public class HealthController {
     private final HealthService healthService;
 
     @Operation(summary = "Health check and keep-alive ping", description = "Returns operational status, uptime, and database connectivity. Designed for auto-pinging services.")
-    @GetMapping({ "/api/health", "/health" })
-    public ResponseEntity<Map<String, Object>> checkHealth() {
-        return ResponseEntity.ok(healthService.checkHealth());
+    @GetMapping({"/api/health", "/health"})
+    public ResponseEntity<String> checkHealth() {
+        return ResponseEntity.ok("ok");
     }
 
     @Operation(summary = "Lightweight HEAD ping", description = "Returns HTTP 200 without payload for bandwidth-efficient keep-alive pings.")
