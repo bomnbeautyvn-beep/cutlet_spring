@@ -23,7 +23,7 @@ export const DishModalFooter: React.FC<DishModalFooterProps> = ({
           type="button"
           onClick={onClose}
           disabled={isSubmitting}
-          className="px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[#585757] hover:bg-[#eae8e5] border border-[#eae8e5] rounded-none transition-colors cursor-pointer"
+          className="px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-[#585757] hover:bg-[#eae8e5] border border-[#eae8e5] rounded-lg transition-colors cursor-pointer"
         >
           Cancel
         </button>
@@ -31,7 +31,7 @@ export const DishModalFooter: React.FC<DishModalFooterProps> = ({
           type="button"
           onClick={onSubmit}
           disabled={isSubmitting}
-          className="px-6 py-2.5 bg-[#af101a] hover:bg-[#930010] text-white text-xs font-bold uppercase tracking-wider rounded-none transition-all shadow-xs flex items-center gap-2 cursor-pointer disabled:opacity-50"
+          className="px-6 py-2.5 bg-[#af101a] hover:bg-[#930010] text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-all shadow-xs flex items-center gap-2 cursor-pointer disabled:opacity-50"
         >
           {isSubmitting ? (
             <>

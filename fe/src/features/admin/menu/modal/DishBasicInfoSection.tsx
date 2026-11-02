@@ -23,11 +23,11 @@ export const DishBasicInfoSection: React.FC<DishBasicInfoSectionProps> = ({
   onActiveChange,
 }) => {
   return (
-    <div className="bg-white rounded-none border border-[#eae8e5] p-5 sm:p-6 shadow-xs space-y-4">
+    <div className="bg-white rounded-2xl border border-[#eae8e5] p-5 sm:p-6 shadow-xs space-y-4">
       <div className="flex items-center justify-between pb-3 border-b border-[#eae8e5]">
         <div>
           <h3 className="font-headline-sm text-base sm:text-lg font-bold text-[#1b1c1a]">
-            Section 2: Basic Information
+            Basic Information
           </h3>
           <p className="text-xs text-[#585757]">
             System identifier slug, menu catalog category assignment, and public dining visibility
@@ -47,7 +47,7 @@ export const DishBasicInfoSection: React.FC<DishBasicInfoSectionProps> = ({
             onChange={(e) => onIdChange(e.target.value)}
             disabled={isEditing}
             placeholder="e.g. spring-signature-set"
-            className="w-full px-3 py-2 rounded-none border border-[#eae8e5] bg-[#fbf9f6] text-xs font-mono text-[#1b1c1a] focus:outline-none focus:border-[#af101a] disabled:opacity-60 disabled:bg-gray-100 cursor-text"
+            className="w-full px-3 py-2 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs font-mono text-[#1b1c1a] focus:outline-none focus:border-[#af101a] disabled:opacity-60 disabled:bg-gray-100 cursor-text"
             required
           />
           <span className="text-[10px] text-[#8f6f6c] block mt-1">
@@ -63,7 +63,7 @@ export const DishBasicInfoSection: React.FC<DishBasicInfoSectionProps> = ({
           <select
             value={categoryId}
             onChange={(e) => onCategoryChange(e.target.value)}
-            className="w-full px-3 py-2 rounded-none border border-[#eae8e5] bg-[#fbf9f6] text-xs font-bold text-[#1b1c1a] focus:outline-none focus:border-[#af101a] cursor-pointer"
+            className="w-full px-3 py-2 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs font-bold text-[#1b1c1a] focus:outline-none focus:border-[#af101a] cursor-pointer"
             required
           >
             {categories.map((cat) => (
@@ -90,7 +90,7 @@ export const DishBasicInfoSection: React.FC<DishBasicInfoSectionProps> = ({
                 onChange={(e) => onActiveChange(e.target.checked)}
                 className="sr-only peer"
               />
-              <div className="w-10 h-5 bg-gray-200 peer-focus:outline-none rounded-none peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:h-4 after:w-4 after:transition-all peer-checked:bg-[#af101a]"></div>
+              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:h-5 after:w-5 after:rounded-full after:transition-all peer-checked:bg-[#af101a]"></div>
             </label>
             <span className="text-xs font-semibold text-[#1b1c1a]">
               {active ? (
@@ -100,12 +100,8 @@ export const DishBasicInfoSection: React.FC<DishBasicInfoSectionProps> = ({
               )}
             </span>
           </div>
-          <span className="text-[10px] text-[#8f6f6c] block mt-1">
-            Hiển thị trên thực đơn số trực tuyến
-          </span>
         </div>
       </div>
     </div>
   );
 };
-

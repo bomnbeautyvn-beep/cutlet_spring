@@ -83,20 +83,20 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
   };
 
   return (
-    <div className="bg-white rounded-none border border-[#eae8e5] p-5 sm:p-6 shadow-xs space-y-5">
+    <div className="bg-white rounded-2xl border border-[#eae8e5] p-5 sm:p-6 shadow-xs space-y-5">
       {/* Header and In-Section Language Tabs (Hero Pattern) */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#eae8e5]">
         <div>
           <h3 className="font-headline-sm text-base sm:text-lg font-bold text-[#1b1c1a]">
-            Section 4: Multilingual Menu Content
+            Multilingual Menu Content
           </h3>
           <p className="text-xs text-[#585757]">
             Culinary nomenclature, portion specifications, and tasting notes across 4 mandatory languages
           </p>
         </div>
 
-        {/* 4-Language Tabs - Japanese Atelier Sharp Styling */}
-        <div className="inline-flex flex-wrap p-1 bg-[#f5f3f0] rounded-none border border-[#eae8e5] gap-1">
+        {/* 4-Language Tabs - Softened Modern Atelier Styling */}
+        <div className="inline-flex flex-wrap p-1.5 bg-[#f5f3f0] rounded-xl border border-[#eae8e5] gap-1">
           {(['VI', 'EN', 'KR', 'JP'] as Language[]).map((lang) => {
             const isComplete = languageStatus[lang];
             const isActive = activeLang === lang;
@@ -106,10 +106,10 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
                 key={lang}
                 type="button"
                 onClick={() => onActiveLangChange(lang)}
-                className={`px-3 py-1.5 rounded-none text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
                   isActive
-                    ? 'bg-[#af101a] text-white shadow-2xs'
-                    : 'text-[#5b403d] hover:text-[#1b1c1a] hover:bg-white/50'
+                    ? 'bg-[#af101a] text-white shadow-xs'
+                    : 'text-[#5b403d] hover:text-[#1b1c1a] hover:bg-white/60'
                 }`}
               >
                 <span>
@@ -150,7 +150,7 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
                 value={nameVi}
                 onChange={(e) => onNameViChange(e.target.value)}
                 placeholder="Ví dụ: Set Cơm Thịt Heo Nạc Lưng Chiên Xù"
-                className={`w-full px-3 py-2 rounded-none border bg-[#fbf9f6] text-xs font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
+                className={`w-full px-3 py-2 rounded-lg border bg-[#fbf9f6] text-xs font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
                   errors.nameVi ? 'border-red-500 bg-red-50/20' : 'border-[#eae8e5]'
                 }`}
                 required
@@ -167,7 +167,7 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
                 value={portionVi}
                 onChange={(e) => onPortionViChange(e.target.value)}
                 placeholder="Ví dụ: Phần 1 người (6 miếng nạc thăn mềm)"
-                className={`w-full px-3 py-2 rounded-none border bg-[#fbf9f6] text-xs text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
+                className={`w-full px-3 py-2 rounded-lg border bg-[#fbf9f6] text-xs text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
                   errors.portionVi ? 'border-red-500 bg-red-50/20' : 'border-[#eae8e5]'
                 }`}
                 required
@@ -185,7 +185,7 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
               value={descriptionVi}
               onChange={(e) => onDescriptionViChange(e.target.value)}
               placeholder="Mô tả hương vị, nguyên liệu tuyển chọn và nghệ thuật tẩm bột..."
-              className={`w-full px-3 py-2 rounded-none border bg-[#fbf9f6] text-xs leading-relaxed text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
+              className={`w-full px-3 py-2 rounded-lg border bg-[#fbf9f6] text-xs leading-relaxed text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
                 errors.descriptionVi ? 'border-red-500 bg-red-50/20' : 'border-[#eae8e5]'
               }`}
               required
@@ -212,7 +212,7 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
                 value={nameEn}
                 onChange={(e) => onNameEnChange(e.target.value)}
                 placeholder="e.g. Pork Tenderloin Cutlet Set"
-                className={`w-full px-3 py-2 rounded-none border bg-[#fbf9f6] text-xs font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
+                className={`w-full px-3 py-2 rounded-lg border bg-[#fbf9f6] text-xs font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
                   errors.nameEn ? 'border-red-500 bg-red-50/20' : 'border-[#eae8e5]'
                 }`}
                 required
@@ -229,7 +229,7 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
                 value={portionEn}
                 onChange={(e) => onPortionEnChange(e.target.value)}
                 placeholder="e.g. 1 serving (6 tenderloin pieces)"
-                className={`w-full px-3 py-2 rounded-none border bg-[#fbf9f6] text-xs text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
+                className={`w-full px-3 py-2 rounded-lg border bg-[#fbf9f6] text-xs text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
                   errors.portionEn ? 'border-red-500 bg-red-50/20' : 'border-[#eae8e5]'
                 }`}
                 required
@@ -247,7 +247,7 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
               value={descriptionEn}
               onChange={(e) => onDescriptionEnChange(e.target.value)}
               placeholder="Detailed culinary notes, ingredients, and preparation techniques in English..."
-              className={`w-full px-3 py-2 rounded-none border bg-[#fbf9f6] text-xs leading-relaxed text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
+              className={`w-full px-3 py-2 rounded-lg border bg-[#fbf9f6] text-xs leading-relaxed text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
                 errors.descriptionEn ? 'border-red-500 bg-red-50/20' : 'border-[#eae8e5]'
               }`}
               required
@@ -274,7 +274,7 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
                 value={nameKr}
                 onChange={(e) => onNameKrChange(e.target.value)}
                 placeholder="예: 안심카츠 정식"
-                className={`w-full px-3 py-2 rounded-none border bg-[#fbf9f6] text-xs font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
+                className={`w-full px-3 py-2 rounded-lg border bg-[#fbf9f6] text-xs font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
                   errors.nameKr ? 'border-red-500 bg-red-50/20' : 'border-[#eae8e5]'
                 }`}
                 required
@@ -292,7 +292,7 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
                   value={nameKrSubtitle}
                   onChange={(e) => onNameKrSubtitleChange(e.target.value)}
                   placeholder="예: (히레카츠)"
-                  className="w-full px-3 py-2 rounded-none border border-[#eae8e5] bg-[#fbf9f6] text-xs text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
+                  className="w-full px-3 py-2 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
                 />
               </div>
             )}
@@ -306,7 +306,7 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
                 value={portionKr}
                 onChange={(e) => onPortionKrChange(e.target.value)}
                 placeholder="예: 1인분 (안심 6조각)"
-                className={`w-full px-3 py-2 rounded-none border bg-[#fbf9f6] text-xs text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
+                className={`w-full px-3 py-2 rounded-lg border bg-[#fbf9f6] text-xs text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
                   errors.portionKr ? 'border-red-500 bg-red-50/20' : 'border-[#eae8e5]'
                 }`}
                 required
@@ -324,7 +324,7 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
               value={descriptionKr}
               onChange={(e) => onDescriptionKrChange(e.target.value)}
               placeholder="한국어로 메뉴의 특징, 튀김 기법과 조리법을 상세히 입력하세요..."
-              className={`w-full px-3 py-2 rounded-none border bg-[#fbf9f6] text-xs leading-relaxed text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
+              className={`w-full px-3 py-2 rounded-lg border bg-[#fbf9f6] text-xs leading-relaxed text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
                 errors.descriptionKr ? 'border-red-500 bg-red-50/20' : 'border-[#eae8e5]'
               }`}
               required
@@ -351,7 +351,7 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
                 value={nameJp}
                 onChange={(e) => onNameJpChange(e.target.value)}
                 placeholder="例: ヒレかつ定食"
-                className={`w-full px-3 py-2 rounded-none border bg-[#fbf9f6] text-xs font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
+                className={`w-full px-3 py-2 rounded-lg border bg-[#fbf9f6] text-xs font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
                   errors.nameJp ? 'border-red-500 bg-red-50/20' : 'border-[#eae8e5]'
                 }`}
                 required
@@ -368,7 +368,7 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
                 value={portionJp}
                 onChange={(e) => onPortionJpChange(e.target.value)}
                 placeholder="例: 1人前 (ヒレ 6個)"
-                className={`w-full px-3 py-2 rounded-none border bg-[#fbf9f6] text-xs text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
+                className={`w-full px-3 py-2 rounded-lg border bg-[#fbf9f6] text-xs text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
                   errors.portionJp ? 'border-red-500 bg-red-50/20' : 'border-[#eae8e5]'
                 }`}
                 required
@@ -386,7 +386,7 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
               value={descriptionJp}
               onChange={(e) => onDescriptionJpChange(e.target.value)}
               placeholder="日本語で料理のこだわり、低温調理や揚げ上がりの特徴を入力してください..."
-              className={`w-full px-3 py-2 rounded-none border bg-[#fbf9f6] text-xs leading-relaxed text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
+              className={`w-full px-3 py-2 rounded-lg border bg-[#fbf9f6] text-xs leading-relaxed text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
                 errors.descriptionJp ? 'border-red-500 bg-red-50/20' : 'border-[#eae8e5]'
               }`}
               required
@@ -398,4 +398,3 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
     </div>
   );
 };
-

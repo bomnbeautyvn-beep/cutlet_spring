@@ -75,7 +75,7 @@ export const MenuManagementPage: React.FC<MenuManagementPageProps> = ({
               setEditingDish(null);
               onOpenNewDishModal(true);
             }}
-            className="px-4 py-2.5 bg-[#af101a] hover:bg-[#930010] text-white text-xs font-bold uppercase tracking-wider rounded-none transition-all shadow-xs flex items-center gap-2 cursor-pointer shrink-0"
+            className="px-4 py-2.5 bg-[#af101a] hover:bg-[#930010] text-white text-xs font-bold uppercase tracking-wider rounded-lg transition-all shadow-xs flex items-center gap-2 cursor-pointer shrink-0"
           >
             <span className="material-symbols-outlined text-[18px]">add</span>
             <span>New Menu Item</span>
@@ -83,14 +83,14 @@ export const MenuManagementPage: React.FC<MenuManagementPageProps> = ({
         )}
       </div>
 
-      {/* Top Tab Switcher - Japanese Atelier Sharp Styling */}
-      <div className="flex border-b border-[#eae8e5] gap-2 overflow-x-auto">
+      {/* Top Tab Switcher - Softened Modern Atelier Styling */}
+      <div className="flex border-b border-[#eae8e5] gap-2 overflow-x-auto pb-px">
         <button
           onClick={() => setActiveMenuTab('dishes')}
-          className={`px-4 py-2.5 text-xs font-bold uppercase tracking-wider transition-all cursor-pointer border-b-2 flex items-center gap-2 rounded-none whitespace-nowrap ${
+          className={`px-4 py-2.5 text-xs font-bold uppercase tracking-wider transition-all cursor-pointer border-b-2 flex items-center gap-2 rounded-t-lg whitespace-nowrap ${
             activeMenuTab === 'dishes'
-              ? 'border-[#af101a] text-[#af101a] bg-white'
-              : 'border-transparent text-[#585757] hover:text-[#1b1c1a]'
+              ? 'border-[#af101a] text-[#af101a] bg-white shadow-2xs font-bold'
+              : 'border-transparent text-[#585757] hover:text-[#1b1c1a] hover:bg-gray-50'
           }`}
         >
           <span className="material-symbols-outlined text-[18px]">restaurant_menu</span>
@@ -99,10 +99,10 @@ export const MenuManagementPage: React.FC<MenuManagementPageProps> = ({
 
         <button
           onClick={() => setActiveMenuTab('categories')}
-          className={`px-4 py-2.5 text-xs font-bold uppercase tracking-wider transition-all cursor-pointer border-b-2 flex items-center gap-2 rounded-none whitespace-nowrap ${
+          className={`px-4 py-2.5 text-xs font-bold uppercase tracking-wider transition-all cursor-pointer border-b-2 flex items-center gap-2 rounded-t-lg whitespace-nowrap ${
             activeMenuTab === 'categories'
-              ? 'border-[#af101a] text-[#af101a] bg-white'
-              : 'border-transparent text-[#585757] hover:text-[#1b1c1a]'
+              ? 'border-[#af101a] text-[#af101a] bg-white shadow-2xs font-bold'
+              : 'border-transparent text-[#585757] hover:text-[#1b1c1a] hover:bg-gray-50'
           }`}
         >
           <span className="material-symbols-outlined text-[18px]">category</span>
@@ -111,10 +111,10 @@ export const MenuManagementPage: React.FC<MenuManagementPageProps> = ({
 
         <button
           onClick={() => setActiveMenuTab('badges')}
-          className={`px-4 py-2.5 text-xs font-bold uppercase tracking-wider transition-all cursor-pointer border-b-2 flex items-center gap-2 rounded-none whitespace-nowrap ${
+          className={`px-4 py-2.5 text-xs font-bold uppercase tracking-wider transition-all cursor-pointer border-b-2 flex items-center gap-2 rounded-t-lg whitespace-nowrap ${
             activeMenuTab === 'badges'
-              ? 'border-[#af101a] text-[#af101a] bg-white'
-              : 'border-transparent text-[#585757] hover:text-[#1b1c1a]'
+              ? 'border-[#af101a] text-[#af101a] bg-white shadow-2xs font-bold'
+              : 'border-transparent text-[#585757] hover:text-[#1b1c1a] hover:bg-gray-50'
           }`}
         >
           <span className="material-symbols-outlined text-[18px]">stars</span>
@@ -125,7 +125,7 @@ export const MenuManagementPage: React.FC<MenuManagementPageProps> = ({
       {/* Floating Feedback Toast */}
       {feedbackToast && (
         <div
-          className={`p-3.5 rounded-none border text-xs flex items-center gap-2.5 shadow-xs animate-fade-in ${
+          className={`p-3.5 rounded-xl border text-xs flex items-center gap-2.5 shadow-xs animate-fade-in ${
             feedbackToast.isError
               ? 'bg-red-50 border-red-200 text-red-800'
               : 'bg-emerald-50 border-emerald-200 text-emerald-800'
@@ -159,7 +159,7 @@ export const MenuManagementPage: React.FC<MenuManagementPageProps> = ({
           />
 
           {/* Dishes Table */}
-          <div className="bg-white rounded-none border border-[#eae8e5] shadow-xs overflow-hidden">
+          <div className="bg-white rounded-xl border border-[#eae8e5] shadow-xs overflow-hidden">
             <MenuTable
               dishes={filteredDishes}
               isLoading={isLoading}

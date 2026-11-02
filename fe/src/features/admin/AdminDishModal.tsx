@@ -23,7 +23,7 @@ export const AdminDishModal: React.FC<AdminDishModalProps> = ({ dish, onClose, o
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-4xl max-h-[94vh] bg-[#fbf9f6] rounded-none shadow-2xl border border-[#eae8e5] overflow-hidden flex flex-col animate-scale-in"
+        className="relative w-full max-w-4xl max-h-[94vh] bg-[#fbf9f6] rounded-2xl shadow-2xl border border-[#eae8e5] overflow-hidden flex flex-col animate-scale-in"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -32,7 +32,7 @@ export const AdminDishModal: React.FC<AdminDishModalProps> = ({ dish, onClose, o
         {/* Unified Single Scrollable Body */}
         <form onSubmit={form.handleSubmit} className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
           {form.errorMessage && (
-            <div className="p-3.5 bg-red-50 border border-red-200 text-red-700 text-xs rounded-none flex items-center gap-2 animate-fade-in">
+            <div className="p-3.5 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl flex items-center gap-2 animate-fade-in">
               <span className="material-symbols-outlined text-[18px]">error</span>
               <span className="font-medium">{form.errorMessage}</span>
             </div>

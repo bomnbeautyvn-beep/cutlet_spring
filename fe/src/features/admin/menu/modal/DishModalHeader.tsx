@@ -25,7 +25,7 @@ export const DishModalHeader: React.FC<DishModalHeaderProps> = ({ dish, isEditin
       <button
         onClick={onClose}
         aria-label="Close modal"
-        className="w-8 h-8 rounded-none hover:bg-[#eae8e5] text-[#585757] hover:text-[#1b1c1a] flex items-center justify-center transition-colors cursor-pointer border border-transparent hover:border-[#eae8e5]"
+        className="w-8 h-8 rounded-lg hover:bg-[#eae8e5] text-[#585757] hover:text-[#1b1c1a] flex items-center justify-center transition-colors cursor-pointer border border-transparent hover:border-[#eae8e5]"
       >
         <span className="material-symbols-outlined text-[20px]">close</span>
       </button>

@@ -48,8 +48,7 @@ public class AdminCategoryController {
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<CategoryResponse>> updateCategory(
             @PathVariable String id,
-            @Valid @RequestBody CategoryRequest request
-    ) {
+            @Valid @RequestBody CategoryRequest request) {
         CategoryResponse updated = categoryService.updateCategory(id, request);
         return ResponseEntity.ok(ApiResponse.success("Category updated successfully", updated));
     }
@@ -58,8 +57,7 @@ public class AdminCategoryController {
     @PatchMapping("/{id}/status")
     public ResponseEntity<ApiResponse<CategoryResponse>> setCategoryStatus(
             @PathVariable String id,
-            @RequestBody java.util.Map<String, Boolean> payload
-    ) {
+            @RequestBody java.util.Map<String, Boolean> payload) {
         boolean active = payload != null && Boolean.TRUE.equals(payload.get("active"));
         CategoryResponse updated = categoryService.setCategoryStatus(id, active);
         return ResponseEntity.ok(ApiResponse.success("Category status updated successfully", updated));
@@ -72,4 +70,3 @@ public class AdminCategoryController {
         return ResponseEntity.ok(ApiResponse.success("Category deleted successfully", null));
     }
 }
-

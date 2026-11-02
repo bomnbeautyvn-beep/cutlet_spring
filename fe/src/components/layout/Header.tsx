@@ -77,7 +77,7 @@ export const Header: React.FC<HeaderProps> = ({
               href={`tel:${phoneNumber.replace(/\s+/g, '')}`}
               aria-label={`Call ${phoneNumber}`}
               title={phoneNumber}
-              className="flex items-center justify-center gap-2 p-1.5 sm:px-3.5 sm:py-2 border border-[#eae8e5] bg-[#f5f3f0] hover:bg-[#eae8e5] text-[#1b1c1a] hover:text-[#af101a] rounded-none transition-colors font-label-md tracking-wider font-bold shadow-2xs"
+              className="flex items-center justify-center gap-2 p-1.5 sm:px-3.5 sm:py-2 border border-[#eae8e5] bg-[#f5f3f0] hover:bg-[#eae8e5] text-[#1b1c1a] hover:text-[#af101a] rounded-lg transition-colors font-label-md tracking-wider font-bold shadow-2xs"
             >
               <span className="material-symbols-outlined text-[17px] sm:text-[19px] text-[#af101a]">call</span>
               <span className="hidden sm:inline font-price-numeral tracking-tight text-xs sm:text-sm md:text-[14px] font-bold whitespace-nowrap">

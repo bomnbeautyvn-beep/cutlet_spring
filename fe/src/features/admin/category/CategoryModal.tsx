@@ -68,7 +68,7 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-lg bg-white rounded-none shadow-2xl border border-[#eae8e5] overflow-hidden flex flex-col animate-scale-in"
+        className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-[#eae8e5] overflow-hidden flex flex-col animate-scale-in"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -83,7 +83,7 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 rounded-none hover:bg-[#eae8e5] text-[#585757] hover:text-[#1b1c1a] flex items-center justify-center transition-colors cursor-pointer"
+            className="w-8 h-8 rounded-lg hover:bg-[#eae8e5] text-[#585757] hover:text-[#1b1c1a] flex items-center justify-center transition-colors cursor-pointer"
           >
             <span className="material-symbols-outlined text-[20px]">close</span>
           </button>
@@ -92,7 +92,7 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
         {/* Form Body */}
         <form onSubmit={handleSubmit} className="p-5 sm:p-6 space-y-4">
           {error && (
-            <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-none flex items-center gap-2">
+            <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl flex items-center gap-2">
               <span className="material-symbols-outlined text-[16px]">error</span>
               <span className="font-medium">{error}</span>
             </div>
@@ -108,7 +108,7 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
                 placeholder="e.g. japanese-curry"
-                className="w-full px-3 py-2 rounded-none border border-[#eae8e5] bg-[#fbf9f6] text-xs font-mono text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
+                className="w-full px-3 py-2 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs font-mono text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
                 required
               />
               <span className="text-[10px] text-[#8f6f6c] block mt-1">Unique slug code</span>
@@ -123,7 +123,7 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
                 min="1"
                 value={displayOrder}
                 onChange={(e) => setDisplayOrder(parseInt(e.target.value) || 1)}
-                className="w-full px-3 py-2 rounded-none border border-[#eae8e5] bg-[#fbf9f6] text-xs text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
+                className="w-full px-3 py-2 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
               />
               <span className="text-[10px] text-[#8f6f6c] block mt-1">Sort order in menu tabs</span>
             </div>
@@ -138,7 +138,7 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="e.g. Japanese Tonkatsu &amp; Rice Sets"
-              className="w-full px-3 py-2 rounded-none border border-[#eae8e5] bg-[#fbf9f6] text-xs font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3 py-2 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
               required
             />
           </div>
@@ -152,7 +152,7 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="Brief summary of dishes classified under this category..."
-              className="w-full px-3 py-2 rounded-none border border-[#eae8e5] bg-[#fbf9f6] text-xs text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3 py-2 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
             />
           </div>
 
@@ -164,7 +164,7 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
                 onChange={(e) => setActive(e.target.checked)}
                 className="sr-only peer"
               />
-              <div className="w-10 h-5 bg-gray-200 peer-focus:outline-none rounded-none peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:h-4 after:w-4 after:transition-all peer-checked:bg-[#af101a]"></div>
+              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:h-5 after:w-5 after:rounded-full after:transition-all peer-checked:bg-[#af101a]"></div>
             </label>
             <span className="text-xs font-semibold text-[#1b1c1a]">
               {active ? 'Active (Visible on public menu)' : 'Inactive (Draft / Hidden)'}
@@ -177,14 +177,14 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
               type="button"
               onClick={onClose}
               disabled={isSubmitting}
-              className="px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#585757] hover:bg-[#eae8e5] border border-[#eae8e5] rounded-none cursor-pointer"
+              className="px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#585757] hover:bg-[#eae8e5] border border-[#eae8e5] rounded-lg cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-5 py-2 bg-[#af101a] hover:bg-[#930010] text-white text-xs font-bold uppercase tracking-wider rounded-none shadow-xs flex items-center gap-2 cursor-pointer disabled:opacity-50"
+              className="px-5 py-2 bg-[#af101a] hover:bg-[#930010] text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-xs flex items-center gap-2 cursor-pointer disabled:opacity-50"
             >
               {isSubmitting ? (
                 <>
@@ -204,4 +204,3 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
     </div>
   );
 };
-

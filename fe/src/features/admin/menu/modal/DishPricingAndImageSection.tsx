@@ -38,25 +38,22 @@ export const DishPricingAndImageSection: React.FC<DishPricingAndImageSectionProp
   const formattedVnd = (Number(basePrice) * 1000).toLocaleString('vi-VN') + ' VND';
 
   return (
-    <div className="bg-white rounded-none border border-[#eae8e5] p-5 sm:p-6 shadow-xs space-y-6">
+    <div className="bg-white rounded-2xl border border-[#eae8e5] p-5 sm:p-6 shadow-xs space-y-6">
       <div className="flex items-center justify-between pb-3 border-b border-[#eae8e5]">
         <div>
           <h3 className="font-headline-sm text-base sm:text-lg font-bold text-[#1b1c1a]">
-            Section 1: Pricing &amp; Image
+            Pricing &amp; Image
           </h3>
           <p className="text-xs text-[#585757]">
             Artisanal photo asset (Cloudinary), base dining pricing, and portion size variants
           </p>
         </div>
-        <span className="text-[10px] uppercase font-bold tracking-wider text-[#af101a] px-2 py-0.5 bg-[#af101a]/10 rounded-none">
-          Priority Section
-        </span>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
         {/* Left Column: Image Asset & Cloudinary Upload */}
         <div className="md:col-span-5 flex flex-col items-center">
-          <div className="w-full aspect-[4/3] rounded-none overflow-hidden bg-[#f3f1ec] border border-[#eae6df] relative flex items-center justify-center group">
+          <div className="w-full aspect-[4/3] rounded-xl overflow-hidden bg-[#f3f1ec] border border-[#eae6df] relative flex items-center justify-center group">
             {imagePreview ? (
               <img
                 src={imagePreview}
@@ -81,7 +78,7 @@ export const DishPricingAndImageSection: React.FC<DishPricingAndImageSectionProp
             )}
           </div>
 
-          <label className="mt-3 w-full py-2 px-3 border border-[#eae8e5] bg-[#f5f3f0] hover:bg-[#eae8e5] text-xs font-bold text-[#1b1c1a] text-center cursor-pointer transition-colors flex items-center justify-center gap-1.5 rounded-none shadow-2xs">
+          <label className="mt-3 w-full py-2 px-3 border border-[#eae8e5] bg-[#f5f3f0] hover:bg-[#eae8e5] text-xs font-bold text-[#1b1c1a] text-center cursor-pointer transition-colors flex items-center justify-center gap-1.5 rounded-lg shadow-2xs">
             <span className="material-symbols-outlined text-[16px] text-[#af101a]">cloud_upload</span>
             <span>{uploading ? 'Processing Image...' : imagePreview ? 'Replace Dish Photo' : 'Upload Dish Photo'}</span>
             <input
@@ -118,7 +115,7 @@ export const DishPricingAndImageSection: React.FC<DishPricingAndImageSectionProp
                   value={basePrice || ''}
                   onChange={(e) => onBasePriceChange(Number(e.target.value))}
                   placeholder="e.g. 180"
-                  className="w-full px-3 py-2 rounded-none border border-[#eae8e5] bg-[#fbf9f6] text-sm font-semibold focus:outline-none focus:border-[#af101a]"
+                  className="w-full px-3 py-2 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-sm font-semibold focus:outline-none focus:border-[#af101a]"
                   required
                 />
                 <span className="absolute right-3 top-2.5 text-xs text-[#8f6f6c] font-medium pointer-events-none">
@@ -143,7 +140,7 @@ export const DishPricingAndImageSection: React.FC<DishPricingAndImageSectionProp
                   value={prepTimeMinutes || ''}
                   onChange={(e) => onPrepTimeChange(Number(e.target.value))}
                   placeholder="15"
-                  className="w-full px-3 py-2 rounded-none border border-[#eae8e5] bg-[#fbf9f6] text-sm font-semibold focus:outline-none focus:border-[#af101a]"
+                  className="w-full px-3 py-2 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-sm font-semibold focus:outline-none focus:border-[#af101a]"
                 />
                 <span className="absolute right-3 top-2.5 text-xs text-[#8f6f6c] font-medium pointer-events-none">
                   min
@@ -173,12 +170,12 @@ export const DishPricingAndImageSection: React.FC<DishPricingAndImageSectionProp
                   onChange={(e) => onHasSizesChange(e.target.checked)}
                   className="sr-only peer"
                 />
-                <div className="w-10 h-5 bg-gray-200 peer-focus:outline-none rounded-none peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:h-4 after:w-4 after:transition-all peer-checked:bg-[#af101a]"></div>
+                <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:h-5 after:w-5 after:rounded-full after:transition-all peer-checked:bg-[#af101a]"></div>
               </label>
             </div>
 
             {hasSizes && (
-              <div className="p-3 bg-[#fbf9f6] border border-[#eae8e5] rounded-none space-y-2.5">
+              <div className="p-3.5 bg-[#fbf9f6] border border-[#eae8e5] rounded-xl space-y-2.5">
                 {sizesError && (
                   <p className="text-xs text-red-600 font-medium">{sizesError}</p>
                 )}
@@ -190,7 +187,7 @@ export const DishPricingAndImageSection: React.FC<DishPricingAndImageSectionProp
                       value={s.label}
                       onChange={(e) => onUpdateSize(idx, 'label', e.target.value)}
                       placeholder="Size label (e.g. Size M, Phần lớn)"
-                      className="flex-1 px-2.5 py-1.5 text-xs bg-white border border-[#eae8e5] rounded-none focus:outline-none focus:border-[#af101a]"
+                      className="flex-1 px-3 py-1.5 text-xs bg-white border border-[#eae8e5] rounded-lg focus:outline-none focus:border-[#af101a]"
                     />
                     <div className="relative w-28">
                       <input
@@ -200,14 +197,14 @@ export const DishPricingAndImageSection: React.FC<DishPricingAndImageSectionProp
                         value={s.price || ''}
                         onChange={(e) => onUpdateSize(idx, 'price', Number(e.target.value))}
                         placeholder="Price"
-                        className="w-full px-2.5 py-1.5 text-xs bg-white border border-[#eae8e5] rounded-none font-semibold focus:outline-none focus:border-[#af101a]"
+                        className="w-full px-3 py-1.5 text-xs bg-white border border-[#eae8e5] rounded-lg font-semibold focus:outline-none focus:border-[#af101a]"
                       />
-                      <span className="absolute right-2 top-1.5 text-[10px] text-gray-400">k</span>
+                      <span className="absolute right-2.5 top-1.5 text-[10px] text-gray-400">k</span>
                     </div>
                     <button
                       type="button"
                       onClick={() => onRemoveSize(idx)}
-                      className="p-1 text-gray-400 hover:text-red-600 transition-colors cursor-pointer"
+                      className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
                       title="Remove size"
                     >
                       <span className="material-symbols-outlined text-[18px]">delete</span>
@@ -218,7 +215,7 @@ export const DishPricingAndImageSection: React.FC<DishPricingAndImageSectionProp
                 <button
                   type="button"
                   onClick={() => onAddSize()}
-                  className="w-full py-1.5 border border-dashed border-[#eae8e5] hover:border-[#af101a] text-[#af101a] text-xs font-bold rounded-none flex items-center justify-center gap-1 transition-colors cursor-pointer"
+                  className="w-full py-2 border border-dashed border-[#eae8e5] hover:border-[#af101a] text-[#af101a] text-xs font-bold rounded-lg flex items-center justify-center gap-1 transition-colors cursor-pointer hover:bg-white"
                 >
                   <span className="material-symbols-outlined text-[16px]">add</span>
                   <span>Add Size Option</span>
@@ -231,4 +228,3 @@ export const DishPricingAndImageSection: React.FC<DishPricingAndImageSectionProp
     </div>
   );
 };
-
