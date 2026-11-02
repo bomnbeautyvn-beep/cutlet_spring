@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { MenuItem, DishCategory, MenuCategory, MenuBadge, Language } from '@/types';
 import { adminService, MenuItemPayload } from '@/services/admin.service';
 import { badgeService } from '@/services/badge.service';
+import { notifyMenuUpdated } from '@/utils/menuSync';
 
 export type ModalTab = 'general' | 'en' | 'ko' | 'vi' | 'ja';
 
@@ -360,6 +361,7 @@ export function useAdminDishForm({ dish, onSaved, onClose }: UseAdminDishFormPro
         await adminService.uploadImage(savedDishId, imageFile);
       }
 
+      notifyMenuUpdated();
       onSaved();
       onClose();
     } catch (err: any) {

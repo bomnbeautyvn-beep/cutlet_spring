@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { MenuItem } from '@/types';
 import { adminService, PageResult } from '@/services/admin.service';
+import { notifyMenuUpdated, subscribeToMenuUpdates } from '@/utils/menuSync';
 
 export interface UseAdminMenuReturn {
   pageResult: PageResult<MenuItem> | null;
@@ -18,7 +19,7 @@ export interface UseAdminMenuReturn {
   togglingDishId: string | null;
   feedbackToast: { message: string; isError?: boolean } | null;
   showToast: (message: string, isError?: boolean) => void;
-  fetchDishes: () => Promise<void>;
+  fetchDishes: (silent?: boolean) => Promise<void>;
   handleToggleStatus: (dish: MenuItem) => Promise<void>;
   handleDelete: (dish: MenuItem) => Promise<void>;
   filteredDishes: MenuItem[];
@@ -78,8 +79,10 @@ export function useAdminMenu(): UseAdminMenuReturn {
     setTimeout(() => setFeedbackToast(null), 3500);
   }, []);
 
-  const fetchDishes = useCallback(async () => {
-    setIsLoading(true);
+  const fetchDishes = useCallback(async (silent = false) => {
+    if (!silent) {
+      setIsLoading(true);
+    }
     try {
       const activeParam =
         selectedActive === 'active' ? true : selectedActive === 'inactive' ? false : undefined;
@@ -99,7 +102,35 @@ export function useAdminMenu(): UseAdminMenuReturn {
   }, [currentPage, selectedCategory, selectedActive, showToast]);
 
   useEffect(() => {
-    fetchDishes();
+    fetchDishes(false);
+  }, [fetchDishes]);
+
+  // Real-time synchronization across tabs, windows, and components
+  useEffect(() => {
+    const unsubscribe = subscribeToMenuUpdates(() => {
+      fetchDishes(true); // Silent re-fetch
+    });
+    return unsubscribe;
+  }, [fetchDishes]);
+
+  // Auto-refresh when tab is focused or becomes visible
+  useEffect(() => {
+    let lastFetch = Date.now();
+
+    const handleFocusOrVisible = () => {
+      if (document.visibilityState === 'visible' && Date.now() - lastFetch > 3000) {
+        lastFetch = Date.now();
+        fetchDishes(true);
+      }
+    };
+
+    window.addEventListener('focus', handleFocusOrVisible);
+    document.addEventListener('visibilitychange', handleFocusOrVisible);
+
+    return () => {
+      window.removeEventListener('focus', handleFocusOrVisible);
+      document.removeEventListener('visibilitychange', handleFocusOrVisible);
+    };
   }, [fetchDishes]);
 
   // Interactive Animated Status Toggle with Optimistic UI & Revert
@@ -126,6 +157,7 @@ export function useAdminMenu(): UseAdminMenuReturn {
           ? `"${dish.nameEn}" is now ACTIVE on public menu`
           : `"${dish.nameEn}" is now INACTIVE and hidden from diners`
       );
+      notifyMenuUpdated();
     } catch (err: any) {
       // Revert optimistic update on failure
       setPageResult((prev) => {
@@ -150,6 +182,7 @@ export function useAdminMenu(): UseAdminMenuReturn {
     try {
       await adminService.deleteMenuItem(dish.id);
       showToast(`Dish "${dish.nameEn}" deactivated successfully`);
+      notifyMenuUpdated();
       fetchDishes();
     } catch (err: any) {
       showToast(`Failed to delete dish: ${err.message}`, true);

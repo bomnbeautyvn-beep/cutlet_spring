@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MenuBadge } from '@/types';
 import { badgeService } from '@/services/badge.service';
+import { notifyMenuUpdated } from '@/utils/menuSync';
 import { BadgeModal } from './BadgeModal';
 
 export const BadgeManagementTab: React.FC = () => {
@@ -38,6 +39,7 @@ export const BadgeManagementTab: React.FC = () => {
       setBadges((prev) =>
         prev.map((b) => (b.id === badge.id ? { ...b, active: nextStatus } : b))
       );
+      notifyMenuUpdated();
       setSuccessToast(`Badge "${badge.name}" is now ${nextStatus ? 'active' : 'inactive'}`);
       setTimeout(() => setSuccessToast(null), 3000);
     } catch (err: any) {
@@ -63,6 +65,7 @@ export const BadgeManagementTab: React.FC = () => {
       setDeletingId(badge.id);
       await badgeService.deleteBadge(badge.id);
       setBadges((prev) => prev.filter((b) => b.id !== badge.id));
+      notifyMenuUpdated();
       setSuccessToast(`Badge "${badge.name}" deleted successfully`);
       setTimeout(() => setSuccessToast(null), 3000);
     } catch (err: any) {
@@ -235,6 +238,7 @@ export const BadgeManagementTab: React.FC = () => {
           onClose={() => setModalBadge(null)}
           onSaved={() => {
             loadBadges();
+            notifyMenuUpdated();
             setSuccessToast('Badge saved successfully');
             setTimeout(() => setSuccessToast(null), 3000);
           }}

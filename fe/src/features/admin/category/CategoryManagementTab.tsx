@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MenuCategory } from '@/types';
 import { adminService } from '@/services/admin.service';
+import { notifyMenuUpdated } from '@/utils/menuSync';
 import { CategoryModal } from './CategoryModal';
 
 export const CategoryManagementTab: React.FC = () => {
@@ -38,6 +39,7 @@ export const CategoryManagementTab: React.FC = () => {
       setCategories((prev) =>
         prev.map((c) => (c.id === cat.id ? { ...c, active: nextStatus } : c))
       );
+      notifyMenuUpdated();
       setSuccessToast(`Category "${cat.name}" is now ${nextStatus ? 'active' : 'inactive'}`);
       setTimeout(() => setSuccessToast(null), 3000);
     } catch (err: any) {
@@ -61,6 +63,7 @@ export const CategoryManagementTab: React.FC = () => {
       setDeletingId(cat.id);
       await adminService.deleteCategory(cat.id);
       setCategories((prev) => prev.filter((c) => c.id !== cat.id));
+      notifyMenuUpdated();
       setSuccessToast(`Category "${cat.name}" deleted successfully`);
       setTimeout(() => setSuccessToast(null), 3000);
     } catch (err: any) {
@@ -220,6 +223,7 @@ export const CategoryManagementTab: React.FC = () => {
           onClose={() => setModalCategory(null)}
           onSaved={() => {
             loadCategories();
+            notifyMenuUpdated();
             setSuccessToast('Category saved successfully');
             setTimeout(() => setSuccessToast(null), 3000);
           }}
