@@ -104,18 +104,18 @@ public class MenuItemServiceImpl implements MenuItemService {
                 .id(itemId)
                 .category(category)
                 .nameEn(request.getNameEn().trim())
-                .nameKr(request.getNameKr().trim())
-                .nameKrSubtitle(request.getNameKrSubtitle())
-                .nameJp(request.getNameJp())
-                .nameVi(request.getNameVi())
+                .nameKr(trimOrNull(request.getNameKr()))
+                .nameKrSubtitle(trimOrNull(request.getNameKrSubtitle()))
+                .nameJp(trimOrNull(request.getNameJp()))
+                .nameVi(trimOrNull(request.getNameVi()))
                 .descriptionEn(request.getDescriptionEn().trim())
-                .descriptionKr(request.getDescriptionKr().trim())
-                .descriptionVi(request.getDescriptionVi())
-                .descriptionJp(request.getDescriptionJp())
-                .portionEn(request.getPortionEn())
-                .portionVi(request.getPortionVi())
-                .portionKr(request.getPortionKr())
-                .portionJp(request.getPortionJp())
+                .descriptionKr(trimOrNull(request.getDescriptionKr()))
+                .descriptionVi(trimOrNull(request.getDescriptionVi()))
+                .descriptionJp(trimOrNull(request.getDescriptionJp()))
+                .portionEn(trimOrNull(request.getPortionEn()))
+                .portionVi(trimOrNull(request.getPortionVi()))
+                .portionKr(trimOrNull(request.getPortionKr()))
+                .portionJp(trimOrNull(request.getPortionJp()))
                 .basePrice(request.getBasePrice())
                 .prepTimeMinutes(request.getPrepTimeMinutes() != null && request.getPrepTimeMinutes() > 0 ? request.getPrepTimeMinutes() : 15)
                 .imageUrl(request.getImageUrl())
@@ -196,18 +196,18 @@ public class MenuItemServiceImpl implements MenuItemService {
 
         item.setCategory(category);
         item.setNameEn(request.getNameEn().trim());
-        item.setNameKr(request.getNameKr().trim());
-        item.setNameKrSubtitle(request.getNameKrSubtitle());
-        item.setNameJp(request.getNameJp());
-        item.setNameVi(request.getNameVi());
+        item.setNameKr(trimOrNull(request.getNameKr()));
+        item.setNameKrSubtitle(trimOrNull(request.getNameKrSubtitle()));
+        item.setNameJp(trimOrNull(request.getNameJp()));
+        item.setNameVi(trimOrNull(request.getNameVi()));
         item.setDescriptionEn(request.getDescriptionEn().trim());
-        item.setDescriptionKr(request.getDescriptionKr().trim());
-        item.setDescriptionVi(request.getDescriptionVi());
-        item.setDescriptionJp(request.getDescriptionJp());
-        item.setPortionEn(request.getPortionEn());
-        item.setPortionVi(request.getPortionVi());
-        item.setPortionKr(request.getPortionKr());
-        item.setPortionJp(request.getPortionJp());
+        item.setDescriptionKr(trimOrNull(request.getDescriptionKr()));
+        item.setDescriptionVi(trimOrNull(request.getDescriptionVi()));
+        item.setDescriptionJp(trimOrNull(request.getDescriptionJp()));
+        item.setPortionEn(trimOrNull(request.getPortionEn()));
+        item.setPortionVi(trimOrNull(request.getPortionVi()));
+        item.setPortionKr(trimOrNull(request.getPortionKr()));
+        item.setPortionJp(trimOrNull(request.getPortionJp()));
         item.setBasePrice(request.getBasePrice());
         item.setPrepTimeMinutes(request.getPrepTimeMinutes() != null && request.getPrepTimeMinutes() > 0 ? request.getPrepTimeMinutes() : 15);
         if (request.getImageUrl() != null) item.setImageUrl(request.getImageUrl());
@@ -369,5 +369,11 @@ public class MenuItemServiceImpl implements MenuItemService {
         }
 
         return menuItemMapper.toResponse(item);
+    }
+
+    private String trimOrNull(String str) {
+        if (str == null) return null;
+        String trimmed = str.trim();
+        return trimmed.isEmpty() ? null : trimmed;
     }
 }

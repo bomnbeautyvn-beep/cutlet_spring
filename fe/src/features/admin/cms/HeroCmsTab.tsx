@@ -3,9 +3,11 @@ import { useHeroCmsForm } from './hero/hooks/useHeroCmsForm';
 import { HeroVisualStatusCard } from './hero/components/HeroVisualStatusCard';
 import { HeroLanguageTabContent } from './hero/components/HeroLanguageTabContent';
 import { PublicPlacementGuide } from '@/features/admin/components/PublicPlacementGuide';
+import { UnsavedChangesNotice } from '@/features/admin/components/UnsavedChangesNotice';
 
 export const HeroCmsTab: React.FC = () => {
   const {
+    isDirty,
     hero,
     loading,
     saving,
@@ -81,12 +83,25 @@ export const HeroCmsTab: React.FC = () => {
         onFormDataChange={setFormData}
       />
 
+      {/* Unsaved Changes Lock Notice */}
+      {isDirty && (
+        <UnsavedChangesNotice
+          isDirty={isDirty}
+          isSaving={saving}
+          onSave={handleSave}
+          saveButtonText="Save Hero Changes"
+          customMessage="Đang có chỉnh sửa Hero Banner chưa được lưu!"
+        />
+      )}
+
       {/* Save Action Bar */}
       <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#eae8e5]">
         <button
           type="submit"
           disabled={saving}
-          className="px-6 py-2.5 rounded-xl bg-[#af101a] hover:bg-[#930010] text-white font-label-md text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 shadow-md cursor-pointer disabled:opacity-50"
+          className={`px-6 py-2.5 rounded-xl bg-[#af101a] hover:bg-[#930010] text-white font-label-md text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 shadow-md cursor-pointer disabled:opacity-50 ${
+            isDirty ? 'ring-2 ring-amber-400 ring-offset-2 animate-gentle-shake' : ''
+          }`}
         >
           {saving ? (
             <>
@@ -95,7 +110,9 @@ export const HeroCmsTab: React.FC = () => {
             </>
           ) : (
             <>
-              <span className="material-symbols-outlined text-[18px]">save</span>
+              <span className="material-symbols-outlined text-[18px]">
+                {isDirty ? 'lock_reset' : 'save'}
+              </span>
               <span>Save Hero Changes</span>
             </>
           )}

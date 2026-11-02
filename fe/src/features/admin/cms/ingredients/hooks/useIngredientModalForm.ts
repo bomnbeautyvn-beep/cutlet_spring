@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Ingredient, SaveIngredientRequest, Language } from '@/types';
 import { cmsService } from '@/services/cms.service';
 
@@ -84,39 +84,80 @@ export function useIngredientModalForm({
     setErrorMessage(null);
   }, [ingredient, isOpen]);
 
+  const isDirty = useMemo(() => {
+    if (!ingredient) {
+      return Boolean(
+        formData.nameEn?.trim() ||
+        formData.nameKr?.trim() ||
+        formData.nameVi?.trim() ||
+        formData.nameJp?.trim() ||
+        formData.descriptionEn?.trim() ||
+        formData.descriptionKr?.trim() ||
+        formData.descriptionVi?.trim() ||
+        formData.descriptionJp?.trim() ||
+        imageFile
+      );
+    }
+    return (
+      (formData.nameEn || '') !== (ingredient.nameEn || '') ||
+      (formData.nameKr || '') !== (ingredient.nameKr || '') ||
+      (formData.nameVi || '') !== (ingredient.nameVi || '') ||
+      (formData.nameJp || '') !== (ingredient.nameJp || '') ||
+      (formData.descriptionEn || '') !== (ingredient.descriptionEn || '') ||
+      (formData.descriptionKr || '') !== (ingredient.descriptionKr || '') ||
+      (formData.descriptionVi || '') !== (ingredient.descriptionVi || '') ||
+      (formData.descriptionJp || '') !== (ingredient.descriptionJp || '') ||
+      (formData.subtitleEn || '') !== (ingredient.subtitleEn || '') ||
+      (formData.subtitleKr || '') !== (ingredient.subtitleKr || '') ||
+      (formData.subtitleVi || '') !== (ingredient.subtitleVi || '') ||
+      (formData.subtitleJp || '') !== (ingredient.subtitleJp || '') ||
+      formData.displayOrder !== ingredient.displayOrder ||
+      formData.isActive !== ingredient.isActive ||
+      Boolean(imageFile)
+    );
+  }, [formData, ingredient, imageFile]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       setSaving(true);
       setErrorMessage(null);
 
-      // Validate all 4 languages are present
-      if (
-        !formData.nameEn?.trim() ||
-        !formData.nameKr?.trim() ||
-        !formData.nameVi?.trim() ||
-        !formData.nameJp?.trim()
-      ) {
-        setErrorMessage('All 4 language names (EN, KR, VI, JP) are strictly required.');
+      // English (EN) is strictly required; VI, KR, JA are optional
+      if (!formData.nameEn?.trim()) {
+        setErrorMessage('English ingredient name (EN) is required.');
+        setActiveLangTab('EN');
         setSaving(false);
         return;
       }
-      if (
-        !formData.descriptionEn?.trim() ||
-        !formData.descriptionKr?.trim() ||
-        !formData.descriptionVi?.trim() ||
-        !formData.descriptionJp?.trim()
-      ) {
-        setErrorMessage('All 4 language descriptions (EN, KR, VI, JP) are strictly required.');
+      if (!formData.descriptionEn?.trim()) {
+        setErrorMessage('English ingredient description (EN) is required.');
+        setActiveLangTab('EN');
         setSaving(false);
         return;
       }
 
+      const payload: SaveIngredientRequest = {
+        ...formData,
+        nameEn: formData.nameEn.trim(),
+        nameVi: formData.nameVi?.trim() || undefined,
+        nameKr: formData.nameKr?.trim() || undefined,
+        nameJp: formData.nameJp?.trim() || undefined,
+        subtitleEn: formData.subtitleEn?.trim() || undefined,
+        subtitleVi: formData.subtitleVi?.trim() || undefined,
+        subtitleKr: formData.subtitleKr?.trim() || undefined,
+        subtitleJp: formData.subtitleJp?.trim() || undefined,
+        descriptionEn: formData.descriptionEn.trim(),
+        descriptionVi: formData.descriptionVi?.trim() || undefined,
+        descriptionKr: formData.descriptionKr?.trim() || undefined,
+        descriptionJp: formData.descriptionJp?.trim() || undefined,
+      };
+
       let savedId = ingredient?.id;
       if (ingredient?.id) {
-        await cmsService.updateAdminIngredient(ingredient.id, formData);
+        await cmsService.updateAdminIngredient(ingredient.id, payload);
       } else {
-        const created = await cmsService.createAdminIngredient(formData);
+        const created = await cmsService.createAdminIngredient(payload);
         savedId = created?.id;
       }
 
@@ -184,6 +225,7 @@ export function useIngredientModalForm({
   };
 
   return {
+    isDirty,
     activeLangTab,
     setActiveLangTab,
     saving,

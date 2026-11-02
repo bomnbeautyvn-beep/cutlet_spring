@@ -262,20 +262,21 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
 
       {/* Unsaved Changes Banner */}
       {isDirty && (
-        <div className="p-3.5 bg-blue-50 border border-blue-200 rounded-2xl text-blue-900 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs animate-fade-in">
+        <div className="p-3.5 bg-amber-50 border-2 border-amber-400 rounded-2xl text-amber-950 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-md animate-gentle-shake">
           <div className="flex items-center gap-2.5">
-            <span className="material-symbols-outlined text-blue-600 text-lg">edit_note</span>
-            <span className="font-semibold">
-              You have unsaved changes to your SMTP configuration.
+            <span className="material-symbols-outlined text-amber-600 text-lg animate-pulse">lock</span>
+            <span className="font-bold">
+              🔒 Có thay đổi cấu hình SMTP chưa lưu! Vui lòng nhấn &quot;Save Changes&quot; để áp dụng.
             </span>
           </div>
           <button
             type="button"
             onClick={() => handleSave()}
             disabled={isSaving}
-            className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-[11px] uppercase tracking-wider cursor-pointer transition-colors shadow-xs shrink-0 self-end sm:self-auto"
+            className="px-4 py-1.5 bg-[#af101a] hover:bg-[#930010] text-white font-bold rounded-xl text-[11px] uppercase tracking-wider cursor-pointer transition-all shadow-xs shrink-0 self-end sm:self-auto flex items-center gap-1.5"
           >
-            Save Changes
+            <span className="material-symbols-outlined text-[15px]">save</span>
+            <span>Save Changes</span>
           </button>
         </div>
       )}

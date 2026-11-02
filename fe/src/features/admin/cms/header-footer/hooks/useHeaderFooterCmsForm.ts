@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { HeaderFooterSettings, UpdateHeaderFooterRequest, Language } from '@/types';
 import { cmsService } from '@/services/cms.service';
 
@@ -9,6 +9,7 @@ export function useHeaderFooterCmsForm() {
   const [uploading, setUploading] = useState(false);
   const [activeLangTab, setActiveLangTab] = useState<Language>('VI');
   const [message, setMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
+  const [initialData, setInitialData] = useState<UpdateHeaderFooterRequest | null>(null);
 
   const [formData, setFormData] = useState<UpdateHeaderFooterRequest>({
     phoneNumber: '039 376 2717',
@@ -62,7 +63,7 @@ export function useHeaderFooterCmsForm() {
       setLoading(true);
       const data = await cmsService.getAdminHeaderFooter();
       setSettings(data);
-      setFormData({
+      const loaded: UpdateHeaderFooterRequest = {
         phoneNumber: data.phoneNumber || '039 376 2717',
         hotlineVisible: data.hotlineVisible !== false,
         email: data.email || 'contact@cutletspring.com',
@@ -103,7 +104,9 @@ export function useHeaderFooterCmsForm() {
         copyrightTextKr: data.copyrightTextKr || '',
         copyrightTextVi: data.copyrightTextVi || '',
         copyrightTextJp: data.copyrightTextJp || '',
-      });
+      };
+      setInitialData(loaded);
+      setFormData(loaded);
     } catch (err: unknown) {
       console.error(err);
       setMessage({ text: 'Failed to load Header & Footer configuration', type: 'error' });
@@ -111,6 +114,11 @@ export function useHeaderFooterCmsForm() {
       setLoading(false);
     }
   };
+
+  const isDirty = useMemo(() => {
+    if (!initialData) return false;
+    return JSON.stringify(formData) !== JSON.stringify(initialData);
+  }, [formData, initialData]);
 
   useEffect(() => {
     loadSettings();
@@ -123,6 +131,7 @@ export function useHeaderFooterCmsForm() {
       setMessage(null);
       const updated = await cmsService.updateAdminHeaderFooter(formData);
       setSettings(updated);
+      setInitialData(formData);
       setMessage({ text: 'Header & Footer settings updated successfully!', type: 'success' });
     } catch (err: unknown) {
       console.error(err);
@@ -154,6 +163,7 @@ export function useHeaderFooterCmsForm() {
   };
 
   return {
+    isDirty,
     settings,
     loading,
     saving,

@@ -188,6 +188,33 @@ class CmsControllerTests {
     }
 
     @Test
+    @DisplayName("Admin creates ingredient with ONLY English fields (VI, KO, JA optional)")
+    void testCreateIngredient_withOnlyEnglish_succeeds() {
+        UserDetails admin = setupAdminAuth();
+
+        SaveIngredientRequest newIng = SaveIngredientRequest.builder()
+                .id("en-only-flour")
+                .nameEn("Organic Wheat Flour")
+                .descriptionEn("High protein organic flour imported directly from Hokkaido.")
+                .displayOrder(6)
+                .isActive(true)
+                .build();
+
+        ResponseEntity<ApiResponse<IngredientDto>> created = adminController.createIngredient(newIng, admin);
+        assertNotNull(created);
+        assertEquals("en-only-flour", created.getBody().getData().getId());
+        assertEquals("Organic Wheat Flour", created.getBody().getData().getNameEn());
+        assertNull(created.getBody().getData().getNameVi());
+        assertNull(created.getBody().getData().getNameKr());
+        assertNull(created.getBody().getData().getNameJp());
+
+        // Clean up
+        ResponseEntity<ApiResponse<Void>> deleted = adminController.deleteIngredient("en-only-flour", admin);
+        assertNotNull(deleted);
+        assertEquals(200, deleted.getStatusCode().value());
+    }
+
+    @Test
     @DisplayName("Admin can manage Google reviews: create, update, toggle featured, and delete")
     void testAdminGoogleReviewLifecycle() {
         UserDetails admin = setupAdminAuth();

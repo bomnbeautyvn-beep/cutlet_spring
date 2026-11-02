@@ -286,17 +286,17 @@ public class CmsAdminServiceImpl implements CmsAdminService {
         Ingredient item = Ingredient.builder()
                 .id(id)
                 .nameEn(request.getNameEn().trim())
-                .nameKr(request.getNameKr().trim())
-                .nameVi(request.getNameVi().trim())
-                .nameJp(request.getNameJp().trim())
-                .subtitleEn(request.getSubtitleEn())
-                .subtitleKr(request.getSubtitleKr())
-                .subtitleVi(request.getSubtitleVi())
-                .subtitleJp(request.getSubtitleJp())
+                .nameKr(trimOrNull(request.getNameKr()))
+                .nameVi(trimOrNull(request.getNameVi()))
+                .nameJp(trimOrNull(request.getNameJp()))
+                .subtitleEn(trimOrNull(request.getSubtitleEn()))
+                .subtitleKr(trimOrNull(request.getSubtitleKr()))
+                .subtitleVi(trimOrNull(request.getSubtitleVi()))
+                .subtitleJp(trimOrNull(request.getSubtitleJp()))
                 .descriptionEn(request.getDescriptionEn().trim())
-                .descriptionKr(request.getDescriptionKr().trim())
-                .descriptionVi(request.getDescriptionVi().trim())
-                .descriptionJp(request.getDescriptionJp().trim())
+                .descriptionKr(trimOrNull(request.getDescriptionKr()))
+                .descriptionVi(trimOrNull(request.getDescriptionVi()))
+                .descriptionJp(trimOrNull(request.getDescriptionJp()))
                 .displayOrder(order)
                 .isActive(request.getIsActive() != null ? request.getIsActive() : true)
                 .createdAt(Instant.now())
@@ -325,19 +325,19 @@ public class CmsAdminServiceImpl implements CmsAdminService {
                 .orElseThrow(() -> new ResourceNotFoundException("Ingredient not found with id: " + id));
 
         item.setNameEn(request.getNameEn().trim());
-        item.setNameKr(request.getNameKr().trim());
-        item.setNameVi(request.getNameVi().trim());
-        item.setNameJp(request.getNameJp().trim());
+        item.setNameKr(trimOrNull(request.getNameKr()));
+        item.setNameVi(trimOrNull(request.getNameVi()));
+        item.setNameJp(trimOrNull(request.getNameJp()));
 
-        item.setSubtitleEn(request.getSubtitleEn());
-        item.setSubtitleKr(request.getSubtitleKr());
-        item.setSubtitleVi(request.getSubtitleVi());
-        item.setSubtitleJp(request.getSubtitleJp());
+        item.setSubtitleEn(trimOrNull(request.getSubtitleEn()));
+        item.setSubtitleKr(trimOrNull(request.getSubtitleKr()));
+        item.setSubtitleVi(trimOrNull(request.getSubtitleVi()));
+        item.setSubtitleJp(trimOrNull(request.getSubtitleJp()));
 
         item.setDescriptionEn(request.getDescriptionEn().trim());
-        item.setDescriptionKr(request.getDescriptionKr().trim());
-        item.setDescriptionVi(request.getDescriptionVi().trim());
-        item.setDescriptionJp(request.getDescriptionJp().trim());
+        item.setDescriptionKr(trimOrNull(request.getDescriptionKr()));
+        item.setDescriptionVi(trimOrNull(request.getDescriptionVi()));
+        item.setDescriptionJp(trimOrNull(request.getDescriptionJp()));
 
         if (request.getDisplayOrder() != null) {
             item.setDisplayOrder(request.getDisplayOrder());
@@ -742,6 +742,12 @@ public class CmsAdminServiceImpl implements CmsAdminService {
         );
 
         return cmsMapper.toHeaderFooterDto(saved);
+    }
+
+    private String trimOrNull(String str) {
+        if (str == null) return null;
+        String trimmed = str.trim();
+        return trimmed.isEmpty() ? null : trimmed;
     }
 }
 

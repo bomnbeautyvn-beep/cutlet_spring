@@ -30,7 +30,7 @@ public class MenuItem {
     @Column(name = "name_en", nullable = false)
     private String nameEn;
 
-    @Column(name = "name_kr", nullable = false)
+    @Column(name = "name_kr")
     private String nameKr;
 
     @Column(name = "name_kr_subtitle")
@@ -45,7 +45,7 @@ public class MenuItem {
     @Column(name = "description_en", columnDefinition = "TEXT", nullable = false)
     private String descriptionEn;
 
-    @Column(name = "description_kr", columnDefinition = "TEXT", nullable = false)
+    @Column(name = "description_kr", columnDefinition = "TEXT")
     private String descriptionKr;
 
     @Column(name = "description_vi", columnDefinition = "TEXT")

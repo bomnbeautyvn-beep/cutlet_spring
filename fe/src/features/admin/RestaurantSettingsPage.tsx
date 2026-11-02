@@ -5,6 +5,7 @@ import { RestaurantProfileTab } from './restaurant/components/RestaurantProfileT
 import { RestaurantHoursTab } from './restaurant/components/RestaurantHoursTab';
 import { RestaurantPoliciesTab } from './restaurant/components/RestaurantPoliciesTab';
 import { EmailSmtpSettingsTab } from './restaurant/components/EmailSmtpSettingsTab';
+import { UnsavedChangesNotice } from './components/UnsavedChangesNotice';
 
 interface RestaurantSettingsPageProps {
   onNavigateToHomepage?: () => void;
@@ -16,6 +17,7 @@ export const RestaurantSettingsPage: React.FC<RestaurantSettingsPageProps> = ({
   const [isEmailDirty, setIsEmailDirty] = React.useState(false);
 
   const {
+    isDirty,
     activeTab,
     setActiveTab,
     isLoading,
@@ -33,6 +35,12 @@ export const RestaurantSettingsPage: React.FC<RestaurantSettingsPageProps> = ({
     if (activeTab === 'email' && isEmailDirty) {
       const confirmLeave = window.confirm(
         'You have unsaved changes in your Email & SMTP configuration. Are you sure you want to leave without saving?'
+      );
+      if (!confirmLeave) return;
+    }
+    if (activeTab !== 'email' && isDirty) {
+      const confirmLeave = window.confirm(
+        'Bạn có thay đổi thông tin cửa hàng / giờ mở cửa chưa lưu. Bạn có chắc chắn muốn chuyển tab mà không lưu?'
       );
       if (!confirmLeave) return;
     }
@@ -69,7 +77,9 @@ export const RestaurantSettingsPage: React.FC<RestaurantSettingsPageProps> = ({
           <button
             onClick={handleSave}
             disabled={isSaving}
-            className="px-6 py-2.5 bg-[#af101a] hover:bg-[#d32f2f] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center gap-2 cursor-pointer disabled:opacity-50 shrink-0"
+            className={`px-6 py-2.5 bg-[#af101a] hover:bg-[#d32f2f] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center gap-2 cursor-pointer disabled:opacity-50 shrink-0 ${
+              isDirty ? 'ring-2 ring-amber-400 ring-offset-2 animate-gentle-shake' : ''
+            }`}
           >
             {isSaving ? (
               <>
@@ -78,13 +88,26 @@ export const RestaurantSettingsPage: React.FC<RestaurantSettingsPageProps> = ({
               </>
             ) : (
               <>
-                <span className="material-symbols-outlined text-[18px]">save</span>
+                <span className="material-symbols-outlined text-[18px]">
+                  {isDirty ? 'lock_reset' : 'save'}
+                </span>
                 <span>Save Configuration</span>
               </>
             )}
           </button>
         )}
       </div>
+
+      {/* Unsaved Changes Lock Notice for Restaurant Settings */}
+      {isDirty && activeTab !== 'email' && activeTab !== 'profile' && (
+        <UnsavedChangesNotice
+          isDirty={isDirty}
+          isSaving={isSaving}
+          onSave={handleSave}
+          saveButtonText="Save Configuration"
+          customMessage="Đang có chỉnh sửa thông tin nhà hàng chưa lưu!"
+        />
+      )}
 
       {/* Floating Feedback Toast */}
       {feedback && (

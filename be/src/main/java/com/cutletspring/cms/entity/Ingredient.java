@@ -21,13 +21,13 @@ public class Ingredient {
     @Column(name = "name_en", nullable = false)
     private String nameEn;
 
-    @Column(name = "name_kr", nullable = false)
+    @Column(name = "name_kr")
     private String nameKr;
 
-    @Column(name = "name_vi", nullable = false)
+    @Column(name = "name_vi")
     private String nameVi;
 
-    @Column(name = "name_jp", nullable = false)
+    @Column(name = "name_jp")
     private String nameJp;
 
     @Column(name = "subtitle_en")
@@ -45,13 +45,13 @@ public class Ingredient {
     @Column(name = "description_en", nullable = false, columnDefinition = "TEXT")
     private String descriptionEn;
 
-    @Column(name = "description_kr", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "description_kr", columnDefinition = "TEXT")
     private String descriptionKr;
 
-    @Column(name = "description_vi", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "description_vi", columnDefinition = "TEXT")
     private String descriptionVi;
 
-    @Column(name = "description_jp", nullable = false, columnDefinition = "TEXT")
+    @Column(name = "description_jp", columnDefinition = "TEXT")
     private String descriptionJp;
 
     @Column(name = "image_url", length = 500)

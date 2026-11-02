@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { cmsService } from '@/services/cms.service';
 import { HomepageHero, UpdateHomepageHeroRequest, Language } from '@/types';
 
@@ -9,6 +9,7 @@ export function useHeroCmsForm() {
   const [uploading, setUploading] = useState(false);
   const [message, setMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
   const [activeLangTab, setActiveLangTab] = useState<Language>('VI');
+  const [initialData, setInitialData] = useState<UpdateHomepageHeroRequest | null>(null);
 
   // Form states
   const [formData, setFormData] = useState<UpdateHomepageHeroRequest>({
@@ -68,7 +69,7 @@ export function useHeroCmsForm() {
       setLoading(true);
       const data = await cmsService.getAdminHero();
       setHero(data);
-      setFormData({
+      const loadedForm: UpdateHomepageHeroRequest = {
         titleEn: data.titleEn || '',
         titleKr: data.titleKr || '',
         titleVi: data.titleVi || '',
@@ -118,7 +119,9 @@ export function useHeroCmsForm() {
         metric3LabelVi: data.metric3LabelVi || 'Bột chiên tươi nướng mỗi sáng',
         metric3LabelJp: data.metric3LabelJp || '毎朝焼き上げる生パン粉',
         isActive: data.isActive,
-      });
+      };
+      setInitialData(loadedForm);
+      setFormData(loadedForm);
     } catch (err: unknown) {
       console.error(err);
       setMessage({ text: 'Failed to load hero configuration', type: 'error' });
@@ -126,6 +129,11 @@ export function useHeroCmsForm() {
       setLoading(false);
     }
   };
+
+  const isDirty = useMemo(() => {
+    if (!initialData) return false;
+    return JSON.stringify(formData) !== JSON.stringify(initialData);
+  }, [formData, initialData]);
 
   useEffect(() => {
     loadHero();
@@ -138,6 +146,7 @@ export function useHeroCmsForm() {
       setMessage(null);
       const updated = await cmsService.updateAdminHero(formData);
       setHero(updated);
+      setInitialData(formData);
       setMessage({ text: 'Hero & Introduction updated successfully!', type: 'success' });
     } catch (err: unknown) {
       console.error(err);
@@ -169,6 +178,7 @@ export function useHeroCmsForm() {
   };
 
   return {
+    isDirty,
     hero,
     loading,
     saving,

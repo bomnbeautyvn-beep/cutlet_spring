@@ -25,39 +25,29 @@ public class MenuItemRequest {
     @NotBlank(message = "English name (EN) is required")
     private String nameEn;
 
-    @NotBlank(message = "Korean name (KO) is required")
     private String nameKr;
 
     private String nameKrSubtitle;
 
-    @NotBlank(message = "Vietnamese name (VI) is required")
     private String nameVi;
 
-    @NotBlank(message = "Japanese name (JA) is required")
     private String nameJp;
 
     @NotBlank(message = "English description (EN) is required")
     private String descriptionEn;
 
-    @NotBlank(message = "Korean description (KO) is required")
     private String descriptionKr;
 
-    @NotBlank(message = "Vietnamese description (VI) is required")
     private String descriptionVi;
 
-    @NotBlank(message = "Japanese description (JA) is required")
     private String descriptionJp;
 
-    @NotBlank(message = "English portion info (EN) is required")
     private String portionEn;
 
-    @NotBlank(message = "Korean portion info (KO) is required")
     private String portionKr;
 
-    @NotBlank(message = "Vietnamese portion info (VI) is required")
     private String portionVi;
 
-    @NotBlank(message = "Japanese portion info (JA) is required")
     private String portionJp;
 
     @PositiveOrZero(message = "Base price must be zero or positive")

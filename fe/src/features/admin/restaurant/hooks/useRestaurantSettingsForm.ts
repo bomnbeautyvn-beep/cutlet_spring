@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { adminService, RestaurantSettings } from '@/services/admin.service';
 import { SettingsTab } from '../components/RestaurantSettingsTabs';
 
@@ -11,6 +11,11 @@ export function useRestaurantSettingsForm() {
 
   // Form state
   const [formData, setFormData] = useState<Partial<RestaurantSettings>>({});
+
+  const isDirty = useMemo(() => {
+    if (!settings) return false;
+    return JSON.stringify(formData) !== JSON.stringify(settings);
+  }, [formData, settings]);
 
   const showFeedback = (message: string, isError = false) => {
     setFeedback({ message, isError });
@@ -87,6 +92,7 @@ export function useRestaurantSettingsForm() {
   };
 
   return {
+    isDirty,
     settings,
     activeTab,
     setActiveTab,

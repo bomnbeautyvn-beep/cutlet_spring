@@ -188,4 +188,34 @@ class AdminMenuControllerTests {
         assertNotNull(deleteResponse);
         assertEquals(200, deleteResponse.getStatusCode().value());
     }
+
+    @Test
+    @DisplayName("Admin creates menu item with ONLY English fields (VI, KO, JA optional)")
+    void testCreateMenuItem_withOnlyEnglish_succeeds() {
+        MenuItemRequest request = MenuItemRequest.builder()
+                .id("test-en-only-katsu")
+                .categoryId("japanese")
+                .nameEn("English Only Special Katsu")
+                .descriptionEn("Crispy tenderloin cutlet with only English translations provided.")
+                .basePrice(250)
+                .prepTimeMinutes(15)
+                .active(true)
+                .build();
+
+        ResponseEntity<ApiResponse<MenuItemResponse>> createResponse = adminMenuController.createMenuItem(request);
+        assertNotNull(createResponse);
+        assertEquals(201, createResponse.getStatusCode().value());
+        MenuItemResponse created = createResponse.getBody().getData();
+        assertNotNull(created);
+        assertEquals("test-en-only-katsu", created.getId());
+        assertEquals("English Only Special Katsu", created.getNameEn());
+        assertNull(created.getNameVi());
+        assertNull(created.getNameKr());
+        assertNull(created.getNameJp());
+
+        // Clean up
+        ResponseEntity<ApiResponse<Void>> deleteResponse = adminMenuController.deleteMenuItem("test-en-only-katsu");
+        assertNotNull(deleteResponse);
+        assertEquals(200, deleteResponse.getStatusCode().value());
+    }
 }

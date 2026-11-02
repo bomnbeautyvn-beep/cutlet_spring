@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { MenuItem, DishCategory, MenuCategory, MenuBadge, Language } from '@/types';
 import { adminService, MenuItemPayload } from '@/services/admin.service';
 import { badgeService } from '@/services/badge.service';
@@ -242,10 +242,10 @@ export function useAdminDishForm({ dish, onSaved, onClose }: UseAdminDishFormPro
   };
 
   // Validations
-  const isViValid = Boolean(nameVi.trim() && descriptionVi.trim() && portionVi.trim());
-  const isEnValid = Boolean(nameEn.trim() && descriptionEn.trim() && portionEn.trim());
-  const isKoValid = Boolean(nameKr.trim() && descriptionKr.trim() && portionKr.trim());
-  const isJaValid = Boolean(nameJp.trim() && descriptionJp.trim() && portionJp.trim());
+  const isViValid = Boolean(nameVi.trim() && descriptionVi.trim());
+  const isEnValid = Boolean(nameEn.trim() && descriptionEn.trim());
+  const isKoValid = Boolean(nameKr.trim() && descriptionKr.trim());
+  const isJaValid = Boolean(nameJp.trim() && descriptionJp.trim());
   const isGeneralValid =
     basePrice > 0 &&
     (!hasSizes || sizes.some((s) => s.label.trim().length > 0 && Number(s.price) >= 0));
@@ -264,37 +264,66 @@ export function useAdminDishForm({ dish, onSaved, onClose }: UseAdminDishFormPro
       }
     }
 
-    if (!nameVi.trim()) errors.nameVi = 'Tên món ăn (VI) là bắt buộc';
-    if (!descriptionVi.trim()) errors.descriptionVi = 'Mô tả món ăn (VI) là bắt buộc';
-    if (!portionVi.trim()) errors.portionVi = 'Định lượng khẩu phần (VI) là bắt buộc';
-
+    // English (EN) is the primary required language
     if (!nameEn.trim()) errors.nameEn = 'English name (EN) is required';
     if (!descriptionEn.trim()) errors.descriptionEn = 'English description (EN) is required';
-    if (!portionEn.trim()) errors.portionEn = 'English portion info (EN) is required';
 
-    if (!nameKr.trim()) errors.nameKr = 'Korean name (KO) is required';
-    if (!descriptionKr.trim()) errors.descriptionKr = 'Korean description (KO) is required';
-    if (!portionKr.trim()) errors.portionKr = 'Korean portion info (KO) is required';
-
-    if (!nameJp.trim()) errors.nameJp = 'Japanese name (JA) is required';
-    if (!descriptionJp.trim()) errors.descriptionJp = 'Japanese description (JA) is required';
-    if (!portionJp.trim()) errors.portionJp = 'Japanese portion info (JA) is required';
+    // Vietnamese, Korean, Japanese are strictly optional
 
     setValidationErrors(errors);
 
-    // Switch to first tab with error in Section 4 if needed
-    if (errors.nameVi || errors.descriptionVi || errors.portionVi) {
-      setActiveLangTab('VI');
-    } else if (errors.nameEn || errors.descriptionEn || errors.portionEn) {
+    // Switch to EN tab if English validation failed
+    if (errors.nameEn || errors.descriptionEn || errors.portionEn) {
       setActiveLangTab('EN');
-    } else if (errors.nameKr || errors.descriptionKr || errors.portionKr) {
-      setActiveLangTab('KR');
-    } else if (errors.nameJp || errors.descriptionJp || errors.portionJp) {
-      setActiveLangTab('JP');
     }
 
     return Object.keys(errors).length === 0;
   };
+
+  const isDirty = useMemo(() => {
+    if (!dish) {
+      return Boolean(
+        nameEn.trim() ||
+        nameVi.trim() ||
+        nameKr.trim() ||
+        nameJp.trim() ||
+        descriptionEn.trim() ||
+        descriptionVi.trim() ||
+        descriptionKr.trim() ||
+        descriptionJp.trim() ||
+        basePrice > 0 ||
+        selectedFile ||
+        sizes.length > 0
+      );
+    }
+    return (
+      nameEn !== (dish.nameEn || '') ||
+      nameVi !== (dish.nameVi || '') ||
+      nameKr !== (dish.nameKr || '') ||
+      nameJp !== (dish.nameJp || '') ||
+      descriptionEn !== (dish.descriptionEn || '') ||
+      descriptionVi !== (dish.descriptionVi || '') ||
+      descriptionKr !== (dish.descriptionKr || '') ||
+      descriptionJp !== (dish.descriptionJp || '') ||
+      portionEn !== (dish.portionEn || '') ||
+      portionVi !== (dish.portionVi || '') ||
+      portionKr !== (dish.portionKr || '') ||
+      portionJp !== (dish.portionJp || '') ||
+      basePrice !== dish.basePrice ||
+      prepTimeMinutes !== (dish.prepTimeMinutes || 15) ||
+      categoryId !== dish.categoryId ||
+      active !== dish.active ||
+      isChefSignature !== Boolean(dish.isChefSignature) ||
+      isBestSeller !== Boolean(dish.isBestSeller) ||
+      isLimited !== Boolean(dish.isLimited) ||
+      Boolean(selectedFile)
+    );
+  }, [
+    dish, nameEn, nameVi, nameKr, nameJp, descriptionEn, descriptionVi,
+    descriptionKr, descriptionJp, portionEn, portionVi, portionKr, portionJp,
+    basePrice, prepTimeMinutes, categoryId, active, isChefSignature,
+    isBestSeller, isLimited, selectedFile, sizes
+  ]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -302,7 +331,7 @@ export function useAdminDishForm({ dish, onSaved, onClose }: UseAdminDishFormPro
     setUploadError(null);
 
     if (!validateForm()) {
-      setErrorMessage('Please check all mandatory fields across Pricing, Details, and 4-Language Content.');
+      setErrorMessage('Vui lòng kiểm tra các trường bắt buộc (Giá cơ bản, Tên EN, Mô tả EN).');
       return;
     }
 
@@ -311,19 +340,19 @@ export function useAdminDishForm({ dish, onSaved, onClose }: UseAdminDishFormPro
     const payload: MenuItemPayload = {
       id: id.trim() || undefined,
       categoryId,
-      nameVi: nameVi.trim(),
-      descriptionVi: descriptionVi.trim(),
-      portionVi: portionVi.trim(),
+      nameVi: nameVi.trim() || undefined,
+      descriptionVi: descriptionVi.trim() || undefined,
+      portionVi: portionVi.trim() || undefined,
       nameEn: nameEn.trim(),
       descriptionEn: descriptionEn.trim(),
-      portionEn: portionEn.trim(),
-      nameKr: nameKr.trim(),
+      portionEn: portionEn.trim() || undefined,
+      nameKr: nameKr.trim() || undefined,
       nameKrSubtitle: nameKrSubtitle.trim() || undefined,
-      descriptionKr: descriptionKr.trim(),
-      portionKr: portionKr.trim(),
-      nameJp: nameJp.trim(),
-      descriptionJp: descriptionJp.trim(),
-      portionJp: portionJp.trim(),
+      descriptionKr: descriptionKr.trim() || undefined,
+      portionKr: portionKr.trim() || undefined,
+      nameJp: nameJp.trim() || undefined,
+      descriptionJp: descriptionJp.trim() || undefined,
+      portionJp: portionJp.trim() || undefined,
       basePrice: Number(basePrice),
       prepTimeMinutes: Number(prepTimeMinutes),
       altText: altText.trim() || undefined,
@@ -454,6 +483,7 @@ export function useAdminDishForm({ dish, onSaved, onClose }: UseAdminDishFormPro
     descriptionJp,
     setDescriptionJp,
     // Validation & Submission
+    isDirty,
     isViValid,
     isEnValid,
     isKoValid,

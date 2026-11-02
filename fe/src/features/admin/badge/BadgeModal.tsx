@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { MenuBadge, BadgeRequest } from '@/types';
 import { badgeService } from '@/services/badge.service';
+import { UnsavedChangesNotice } from '@/features/admin/components/UnsavedChangesNotice';
 
 interface BadgeModalProps {
   badge: MenuBadge | null; // null = create new
@@ -37,6 +38,33 @@ export const BadgeModal: React.FC<BadgeModalProps> = ({ badge, onClose, onSaved 
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showExitConfirm, setShowExitConfirm] = useState(false);
+
+  const isDirty = useMemo(() => {
+    if (!badge) {
+      return Boolean(code.trim() || name.trim() || nameVi.trim() || nameKr.trim() || nameJp.trim() || description.trim());
+    }
+    return (
+      code !== badge.code ||
+      name !== badge.name ||
+      nameVi !== (badge.nameVi || '') ||
+      nameKr !== (badge.nameKr || '') ||
+      nameJp !== (badge.nameJp || '') ||
+      description !== (badge.description || '') ||
+      badgeColor !== (badge.badgeColor || '#af101a') ||
+      icon !== (badge.icon || 'restaurant') ||
+      displayOrder !== badge.displayOrder ||
+      active !== badge.active
+    );
+  }, [badge, code, name, nameVi, nameKr, nameJp, description, badgeColor, icon, displayOrder, active]);
+
+  const handleRequestClose = () => {
+    if (isDirty) {
+      setShowExitConfirm(true);
+    } else {
+      onClose();
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -84,7 +112,7 @@ export const BadgeModal: React.FC<BadgeModalProps> = ({ badge, onClose, onSaved 
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/65 backdrop-blur-xs animate-fade-in"
-      onClick={onClose}
+      onClick={handleRequestClose}
     >
       <div
         className="relative w-full max-w-xl max-h-[92vh] bg-white rounded-2xl shadow-2xl border border-[#eae8e5] overflow-hidden flex flex-col animate-scale-in"
@@ -101,15 +129,54 @@ export const BadgeModal: React.FC<BadgeModalProps> = ({ badge, onClose, onSaved 
             </h2>
           </div>
           <button
-            onClick={onClose}
+            onClick={handleRequestClose}
             className="w-8 h-8 rounded-lg hover:bg-[#eae8e5] text-[#585757] hover:text-[#1b1c1a] flex items-center justify-center transition-colors cursor-pointer"
           >
             <span className="material-symbols-outlined text-[20px]">close</span>
           </button>
         </div>
 
+        {/* Exit Confirmation Dialog */}
+        {showExitConfirm && (
+          <div className="p-4 bg-amber-50 border-b border-amber-300 text-amber-950 animate-gentle-shake text-center space-y-2">
+            <div className="flex items-center justify-center gap-1.5 font-bold text-xs">
+              <span className="material-symbols-outlined text-amber-700 text-sm">lock</span>
+              <span>Đang có thay đổi badge chưa lưu!</span>
+            </div>
+            <p className="text-[11px] text-amber-900">
+              Bạn có chắc chắn muốn hủy bỏ thay đổi badge này không?
+            </p>
+            <div className="flex items-center justify-center gap-2 pt-1">
+              <button
+                type="button"
+                onClick={() => setShowExitConfirm(false)}
+                className="px-3 py-1 bg-[#af101a] text-white text-[11px] font-bold rounded-lg cursor-pointer"
+              >
+                Tiếp tục sửa
+              </button>
+              <button
+                type="button"
+                onClick={onClose}
+                className="px-3 py-1 border border-amber-300 bg-white text-gray-700 text-[11px] font-bold rounded-lg cursor-pointer"
+              >
+                Hủy bỏ và thoát
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* Body */}
         <form onSubmit={handleSubmit} className="flex-1 overflow-y-auto p-5 sm:p-6 space-y-4">
+          {isDirty && (
+            <UnsavedChangesNotice
+              isDirty={isDirty}
+              isSaving={isSubmitting}
+              onSave={handleSubmit}
+              saveButtonText={isEditing ? 'Save Badge' : 'Create Badge'}
+              customMessage="Có thay đổi badge chưa lưu!"
+            />
+          )}
+
           {error && (
             <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl flex items-center gap-2">
               <span className="material-symbols-outlined text-[16px]">error</span>
@@ -302,7 +369,7 @@ export const BadgeModal: React.FC<BadgeModalProps> = ({ badge, onClose, onSaved 
           <div className="flex items-center justify-end gap-3 pt-4 border-t border-[#eae8e5]">
             <button
               type="button"
-              onClick={onClose}
+              onClick={handleRequestClose}
               disabled={isSubmitting}
               className="px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#585757] hover:bg-[#eae8e5] border border-[#eae8e5] rounded-lg cursor-pointer"
             >
@@ -311,7 +378,9 @@ export const BadgeModal: React.FC<BadgeModalProps> = ({ badge, onClose, onSaved 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="px-5 py-2 bg-[#af101a] hover:bg-[#930010] text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-xs flex items-center gap-2 cursor-pointer disabled:opacity-50"
+              className={`px-5 py-2 bg-[#af101a] hover:bg-[#930010] text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-xs flex items-center gap-2 cursor-pointer disabled:opacity-50 ${
+                isDirty ? 'ring-2 ring-amber-400 ring-offset-1 animate-gentle-shake' : ''
+              }`}
             >
               {isSubmitting ? (
                 <>
@@ -320,7 +389,9 @@ export const BadgeModal: React.FC<BadgeModalProps> = ({ badge, onClose, onSaved 
                 </>
               ) : (
                 <>
-                  <span className="material-symbols-outlined text-[16px]">save</span>
+                  <span className="material-symbols-outlined text-[16px]">
+                    {isDirty ? 'lock_reset' : 'save'}
+                  </span>
                   <span>{isEditing ? 'Save Badge' : 'Create Badge'}</span>
                 </>
               )}

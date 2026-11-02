@@ -17,13 +17,10 @@ public class SaveIngredientRequest {
     @NotBlank(message = "English name is required")
     private String nameEn;
 
-    @NotBlank(message = "Korean name is required")
     private String nameKr;
 
-    @NotBlank(message = "Vietnamese name is required")
     private String nameVi;
 
-    @NotBlank(message = "Japanese name is required")
     private String nameJp;
 
     private String subtitleEn;
@@ -34,13 +31,10 @@ public class SaveIngredientRequest {
     @NotBlank(message = "English description is required")
     private String descriptionEn;
 
-    @NotBlank(message = "Korean description is required")
     private String descriptionKr;
 
-    @NotBlank(message = "Vietnamese description is required")
     private String descriptionVi;
 
-    @NotBlank(message = "Japanese description is required")
     private String descriptionJp;
 
     private Integer displayOrder;
