@@ -1,5 +1,6 @@
 package com.cutletspring.menu.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,10 +35,19 @@ public class MenuItemResponse {
     private String image;
     private String imagePublicId;
     private String altText;
+
+    @JsonProperty("isBestSeller")
     private boolean isBestSeller;
+
+    @JsonProperty("isChefSignature")
     private boolean isChefSignature;
+
+    @JsonProperty("isLimited")
     private boolean isLimited;
+
+    @JsonProperty("isSpicy")
     private boolean isSpicy;
+
     private int spiceLevel;
     private String spiceNote;
     private List<String> dishTypes;
@@ -48,5 +58,24 @@ public class MenuItemResponse {
     private List<MenuItemAddonDto> addons;
     private boolean active;
     private int displayOrder;
-}
 
+    @JsonProperty("bestSeller")
+    public boolean getBestSellerAlias() {
+        return isBestSeller;
+    }
+
+    @JsonProperty("chefSignature")
+    public boolean getChefSignatureAlias() {
+        return isChefSignature;
+    }
+
+    @JsonProperty("limited")
+    public boolean getLimitedAlias() {
+        return isLimited;
+    }
+
+    @JsonProperty("spicy")
+    public boolean getSpicyAlias() {
+        return isSpicy;
+    }
+}

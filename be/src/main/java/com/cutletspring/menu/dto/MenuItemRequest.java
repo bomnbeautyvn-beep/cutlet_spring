@@ -1,5 +1,7 @@
 package com.cutletspring.menu.dto;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.AllArgsConstructor;
@@ -68,15 +70,23 @@ public class MenuItemRequest {
     private String imagePublicId;
     private String altText;
 
+    @JsonProperty("isBestSeller")
+    @JsonAlias({"bestSeller", "isBestSeller"})
     @Builder.Default
     private Boolean isBestSeller = false;
 
+    @JsonProperty("isChefSignature")
+    @JsonAlias({"chefSignature", "isChefSignature"})
     @Builder.Default
     private Boolean isChefSignature = false;
 
+    @JsonProperty("isLimited")
+    @JsonAlias({"limited", "isLimited"})
     @Builder.Default
     private Boolean isLimited = false;
 
+    @JsonProperty("isSpicy")
+    @JsonAlias({"spicy", "isSpicy"})
     @Builder.Default
     private Boolean isSpicy = false;
 

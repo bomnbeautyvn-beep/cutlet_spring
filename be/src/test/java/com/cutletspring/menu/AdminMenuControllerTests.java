@@ -6,6 +6,7 @@ import com.cutletspring.menu.dto.MenuItemResponse;
 import com.cutletspring.menu.dto.MenuStatusUpdateRequest;
 import com.cutletspring.menu.service.MenuItemService;
 import com.cutletspring.shared.response.ApiResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,91 @@ class AdminMenuControllerTests {
 
     @Autowired
     private MenuItemService menuItemService;
+
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
+    @Test
+    @DisplayName("Admin updates dish attributes and verifies database persistence and JSON response")
+    void testUpdateDishBadgePersistence() {
+        String testId = "spring-signature-set";
+        
+        // 1. Fetch current item
+        MenuItemResponse current = adminMenuController.getAdminMenuItemById(testId).getBody().getData();
+        assertNotNull(current);
+
+        // 2. Build update request with all 4 attributes toggled
+        MenuItemRequest request = MenuItemRequest.builder()
+                .categoryId(current.getCategory())
+                .nameEn(current.getNameEn())
+                .nameKr(current.getNameKr())
+                .nameVi(current.getNameVi())
+                .nameJp(current.getNameJp())
+                .descriptionEn(current.getDescriptionEn())
+                .descriptionKr(current.getDescriptionKr())
+                .descriptionVi(current.getDescriptionVi())
+                .descriptionJp(current.getDescriptionJp())
+                .portionEn(current.getPortionEn())
+                .portionKr(current.getPortionKr())
+                .portionVi(current.getPortionVi())
+                .portionJp(current.getPortionJp())
+                .basePrice(current.getPrice())
+                .prepTimeMinutes(current.getPrepTimeMinutes())
+                .isChefSignature(true)
+                .isBestSeller(true)
+                .isLimited(true)
+                .isSpicy(true)
+                .active(true)
+                .build();
+
+        // 3. Perform update
+        ResponseEntity<ApiResponse<MenuItemResponse>> updateResponse = adminMenuController.updateMenuItem(testId, request);
+        assertNotNull(updateResponse);
+        assertEquals(200, updateResponse.getStatusCode().value());
+        MenuItemResponse updated = updateResponse.getBody().getData();
+        assertNotNull(updated);
+
+        // Verify response contains true for all 4 attributes (both formats)
+        assertTrue(updated.isChefSignature());
+        assertTrue(updated.isBestSeller());
+        assertTrue(updated.isLimited());
+        assertTrue(updated.isSpicy());
+        assertTrue(updated.getChefSignatureAlias());
+        assertTrue(updated.getBestSellerAlias());
+        assertTrue(updated.getLimitedAlias());
+        assertTrue(updated.getSpicyAlias());
+
+        // 4. Verify directly in repository / database
+        MenuItemResponse reloaded = adminMenuController.getAdminMenuItemById(testId).getBody().getData();
+        assertTrue(reloaded.isChefSignature());
+        assertTrue(reloaded.isBestSeller());
+        assertTrue(reloaded.isLimited());
+        assertTrue(reloaded.isSpicy());
+
+        // 5. Restore original state
+        MenuItemRequest restoreReq = MenuItemRequest.builder()
+                .categoryId(current.getCategory())
+                .nameEn(current.getNameEn())
+                .nameKr(current.getNameKr())
+                .nameVi(current.getNameVi())
+                .nameJp(current.getNameJp())
+                .descriptionEn(current.getDescriptionEn())
+                .descriptionKr(current.getDescriptionKr())
+                .descriptionVi(current.getDescriptionVi())
+                .descriptionJp(current.getDescriptionJp())
+                .portionEn(current.getPortionEn())
+                .portionKr(current.getPortionKr())
+                .portionVi(current.getPortionVi())
+                .portionJp(current.getPortionJp())
+                .basePrice(current.getPrice())
+                .prepTimeMinutes(current.getPrepTimeMinutes())
+                .isChefSignature(current.isChefSignature())
+                .isBestSeller(current.isBestSeller())
+                .isLimited(current.isLimited())
+                .isSpicy(current.isSpicy())
+                .active(current.isActive())
+                .build();
+        adminMenuController.updateMenuItem(testId, restoreReq);
+    }
 
     @Test
     @DisplayName("Admin retrieves paginated dishes")

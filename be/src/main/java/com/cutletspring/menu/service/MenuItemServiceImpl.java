@@ -204,10 +204,10 @@ public class MenuItemServiceImpl implements MenuItemService {
         if (request.getImageUrl() != null) item.setImageUrl(request.getImageUrl());
         if (request.getImagePublicId() != null) item.setImagePublicId(request.getImagePublicId());
         item.setAltText(request.getAltText());
-        item.setBestSeller(Boolean.TRUE.equals(request.getIsBestSeller()));
-        item.setChefSignature(Boolean.TRUE.equals(request.getIsChefSignature()));
-        item.setLimited(Boolean.TRUE.equals(request.getIsLimited()));
-        item.setSpicy(Boolean.TRUE.equals(request.getIsSpicy()));
+        if (request.getIsBestSeller() != null) item.setBestSeller(request.getIsBestSeller());
+        if (request.getIsChefSignature() != null) item.setChefSignature(request.getIsChefSignature());
+        if (request.getIsLimited() != null) item.setLimited(request.getIsLimited());
+        if (request.getIsSpicy() != null) item.setSpicy(request.getIsSpicy());
         item.setSpiceLevel(request.getSpiceLevel() != null ? request.getSpiceLevel() : 0);
         item.setSpiceNote(request.getSpiceNote());
 
