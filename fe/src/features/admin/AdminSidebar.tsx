@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuthStore } from '@/stores/auth.store';
 
-export type AdminSection = 'dashboard' | 'menu' | 'homepage' | 'settings' | 'accounts';
+export type AdminSection = 'dashboard' | 'menu' | 'homepage' | 'settings' | 'accounts' | 'database';
 
 interface AdminSidebarProps {
   currentSection: AdminSection;
@@ -57,6 +57,13 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
       label: 'Account Management',
       sublabel: 'Admins, Staff & Audit Trail',
       icon: 'manage_accounts',
+      adminOnly: true,
+    },
+    {
+      id: 'database',
+      label: 'Database Management',
+      sublabel: 'Backup, Export & Restore',
+      icon: 'database',
       adminOnly: true,
     },
   ];

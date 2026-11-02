@@ -6,6 +6,7 @@ import { MenuManagementPage } from '@/features/admin/MenuManagementPage';
 import { RestaurantSettingsPage } from '@/features/admin/RestaurantSettingsPage';
 import { AccountManagementPage } from '@/features/admin/AccountManagementPage';
 import { HomepageCmsPage } from '@/features/admin/cms/HomepageCmsPage';
+import { DatabaseManagementPage } from '@/features/admin/database/DatabaseManagementPage';
 import { ChangePasswordModal } from '@/features/admin/ChangePasswordModal';
 import { useAuthStore } from '@/stores/auth.store';
 
@@ -29,11 +30,12 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onExitToPublicSite }) 
     homepage: 'Homepage Content Management & CMS',
     settings: 'Restaurant Profile & Operating Settings',
     accounts: 'Account Credentials & Security Audit',
+    database: 'Database Backup & Disaster Recovery',
   };
 
   const handleSelectSection = (section: AdminSection) => {
     // If staff tries to access admin-only sections, prevent
-    if ((section === 'settings' || section === 'accounts' || section === 'homepage') && !isAdmin) {
+    if ((section === 'settings' || section === 'accounts' || section === 'homepage' || section === 'database') && !isAdmin) {
       return;
     }
     setCurrentSection(section);
@@ -93,6 +95,8 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onExitToPublicSite }) 
           {currentSection === 'settings' && isAdmin && <RestaurantSettingsPage />}
 
           {currentSection === 'accounts' && isAdmin && <AccountManagementPage />}
+
+          {currentSection === 'database' && isAdmin && <DatabaseManagementPage />}
         </main>
       </div>
 

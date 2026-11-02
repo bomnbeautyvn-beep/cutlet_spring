@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { adminService, AdminDashboardStats } from '@/services/admin.service';
 import { AdminSection } from '@/features/admin/AdminSidebar';
+import { useAuthStore } from '@/stores/auth.store';
 
 interface AdminDashboardProps {
   onNavigate: (section: AdminSection) => void;
@@ -11,6 +12,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   onNavigate,
   onOpenNewDish,
 }) => {
+  const { admin } = useAuthStore();
+  const isAdmin = admin?.role === 'ROLE_ADMIN' || admin?.role === 'ADMIN';
+
   const [stats, setStats] = useState<AdminDashboardStats | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -86,7 +90,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       </div>
 
       {/* Primary KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4">
+      <div className={`grid grid-cols-1 ${isAdmin ? 'sm:grid-cols-2 lg:grid-cols-4' : 'sm:grid-cols-3'} gap-3.5 sm:gap-4`}>
         {/* Total Dishes */}
         <div
           onClick={() => onNavigate('menu')}
@@ -145,6 +149,26 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             {stats?.activeAccounts ?? 0} Active Operators
           </div>
         </div>
+
+        {/* Database & Backups (Admin Only) */}
+        {isAdmin && (
+          <div
+            onClick={() => onNavigate('database')}
+            className="p-4 sm:p-5 bg-white rounded-2xl border border-[#eae8e5] shadow-xs hover:border-[#af101a]/40 transition-all cursor-pointer group active:scale-[0.99]"
+          >
+            <div className="flex items-center justify-between text-[#8f6f6c] mb-2">
+              <span className="text-xs font-bold uppercase tracking-wider">Database Engine</span>
+              <span className="material-symbols-outlined text-[20px] text-emerald-600 group-hover:scale-110 transition-transform">database</span>
+            </div>
+            <div className="font-price-numeral text-2xl sm:text-3xl font-black text-[#1b1c1a] leading-tight">
+              PostgreSQL
+            </div>
+            <div className="text-[11px] text-emerald-700 font-bold mt-2 flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span>Backup & Recovery</span>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Category Distribution Grid */}
