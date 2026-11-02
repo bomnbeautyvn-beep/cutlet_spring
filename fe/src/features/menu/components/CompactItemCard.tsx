@@ -7,6 +7,9 @@ interface CompactItemCardProps {
 }
 
 export const CompactItemCard: React.FC<CompactItemCardProps> = ({ item, onSelectItem }) => {
+  const isBest = Boolean(item.isBestSeller ?? item.bestSeller);
+  const isChef = Boolean(item.isChefSignature ?? item.chefSignature);
+
   const hasImage = Boolean(
     item.image &&
     (item.image.startsWith('/images/menu/') ||
@@ -39,11 +42,15 @@ export const CompactItemCard: React.FC<CompactItemCardProps> = ({ item, onSelect
                 {item.tags[0]}
               </div>
             )}
-            {item.isBestSeller && (
+            {isChef ? (
+              <div className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 bg-[#af101a] text-white font-label-md text-[9px] sm:text-[10px] uppercase px-1.5 sm:px-2 py-0.5 rounded-none font-bold shadow-xs">
+                Signature
+              </div>
+            ) : isBest ? (
               <div className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 bg-[#feae2c] text-[#291800] font-label-md text-[9px] sm:text-[10px] uppercase px-1.5 sm:px-2 py-0.5 rounded-none font-bold shadow-xs">
                 Best
               </div>
-            )}
+            ) : null}
           </div>
         ) : (
           /* Locked Loading Placeholder - Guarantees horizontal title alignment across the row */
@@ -60,11 +67,15 @@ export const CompactItemCard: React.FC<CompactItemCardProps> = ({ item, onSelect
                 {item.tags[0]}
               </div>
             )}
-            {item.isBestSeller && (
+            {isChef ? (
+              <div className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 bg-[#af101a] text-white font-label-md text-[9px] sm:text-[10px] uppercase px-1.5 sm:px-2 py-0.5 rounded-none font-bold shadow-xs">
+                Signature
+              </div>
+            ) : isBest ? (
               <div className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 bg-[#feae2c] text-[#291800] font-label-md text-[9px] sm:text-[10px] uppercase px-1.5 sm:px-2 py-0.5 rounded-none font-bold shadow-xs">
                 Best
               </div>
-            )}
+            ) : null}
           </div>
         )}
 

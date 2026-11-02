@@ -55,9 +55,13 @@ export interface MenuItem {
   tags?: string[];
   dishTypes: string[]; // for filtering: 'pork', 'chicken', 'cheese', 'spicy', 'noodles', 'drinks'
   isBestSeller?: boolean;
+  bestSeller?: boolean;
   isChefSignature?: boolean;
+  chefSignature?: boolean;
   isLimited?: boolean;
+  limited?: boolean;
   isSpicy?: boolean;
+  spicy?: boolean;
   spiceLevel?: number; // 1, 2, 3
   spiceNote?: string;
   sizes?: MenuSizeOption[];

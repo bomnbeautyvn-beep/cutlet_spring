@@ -6,6 +6,11 @@ interface ItemDetailHeroProps {
 }
 
 export const ItemDetailHero: React.FC<ItemDetailHeroProps> = ({ item }) => {
+  const isChef = Boolean(item.isChefSignature ?? item.chefSignature);
+  const isBest = Boolean(item.isBestSeller ?? item.bestSeller);
+  const isLim = Boolean(item.isLimited ?? item.limited);
+  const isSp = Boolean(item.isSpicy ?? item.spicy);
+
   const hasImage = Boolean(
     item.image &&
       (item.image.startsWith('/images/menu/') ||
@@ -15,7 +20,7 @@ export const ItemDetailHero: React.FC<ItemDetailHeroProps> = ({ item }) => {
   );
 
   return (
-    <div className="relative w-full h-56 sm:h-64 bg-[#efeeeb] shrink-0 flex items-center justify-center overflow-hidden">
+    <div className="relative w-full h-52 sm:h-64 bg-[#efeeeb] shrink-0 flex items-center justify-center overflow-hidden">
       {hasImage ? (
         <img
           src={item.image}
@@ -32,25 +37,31 @@ export const ItemDetailHero: React.FC<ItemDetailHeroProps> = ({ item }) => {
         </div>
       )}
 
-      {/* Badges */}
-      <div className="absolute bottom-3 left-4 flex flex-wrap items-center gap-2">
-        {item.isChefSignature && (
-          <span className="bg-[#af101a] text-white font-label-md text-[11px] uppercase px-2.5 py-0.5 tracking-wider font-bold shadow-xs">
+      {/* Badges Container - naturally wraps without horizontal overflow on 320px screens */}
+      <div className="absolute bottom-3 left-3 right-3 sm:left-4 sm:right-4 flex flex-wrap items-center gap-1.5 sm:gap-2 pointer-events-none">
+        {isChef && (
+          <span className="bg-[#af101a] text-white font-label-md text-[10px] sm:text-[11px] uppercase px-2 sm:px-2.5 py-0.5 tracking-wider font-bold shadow-xs">
             Chef Signature
           </span>
         )}
-        {item.isBestSeller && !item.isChefSignature && (
-          <span className="bg-[#feae2c] text-[#291800] font-label-md text-[11px] uppercase px-2.5 py-0.5 tracking-wider font-bold shadow-xs">
+        {isBest && !isChef && (
+          <span className="bg-[#feae2c] text-[#291800] font-label-md text-[10px] sm:text-[11px] uppercase px-2 sm:px-2.5 py-0.5 tracking-wider font-bold shadow-xs">
             Best Seller
           </span>
         )}
-        {item.isLimited && (
-          <span className="bg-[#5b403d] text-white font-label-md text-[11px] uppercase px-2.5 py-0.5 tracking-wider font-bold shadow-xs">
+        {isLim && (
+          <span className="bg-[#1b1c1a] text-white font-label-md text-[10px] sm:text-[11px] uppercase px-2 sm:px-2.5 py-0.5 tracking-wider font-bold shadow-xs">
             Limited Daily Batch
           </span>
         )}
-        {item.prepTimeMinutes && (
-          <span className="bg-white/90 text-[#1b1c1a] font-label-md text-[11px] uppercase px-2 py-0.5 tracking-wider font-semibold shadow-xs">
+        {isSp && (
+          <span className="bg-red-600 text-white font-label-md text-[10px] sm:text-[11px] uppercase px-2 sm:px-2.5 py-0.5 tracking-wider font-bold shadow-xs flex items-center gap-1">
+            <span className="material-symbols-outlined text-[12px]">local_fire_department</span>
+            <span>Spicy Glaze</span>
+          </span>
+        )}
+        {item.prepTimeMinutes && item.prepTimeMinutes > 0 && (
+          <span className="bg-white/95 backdrop-blur-xs text-[#1b1c1a] font-label-md text-[10px] sm:text-[11px] uppercase px-2 py-0.5 tracking-wider font-semibold shadow-xs">
             {item.prepTimeMinutes} MIN PREP
           </span>
         )}
@@ -58,4 +69,3 @@ export const ItemDetailHero: React.FC<ItemDetailHeroProps> = ({ item }) => {
     </div>
   );
 };
-

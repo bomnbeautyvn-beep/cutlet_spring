@@ -62,6 +62,38 @@ export const MenuTableRow: React.FC<MenuTableRowProps> = ({
             <span className="text-[10px] text-[#8f6f6c] font-mono">
               {dish.id}
             </span>
+
+            {/* Atelier Badges */}
+            {Boolean(
+              (dish.isChefSignature ?? dish.chefSignature) ||
+              (dish.isBestSeller ?? dish.bestSeller) ||
+              (dish.isLimited ?? dish.limited) ||
+              (dish.isSpicy ?? dish.spicy)
+            ) && (
+              <div className="flex items-center gap-1.5 flex-wrap mt-1.5">
+                {(dish.isChefSignature ?? dish.chefSignature) && (
+                  <span className="px-1.5 py-0.5 bg-[#af101a] text-white text-[9px] font-bold uppercase rounded tracking-wider shadow-2xs">
+                    Signature
+                  </span>
+                )}
+                {(dish.isBestSeller ?? dish.bestSeller) && (
+                  <span className="px-1.5 py-0.5 bg-[#feae2c] text-[#291800] text-[9px] font-bold uppercase rounded tracking-wider shadow-2xs">
+                    Best Seller
+                  </span>
+                )}
+                {(dish.isLimited ?? dish.limited) && (
+                  <span className="px-1.5 py-0.5 bg-[#1b1c1a] text-white text-[9px] font-bold uppercase rounded tracking-wider shadow-2xs">
+                    Limited
+                  </span>
+                )}
+                {(dish.isSpicy ?? dish.spicy) && (
+                  <span className="px-1.5 py-0.5 bg-red-600 text-white text-[9px] font-bold uppercase rounded tracking-wider shadow-2xs flex items-center gap-0.5">
+                    <span className="material-symbols-outlined text-[10px]">local_fire_department</span>
+                    <span>Spicy</span>
+                  </span>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </td>

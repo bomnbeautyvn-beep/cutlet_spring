@@ -37,7 +37,7 @@ export const CatalogSections: React.FC<CatalogSectionsProps> = ({
             <DishCard
               key={item.id}
               item={item}
-              isFeatured={item.isChefSignature}
+              isFeatured={Boolean(item.isChefSignature ?? item.chefSignature)}
               onSelectItem={onSelectItem}
             />
           ))}

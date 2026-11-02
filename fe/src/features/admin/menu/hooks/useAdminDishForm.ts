@@ -20,10 +20,18 @@ export function useAdminDishForm({ dish, onSaved, onClose }: UseAdminDishFormPro
   const [basePrice, setBasePrice] = useState<number>(dish?.price || 180);
   const [prepTimeMinutes, setPrepTimeMinutes] = useState<number>(dish?.prepTimeMinutes || 15);
   const [active, setActive] = useState(dish?.active !== false);
-  const [isChefSignature, setIsChefSignature] = useState(Boolean(dish?.isChefSignature));
-  const [isBestSeller, setIsBestSeller] = useState(Boolean(dish?.isBestSeller));
-  const [isLimited, setIsLimited] = useState(Boolean(dish?.isLimited));
-  const [isSpicy, setIsSpicy] = useState(Boolean(dish?.isSpicy));
+  const [isChefSignature, setIsChefSignature] = useState(
+    Boolean(dish?.isChefSignature ?? dish?.chefSignature)
+  );
+  const [isBestSeller, setIsBestSeller] = useState(
+    Boolean(dish?.isBestSeller ?? dish?.bestSeller)
+  );
+  const [isLimited, setIsLimited] = useState(
+    Boolean(dish?.isLimited ?? dish?.limited)
+  );
+  const [isSpicy, setIsSpicy] = useState(
+    Boolean(dish?.isSpicy ?? dish?.spicy)
+  );
   const [spiceLevel, setSpiceLevel] = useState<number>(dish?.spiceLevel || 0);
   const [spiceNote, setSpiceNote] = useState(dish?.spiceNote || '');
 

@@ -51,15 +51,18 @@ export const menuService = {
    * Fetch chef signature & best seller items
    */
   async getFeaturedItems(): Promise<MenuItem[]> {
+    const isSpecial = (item: MenuItem) =>
+      Boolean((item.isChefSignature ?? item.chefSignature) || (item.isBestSeller ?? item.bestSeller));
+
     if (USE_MOCK_DATA) {
-      return MOCK_MENU_ITEMS.filter((item) => item.isChefSignature || item.isBestSeller);
+      return MOCK_MENU_ITEMS.filter(isSpecial);
     }
 
     try {
       const response = await apiClient.get<MenuItem[]>(API_ENDPOINTS.MENU.FEATURED);
       return response.data || [];
     } catch {
-      return MOCK_MENU_ITEMS.filter((item) => item.isChefSignature || item.isBestSeller);
+      return MOCK_MENU_ITEMS.filter(isSpecial);
     }
   },
 
