@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+﻿import React, { useState, useMemo } from 'react';
 import { MenuBadge, BadgeRequest } from '@/types';
 import { badgeService } from '@/services/badge.service';
 import { UnsavedChangesNotice } from '@/features/admin/components/UnsavedChangesNotice';
@@ -115,7 +115,7 @@ export const BadgeModal: React.FC<BadgeModalProps> = ({ badge, onClose, onSaved 
       onClick={handleRequestClose}
     >
       <div
-        className="relative w-full max-w-xl max-h-[92vh] bg-white rounded-2xl shadow-2xl border border-[#eae8e5] overflow-hidden flex flex-col animate-scale-in"
+        className="relative w-full max-w-xl max-h-[92vh] bg-white rounded shadow-2xl border border-[#eae8e5] overflow-hidden flex flex-col animate-scale-in"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -130,7 +130,7 @@ export const BadgeModal: React.FC<BadgeModalProps> = ({ badge, onClose, onSaved 
           </div>
           <button
             onClick={handleRequestClose}
-            className="w-8 h-8 rounded-lg hover:bg-[#eae8e5] text-[#585757] hover:text-[#1b1c1a] flex items-center justify-center transition-colors cursor-pointer"
+            className="w-8 h-8 rounded hover:bg-[#eae8e5] text-[#585757] hover:text-[#1b1c1a] flex items-center justify-center transition-colors cursor-pointer"
           >
             <span className="material-symbols-outlined text-[20px]">close</span>
           </button>
@@ -178,7 +178,7 @@ export const BadgeModal: React.FC<BadgeModalProps> = ({ badge, onClose, onSaved 
           )}
 
           {error && (
-            <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl flex items-center gap-2">
+            <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded flex items-center gap-2">
               <span className="material-symbols-outlined text-[16px]">error</span>
               <span className="font-medium">{error}</span>
             </div>
@@ -195,7 +195,7 @@ export const BadgeModal: React.FC<BadgeModalProps> = ({ badge, onClose, onSaved 
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
                 placeholder="e.g. chef-signature"
-                className="w-full px-3 py-2 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs font-mono text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
+                className="w-full px-3 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs font-mono text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
                 required
               />
               <span className="text-[10px] text-[#8f6f6c] block mt-1">Unique identifier</span>
@@ -210,7 +210,7 @@ export const BadgeModal: React.FC<BadgeModalProps> = ({ badge, onClose, onSaved 
                 min="1"
                 value={displayOrder}
                 onChange={(e) => setDisplayOrder(parseInt(e.target.value) || 1)}
-                className="w-full px-3 py-2 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
+                className="w-full px-3 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
               />
             </div>
           </div>
@@ -226,7 +226,7 @@ export const BadgeModal: React.FC<BadgeModalProps> = ({ badge, onClose, onSaved 
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="e.g. Chef Signature"
-                className="w-full px-3 py-2 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
+                className="w-full px-3 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
                 required
               />
             </div>
@@ -240,7 +240,7 @@ export const BadgeModal: React.FC<BadgeModalProps> = ({ badge, onClose, onSaved 
                 value={nameVi}
                 onChange={(e) => setNameVi(e.target.value)}
                 placeholder="Ví dụ: Bếp Trưởng Khuyên Dùng"
-                className="w-full px-3 py-2 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
+                className="w-full px-3 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
               />
             </div>
 
@@ -253,7 +253,7 @@ export const BadgeModal: React.FC<BadgeModalProps> = ({ badge, onClose, onSaved 
                 value={nameKr}
                 onChange={(e) => setNameKr(e.target.value)}
                 placeholder="예: 쉐프 시그니처"
-                className="w-full px-3 py-2 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
+                className="w-full px-3 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
               />
             </div>
 
@@ -266,7 +266,7 @@ export const BadgeModal: React.FC<BadgeModalProps> = ({ badge, onClose, onSaved 
                 value={nameJp}
                 onChange={(e) => setNameJp(e.target.value)}
                 placeholder="例: シェフのおすすめ"
-                className="w-full px-3 py-2 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
+                className="w-full px-3 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
               />
             </div>
           </div>
@@ -281,7 +281,7 @@ export const BadgeModal: React.FC<BadgeModalProps> = ({ badge, onClose, onSaved 
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder="e.g. Món ăn tinh hoa đại diện phong cách ẩm thực của nhà hàng"
-              className="w-full px-3 py-2 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
             />
           </div>
 
@@ -296,7 +296,7 @@ export const BadgeModal: React.FC<BadgeModalProps> = ({ badge, onClose, onSaved 
                   key={i}
                   type="button"
                   onClick={() => setIcon(i)}
-                  className={`w-9 h-9 rounded-lg border flex items-center justify-center transition-all cursor-pointer ${
+                  className={`w-9 h-9 rounded border flex items-center justify-center transition-all cursor-pointer ${
                     icon === i
                       ? 'border-[#af101a] bg-[#af101a] text-white shadow-xs'
                       : 'border-[#eae8e5] bg-[#fbf9f6] text-[#585757] hover:bg-gray-100'
@@ -319,13 +319,13 @@ export const BadgeModal: React.FC<BadgeModalProps> = ({ badge, onClose, onSaved 
                   type="color"
                   value={badgeColor}
                   onChange={(e) => setBadgeColor(e.target.value)}
-                  className="w-9 h-9 p-0 border border-[#eae8e5] rounded-lg cursor-pointer bg-white"
+                  className="w-9 h-9 p-0 border border-[#eae8e5] rounded cursor-pointer bg-white"
                 />
                 <input
                   type="text"
                   value={badgeColor}
                   onChange={(e) => setBadgeColor(e.target.value)}
-                  className="w-28 px-2.5 py-1.5 rounded-lg border border-[#eae8e5] font-mono text-xs text-[#1b1c1a]"
+                  className="w-28 px-2.5 py-1.5 rounded border border-[#eae8e5] font-mono text-xs text-[#1b1c1a]"
                 />
               </div>
             </div>
@@ -335,9 +335,9 @@ export const BadgeModal: React.FC<BadgeModalProps> = ({ badge, onClose, onSaved 
               <label className="block text-xs font-bold text-[#5b403d] uppercase tracking-wider mb-1">
                 Live Badge Preview
               </label>
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-[#eae8e5] bg-[#fbf9f6]">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded border border-[#eae8e5] bg-[#fbf9f6]">
                 <div
-                  className="w-5 h-5 rounded-md flex items-center justify-center text-white"
+                  className="w-5 h-5 rounded flex items-center justify-center text-white"
                   style={{ backgroundColor: badgeColor }}
                 >
                   <span className="material-symbols-outlined text-[14px]">{icon}</span>

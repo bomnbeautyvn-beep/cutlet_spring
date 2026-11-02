@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { AdminAccount } from '@/services/admin.service';
 
 interface ResetAccountPasswordModalProps {
@@ -24,7 +24,7 @@ export const ResetAccountPasswordModal: React.FC<ResetAccountPasswordModalProps>
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl border border-[#eae8e5] p-6 space-y-5 animate-scale-in"
+        className="relative w-full max-w-md bg-white rounded shadow-2xl border border-[#eae8e5] p-6 space-y-5 animate-scale-in"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between pb-3 border-b border-[#eae8e5]">
@@ -57,7 +57,7 @@ export const ResetAccountPasswordModal: React.FC<ResetAccountPasswordModalProps>
               value={newPasswordValue}
               onChange={(e) => onPasswordChange(e.target.value)}
               placeholder="Min 8 chars, uppercase, lowercase, digit, symbol"
-              className="w-full px-3 py-2 bg-[#fbf9f6] border border-[#eae8e5] rounded-xl focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3 py-2 bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a]"
             />
           </div>
 
@@ -65,13 +65,13 @@ export const ResetAccountPasswordModal: React.FC<ResetAccountPasswordModalProps>
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 font-bold uppercase tracking-wider text-gray-600 hover:bg-gray-100 rounded-xl cursor-pointer"
+              className="px-4 py-2 font-bold uppercase tracking-wider text-gray-600 hover:bg-gray-100 rounded cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-5 py-2 bg-amber-600 hover:bg-amber-700 text-white font-bold uppercase tracking-wider rounded-xl shadow-md cursor-pointer"
+              className="px-5 py-2 bg-amber-600 hover:bg-amber-700 text-white font-bold uppercase tracking-wider rounded shadow-md cursor-pointer"
             >
               Reset Password
             </button>

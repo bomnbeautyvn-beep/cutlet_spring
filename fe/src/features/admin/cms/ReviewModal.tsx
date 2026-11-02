@@ -26,11 +26,11 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
-      <div className="bg-white rounded-2xl max-w-xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-[#eae8e5] overflow-hidden">
+      <div className="bg-white rounded max-w-xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-[#eae8e5] overflow-hidden">
         {/* Header */}
         <div className="p-6 border-b border-[#eae8e5] flex items-center justify-between bg-[#fbf9f6]">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-600">
+            <div className="w-10 h-10 rounded bg-amber-500/10 flex items-center justify-center text-amber-600">
               <span className="material-symbols-outlined text-[22px]">reviews</span>
             </div>
             <div>
@@ -53,7 +53,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
         {/* Form Body */}
         <form onSubmit={handleSubmit} className="p-6 overflow-y-auto space-y-4 flex-1">
           {errorMessage && (
-            <div className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-800 text-xs font-medium flex items-center gap-2">
+            <div className="p-3.5 rounded bg-red-50 border border-red-200 text-red-800 text-xs font-medium flex items-center gap-2">
               <span className="material-symbols-outlined text-[18px]">error</span>
               <span>{errorMessage}</span>
             </div>
@@ -68,7 +68,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
                 type="text"
                 value={formData.reviewerName}
                 onChange={(e) => setFormData({ ...formData, reviewerName: e.target.value })}
-                className="w-full px-3 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs font-semibold focus:outline-none focus:border-[#af101a]"
+                className="w-full px-3 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs font-semibold focus:outline-none focus:border-[#af101a]"
                 placeholder="e.g. Bích Trâm 한유미"
                 required
               />
@@ -85,7 +85,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
                 onChange={(e) =>
                   setFormData({ ...formData, reviewerInitials: e.target.value.toUpperCase() })
                 }
-                className="w-full px-3 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs font-semibold focus:outline-none focus:border-[#af101a]"
+                className="w-full px-3 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs font-semibold focus:outline-none focus:border-[#af101a]"
                 placeholder="Auto-generated if empty"
               />
             </div>
@@ -99,7 +99,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
               <select
                 value={formData.rating}
                 onChange={(e) => setFormData({ ...formData, rating: parseInt(e.target.value) || 5 })}
-                className="w-full px-3 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs font-bold focus:outline-none focus:border-[#af101a]"
+                className="w-full px-3 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs font-bold focus:outline-none focus:border-[#af101a]"
               >
                 <option value={5}>5 Stars ★★★★★</option>
                 <option value={4}>4 Stars ★★★★☆</option>
@@ -116,7 +116,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
               <select
                 value={formData.reviewLanguage}
                 onChange={(e) => setFormData({ ...formData, reviewLanguage: e.target.value })}
-                className="w-full px-3 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs font-bold focus:outline-none focus:border-[#af101a]"
+                className="w-full px-3 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs font-bold focus:outline-none focus:border-[#af101a]"
               >
                 <option value="VI">🇻🇳 Tiếng Việt</option>
                 <option value="EN">🇺🇸 English</option>
@@ -133,7 +133,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
                 type="text"
                 value={formData.reviewDate}
                 onChange={(e) => setFormData({ ...formData, reviewDate: e.target.value })}
-                className="w-full px-3 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs focus:outline-none focus:border-[#af101a]"
+                className="w-full px-3 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs focus:outline-none focus:border-[#af101a]"
                 placeholder="1 week ago"
                 required
               />
@@ -148,7 +148,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
               type="text"
               value={formData.reviewerMetadata || ''}
               onChange={(e) => setFormData({ ...formData, reviewerMetadata: e.target.value })}
-              className="w-full px-3 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs focus:outline-none focus:border-[#af101a]"
               placeholder="e.g. Local Guide · 85 reviews · 232 photos"
             />
           </div>
@@ -161,7 +161,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
               rows={3}
               value={formData.reviewContent}
               onChange={(e) => setFormData({ ...formData, reviewContent: e.target.value })}
-              className="w-full px-3 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs leading-relaxed focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs leading-relaxed focus:outline-none focus:border-[#af101a]"
               placeholder="Guest feedback and dining experience..."
               required
             />
@@ -175,7 +175,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
               rows={2}
               value={formData.ownerResponse || ''}
               onChange={(e) => setFormData({ ...formData, ownerResponse: e.target.value })}
-              className="w-full px-3 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs leading-relaxed focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs leading-relaxed focus:outline-none focus:border-[#af101a]"
               placeholder="Thank you for visiting Cutlet Spring! We look forward to welcoming you again."
             />
           </div>
@@ -192,7 +192,7 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
                 onChange={(e) =>
                   setFormData({ ...formData, displayOrder: parseInt(e.target.value) || 1 })
                 }
-                className="w-full px-3 py-1.5 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs font-bold focus:outline-none focus:border-[#af101a]"
+                className="w-full px-3 py-1.5 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs font-bold focus:outline-none focus:border-[#af101a]"
               />
             </div>
 
@@ -228,14 +228,14 @@ export const ReviewModal: React.FC<ReviewModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 rounded-xl border border-[#eae8e5] bg-white hover:bg-[#f5f3f0] text-[#5b403d] font-label-md text-xs font-bold transition-colors cursor-pointer"
+              className="px-4 py-2 rounded border border-[#eae8e5] bg-white hover:bg-[#f5f3f0] text-[#5b403d] font-label-md text-xs font-bold transition-colors cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={saving}
-              className="px-5 py-2 rounded-xl bg-[#af101a] hover:bg-[#930010] text-white font-label-md text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 shadow-md cursor-pointer disabled:opacity-50"
+              className="px-5 py-2 rounded bg-[#af101a] hover:bg-[#930010] text-white font-label-md text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 shadow-md cursor-pointer disabled:opacity-50"
             >
               {saving ? (
                 <>

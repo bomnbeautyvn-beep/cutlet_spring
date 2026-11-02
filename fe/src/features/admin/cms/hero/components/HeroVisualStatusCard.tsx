@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { HomepageHero, UpdateHomepageHeroRequest } from '@/types';
 
 interface HeroVisualStatusCardProps {
@@ -17,9 +17,9 @@ export const HeroVisualStatusCard: React.FC<HeroVisualStatusCardProps> = ({
   onFormDataChange,
 }) => {
   return (
-    <div className="bg-white rounded-2xl border border-[#eae8e5] p-6 shadow-xs grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+    <div className="bg-white rounded border border-[#eae8e5] p-6 shadow-xs grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
       <div className="md:col-span-4 flex flex-col items-center justify-center">
-        <div className="w-full h-48 rounded-xl overflow-hidden bg-[#f3f1ec] border border-[#eae6df] relative flex items-center justify-center group">
+        <div className="w-full h-48 rounded overflow-hidden bg-[#f3f1ec] border border-[#eae6df] relative flex items-center justify-center group">
           {hero?.imageUrl ? (
             <img src={hero.imageUrl} alt="Hero Visual" className="w-full h-full object-cover" />
           ) : (

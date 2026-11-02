@@ -13,7 +13,7 @@ export const FeedbackReviewCard: React.FC<FeedbackReviewCardProps> = ({
   ownerReplyLabel,
 }) => {
   return (
-    <div className="flex flex-col justify-between rounded-2xl border border-[#eae8e5] bg-white p-5 sm:p-6 shadow-xs hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+    <div className="flex flex-col justify-between rounded border border-[#eae8e5] bg-white p-5 sm:p-6 shadow-xs hover:shadow-md hover:-translate-y-1 transition-all duration-300">
       <div>
         {/* Header: Stars */}
         <div className="flex items-center text-amber-500 mb-3">
@@ -40,7 +40,7 @@ export const FeedbackReviewCard: React.FC<FeedbackReviewCardProps> = ({
 
         {/* Owner Response Box in corresponding language */}
         {review.ownerResponse && (
-          <div className="mt-4 p-3 rounded-xl bg-[#f5f3f0] border-l-2 border-[#af101a] text-[11px] text-[#5b403d] space-y-1">
+          <div className="mt-4 p-3 rounded bg-[#f5f3f0] border-l-2 border-[#af101a] text-[11px] text-[#5b403d] space-y-1">
             <span className="font-bold text-[#af101a] uppercase text-[10px] block tracking-wide">
               {ownerReplyLabel}
             </span>

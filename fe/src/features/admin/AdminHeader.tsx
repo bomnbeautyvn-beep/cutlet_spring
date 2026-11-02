@@ -23,7 +23,7 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({
         <button
           type="button"
           onClick={onToggleSidebar}
-          className="p-1.5 -ml-1 text-[#585757] hover:text-[#1b1c1a] hover:bg-[#f5f3f0] rounded-lg lg:hidden cursor-pointer flex items-center justify-center shrink-0"
+          className="p-1.5 -ml-1 text-[#585757] hover:text-[#1b1c1a] hover:bg-[#f5f3f0] rounded lg:hidden cursor-pointer flex items-center justify-center shrink-0"
           aria-label="Toggle Navigation Menu"
         >
           <span className="material-symbols-outlined text-[24px]">menu</span>
@@ -56,7 +56,7 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({
         <button
           onClick={onChangePasswordClick}
           title="Change account password"
-          className="p-1.5 sm:p-2 text-[#585757] hover:text-[#af101a] hover:bg-[#fbf9f6] rounded-lg border border-transparent hover:border-[#eae8e5] transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer shrink-0"
+          className="p-1.5 sm:p-2 text-[#585757] hover:text-[#af101a] hover:bg-[#fbf9f6] rounded border border-transparent hover:border-[#eae8e5] transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer shrink-0"
         >
           <span className="material-symbols-outlined text-[18px]">key</span>
           <span className="hidden xl:inline">Password</span>
@@ -66,7 +66,7 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({
         <button
           onClick={onExitToPublicSite}
           title="Open Public Menu"
-          className="p-1.5 sm:p-2 text-[#585757] hover:text-[#1b1c1a] hover:bg-[#fbf9f6] rounded-lg border border-transparent hover:border-[#eae8e5] transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer shrink-0"
+          className="p-1.5 sm:p-2 text-[#585757] hover:text-[#1b1c1a] hover:bg-[#fbf9f6] rounded border border-transparent hover:border-[#eae8e5] transition-colors flex items-center gap-1.5 text-xs font-semibold cursor-pointer shrink-0"
         >
           <span className="material-symbols-outlined text-[18px]">open_in_new</span>
           <span className="hidden xl:inline">Public Site</span>
@@ -76,7 +76,7 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({
         <button
           onClick={() => logout()}
           title="Sign out of administration"
-          className="px-2.5 sm:px-3 py-1.5 bg-[#f5f3f0] hover:bg-red-50 text-[#585757] hover:text-red-700 hover:border-red-200 border border-[#eae8e5] rounded-lg text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-1 sm:gap-1.5 cursor-pointer shrink-0"
+          className="px-2.5 sm:px-3 py-1.5 bg-[#f5f3f0] hover:bg-red-50 text-[#585757] hover:text-red-700 hover:border-red-200 border border-[#eae8e5] rounded text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-1 sm:gap-1.5 cursor-pointer shrink-0"
         >
           <span className="material-symbols-outlined text-[16px]">logout</span>
           <span className="hidden sm:inline">Sign Out</span>

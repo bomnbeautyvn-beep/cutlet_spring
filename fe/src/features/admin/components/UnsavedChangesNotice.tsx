@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+﻿import React, { useEffect } from 'react';
 
 interface UnsavedChangesNoticeProps {
   isDirty: boolean;
@@ -34,15 +34,15 @@ export const UnsavedChangesNotice: React.FC<UnsavedChangesNoticeProps> = ({
 
   const content = (
     <div
-      className={`relative flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3.5 sm:px-4 sm:py-3 rounded-2xl border-2 border-amber-400 bg-amber-50/95 text-amber-950 shadow-lg backdrop-blur-xs animate-gentle-shake transition-all`}
+      className={`relative flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-3.5 sm:px-4 sm:py-3 rounded border-2 border-amber-400 bg-amber-50/95 text-amber-950 shadow-lg backdrop-blur-xs animate-gentle-shake transition-all`}
     >
       <div className="flex items-center gap-3">
-        <div className="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-xs">
+        <div className="w-8 h-8 rounded bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-xs">
           <span className="material-symbols-outlined text-[19px] animate-pulse">lock</span>
         </div>
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-[10px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded-md bg-amber-200/80 text-amber-900">
+            <span className="text-[10px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded bg-amber-200/80 text-amber-900">
               Lưu ý thay đổi
             </span>
             <span className="text-xs font-bold text-amber-950">

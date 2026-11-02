@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Ingredient } from '@/types';
 import { useIngredientModalForm } from './ingredients/hooks/useIngredientModalForm';
 import { IngredientLanguageTab } from './ingredients/components/IngredientLanguageTab';
@@ -51,7 +51,7 @@ export const IngredientModal: React.FC<IngredientModalProps> = ({
       onClick={handleRequestClose}
     >
       <div
-        className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl border border-[#eae8e5] p-6 space-y-5 animate-scale-in max-h-[90vh] overflow-y-auto"
+        className="relative w-full max-w-2xl bg-white rounded shadow-2xl border border-[#eae8e5] p-6 space-y-5 animate-scale-in max-h-[90vh] overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -72,7 +72,7 @@ export const IngredientModal: React.FC<IngredientModalProps> = ({
 
         {/* Exit Confirmation Dialog */}
         {showExitConfirm && (
-          <div className="p-4 rounded-xl border-2 border-amber-400 bg-amber-50 text-amber-950 animate-gentle-shake text-center space-y-3">
+          <div className="p-4 rounded border-2 border-amber-400 bg-amber-50 text-amber-950 animate-gentle-shake text-center space-y-3">
             <div className="flex items-center justify-center gap-2 font-bold text-sm">
               <span className="material-symbols-outlined text-amber-700">lock</span>
               <span>Bạn có chỉnh sửa nguyên liệu chưa lưu!</span>
@@ -110,7 +110,7 @@ export const IngredientModal: React.FC<IngredientModalProps> = ({
         )}
 
         {errorMessage && (
-          <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl flex items-center gap-2">
+          <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded flex items-center gap-2">
             <span className="material-symbols-outlined text-[16px]">error</span>
             <span>{errorMessage}</span>
           </div>

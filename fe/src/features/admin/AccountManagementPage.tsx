@@ -67,7 +67,7 @@ export const AccountManagementPage: React.FC = () => {
         <div className="flex items-center gap-2">
           <button
             onClick={() => setShowAuditLogs(!showAuditLogs)}
-            className="px-4 py-2.5 bg-white hover:bg-[#fbf9f6] text-[#1b1c1a] border border-[#eae8e5] text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-2xs flex items-center gap-2 cursor-pointer shrink-0"
+            className="px-4 py-2.5 bg-white hover:bg-[#fbf9f6] text-[#1b1c1a] border border-[#eae8e5] text-xs font-bold uppercase tracking-wider rounded transition-all shadow-2xs flex items-center gap-2 cursor-pointer shrink-0"
           >
             <span className="material-symbols-outlined text-[18px] text-[#af101a]">security</span>
             <span>{showAuditLogs ? 'Hide Audit Log' : 'View Audit Trail'}</span>
@@ -75,7 +75,7 @@ export const AccountManagementPage: React.FC = () => {
 
           <button
             onClick={() => setIsCreateOpen(true)}
-            className="px-4 py-2.5 bg-[#af101a] hover:bg-[#d32f2f] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center gap-2 cursor-pointer shrink-0"
+            className="px-4 py-2.5 bg-[#af101a] hover:bg-[#d32f2f] text-white text-xs font-bold uppercase tracking-wider rounded transition-all shadow-md flex items-center gap-2 cursor-pointer shrink-0"
           >
             <span className="material-symbols-outlined text-[18px]">person_add</span>
             <span>Add Account</span>
@@ -86,7 +86,7 @@ export const AccountManagementPage: React.FC = () => {
       {/* Floating Feedback Toast */}
       {feedback && (
         <div
-          className={`p-3.5 rounded-xl border text-xs flex items-center gap-2.5 shadow-sm animate-fade-in ${
+          className={`p-3.5 rounded border text-xs flex items-center gap-2.5 shadow-sm animate-fade-in ${
             feedback.isError
               ? 'bg-red-50 border-red-200 text-red-800'
               : 'bg-emerald-50 border-emerald-200 text-emerald-800'
@@ -123,7 +123,7 @@ export const AccountManagementPage: React.FC = () => {
       />
 
       {/* Accounts Table */}
-      <div className="bg-white rounded-2xl border border-[#eae8e5] shadow-xs overflow-hidden">
+      <div className="bg-white rounded border border-[#eae8e5] shadow-xs overflow-hidden">
         <AccountTable
           accounts={accounts}
           pageResult={pageResult}

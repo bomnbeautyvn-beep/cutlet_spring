@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { MenuCategory } from '@/types';
 import { adminService } from '@/services/admin.service';
 import { notifyMenuUpdated } from '@/utils/menuSync';
@@ -77,21 +77,21 @@ export const CategoryManagementTab: React.FC = () => {
     <div className="space-y-6">
       {/* Toast & Alert */}
       {successToast && (
-        <div className="p-3.5 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded-xl flex items-center gap-2 animate-fade-in shadow-xs">
+        <div className="p-3.5 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded flex items-center gap-2 animate-fade-in shadow-xs">
           <span className="material-symbols-outlined text-[18px]">check_circle</span>
           <span className="font-medium">{successToast}</span>
         </div>
       )}
 
       {error && (
-        <div className="p-3.5 bg-red-50 border border-red-200 text-red-800 text-xs rounded-xl flex items-center gap-2 animate-fade-in shadow-xs">
+        <div className="p-3.5 bg-red-50 border border-red-200 text-red-800 text-xs rounded flex items-center gap-2 animate-fade-in shadow-xs">
           <span className="material-symbols-outlined text-[18px]">error</span>
           <span className="font-medium">{error}</span>
         </div>
       )}
 
       {/* Subheader Toolbar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 border border-[#eae8e5] rounded-xl shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white p-4 border border-[#eae8e5] rounded shadow-xs">
         <div>
           <h2 className="text-sm font-bold text-[#1b1c1a] uppercase tracking-wider">
             Menu Categories Configuration
@@ -103,7 +103,7 @@ export const CategoryManagementTab: React.FC = () => {
 
         <button
           onClick={() => setModalCategory('NEW')}
-          className="px-4 py-2 bg-[#af101a] hover:bg-[#930010] text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-xs flex items-center gap-2 cursor-pointer transition-colors"
+          className="px-4 py-2 bg-[#af101a] hover:bg-[#930010] text-white text-xs font-bold uppercase tracking-wider rounded shadow-xs flex items-center gap-2 cursor-pointer transition-colors"
         >
           <span className="material-symbols-outlined text-[16px]">add</span>
           <span>New Category</span>
@@ -111,7 +111,7 @@ export const CategoryManagementTab: React.FC = () => {
       </div>
 
       {/* Table */}
-      <div className="bg-white border border-[#eae8e5] rounded-xl overflow-x-auto shadow-xs">
+      <div className="bg-white border border-[#eae8e5] rounded overflow-x-auto shadow-xs">
         {loading ? (
           <div className="flex items-center justify-center p-12 text-[#585757] text-xs gap-2">
             <div className="w-5 h-5 border-2 border-[#af101a] border-t-transparent rounded-full animate-spin" />
@@ -155,7 +155,7 @@ export const CategoryManagementTab: React.FC = () => {
                       )}
                     </td>
                     <td className="py-3 px-4">
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-mono bg-[#f5f3f0] text-[#1b1c1a] border border-[#eae8e5]">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-mono bg-[#f5f3f0] text-[#1b1c1a] border border-[#eae8e5]">
                         {cat.assignedCount ?? 0} dishes
                       </span>
                     </td>
@@ -193,7 +193,7 @@ export const CategoryManagementTab: React.FC = () => {
                       <div className="inline-flex items-center gap-1 justify-end">
                         <button
                           onClick={() => setModalCategory(cat)}
-                          className="p-1.5 text-[#585757] hover:text-[#1b1c1a] hover:bg-[#eae8e5] rounded-lg transition-colors cursor-pointer"
+                          className="p-1.5 text-[#585757] hover:text-[#1b1c1a] hover:bg-[#eae8e5] rounded transition-colors cursor-pointer"
                           title="Edit category"
                         >
                           <span className="material-symbols-outlined text-[18px]">edit</span>
@@ -201,7 +201,7 @@ export const CategoryManagementTab: React.FC = () => {
                         <button
                           onClick={() => handleDelete(cat)}
                           disabled={deletingId === cat.id}
-                          className="p-1.5 text-red-600 hover:text-red-800 hover:bg-red-50 rounded-lg transition-colors cursor-pointer disabled:opacity-50"
+                          className="p-1.5 text-red-600 hover:text-red-800 hover:bg-red-50 rounded transition-colors cursor-pointer disabled:opacity-50"
                           title="Delete category"
                         >
                           <span className="material-symbols-outlined text-[18px]">delete</span>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import { BackupPreview, DatabaseJob } from '@/types/database.types';
 import { databaseService } from '@/services/database.service';
 
@@ -159,7 +159,7 @@ export const DatabaseRestoreSection: React.FC<DatabaseRestoreSectionProps> = ({
   );
 
   return (
-    <div className="bg-white rounded-2xl border border-[#eae8e5] p-5 sm:p-6 space-y-6 shadow-xs">
+    <div className="bg-white rounded border border-[#eae8e5] p-5 sm:p-6 space-y-6 shadow-xs">
       <div>
         <h3 className="text-sm font-bold uppercase tracking-wider text-[#1b1c1a] flex items-center gap-2">
           <span>Database Restoration Workflow</span>
@@ -173,7 +173,7 @@ export const DatabaseRestoreSection: React.FC<DatabaseRestoreSectionProps> = ({
       </div>
 
       {uploadError && (
-        <div className="p-4 bg-red-50 border border-red-200 rounded-xl text-red-900 text-xs flex items-start gap-2.5">
+        <div className="p-4 bg-red-50 border border-red-200 rounded text-red-900 text-xs flex items-start gap-2.5">
           <span className="material-symbols-outlined text-[18px] text-red-600 shrink-0 mt-0.5">
             error
           </span>
@@ -183,7 +183,7 @@ export const DatabaseRestoreSection: React.FC<DatabaseRestoreSectionProps> = ({
 
       {/* --- ACTIVE RESTORE TRACKER --- */}
       {activeJob && (
-        <div className="p-5 sm:p-6 bg-[#fbf9f6] rounded-2xl border-2 border-[#af101a]/30 space-y-4">
+        <div className="p-5 sm:p-6 bg-[#fbf9f6] rounded border-2 border-[#af101a]/30 space-y-4">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-[#af101a] animate-ping" />
@@ -217,7 +217,7 @@ export const DatabaseRestoreSection: React.FC<DatabaseRestoreSectionProps> = ({
 
           {/* Job Result Alerts */}
           {activeJob.status === 'COMPLETED' && (
-            <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-900 text-xs flex items-center justify-between">
+            <div className="p-3 bg-emerald-50 border border-emerald-200 rounded text-emerald-900 text-xs flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-[18px] text-emerald-600">check_circle</span>
                 <span className="font-bold">Database restoration successfully verified!</span>
@@ -225,7 +225,7 @@ export const DatabaseRestoreSection: React.FC<DatabaseRestoreSectionProps> = ({
               <button
                 type="button"
                 onClick={() => setActiveJob(null)}
-                className="px-3 py-1 bg-emerald-600 text-white rounded-lg text-xs font-bold hover:bg-emerald-700 cursor-pointer"
+                className="px-3 py-1 bg-emerald-600 text-white rounded text-xs font-bold hover:bg-emerald-700 cursor-pointer"
               >
                 Dismiss
               </button>
@@ -233,7 +233,7 @@ export const DatabaseRestoreSection: React.FC<DatabaseRestoreSectionProps> = ({
           )}
 
           {activeJob.status === 'ROLLED_BACK' && (
-            <div className="p-3 bg-amber-50 border border-amber-200 rounded-xl text-amber-900 text-xs space-y-2">
+            <div className="p-3 bg-amber-50 border border-amber-200 rounded text-amber-900 text-xs space-y-2">
               <div className="flex items-center gap-2 font-bold">
                 <span className="material-symbols-outlined text-[18px] text-amber-600">warning</span>
                 <span>Restoration Rolled Back Safely</span>
@@ -244,7 +244,7 @@ export const DatabaseRestoreSection: React.FC<DatabaseRestoreSectionProps> = ({
               <button
                 type="button"
                 onClick={() => setActiveJob(null)}
-                className="px-3 py-1 bg-amber-600 text-white rounded-lg text-xs font-bold hover:bg-amber-700 cursor-pointer"
+                className="px-3 py-1 bg-amber-600 text-white rounded text-xs font-bold hover:bg-amber-700 cursor-pointer"
               >
                 Dismiss
               </button>
@@ -252,7 +252,7 @@ export const DatabaseRestoreSection: React.FC<DatabaseRestoreSectionProps> = ({
           )}
 
           {activeJob.status === 'FAILED' && (
-            <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-red-900 text-xs space-y-1">
+            <div className="p-3 bg-red-50 border border-red-200 rounded text-red-900 text-xs space-y-1">
               <div className="flex items-center gap-2 font-bold">
                 <span className="material-symbols-outlined text-[18px] text-red-600">error</span>
                 <span>Restoration Job Failed</span>
@@ -261,7 +261,7 @@ export const DatabaseRestoreSection: React.FC<DatabaseRestoreSectionProps> = ({
               <button
                 type="button"
                 onClick={() => setActiveJob(null)}
-                className="mt-2 px-3 py-1 bg-red-600 text-white rounded-lg text-xs font-bold hover:bg-red-700 cursor-pointer"
+                className="mt-2 px-3 py-1 bg-red-600 text-white rounded text-xs font-bold hover:bg-red-700 cursor-pointer"
               >
                 Dismiss
               </button>
@@ -273,7 +273,7 @@ export const DatabaseRestoreSection: React.FC<DatabaseRestoreSectionProps> = ({
       {/* --- STEP 1: UPLOAD & ANALYZE (WHEN NO PREVIEW ACTIVE) --- */}
       {!preview && !activeJob && (
         <div className="space-y-4">
-          <div className="border-2 border-dashed border-[#eae8e5] hover:border-[#af101a]/50 rounded-2xl p-6 sm:p-8 text-center bg-[#fbf9f6] transition-colors">
+          <div className="border-2 border-dashed border-[#eae8e5] hover:border-[#af101a]/50 rounded p-6 sm:p-8 text-center bg-[#fbf9f6] transition-colors">
             <input
               type="file"
               ref={fileInputRef}
@@ -307,7 +307,7 @@ export const DatabaseRestoreSection: React.FC<DatabaseRestoreSectionProps> = ({
               type="button"
               onClick={handleUploadAndAnalyze}
               disabled={!selectedFile || isUploading}
-              className="px-5 py-2.5 bg-[#1b1c1a] hover:bg-black text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all shadow-xs cursor-pointer disabled:opacity-40 flex items-center gap-2"
+              className="px-5 py-2.5 bg-[#1b1c1a] hover:bg-black text-white rounded text-xs font-bold uppercase tracking-wider transition-all shadow-xs cursor-pointer disabled:opacity-40 flex items-center gap-2"
             >
               {isUploading ? (
                 <>
@@ -329,7 +329,7 @@ export const DatabaseRestoreSection: React.FC<DatabaseRestoreSectionProps> = ({
       {preview && !activeJob && (
         <div className="space-y-6">
           {/* Metadata Cards */}
-          <div className="p-4 sm:p-5 bg-[#fbf9f6] rounded-2xl border border-[#eae8e5] space-y-4">
+          <div className="p-4 sm:p-5 bg-[#fbf9f6] rounded border border-[#eae8e5] space-y-4">
             <div className="flex items-center justify-between pb-3 border-b border-[#eae8e5]">
               <div className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-[20px] text-emerald-600">verified</span>
@@ -369,7 +369,7 @@ export const DatabaseRestoreSection: React.FC<DatabaseRestoreSectionProps> = ({
 
             {/* Warnings list */}
             {preview.warnings && preview.warnings.length > 0 && (
-              <div className="p-3.5 bg-amber-50 border border-amber-200 rounded-xl space-y-1.5 text-xs text-amber-900">
+              <div className="p-3.5 bg-amber-50 border border-amber-200 rounded space-y-1.5 text-xs text-amber-900">
                 <div className="font-bold flex items-center gap-1.5 text-[11px] uppercase tracking-wider">
                   <span className="material-symbols-outlined text-[16px] text-amber-600">warning</span>
                   <span>Compatibility & Security Notices</span>
@@ -393,16 +393,16 @@ export const DatabaseRestoreSection: React.FC<DatabaseRestoreSectionProps> = ({
                   placeholder="Filter table names..."
                   value={tableSearch}
                   onChange={(e) => setTableSearch(e.target.value)}
-                  className="px-2.5 py-1 text-xs border border-[#eae8e5] rounded-lg focus:outline-none focus:border-[#af101a] max-w-xs"
+                  className="px-2.5 py-1 text-xs border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a] max-w-xs"
                 />
               </div>
 
-              <div className="flex flex-wrap gap-1.5 max-h-40 overflow-y-auto p-2 bg-white rounded-xl border border-[#eae8e5]">
+              <div className="flex flex-wrap gap-1.5 max-h-40 overflow-y-auto p-2 bg-white rounded border border-[#eae8e5]">
                 {filteredTables && filteredTables.length > 0 ? (
                   filteredTables.map((tbl) => (
                     <span
                       key={tbl}
-                      className="inline-block px-2 py-0.5 rounded-md bg-[#fbf9f6] border border-[#eae8e5] text-[11px] font-mono text-[#1b1c1a]"
+                      className="inline-block px-2 py-0.5 rounded bg-[#fbf9f6] border border-[#eae8e5] text-[11px] font-mono text-[#1b1c1a]"
                     >
                       {tbl}
                     </span>
@@ -415,7 +415,7 @@ export const DatabaseRestoreSection: React.FC<DatabaseRestoreSectionProps> = ({
           </div>
 
           {/* Warning & Confirmation Box */}
-          <div className="p-5 bg-red-50/70 border-2 border-red-200 rounded-2xl space-y-4">
+          <div className="p-5 bg-red-50/70 border-2 border-red-200 rounded space-y-4">
             <div className="flex items-start gap-3">
               <span className="material-symbols-outlined text-[24px] text-red-600 shrink-0 mt-0.5">
                 dangerous
@@ -453,7 +453,7 @@ export const DatabaseRestoreSection: React.FC<DatabaseRestoreSectionProps> = ({
                 value={confirmationText}
                 onChange={(e) => setConfirmationText(e.target.value)}
                 placeholder="RESTORE DATABASE"
-                className="w-full sm:max-w-md px-3.5 py-2 text-xs font-mono font-bold tracking-wider border border-red-300 rounded-xl bg-white focus:outline-none focus:border-red-600"
+                className="w-full sm:max-w-md px-3.5 py-2 text-xs font-mono font-bold tracking-wider border border-red-300 rounded bg-white focus:outline-none focus:border-red-600"
               />
             </div>
 
@@ -462,7 +462,7 @@ export const DatabaseRestoreSection: React.FC<DatabaseRestoreSectionProps> = ({
               <button
                 type="button"
                 onClick={handleResetPreview}
-                className="px-4 py-2 text-xs font-bold text-[#585757] hover:bg-white rounded-xl cursor-pointer"
+                className="px-4 py-2 text-xs font-bold text-[#585757] hover:bg-white rounded cursor-pointer"
               >
                 Cancel Restoration
               </button>
@@ -471,7 +471,7 @@ export const DatabaseRestoreSection: React.FC<DatabaseRestoreSectionProps> = ({
                 type="button"
                 onClick={handleConfirmRestore}
                 disabled={!isConfirmationSatisfied || isSubmittingRestore}
-                className="px-5 py-2.5 bg-red-700 hover:bg-red-800 text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all shadow-md cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-2"
+                className="px-5 py-2.5 bg-red-700 hover:bg-red-800 text-white rounded text-xs font-bold uppercase tracking-wider transition-all shadow-md cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-2"
               >
                 {isSubmittingRestore ? (
                   <>

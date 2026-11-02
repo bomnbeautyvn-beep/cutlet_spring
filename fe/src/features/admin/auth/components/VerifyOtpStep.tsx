@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 interface VerifyOtpStepProps {
   email: string;
@@ -23,7 +23,7 @@ export const VerifyOtpStep: React.FC<VerifyOtpStepProps> = ({
 }) => {
   return (
     <form onSubmit={onSubmit} className="space-y-4">
-      <div className="p-3 bg-[#fbf9f6] border border-[#eae8e5] rounded-xl text-xs space-y-1">
+      <div className="p-3 bg-[#fbf9f6] border border-[#eae8e5] rounded text-xs space-y-1">
         <div className="text-[#585757]">Verification code sent to:</div>
         <div className="font-bold text-[#1b1c1a] font-mono">{email}</div>
       </div>
@@ -40,7 +40,7 @@ export const VerifyOtpStep: React.FC<VerifyOtpStepProps> = ({
           value={otp}
           onChange={(e) => onOtpChange(e.target.value.replace(/\D/g, ''))}
           placeholder="• • • • • •"
-          className="w-full text-center tracking-[0.5em] text-lg font-mono font-bold py-2.5 bg-[#fbf9f6] border border-[#eae8e5] rounded-xl focus:outline-none focus:border-[#af101a]"
+          className="w-full text-center tracking-[0.5em] text-lg font-mono font-bold py-2.5 bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a]"
         />
         <div className="flex items-center justify-between text-[11px] text-[#8f6f6c] mt-1.5">
           <span>Valid for 5 minutes</span>
@@ -66,7 +66,7 @@ export const VerifyOtpStep: React.FC<VerifyOtpStepProps> = ({
         <button
           type="submit"
           disabled={isLoading || otp.length !== 6}
-          className="px-5 py-2.5 bg-[#af101a] hover:bg-[#d32f2f] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center gap-2 cursor-pointer disabled:opacity-50"
+          className="px-5 py-2.5 bg-[#af101a] hover:bg-[#d32f2f] text-white text-xs font-bold uppercase tracking-wider rounded transition-all shadow-md flex items-center gap-2 cursor-pointer disabled:opacity-50"
         >
           {isLoading ? (
             <>

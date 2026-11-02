@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Language, UpdateHomepageHeroRequest } from '@/types';
 
 interface HeroLanguageTabContentProps {
@@ -15,7 +15,7 @@ export const HeroLanguageTabContent: React.FC<HeroLanguageTabContentProps> = ({
   onFormDataChange,
 }) => {
   return (
-    <div className="bg-white rounded-2xl border border-[#eae8e5] p-6 shadow-xs space-y-6">
+    <div className="bg-white rounded border border-[#eae8e5] p-6 shadow-xs space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#eae8e5]">
         <div>
           <h3 className="font-headline-sm text-lg font-bold text-[#1b1c1a]">
@@ -27,13 +27,13 @@ export const HeroLanguageTabContent: React.FC<HeroLanguageTabContentProps> = ({
         </div>
 
         {/* Language Switcher Tabs */}
-        <div className="inline-flex p-1 bg-[#f5f3f0] rounded-xl border border-[#eae8e5]">
+        <div className="inline-flex p-1 bg-[#f5f3f0] rounded border border-[#eae8e5]">
           {(['VI', 'EN', 'KR', 'JP'] as Language[]).map((lang) => (
             <button
               key={lang}
               type="button"
               onClick={() => onTabChange(lang)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              className={`px-3 py-1.5 rounded text-xs font-bold transition-all cursor-pointer ${
                 activeLangTab === lang
                   ? 'bg-[#af101a] text-white shadow-xs'
                   : 'text-[#5b403d] hover:text-[#1b1c1a]'
@@ -59,7 +59,7 @@ export const HeroLanguageTabContent: React.FC<HeroLanguageTabContentProps> = ({
               type="text"
               value={formData.headlineVi}
               onChange={(e) => onFormDataChange((prev) => ({ ...prev, headlineVi: e.target.value }))}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-sm font-semibold focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3.5 py-2.5 rounded border border-[#eae8e5] bg-[#fbf9f6] text-sm font-semibold focus:outline-none focus:border-[#af101a]"
               placeholder="Nghệ Thuật Tonkatsu Thủ Công"
               required
             />
@@ -72,7 +72,7 @@ export const HeroLanguageTabContent: React.FC<HeroLanguageTabContentProps> = ({
               type="text"
               value={formData.titleVi}
               onChange={(e) => onFormDataChange((prev) => ({ ...prev, titleVi: e.target.value }))}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3.5 py-2.5 rounded border border-[#eae8e5] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#af101a]"
               placeholder="Tonkatsu Hoàng Kim Chiên Chuẩn Xác"
               required
             />
@@ -85,7 +85,7 @@ export const HeroLanguageTabContent: React.FC<HeroLanguageTabContentProps> = ({
               type="text"
               value={formData.taglineVi}
               onChange={(e) => onFormDataChange((prev) => ({ ...prev, taglineVi: e.target.value }))}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3.5 py-2.5 rounded border border-[#eae8e5] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#af101a]"
               placeholder="Nguyên liệu chuẩn mực và tinh thần nghệ nhân"
             />
           </div>
@@ -97,7 +97,7 @@ export const HeroLanguageTabContent: React.FC<HeroLanguageTabContentProps> = ({
               rows={4}
               value={formData.descriptionVi}
               onChange={(e) => onFormDataChange((prev) => ({ ...prev, descriptionVi: e.target.value }))}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-sm leading-relaxed focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3.5 py-2.5 rounded border border-[#eae8e5] bg-[#fbf9f6] text-sm leading-relaxed focus:outline-none focus:border-[#af101a]"
               placeholder="Thịt heo mát ủ ẩm 120 giờ, bột chiên xù tươi tự nướng mỗi sáng..."
               required
             />
@@ -111,7 +111,7 @@ export const HeroLanguageTabContent: React.FC<HeroLanguageTabContentProps> = ({
                 type="text"
                 value={formData.ctaTextVi}
                 onChange={(e) => onFormDataChange((prev) => ({ ...prev, ctaTextVi: e.target.value }))}
-                className="w-full px-3.5 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs font-bold focus:outline-none focus:border-[#af101a]"
+                className="w-full px-3.5 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs font-bold focus:outline-none focus:border-[#af101a]"
                 placeholder="Xem Thực Đơn Đầy Đủ"
                 required
               />
@@ -124,7 +124,7 @@ export const HeroLanguageTabContent: React.FC<HeroLanguageTabContentProps> = ({
                 type="text"
                 value={formData.metric1LabelVi}
                 onChange={(e) => onFormDataChange((prev) => ({ ...prev, metric1LabelVi: e.target.value }))}
-                className="w-full px-3.5 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs focus:outline-none focus:border-[#af101a]"
+                className="w-full px-3.5 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs focus:outline-none focus:border-[#af101a]"
                 placeholder="Thịt heo mát ủ 120 giờ"
               />
             </div>
@@ -142,7 +142,7 @@ export const HeroLanguageTabContent: React.FC<HeroLanguageTabContentProps> = ({
               type="text"
               value={formData.headlineEn}
               onChange={(e) => onFormDataChange((prev) => ({ ...prev, headlineEn: e.target.value }))}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-sm font-semibold focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3.5 py-2.5 rounded border border-[#eae8e5] bg-[#fbf9f6] text-sm font-semibold focus:outline-none focus:border-[#af101a]"
               placeholder="The Art of Hand Crafted Cutlets"
               required
             />
@@ -155,7 +155,7 @@ export const HeroLanguageTabContent: React.FC<HeroLanguageTabContentProps> = ({
               type="text"
               value={formData.titleEn}
               onChange={(e) => onFormDataChange((prev) => ({ ...prev, titleEn: e.target.value }))}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3.5 py-2.5 rounded border border-[#eae8e5] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#af101a]"
               placeholder="Precision Fried Golden Tonkatsu"
               required
             />
@@ -168,7 +168,7 @@ export const HeroLanguageTabContent: React.FC<HeroLanguageTabContentProps> = ({
               type="text"
               value={formData.taglineEn}
               onChange={(e) => onFormDataChange((prev) => ({ ...prev, taglineEn: e.target.value }))}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3.5 py-2.5 rounded border border-[#eae8e5] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#af101a]"
               placeholder="Uncompromising Ingredients and Craftsmanship"
             />
           </div>
@@ -180,7 +180,7 @@ export const HeroLanguageTabContent: React.FC<HeroLanguageTabContentProps> = ({
               rows={4}
               value={formData.descriptionEn}
               onChange={(e) => onFormDataChange((prev) => ({ ...prev, descriptionEn: e.target.value }))}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-sm leading-relaxed focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3.5 py-2.5 rounded border border-[#eae8e5] bg-[#fbf9f6] text-sm leading-relaxed focus:outline-none focus:border-[#af101a]"
               placeholder="120-hour wet-aged chilled pork, house-baked breadcrumbs..."
               required
             />
@@ -194,7 +194,7 @@ export const HeroLanguageTabContent: React.FC<HeroLanguageTabContentProps> = ({
                 type="text"
                 value={formData.ctaTextEn}
                 onChange={(e) => onFormDataChange((prev) => ({ ...prev, ctaTextEn: e.target.value }))}
-                className="w-full px-3.5 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs font-bold focus:outline-none focus:border-[#af101a]"
+                className="w-full px-3.5 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs font-bold focus:outline-none focus:border-[#af101a]"
                 placeholder="Explore Full Menu"
                 required
               />
@@ -207,7 +207,7 @@ export const HeroLanguageTabContent: React.FC<HeroLanguageTabContentProps> = ({
                 type="text"
                 value={formData.metric1LabelEn}
                 onChange={(e) => onFormDataChange((prev) => ({ ...prev, metric1LabelEn: e.target.value }))}
-                className="w-full px-3.5 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs focus:outline-none focus:border-[#af101a]"
+                className="w-full px-3.5 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs focus:outline-none focus:border-[#af101a]"
                 placeholder="Wet-Aged Chilled Pork"
               />
             </div>
@@ -225,7 +225,7 @@ export const HeroLanguageTabContent: React.FC<HeroLanguageTabContentProps> = ({
               type="text"
               value={formData.headlineKr}
               onChange={(e) => onFormDataChange((prev) => ({ ...prev, headlineKr: e.target.value }))}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-sm font-semibold focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3.5 py-2.5 rounded border border-[#eae8e5] bg-[#fbf9f6] text-sm font-semibold focus:outline-none focus:border-[#af101a]"
               placeholder="타협 없는 정통 기법의 황금빛 돈카츠"
               required
             />
@@ -238,7 +238,7 @@ export const HeroLanguageTabContent: React.FC<HeroLanguageTabContentProps> = ({
               type="text"
               value={formData.titleKr}
               onChange={(e) => onFormDataChange((prev) => ({ ...prev, titleKr: e.target.value }))}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3.5 py-2.5 rounded border border-[#eae8e5] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#af101a]"
               placeholder="장인정신으로 빚어낸 수제 돈카츠의 미학"
               required
             />
@@ -251,7 +251,7 @@ export const HeroLanguageTabContent: React.FC<HeroLanguageTabContentProps> = ({
               type="text"
               value={formData.taglineKr}
               onChange={(e) => onFormDataChange((prev) => ({ ...prev, taglineKr: e.target.value }))}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3.5 py-2.5 rounded border border-[#eae8e5] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#af101a]"
               placeholder="타협하지 않는 원재료와 장인정신"
             />
           </div>
@@ -263,7 +263,7 @@ export const HeroLanguageTabContent: React.FC<HeroLanguageTabContentProps> = ({
               rows={4}
               value={formData.descriptionKr}
               onChange={(e) => onFormDataChange((prev) => ({ ...prev, descriptionKr: e.target.value }))}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-sm leading-relaxed focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3.5 py-2.5 rounded border border-[#eae8e5] bg-[#fbf9f6] text-sm leading-relaxed focus:outline-none focus:border-[#af101a]"
               placeholder="120시간 저온 습식숙성 프리미엄 원육, 매일 새벽 직접 구워 분쇄한 생빵가루..."
               required
             />
@@ -277,7 +277,7 @@ export const HeroLanguageTabContent: React.FC<HeroLanguageTabContentProps> = ({
                 type="text"
                 value={formData.ctaTextKr}
                 onChange={(e) => onFormDataChange((prev) => ({ ...prev, ctaTextKr: e.target.value }))}
-                className="w-full px-3.5 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs font-bold focus:outline-none focus:border-[#af101a]"
+                className="w-full px-3.5 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs font-bold focus:outline-none focus:border-[#af101a]"
                 placeholder="전체 메뉴 보기"
                 required
               />
@@ -290,7 +290,7 @@ export const HeroLanguageTabContent: React.FC<HeroLanguageTabContentProps> = ({
                 type="text"
                 value={formData.metric1LabelKr}
                 onChange={(e) => onFormDataChange((prev) => ({ ...prev, metric1LabelKr: e.target.value }))}
-                className="w-full px-3.5 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs focus:outline-none focus:border-[#af101a]"
+                className="w-full px-3.5 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs focus:outline-none focus:border-[#af101a]"
                 placeholder="120시간 습식숙성 냉장육"
               />
             </div>
@@ -308,7 +308,7 @@ export const HeroLanguageTabContent: React.FC<HeroLanguageTabContentProps> = ({
               type="text"
               value={formData.headlineJp}
               onChange={(e) => onFormDataChange((prev) => ({ ...prev, headlineJp: e.target.value }))}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-sm font-semibold focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3.5 py-2.5 rounded border border-[#eae8e5] bg-[#fbf9f6] text-sm font-semibold focus:outline-none focus:border-[#af101a]"
               placeholder="職人技が光る手作りとんかつの真髄"
               required
             />
@@ -321,7 +321,7 @@ export const HeroLanguageTabContent: React.FC<HeroLanguageTabContentProps> = ({
               type="text"
               value={formData.titleJp}
               onChange={(e) => onFormDataChange((prev) => ({ ...prev, titleJp: e.target.value }))}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3.5 py-2.5 rounded border border-[#eae8e5] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#af101a]"
               placeholder="黄金色に揚がる本格極上とんかつ"
               required
             />
@@ -334,7 +334,7 @@ export const HeroLanguageTabContent: React.FC<HeroLanguageTabContentProps> = ({
               type="text"
               value={formData.taglineJp}
               onChange={(e) => onFormDataChange((prev) => ({ ...prev, taglineJp: e.target.value }))}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3.5 py-2.5 rounded border border-[#eae8e5] bg-[#fbf9f6] text-sm focus:outline-none focus:border-[#af101a]"
               placeholder="厳選された素材と匠の技"
             />
           </div>
@@ -346,7 +346,7 @@ export const HeroLanguageTabContent: React.FC<HeroLanguageTabContentProps> = ({
               rows={4}
               value={formData.descriptionJp}
               onChange={(e) => onFormDataChange((prev) => ({ ...prev, descriptionJp: e.target.value }))}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-sm leading-relaxed focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3.5 py-2.5 rounded border border-[#eae8e5] bg-[#fbf9f6] text-sm leading-relaxed focus:outline-none focus:border-[#af101a]"
               placeholder="120時間熟成チルドポーク、毎朝焼き上げる自家製生パン粉..."
               required
             />
@@ -360,7 +360,7 @@ export const HeroLanguageTabContent: React.FC<HeroLanguageTabContentProps> = ({
                 type="text"
                 value={formData.ctaTextJp}
                 onChange={(e) => onFormDataChange((prev) => ({ ...prev, ctaTextJp: e.target.value }))}
-                className="w-full px-3.5 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs font-bold focus:outline-none focus:border-[#af101a]"
+                className="w-full px-3.5 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs font-bold focus:outline-none focus:border-[#af101a]"
                 placeholder="全メニューを見る"
                 required
               />
@@ -373,7 +373,7 @@ export const HeroLanguageTabContent: React.FC<HeroLanguageTabContentProps> = ({
                 type="text"
                 value={formData.metric1LabelJp}
                 onChange={(e) => onFormDataChange((prev) => ({ ...prev, metric1LabelJp: e.target.value }))}
-                className="w-full px-3.5 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs focus:outline-none focus:border-[#af101a]"
+                className="w-full px-3.5 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs focus:outline-none focus:border-[#af101a]"
                 placeholder="120時間熟成チルドポーク"
               />
             </div>

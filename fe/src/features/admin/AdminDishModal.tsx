@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { MenuItem } from '@/types';
 import { useAdminDishForm } from './menu/hooks/useAdminDishForm';
 import { DishModalHeader } from './menu/modal/DishModalHeader';
@@ -33,7 +33,7 @@ export const AdminDishModal: React.FC<AdminDishModalProps> = ({ dish, onClose, o
       onClick={handleRequestClose}
     >
       <div
-        className="relative w-full max-w-4xl max-h-[94vh] bg-[#fbf9f6] rounded-2xl shadow-2xl border border-[#eae8e5] overflow-hidden flex flex-col animate-scale-in"
+        className="relative w-full max-w-4xl max-h-[94vh] bg-[#fbf9f6] rounded shadow-2xl border border-[#eae8e5] overflow-hidden flex flex-col animate-scale-in"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -42,7 +42,7 @@ export const AdminDishModal: React.FC<AdminDishModalProps> = ({ dish, onClose, o
         {/* Exit confirmation dialog overlay */}
         {showExitConfirm && (
           <div className="absolute inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
-            <div className="bg-white rounded-2xl p-5 max-w-md w-full border-2 border-amber-400 shadow-2xl animate-gentle-shake text-center space-y-4">
+            <div className="bg-white rounded p-5 max-w-md w-full border-2 border-amber-400 shadow-2xl animate-gentle-shake text-center space-y-4">
               <div className="w-12 h-12 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center mx-auto">
                 <span className="material-symbols-outlined text-[28px]">lock</span>
               </div>
@@ -83,7 +83,7 @@ export const AdminDishModal: React.FC<AdminDishModalProps> = ({ dish, onClose, o
           )}
 
           {form.errorMessage && (
-            <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl flex items-center gap-2 animate-fade-in">
+            <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded flex items-center gap-2 animate-fade-in">
               <span className="material-symbols-outlined text-[17px]">error</span>
               <span className="font-medium">{form.errorMessage}</span>
             </div>

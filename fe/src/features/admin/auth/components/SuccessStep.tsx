@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 interface SuccessStepProps {
   onSuccess: () => void;
@@ -29,7 +29,7 @@ export const SuccessStep: React.FC<SuccessStepProps> = ({ onSuccess, onClose }) 
             onSuccess();
             onClose();
           }}
-          className="px-6 py-2.5 bg-[#af101a] hover:bg-[#d32f2f] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-md cursor-pointer"
+          className="px-6 py-2.5 bg-[#af101a] hover:bg-[#d32f2f] text-white text-xs font-bold uppercase tracking-wider rounded transition-all shadow-md cursor-pointer"
         >
           Return to Sign In
         </button>

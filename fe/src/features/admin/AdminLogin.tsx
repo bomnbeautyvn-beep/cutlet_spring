@@ -25,7 +25,7 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onSuccess }) => {
   };
 
   return (
-    <div className="max-w-md mx-auto my-12 p-8 bg-white border border-[#eae8e5] rounded-2xl shadow-xl">
+    <div className="max-w-md mx-auto my-12 p-8 bg-white border border-[#eae8e5] rounded shadow-xl">
       <div className="text-center mb-6">
         <span className="font-kr-serif text-sm text-[#af101a] font-bold block">봄돈까스</span>
         <h2 className="font-headline-md text-2xl font-bold text-[#1b1c1a]">Atelier Administration</h2>
@@ -33,14 +33,14 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onSuccess }) => {
       </div>
 
       {resetSuccessMessage && (
-        <div className="mb-4 p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded-lg flex items-center gap-2">
+        <div className="mb-4 p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded flex items-center gap-2">
           <span className="material-symbols-outlined text-[18px]">check_circle</span>
           <span>{resetSuccessMessage}</span>
         </div>
       )}
 
       {error && (
-        <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-lg flex items-center gap-2">
+        <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded flex items-center gap-2">
           <span className="material-symbols-outlined text-[18px]">error</span>
           <span>{error}</span>
         </div>
@@ -56,7 +56,7 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onSuccess }) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            className="w-full px-3.5 py-2.5 text-sm bg-[#fbf9f6] border border-[#eae8e5] rounded-lg focus:outline-none focus:border-[#af101a] text-[#1b1c1a]"
+            className="w-full px-3.5 py-2.5 text-sm bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a] text-[#1b1c1a]"
           />
         </div>
 
@@ -79,7 +79,7 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onSuccess }) => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-3.5 py-2.5 pr-10 text-sm bg-[#fbf9f6] border border-[#eae8e5] rounded-lg focus:outline-none focus:border-[#af101a] text-[#1b1c1a]"
+              className="w-full px-3.5 py-2.5 pr-10 text-sm bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a] text-[#1b1c1a]"
             />
             <button
               type="button"
@@ -96,7 +96,7 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onSuccess }) => {
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full py-3 bg-[#af101a] hover:bg-[#d32f2f] text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+          className="w-full py-3 bg-[#af101a] hover:bg-[#d32f2f] text-white font-bold text-xs uppercase tracking-wider rounded transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
         >
           {isLoading ? (
             <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />

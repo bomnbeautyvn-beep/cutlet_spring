@@ -20,12 +20,12 @@ export const FeedbackBanner: React.FC<FeedbackBannerProps> = ({
   viewOnMaps,
 }) => {
   return (
-    <div className="bg-[#f5f3f0] border border-[#eae8e5] rounded-2xl p-4 sm:p-6 lg:p-8 mb-8 sm:mb-12 shadow-xs">
+    <div className="bg-[#f5f3f0] border border-[#eae8e5] rounded p-4 sm:p-6 lg:p-8 mb-8 sm:mb-12 shadow-xs">
       <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-5 sm:gap-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 w-full lg:w-auto">
           {/* Left Rating Box */}
           <div className="flex items-center gap-3.5 sm:gap-4 w-full sm:w-auto justify-between sm:justify-start">
-            <div className="flex flex-col items-center justify-center bg-white border border-[#eae8e5] rounded-xl px-4 py-2 sm:px-5 sm:py-3 shadow-2xs shrink-0 min-w-[76px] sm:min-w-[90px]">
+            <div className="flex flex-col items-center justify-center bg-white border border-[#eae8e5] rounded px-4 py-2 sm:px-5 sm:py-3 shadow-2xs shrink-0 min-w-[76px] sm:min-w-[90px]">
               <span className="font-headline-lg text-3xl sm:text-5xl font-extrabold text-[#1b1c1a] leading-none">
                 {averageRating}
               </span>
@@ -79,7 +79,7 @@ export const FeedbackBanner: React.FC<FeedbackBannerProps> = ({
             href={googleMapsUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto py-2.5 sm:py-3 px-4 sm:px-5 rounded-xl bg-white hover:bg-[#eae8e5] text-[#1b1c1a] border border-[#eae8e5] font-label-md text-xs uppercase tracking-wider font-bold transition-all shadow-2xs flex items-center justify-center gap-2 cursor-pointer text-center group active:scale-98"
+            className="w-full sm:w-auto py-2.5 sm:py-3 px-4 sm:px-5 rounded bg-white hover:bg-[#eae8e5] text-[#1b1c1a] border border-[#eae8e5] font-label-md text-xs uppercase tracking-wider font-bold transition-all shadow-2xs flex items-center justify-center gap-2 cursor-pointer text-center group active:scale-98"
           >
             <span>{viewOnMaps}</span>
             <span className="material-symbols-outlined text-[16px] text-[#af101a] transition-transform group-hover:translate-x-0.5">

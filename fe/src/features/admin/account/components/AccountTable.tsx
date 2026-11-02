@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { AdminAccount, PageResult } from '@/services/admin.service';
 import { AccountTableRow } from './AccountTableRow';
 
@@ -79,14 +79,14 @@ export const AccountTable: React.FC<AccountTableProps> = ({
             <button
               onClick={() => onPageChange(Math.max(0, currentPage - 1))}
               disabled={currentPage === 0}
-              className="px-3 py-1.5 bg-white border border-[#eae8e5] rounded-lg font-bold text-xs hover:bg-[#eae8e5] disabled:opacity-40 cursor-pointer"
+              className="px-3 py-1.5 bg-white border border-[#eae8e5] rounded font-bold text-xs hover:bg-[#eae8e5] disabled:opacity-40 cursor-pointer"
             >
               Previous
             </button>
             <button
               onClick={() => onPageChange(Math.min(pageResult.totalPages - 1, currentPage + 1))}
               disabled={currentPage >= pageResult.totalPages - 1}
-              className="px-3 py-1.5 bg-white border border-[#eae8e5] rounded-lg font-bold text-xs hover:bg-[#eae8e5] disabled:opacity-40 cursor-pointer"
+              className="px-3 py-1.5 bg-white border border-[#eae8e5] rounded font-bold text-xs hover:bg-[#eae8e5] disabled:opacity-40 cursor-pointer"
             >
               Next
             </button>

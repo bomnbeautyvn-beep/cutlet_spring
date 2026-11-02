@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useRestaurantSettingsForm } from './restaurant/hooks/useRestaurantSettingsForm';
 import { RestaurantSettingsTabs } from './restaurant/components/RestaurantSettingsTabs';
 import { RestaurantProfileTab } from './restaurant/components/RestaurantProfileTab';
@@ -112,7 +112,7 @@ export const RestaurantSettingsPage: React.FC<RestaurantSettingsPageProps> = ({
       {/* Floating Feedback Toast */}
       {feedback && (
         <div
-          className={`p-3.5 rounded-xl border text-xs flex items-center gap-2.5 shadow-sm animate-fade-in ${
+          className={`p-3.5 rounded border text-xs flex items-center gap-2.5 shadow-sm animate-fade-in ${
             feedback.isError
               ? 'bg-red-50 border-red-200 text-red-800'
               : 'bg-emerald-50 border-emerald-200 text-emerald-800'

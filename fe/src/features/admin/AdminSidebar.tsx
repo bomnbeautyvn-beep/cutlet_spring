@@ -77,7 +77,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
       {/* Brand Header */}
       <div className="p-5 sm:p-6 border-b border-white/10 flex items-center justify-between gap-3">
         <div className="flex items-center gap-3 min-w-0">
-          <div className="w-10 h-10 rounded-xl bg-[#af101a] flex items-center justify-center text-white shadow-lg shrink-0">
+          <div className="w-10 h-10 rounded bg-[#af101a] flex items-center justify-center text-white shadow-lg shrink-0">
             <span className="material-symbols-outlined text-[22px]">restaurant</span>
           </div>
           <div className="min-w-0">
@@ -97,7 +97,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
         <button
           type="button"
           onClick={onClose}
-          className="p-1.5 rounded-lg text-white/60 hover:text-white hover:bg-white/10 lg:hidden cursor-pointer"
+          className="p-1.5 rounded text-white/60 hover:text-white hover:bg-white/10 lg:hidden cursor-pointer"
           aria-label="Close sidebar"
         >
           <span className="material-symbols-outlined text-[20px]">close</span>
@@ -117,7 +117,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
                 onSelectSection(item.id);
                 onClose?.();
               }}
-              className={`w-full text-left px-3 py-2.5 rounded-xl transition-all flex items-center gap-3 cursor-pointer group ${
+              className={`w-full text-left px-3 py-2.5 rounded transition-all flex items-center gap-3 cursor-pointer group ${
                 isActive
                   ? 'bg-[#af101a] text-white font-bold shadow-md'
                   : 'text-white/70 hover:bg-white/5 hover:text-white'

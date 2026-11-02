@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { PageResult } from '@/services/admin.service';
 import { MenuItem } from '@/types';
 
@@ -26,21 +26,21 @@ export const MenuPagination: React.FC<MenuPaginationProps> = ({
         <button
           onClick={() => onPageChange(Math.max(0, currentPage - 1))}
           disabled={currentPage === 0}
-          className="px-3.5 py-1.5 bg-white border border-[#cfcac2] hover:border-[#af101a] text-[#1b1c1a] rounded-lg font-bold text-xs hover:bg-[#f5f3f0] disabled:opacity-35 disabled:hover:border-[#cfcac2] disabled:hover:bg-white cursor-pointer transition-all shadow-xs flex items-center gap-1"
+          className="px-3.5 py-1.5 bg-white border border-[#cfcac2] hover:border-[#af101a] text-[#1b1c1a] rounded font-bold text-xs hover:bg-[#f5f3f0] disabled:opacity-35 disabled:hover:border-[#cfcac2] disabled:hover:bg-white cursor-pointer transition-all shadow-xs flex items-center gap-1"
         >
           <span className="material-symbols-outlined text-[16px]">chevron_left</span>
           <span>Previous</span>
         </button>
 
         {/* Prominent Page Chip */}
-        <div className="px-3 py-1.5 bg-[#af101a] text-white rounded-lg font-bold text-xs shadow-xs">
+        <div className="px-3 py-1.5 bg-[#af101a] text-white rounded font-bold text-xs shadow-xs">
           Page {currentPage + 1} / {pageResult.totalPages}
         </div>
 
         <button
           onClick={() => onPageChange(Math.min(pageResult.totalPages - 1, currentPage + 1))}
           disabled={currentPage >= pageResult.totalPages - 1}
-          className="px-3.5 py-1.5 bg-white border border-[#cfcac2] hover:border-[#af101a] text-[#1b1c1a] rounded-lg font-bold text-xs hover:bg-[#f5f3f0] disabled:opacity-35 disabled:hover:border-[#cfcac2] disabled:hover:bg-white cursor-pointer transition-all shadow-xs flex items-center gap-1"
+          className="px-3.5 py-1.5 bg-white border border-[#cfcac2] hover:border-[#af101a] text-[#1b1c1a] rounded font-bold text-xs hover:bg-[#f5f3f0] disabled:opacity-35 disabled:hover:border-[#cfcac2] disabled:hover:bg-white cursor-pointer transition-all shadow-xs flex items-center gap-1"
         >
           <span>Next</span>
           <span className="material-symbols-outlined text-[16px]">chevron_right</span>

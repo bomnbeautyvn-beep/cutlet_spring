@@ -94,7 +94,7 @@ export const WalkInOrderDesk: React.FC = () => {
         <div className="flex items-center gap-2">
           <button
             onClick={() => setFilterSeat('ALL')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold uppercase ${
+            className={`px-3 py-1.5 rounded text-xs font-bold uppercase ${
               filterSeat === 'ALL'
                 ? 'bg-[#1b1c1a] text-white'
                 : 'bg-white border border-[#eae8e5] text-[#585757]'
@@ -104,7 +104,7 @@ export const WalkInOrderDesk: React.FC = () => {
           </button>
           <button
             onClick={() => setFilterSeat('COUNTER')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold uppercase ${
+            className={`px-3 py-1.5 rounded text-xs font-bold uppercase ${
               filterSeat === 'COUNTER'
                 ? 'bg-[#af101a] text-white'
                 : 'bg-white border border-[#eae8e5] text-[#585757]'
@@ -114,7 +114,7 @@ export const WalkInOrderDesk: React.FC = () => {
           </button>
           <button
             onClick={() => setFilterSeat('HALL')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-bold uppercase ${
+            className={`px-3 py-1.5 rounded text-xs font-bold uppercase ${
               filterSeat === 'HALL'
                 ? 'bg-[#5b403d] text-white'
                 : 'bg-white border border-[#eae8e5] text-[#585757]'
@@ -140,7 +140,7 @@ export const WalkInOrderDesk: React.FC = () => {
           return (
             <div
               key={t.ticketNumber}
-              className="p-5 bg-white rounded-2xl border border-[#eae8e5] shadow-xs flex flex-col justify-between space-y-4"
+              className="p-5 bg-white rounded border border-[#eae8e5] shadow-xs flex flex-col justify-between space-y-4"
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
@@ -163,7 +163,7 @@ export const WalkInOrderDesk: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="p-3 bg-[#fbf9f6] rounded-xl border border-[#eae8e5] space-y-1.5 text-xs">
+                <div className="p-3 bg-[#fbf9f6] rounded border border-[#eae8e5] space-y-1.5 text-xs">
                   <span className="text-[10px] uppercase font-bold text-[#585757]">
                     Dishes on Ticket:
                   </span>
@@ -189,7 +189,7 @@ export const WalkInOrderDesk: React.FC = () => {
                 {t.status !== 'SERVED' && (
                   <button
                     onClick={() => advanceStatus(t.ticketNumber)}
-                    className="px-3 py-1.5 bg-[#1b1c1a] hover:bg-[#af101a] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
+                    className="px-3 py-1.5 bg-[#1b1c1a] hover:bg-[#af101a] text-white rounded text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
                   >
                     Advance Step
                   </button>

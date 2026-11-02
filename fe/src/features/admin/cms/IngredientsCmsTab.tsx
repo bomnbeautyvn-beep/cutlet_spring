@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useIngredientsCms } from './ingredients/hooks/useIngredientsCms';
 import { IngredientCard } from './ingredients/components/IngredientCard';
 import { IngredientModal } from './IngredientModal';
@@ -42,7 +42,7 @@ export const IngredientsCmsTab: React.FC = () => {
       {/* Toast Alert */}
       {message && (
         <div
-          className={`p-4 rounded-xl flex items-center justify-between text-sm font-medium ${
+          className={`p-4 rounded flex items-center justify-between text-sm font-medium ${
             message.type === 'success'
               ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
               : 'bg-red-50 text-red-800 border border-red-200'
@@ -65,7 +65,7 @@ export const IngredientsCmsTab: React.FC = () => {
       )}
 
       {/* Header & Add Button */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white rounded-2xl border border-[#eae8e5] p-6 shadow-xs">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white rounded border border-[#eae8e5] p-6 shadow-xs">
         <div>
           <h3 className="font-headline-sm text-lg font-bold text-[#1b1c1a]">
             Atelier Ingredients (Nguyên Liệu Tuyển Chọn)
@@ -80,7 +80,7 @@ export const IngredientsCmsTab: React.FC = () => {
             setSelectedIngredient(null);
             setIsModalOpen(true);
           }}
-          className="px-5 py-2.5 rounded-xl bg-[#af101a] hover:bg-[#930010] text-white font-label-md text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer shrink-0"
+          className="px-5 py-2.5 rounded bg-[#af101a] hover:bg-[#930010] text-white font-label-md text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer shrink-0"
         >
           <span className="material-symbols-outlined text-[18px]">add</span>
           <span>Add New Ingredient</span>

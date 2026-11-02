@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { RestaurantSettings } from '@/services/admin.service';
 import { PublicPlacementGuide } from '@/features/admin/components/PublicPlacementGuide';
 
@@ -18,14 +18,14 @@ export const RestaurantHoursTab: React.FC<RestaurantHoursTabProps> = ({ formData
         previewHint="Giờ bếp nhận đơn cuối cùng (Kitchen Last Call) là mốc thời gian chốt đơn chiên trong ngày."
       />
 
-      <div className="bg-white p-6 rounded-2xl border border-[#eae8e5] shadow-xs space-y-6">
+      <div className="bg-white p-6 rounded border border-[#eae8e5] shadow-xs space-y-6">
         <h3 className="text-xs font-bold uppercase tracking-wider text-[#1b1c1a]">
           Service Shifts &amp; Kitchen Timings
         </h3>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {/* Lunch */}
-        <div className="p-4 bg-[#fbf9f6] rounded-xl border border-[#eae8e5] space-y-3">
+        <div className="p-4 bg-[#fbf9f6] rounded border border-[#eae8e5] space-y-3">
           <span className="block text-xs font-bold text-[#af101a] uppercase tracking-wider">
             Lunch Service Shift
           </span>
@@ -36,7 +36,7 @@ export const RestaurantHoursTab: React.FC<RestaurantHoursTabProps> = ({ formData
                 type="text"
                 value={formData.openingHourLunchStart || '11:00'}
                 onChange={(e) => onChange('openingHourLunchStart', e.target.value)}
-                className="w-full px-2.5 py-1.5 text-xs bg-white border border-[#eae8e5] rounded-lg"
+                className="w-full px-2.5 py-1.5 text-xs bg-white border border-[#eae8e5] rounded"
               />
             </div>
             <div>
@@ -45,14 +45,14 @@ export const RestaurantHoursTab: React.FC<RestaurantHoursTabProps> = ({ formData
                 type="text"
                 value={formData.openingHourLunchEnd || '15:00'}
                 onChange={(e) => onChange('openingHourLunchEnd', e.target.value)}
-                className="w-full px-2.5 py-1.5 text-xs bg-white border border-[#eae8e5] rounded-lg"
+                className="w-full px-2.5 py-1.5 text-xs bg-white border border-[#eae8e5] rounded"
               />
             </div>
           </div>
         </div>
 
         {/* Dinner */}
-        <div className="p-4 bg-[#fbf9f6] rounded-xl border border-[#eae8e5] space-y-3">
+        <div className="p-4 bg-[#fbf9f6] rounded border border-[#eae8e5] space-y-3">
           <span className="block text-xs font-bold text-[#af101a] uppercase tracking-wider">
             Dinner Service Shift
           </span>
@@ -63,7 +63,7 @@ export const RestaurantHoursTab: React.FC<RestaurantHoursTabProps> = ({ formData
                 type="text"
                 value={formData.openingHourDinnerStart || '17:00'}
                 onChange={(e) => onChange('openingHourDinnerStart', e.target.value)}
-                className="w-full px-2.5 py-1.5 text-xs bg-white border border-[#eae8e5] rounded-lg"
+                className="w-full px-2.5 py-1.5 text-xs bg-white border border-[#eae8e5] rounded"
               />
             </div>
             <div>
@@ -72,14 +72,14 @@ export const RestaurantHoursTab: React.FC<RestaurantHoursTabProps> = ({ formData
                 type="text"
                 value={formData.openingHourDinnerEnd || '21:00'}
                 onChange={(e) => onChange('openingHourDinnerEnd', e.target.value)}
-                className="w-full px-2.5 py-1.5 text-xs bg-white border border-[#eae8e5] rounded-lg"
+                className="w-full px-2.5 py-1.5 text-xs bg-white border border-[#eae8e5] rounded"
               />
             </div>
           </div>
         </div>
 
         {/* Last Order */}
-        <div className="p-4 bg-[#fbf9f6] rounded-xl border border-[#eae8e5] space-y-3">
+        <div className="p-4 bg-[#fbf9f6] rounded border border-[#eae8e5] space-y-3">
           <span className="block text-xs font-bold text-[#af101a] uppercase tracking-wider">
             Kitchen Last Call
           </span>
@@ -89,7 +89,7 @@ export const RestaurantHoursTab: React.FC<RestaurantHoursTabProps> = ({ formData
               type="text"
               value={formData.lastOrderTime || '20:30'}
               onChange={(e) => onChange('lastOrderTime', e.target.value)}
-              className="w-full px-2.5 py-1.5 text-xs bg-white border border-[#eae8e5] rounded-lg"
+              className="w-full px-2.5 py-1.5 text-xs bg-white border border-[#eae8e5] rounded"
             />
             <span className="text-[10px] text-[#8f6f6c] mt-1 block">Cutoff for kitchen frying tickets</span>
           </div>
@@ -107,28 +107,28 @@ export const RestaurantHoursTab: React.FC<RestaurantHoursTabProps> = ({ formData
             placeholder="EN: Open Daily"
             value={formData.closedDaysEn || ''}
             onChange={(e) => onChange('closedDaysEn', e.target.value)}
-            className="px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-xl"
+            className="px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded"
           />
           <input
             type="text"
             placeholder="KO: 연중무휴"
             value={formData.closedDaysKr || ''}
             onChange={(e) => onChange('closedDaysKr', e.target.value)}
-            className="px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-xl"
+            className="px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded"
           />
           <input
             type="text"
             placeholder="VI: Mở cửa hàng ngày"
             value={formData.closedDaysVi || ''}
             onChange={(e) => onChange('closedDaysVi', e.target.value)}
-            className="px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-xl"
+            className="px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded"
           />
           <input
             type="text"
             placeholder="JA: 年中無休"
             value={formData.closedDaysJp || ''}
             onChange={(e) => onChange('closedDaysJp', e.target.value)}
-            className="px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-xl"
+            className="px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded"
           />
         </div>
       </div>

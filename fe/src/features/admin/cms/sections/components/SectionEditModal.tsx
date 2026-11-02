@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { HomepageSection, Language } from '@/types';
 
 interface SectionEditModalProps {
@@ -22,7 +22,7 @@ export const SectionEditModal: React.FC<SectionEditModalProps> = ({
 }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
-      <div className="bg-white rounded-2xl max-w-xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-[#eae8e5] overflow-hidden">
+      <div className="bg-white rounded max-w-xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-[#eae8e5] overflow-hidden">
         <div className="p-6 border-b border-[#eae8e5] flex items-center justify-between bg-[#fbf9f6]">
           <div>
             <h3 className="font-headline-sm text-base font-bold text-[#1b1c1a]">
@@ -46,13 +46,13 @@ export const SectionEditModal: React.FC<SectionEditModalProps> = ({
             <span className="text-xs font-bold text-[#5b403d] uppercase tracking-wider">
               Select Language
             </span>
-            <div className="inline-flex p-1 bg-[#f5f3f0] rounded-xl border border-[#eae8e5]">
+            <div className="inline-flex p-1 bg-[#f5f3f0] rounded border border-[#eae8e5]">
               {(['VI', 'EN', 'KR', 'JP'] as Language[]).map((lang) => (
                 <button
                   key={lang}
                   type="button"
                   onClick={() => onTabChange(lang)}
-                  className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                  className={`px-2.5 py-1 rounded text-xs font-bold transition-all cursor-pointer ${
                     activeLangTab === lang
                       ? 'bg-[#af101a] text-white shadow-xs'
                       : 'text-[#5b403d] hover:text-[#1b1c1a]'
@@ -74,7 +74,7 @@ export const SectionEditModal: React.FC<SectionEditModalProps> = ({
                   onChange={(e) =>
                     onUpdateEditingSection({ ...editingSection, titleVi: e.target.value })
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs font-semibold focus:outline-none focus:border-[#af101a]"
+                  className="w-full px-3 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs font-semibold focus:outline-none focus:border-[#af101a]"
                   required
                 />
               </div>
@@ -88,7 +88,7 @@ export const SectionEditModal: React.FC<SectionEditModalProps> = ({
                   onChange={(e) =>
                     onUpdateEditingSection({ ...editingSection, subtitleVi: e.target.value })
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs focus:outline-none focus:border-[#af101a]"
+                  className="w-full px-3 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs focus:outline-none focus:border-[#af101a]"
                 />
               </div>
             </div>
@@ -104,7 +104,7 @@ export const SectionEditModal: React.FC<SectionEditModalProps> = ({
                   onChange={(e) =>
                     onUpdateEditingSection({ ...editingSection, titleEn: e.target.value })
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs font-semibold focus:outline-none focus:border-[#af101a]"
+                  className="w-full px-3 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs font-semibold focus:outline-none focus:border-[#af101a]"
                   required
                 />
               </div>
@@ -116,7 +116,7 @@ export const SectionEditModal: React.FC<SectionEditModalProps> = ({
                   onChange={(e) =>
                     onUpdateEditingSection({ ...editingSection, subtitleEn: e.target.value })
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs focus:outline-none focus:border-[#af101a]"
+                  className="w-full px-3 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs focus:outline-none focus:border-[#af101a]"
                 />
               </div>
             </div>
@@ -134,7 +134,7 @@ export const SectionEditModal: React.FC<SectionEditModalProps> = ({
                   onChange={(e) =>
                     onUpdateEditingSection({ ...editingSection, titleKr: e.target.value })
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs font-semibold focus:outline-none focus:border-[#af101a]"
+                  className="w-full px-3 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs font-semibold focus:outline-none focus:border-[#af101a]"
                   required
                 />
               </div>
@@ -146,7 +146,7 @@ export const SectionEditModal: React.FC<SectionEditModalProps> = ({
                   onChange={(e) =>
                     onUpdateEditingSection({ ...editingSection, subtitleKr: e.target.value })
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs focus:outline-none focus:border-[#af101a]"
+                  className="w-full px-3 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs focus:outline-none focus:border-[#af101a]"
                 />
               </div>
             </div>
@@ -164,7 +164,7 @@ export const SectionEditModal: React.FC<SectionEditModalProps> = ({
                   onChange={(e) =>
                     onUpdateEditingSection({ ...editingSection, titleJp: e.target.value })
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs font-semibold focus:outline-none focus:border-[#af101a]"
+                  className="w-full px-3 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs font-semibold focus:outline-none focus:border-[#af101a]"
                   required
                 />
               </div>
@@ -176,7 +176,7 @@ export const SectionEditModal: React.FC<SectionEditModalProps> = ({
                   onChange={(e) =>
                     onUpdateEditingSection({ ...editingSection, subtitleJp: e.target.value })
                   }
-                  className="w-full px-3 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs focus:outline-none focus:border-[#af101a]"
+                  className="w-full px-3 py-2 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs focus:outline-none focus:border-[#af101a]"
                 />
               </div>
             </div>
@@ -186,14 +186,14 @@ export const SectionEditModal: React.FC<SectionEditModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 rounded-xl border border-[#eae8e5] bg-white hover:bg-[#f5f3f0] text-[#5b403d] font-label-md text-xs font-bold transition-colors cursor-pointer"
+              className="px-4 py-2 rounded border border-[#eae8e5] bg-white hover:bg-[#f5f3f0] text-[#5b403d] font-label-md text-xs font-bold transition-colors cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={saving}
-              className="px-5 py-2 rounded-xl bg-[#af101a] hover:bg-[#930010] text-white font-label-md text-xs font-bold uppercase tracking-wider transition-all shadow-md cursor-pointer disabled:opacity-50"
+              className="px-5 py-2 rounded bg-[#af101a] hover:bg-[#930010] text-white font-label-md text-xs font-bold uppercase tracking-wider transition-all shadow-md cursor-pointer disabled:opacity-50"
             >
               Save Section
             </button>

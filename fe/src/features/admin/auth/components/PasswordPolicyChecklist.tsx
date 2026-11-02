@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 interface PasswordPolicyChecklistProps {
   hasMinLength: boolean;
@@ -18,7 +18,7 @@ export const PasswordPolicyChecklist: React.FC<PasswordPolicyChecklistProps> = (
   passwordsMatch,
 }) => {
   return (
-    <div className="p-3 bg-[#fbf9f6] border border-[#eae8e5] rounded-lg space-y-1.5 text-[11px]">
+    <div className="p-3 bg-[#fbf9f6] border border-[#eae8e5] rounded space-y-1.5 text-[11px]">
       <div className="font-bold text-[#585757] uppercase tracking-wider mb-1">
         Security Policy Checklist
       </div>

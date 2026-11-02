@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+﻿import React, { useState, useRef } from 'react';
 
 interface DishPricingAndImageSectionProps {
   basePrice: number;
@@ -71,7 +71,7 @@ export const DishPricingAndImageSection: React.FC<DishPricingAndImageSectionProp
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-[#eae8e5] p-3.5 sm:p-5 shadow-xs space-y-4 sm:space-y-5">
+    <div className="bg-white rounded border border-[#eae8e5] p-3.5 sm:p-5 shadow-xs space-y-4 sm:space-y-5">
       <div className="flex items-center justify-between pb-2.5 sm:pb-3 border-b border-[#eae8e5]">
         <div>
           <h3 className="font-headline-sm text-sm sm:text-base font-bold text-[#1b1c1a]">
@@ -92,7 +92,7 @@ export const DishPricingAndImageSection: React.FC<DishPricingAndImageSectionProp
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
             onClick={() => !uploading && fileInputRef.current?.click()}
-            className={`w-full aspect-[4/3] rounded-xl overflow-hidden relative flex items-center justify-center transition-all cursor-pointer group select-none ${
+            className={`w-full aspect-[4/3] rounded overflow-hidden relative flex items-center justify-center transition-all cursor-pointer group select-none ${
               isDragging
                 ? 'border-2 border-dashed border-[#af101a] bg-[#af101a]/10 ring-4 ring-[#af101a]/20 scale-[1.01]'
                 : 'bg-[#f3f1ec] border border-[#eae6df] hover:border-[#af101a]/60 hover:shadow-xs'
@@ -149,7 +149,7 @@ export const DishPricingAndImageSection: React.FC<DishPricingAndImageSectionProp
             type="button"
             onClick={() => fileInputRef.current?.click()}
             disabled={uploading}
-            className="mt-2.5 sm:mt-3 w-full py-1.5 sm:py-2 px-3 border border-[#eae8e5] bg-[#f5f3f0] hover:bg-[#eae8e5] text-[11px] sm:text-xs font-bold text-[#1b1c1a] text-center cursor-pointer transition-colors flex items-center justify-center gap-1.5 rounded-lg shadow-2xs"
+            className="mt-2.5 sm:mt-3 w-full py-1.5 sm:py-2 px-3 border border-[#eae8e5] bg-[#f5f3f0] hover:bg-[#eae8e5] text-[11px] sm:text-xs font-bold text-[#1b1c1a] text-center cursor-pointer transition-colors flex items-center justify-center gap-1.5 rounded shadow-2xs"
           >
             <span className="material-symbols-outlined text-[15px] sm:text-[16px] text-[#af101a]">cloud_upload</span>
             <span>{uploading ? 'Processing Image...' : imagePreview ? 'Thay đổi ảnh món ăn' : 'Chọn hoặc thả ảnh vào đây'}</span>
@@ -188,7 +188,7 @@ export const DishPricingAndImageSection: React.FC<DishPricingAndImageSectionProp
                   value={basePrice || ''}
                   onChange={(e) => onBasePriceChange(Number(e.target.value))}
                   placeholder="e.g. 180"
-                  className="w-full pl-3 pr-12 py-1.5 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
+                  className="w-full pl-3 pr-12 py-1.5 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
                   required
                 />
                 <span className="absolute right-3 top-2 text-[11px] text-[#8f6f6c] font-semibold pointer-events-none whitespace-nowrap">
@@ -216,7 +216,7 @@ export const DishPricingAndImageSection: React.FC<DishPricingAndImageSectionProp
                     onPrepTimeChange(clean ? Number(clean) : 0);
                   }}
                   placeholder="15"
-                  className="w-full pl-3 pr-10 py-1.5 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  className="w-full pl-3 pr-10 py-1.5 rounded border border-[#eae8e5] bg-[#fbf9f6] text-xs font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                 />
                 <span className="absolute right-3 top-2 text-[11px] text-[#8f6f6c] font-semibold pointer-events-none whitespace-nowrap">
                   min
@@ -251,7 +251,7 @@ export const DishPricingAndImageSection: React.FC<DishPricingAndImageSectionProp
             </div>
 
             {hasSizes && (
-              <div className="p-2.5 sm:p-3.5 bg-[#fbf9f6] border border-[#eae8e5] rounded-xl space-y-2">
+              <div className="p-2.5 sm:p-3.5 bg-[#fbf9f6] border border-[#eae8e5] rounded space-y-2">
                 {sizesError && (
                   <p className="text-[11px] text-red-600 font-medium">{sizesError}</p>
                 )}
@@ -263,7 +263,7 @@ export const DishPricingAndImageSection: React.FC<DishPricingAndImageSectionProp
                       value={s.label}
                       onChange={(e) => onUpdateSize(idx, 'label', e.target.value)}
                       placeholder="Size label (e.g. Size M, Phần lớn)"
-                      className="flex-1 px-2.5 py-1.5 text-xs bg-white border border-[#eae8e5] rounded-lg focus:outline-none focus:border-[#af101a]"
+                      className="flex-1 px-2.5 py-1.5 text-xs bg-white border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a]"
                     />
                     <div className="relative w-24 sm:w-28">
                       <input
@@ -273,14 +273,14 @@ export const DishPricingAndImageSection: React.FC<DishPricingAndImageSectionProp
                         value={s.price || ''}
                         onChange={(e) => onUpdateSize(idx, 'price', Number(e.target.value))}
                         placeholder="Price"
-                        className="w-full px-2.5 py-1.5 text-xs bg-white border border-[#eae8e5] rounded-lg font-semibold focus:outline-none focus:border-[#af101a]"
+                        className="w-full px-2.5 py-1.5 text-xs bg-white border border-[#eae8e5] rounded font-semibold focus:outline-none focus:border-[#af101a]"
                       />
                       <span className="absolute right-2.5 top-1.5 text-[10px] text-gray-400">k</span>
                     </div>
                     <button
                       type="button"
                       onClick={() => onRemoveSize(idx)}
-                      className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
+                      className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded transition-colors cursor-pointer"
                       title="Remove size"
                     >
                       <span className="material-symbols-outlined text-[17px]">delete</span>
@@ -291,7 +291,7 @@ export const DishPricingAndImageSection: React.FC<DishPricingAndImageSectionProp
                 <button
                   type="button"
                   onClick={() => onAddSize()}
-                  className="w-full py-1.5 sm:py-2 border border-dashed border-[#eae8e5] hover:border-[#af101a] text-[#af101a] text-[11px] sm:text-xs font-bold rounded-lg flex items-center justify-center gap-1 transition-colors cursor-pointer hover:bg-white"
+                  className="w-full py-1.5 sm:py-2 border border-dashed border-[#eae8e5] hover:border-[#af101a] text-[#af101a] text-[11px] sm:text-xs font-bold rounded flex items-center justify-center gap-1 transition-colors cursor-pointer hover:bg-white"
                 >
                   <span className="material-symbols-outlined text-[15px]">add</span>
                   <span>Add Size Option</span>

@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 interface PublicPlacementGuideProps {
   locationTitle: string;
@@ -16,7 +16,7 @@ export const PublicPlacementGuide: React.FC<PublicPlacementGuideProps> = ({
   previewHint,
 }) => {
   return (
-    <div className="bg-[#fbf9f6] border border-[#e6e2da] border-l-4 border-l-[#af101a] rounded-xl p-4 shadow-2xs">
+    <div className="bg-[#fbf9f6] border border-[#e6e2da] border-l-4 border-l-[#af101a] rounded p-4 shadow-2xs">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-[#eae8e5]/60">
         <div className="flex items-center gap-2 flex-wrap">
           <span className="material-symbols-outlined text-[18px] text-[#af101a]">

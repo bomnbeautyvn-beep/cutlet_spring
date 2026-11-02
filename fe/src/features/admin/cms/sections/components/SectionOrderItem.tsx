@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { HomepageSection } from '@/types';
 
 interface SectionOrderItemProps {
@@ -22,13 +22,13 @@ export const SectionOrderItem: React.FC<SectionOrderItemProps> = ({
 }) => {
   return (
     <div
-      className={`bg-white rounded-2xl border p-4 sm:p-5 shadow-xs transition-all flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 ${
+      className={`bg-white rounded border p-4 sm:p-5 shadow-xs transition-all flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 ${
         sec.isActive ? 'border-[#eae8e5]' : 'border-gray-200 bg-gray-50 opacity-60'
       }`}
     >
       {/* Left Order Number & Icon */}
       <div className="flex items-center gap-4 min-w-0">
-        <div className="w-9 h-9 rounded-xl bg-[#f5f3f0] border border-[#eae8e5] flex items-center justify-center font-bold text-xs text-[#1b1c1a] shrink-0">
+        <div className="w-9 h-9 rounded bg-[#f5f3f0] border border-[#eae8e5] flex items-center justify-center font-bold text-xs text-[#1b1c1a] shrink-0">
           #{index + 1}
         </div>
 
@@ -51,12 +51,12 @@ export const SectionOrderItem: React.FC<SectionOrderItemProps> = ({
       {/* Right Controls: Move Buttons, Toggle, and Edit */}
       <div className="flex items-center gap-3 shrink-0 self-end sm:self-center">
         {/* Move Up / Down */}
-        <div className="inline-flex rounded-xl border border-[#eae8e5] p-0.5 bg-[#fbf9f6]">
+        <div className="inline-flex rounded border border-[#eae8e5] p-0.5 bg-[#fbf9f6]">
           <button
             type="button"
             onClick={() => onMove(index, 'up')}
             disabled={index === 0}
-            className="p-1.5 rounded-lg text-[#5b403d] hover:bg-[#eae8e5] disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
+            className="p-1.5 rounded text-[#5b403d] hover:bg-[#eae8e5] disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
             title="Move Up"
           >
             <span className="material-symbols-outlined text-[18px]">arrow_upward</span>
@@ -65,7 +65,7 @@ export const SectionOrderItem: React.FC<SectionOrderItemProps> = ({
             type="button"
             onClick={() => onMove(index, 'down')}
             disabled={index === totalSections - 1}
-            className="p-1.5 rounded-lg text-[#5b403d] hover:bg-[#eae8e5] disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
+            className="p-1.5 rounded text-[#5b403d] hover:bg-[#eae8e5] disabled:opacity-30 disabled:cursor-not-allowed cursor-pointer"
             title="Move Down"
           >
             <span className="material-symbols-outlined text-[18px]">arrow_downward</span>
@@ -76,7 +76,7 @@ export const SectionOrderItem: React.FC<SectionOrderItemProps> = ({
         <button
           type="button"
           onClick={() => onEdit(sec)}
-          className="px-3 py-1.5 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] hover:bg-[#eae8e5] text-xs font-bold text-[#1b1c1a] flex items-center gap-1 cursor-pointer transition-colors"
+          className="px-3 py-1.5 rounded border border-[#eae8e5] bg-[#fbf9f6] hover:bg-[#eae8e5] text-xs font-bold text-[#1b1c1a] flex items-center gap-1 cursor-pointer transition-colors"
         >
           <span className="material-symbols-outlined text-[16px]">edit</span>
           <span>Edit</span>

@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useForgotPasswordForm } from './auth/hooks/useForgotPasswordForm';
 import { RequestOtpStep } from './auth/components/RequestOtpStep';
 import { VerifyOtpStep } from './auth/components/VerifyOtpStep';
@@ -50,7 +50,7 @@ export const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl border border-[#eae8e5] p-6 space-y-5 animate-scale-in"
+        className="relative w-full max-w-md bg-white rounded shadow-2xl border border-[#eae8e5] p-6 space-y-5 animate-scale-in"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -71,7 +71,7 @@ export const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
 
         {/* Global Error Banner */}
         {errorMessage && (
-          <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl flex items-center gap-2 animate-fade-in">
+          <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded flex items-center gap-2 animate-fade-in">
             <span className="material-symbols-outlined text-[18px]">error</span>
             <span>{errorMessage}</span>
           </div>
@@ -79,7 +79,7 @@ export const ForgotPasswordModal: React.FC<ForgotPasswordModalProps> = ({
 
         {/* Global Info Banner */}
         {infoMessage && (
-          <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded-xl flex items-center gap-2 animate-fade-in">
+          <div className="p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded flex items-center gap-2 animate-fade-in">
             <span className="material-symbols-outlined text-[18px]">check_circle</span>
             <span>{infoMessage}</span>
           </div>

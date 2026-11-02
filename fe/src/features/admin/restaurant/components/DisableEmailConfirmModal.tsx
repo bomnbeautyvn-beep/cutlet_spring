@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 interface DisableEmailConfirmModalProps {
   isOpen: boolean;
@@ -15,7 +15,7 @@ export const DisableEmailConfirmModal: React.FC<DisableEmailConfirmModalProps> =
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
-      <div className="bg-white rounded-2xl max-w-md w-full border border-amber-200 shadow-2xl overflow-hidden">
+      <div className="bg-white rounded max-w-md w-full border border-amber-200 shadow-2xl overflow-hidden">
         {/* Header */}
         <div className="p-5 bg-amber-50 text-amber-900 flex items-center gap-3 border-b border-amber-200">
           <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-amber-700 shrink-0">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 
 interface SendTestEmailModalProps {
   isOpen: boolean;
@@ -39,7 +39,7 @@ export const SendTestEmailModal: React.FC<SendTestEmailModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
-      <div className="bg-white rounded-2xl max-w-md w-full border border-[#eae8e5] shadow-2xl overflow-hidden">
+      <div className="bg-white rounded max-w-md w-full border border-[#eae8e5] shadow-2xl overflow-hidden">
         {/* Header */}
         <div className="p-5 bg-[#1b1c1a] text-white flex items-center justify-between border-b-2 border-[#af101a]">
           <div className="flex items-center gap-2.5">
@@ -61,7 +61,7 @@ export const SendTestEmailModal: React.FC<SendTestEmailModalProps> = ({
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
-          <div className="p-3.5 bg-[#fbf9f6] rounded-xl border border-[#eae8e5] text-xs text-[#585757] leading-relaxed">
+          <div className="p-3.5 bg-[#fbf9f6] rounded border border-[#eae8e5] text-xs text-[#585757] leading-relaxed">
             A branded test email will be dispatched through your active SMTP server configuration. Check your inbox and spam folder to confirm delivery.
           </div>
 
@@ -79,7 +79,7 @@ export const SendTestEmailModal: React.FC<SendTestEmailModalProps> = ({
                 if (validationError) setValidationError(null);
               }}
               disabled={isLoading}
-              className="w-full px-3.5 py-2.5 text-xs bg-white border border-[#eae8e5] rounded-xl focus:border-[#af101a] focus:ring-1 focus:ring-[#af101a] outline-none transition-all placeholder:text-[#c2beba]"
+              className="w-full px-3.5 py-2.5 text-xs bg-white border border-[#eae8e5] rounded focus:border-[#af101a] focus:ring-1 focus:ring-[#af101a] outline-none transition-all placeholder:text-[#c2beba]"
             />
             {validationError && (
               <p className="text-[11px] text-red-600 mt-1 font-medium flex items-center gap-1">

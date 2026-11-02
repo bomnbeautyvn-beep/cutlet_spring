@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { RestaurantSettings } from '@/services/admin.service';
 import { PublicPlacementGuide } from '@/features/admin/components/PublicPlacementGuide';
 
@@ -25,7 +25,7 @@ export const RestaurantProfileTab: React.FC<RestaurantProfileTabProps> = ({
       />
 
       {/* Sync Banner & Informational Preview */}
-      <div className="bg-white p-6 sm:p-8 rounded-2xl border border-[#eae8e5] shadow-xs space-y-6">
+      <div className="bg-white p-6 sm:p-8 rounded border border-[#eae8e5] shadow-xs space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#eae8e5]">
           <div>
             <div className="flex items-center gap-2">
@@ -56,11 +56,11 @@ export const RestaurantProfileTab: React.FC<RestaurantProfileTabProps> = ({
         {/* Read-only Data Preview Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
           {/* Logo */}
-          <div className="p-4 bg-[#fbf9f6] rounded-xl border border-[#eae8e5] flex flex-col justify-between">
+          <div className="p-4 bg-[#fbf9f6] rounded border border-[#eae8e5] flex flex-col justify-between">
             <span className="text-[10px] uppercase font-bold text-[#8f6f6c] block mb-2">
               Atelier Logo
             </span>
-            <div className="w-full h-14 flex items-center justify-center bg-white rounded-lg border border-[#eae8e5]/60 p-1">
+            <div className="w-full h-14 flex items-center justify-center bg-white rounded border border-[#eae8e5]/60 p-1">
               {formData.logoUrl ? (
                 <img src={formData.logoUrl} alt="Logo" className="max-h-full max-w-full object-contain" />
               ) : (
@@ -70,7 +70,7 @@ export const RestaurantProfileTab: React.FC<RestaurantProfileTabProps> = ({
           </div>
 
           {/* Restaurant Names */}
-          <div className="p-4 bg-[#fbf9f6] rounded-xl border border-[#eae8e5] space-y-1.5">
+          <div className="p-4 bg-[#fbf9f6] rounded border border-[#eae8e5] space-y-1.5">
             <span className="text-[10px] uppercase font-bold text-[#8f6f6c] block">
               Tên Nhà Hàng (4 Ngôn Ngữ)
             </span>
@@ -81,7 +81,7 @@ export const RestaurantProfileTab: React.FC<RestaurantProfileTabProps> = ({
           </div>
 
           {/* Contact */}
-          <div className="p-4 bg-[#fbf9f6] rounded-xl border border-[#eae8e5] space-y-1.5">
+          <div className="p-4 bg-[#fbf9f6] rounded border border-[#eae8e5] space-y-1.5">
             <span className="text-[10px] uppercase font-bold text-[#8f6f6c] block">
               Hotline &amp; Email Liên Hệ
             </span>
@@ -97,7 +97,7 @@ export const RestaurantProfileTab: React.FC<RestaurantProfileTabProps> = ({
           </div>
 
           {/* Address */}
-          <div className="p-4 bg-[#fbf9f6] rounded-xl border border-[#eae8e5] space-y-1.5">
+          <div className="p-4 bg-[#fbf9f6] rounded border border-[#eae8e5] space-y-1.5">
             <span className="text-[10px] uppercase font-bold text-[#8f6f6c] block">
               Địa Chỉ Thực Tế
             </span>

@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 interface RequestOtpStepProps {
   email: string;
@@ -36,7 +36,7 @@ export const RequestOtpStep: React.FC<RequestOtpStepProps> = ({
             value={email}
             onChange={(e) => onEmailChange(e.target.value)}
             placeholder="admin@cutletspring.com"
-            className="w-full pl-9 pr-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-xl focus:outline-none focus:border-[#af101a] font-mono"
+            className="w-full pl-9 pr-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a] font-mono"
           />
         </div>
       </div>
@@ -45,14 +45,14 @@ export const RequestOtpStep: React.FC<RequestOtpStepProps> = ({
         <button
           type="button"
           onClick={onClose}
-          className="px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#585757] hover:bg-[#eae8e5] rounded-xl transition-colors cursor-pointer"
+          className="px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#585757] hover:bg-[#eae8e5] rounded transition-colors cursor-pointer"
         >
           Cancel
         </button>
         <button
           type="submit"
           disabled={isLoading}
-          className="px-5 py-2.5 bg-[#af101a] hover:bg-[#d32f2f] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center gap-2 cursor-pointer disabled:opacity-50"
+          className="px-5 py-2.5 bg-[#af101a] hover:bg-[#d32f2f] text-white text-xs font-bold uppercase tracking-wider rounded transition-all shadow-md flex items-center gap-2 cursor-pointer disabled:opacity-50"
         >
           {isLoading ? (
             <>

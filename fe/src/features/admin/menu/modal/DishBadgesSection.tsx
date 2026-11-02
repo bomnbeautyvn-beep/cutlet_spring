@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { MenuBadge } from '@/types';
 
 interface DishBadgesSectionProps {
@@ -26,7 +26,7 @@ export const DishBadgesSection: React.FC<DishBadgesSectionProps> = ({
   onSpiceNoteChange,
 }) => {
   return (
-    <div className="bg-white rounded-2xl border border-[#eae8e5] p-3.5 sm:p-5 shadow-xs space-y-3.5 sm:space-y-4">
+    <div className="bg-white rounded border border-[#eae8e5] p-3.5 sm:p-5 shadow-xs space-y-3.5 sm:space-y-4">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2.5 sm:pb-3 border-b border-[#eae8e5]">
         <div>
           <h3 className="font-headline-sm text-sm sm:text-base font-bold text-[#1b1c1a]">
@@ -37,7 +37,7 @@ export const DishBadgesSection: React.FC<DishBadgesSectionProps> = ({
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-[10px] sm:text-[11px] font-mono font-medium text-[#8f6f6c] bg-[#f5f3f0] px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md border border-[#eae8e5]">
+          <span className="text-[10px] sm:text-[11px] font-mono font-medium text-[#8f6f6c] bg-[#f5f3f0] px-2 sm:px-2.5 py-0.5 sm:py-1 rounded border border-[#eae8e5]">
             {selectedBadgeIds.length} selected
           </span>
         </div>
@@ -49,7 +49,7 @@ export const DishBadgesSection: React.FC<DishBadgesSectionProps> = ({
           <span>Loading dynamic badges...</span>
         </div>
       ) : badges.length === 0 ? (
-        <div className="p-4 sm:p-6 text-center text-[11px] sm:text-xs text-[#8f6f6c] border border-dashed border-[#eae8e5] bg-[#fbf9f6] rounded-xl">
+        <div className="p-4 sm:p-6 text-center text-[11px] sm:text-xs text-[#8f6f6c] border border-dashed border-[#eae8e5] bg-[#fbf9f6] rounded">
           No active badges found. Configure badges in the Atelier Badges tab.
         </div>
       ) : (
@@ -67,7 +67,7 @@ export const DishBadgesSection: React.FC<DishBadgesSectionProps> = ({
               <div
                 key={badge.id}
                 onClick={() => onToggleBadge(badge.id)}
-                className={`p-2.5 sm:p-3 border rounded-xl transition-all cursor-pointer select-none relative flex flex-col justify-between min-h-[72px] sm:min-h-[80px] ${
+                className={`p-2.5 sm:p-3 border rounded transition-all cursor-pointer select-none relative flex flex-col justify-between min-h-[72px] sm:min-h-[80px] ${
                   isSelected
                     ? 'bg-[#fbf9f6] border-[#af101a] ring-1 ring-[#af101a] shadow-xs'
                     : 'bg-white border-[#eae8e5] hover:border-[#cfcac2] hover:shadow-2xs'
@@ -76,7 +76,7 @@ export const DishBadgesSection: React.FC<DishBadgesSectionProps> = ({
                 <div className="flex items-start justify-between gap-2">
                   <div className="flex items-center gap-2 sm:gap-2.5 min-w-0">
                     <div
-                      className={`w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center text-sm shrink-0 ${
+                      className={`w-7 h-7 sm:w-8 sm:h-8 rounded flex items-center justify-center text-sm shrink-0 ${
                         isSelected
                           ? 'bg-[#af101a] text-white shadow-xs'
                           : 'bg-[#f5f3f0] text-[#585757]'
@@ -119,7 +119,7 @@ export const DishBadgesSection: React.FC<DishBadgesSectionProps> = ({
 
       {/* Spicy Options if Spicy Glaze / Spicy Badge is Selected */}
       {isSpicySelected && onSpiceLevelChange && (
-        <div className="mt-3 p-3 sm:p-3.5 bg-[#fdf8f6] border border-[#f5d0c5] rounded-xl space-y-2.5 animate-fade-in">
+        <div className="mt-3 p-3 sm:p-3.5 bg-[#fdf8f6] border border-[#f5d0c5] rounded space-y-2.5 animate-fade-in">
           <div className="flex items-center gap-1.5 text-xs font-bold text-[#b43419] uppercase tracking-wider whitespace-nowrap">
             <span className="material-symbols-outlined text-[16px]">local_fire_department</span>
             <span>Spicy Level Configuration</span>
@@ -136,7 +136,7 @@ export const DishBadgesSection: React.FC<DishBadgesSectionProps> = ({
                     key={lvl}
                     type="button"
                     onClick={() => onSpiceLevelChange(lvl)}
-                    className={`flex-1 py-1 text-xs font-bold rounded-lg border transition-all cursor-pointer ${
+                    className={`flex-1 py-1 text-xs font-bold rounded border transition-all cursor-pointer ${
                       spiceLevel >= lvl
                         ? 'bg-[#af101a] text-white border-[#af101a] shadow-xs'
                         : 'bg-white text-[#585757] border-[#eae8e5] hover:bg-gray-50'
@@ -158,7 +158,7 @@ export const DishBadgesSection: React.FC<DishBadgesSectionProps> = ({
                   value={spiceNote}
                   onChange={(e) => onSpiceNoteChange(e.target.value)}
                   placeholder="e.g. Sốt ớt Togarashi cay nồng dịu nhẹ"
-                  className="w-full px-2.5 py-1.5 rounded-lg border border-[#eae8e5] bg-white text-xs font-medium text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
+                  className="w-full px-2.5 py-1.5 rounded border border-[#eae8e5] bg-white text-xs font-medium text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
                 />
               </div>
             )}

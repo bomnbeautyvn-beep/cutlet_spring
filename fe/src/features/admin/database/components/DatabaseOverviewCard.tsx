@@ -14,13 +14,13 @@ export const DatabaseOverviewCard: React.FC<DatabaseOverviewCardProps> = ({
 }) => {
   if (isLoading && !status) {
     return (
-      <div className="p-6 bg-white rounded-2xl border border-[#eae8e5] animate-pulse space-y-4 shadow-xs">
+      <div className="p-6 bg-white rounded border border-[#eae8e5] animate-pulse space-y-4 shadow-xs">
         <div className="h-5 w-48 bg-zinc-200 rounded" />
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          <div className="h-16 bg-zinc-100 rounded-xl" />
-          <div className="h-16 bg-zinc-100 rounded-xl" />
-          <div className="h-16 bg-zinc-100 rounded-xl" />
-          <div className="h-16 bg-zinc-100 rounded-xl" />
+          <div className="h-16 bg-zinc-100 rounded" />
+          <div className="h-16 bg-zinc-100 rounded" />
+          <div className="h-16 bg-zinc-100 rounded" />
+          <div className="h-16 bg-zinc-100 rounded" />
         </div>
       </div>
     );
@@ -30,11 +30,11 @@ export const DatabaseOverviewCard: React.FC<DatabaseOverviewCardProps> = ({
   const isMaintenance = status?.maintenanceMode ?? false;
 
   return (
-    <div className="bg-white rounded-2xl border border-[#eae8e5] p-5 sm:p-6 space-y-5 shadow-xs">
+    <div className="bg-white rounded border border-[#eae8e5] p-5 sm:p-6 space-y-5 shadow-xs">
       {/* Top Banner / Status Line */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-[#eae8e5]">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#1b1c1a] text-white flex items-center justify-center shrink-0 shadow-xs">
+          <div className="w-10 h-10 rounded bg-[#1b1c1a] text-white flex items-center justify-center shrink-0 shadow-xs">
             <span className="material-symbols-outlined text-[22px]">database</span>
           </div>
           <div>
@@ -67,7 +67,7 @@ export const DatabaseOverviewCard: React.FC<DatabaseOverviewCardProps> = ({
           type="button"
           onClick={onRefresh}
           disabled={isLoading}
-          className="self-start sm:self-center px-3.5 py-2 text-xs font-bold text-[#585757] hover:text-[#1b1c1a] hover:bg-[#fbf9f6] rounded-xl border border-[#eae8e5] transition-colors flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+          className="self-start sm:self-center px-3.5 py-2 text-xs font-bold text-[#585757] hover:text-[#1b1c1a] hover:bg-[#fbf9f6] rounded border border-[#eae8e5] transition-colors flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
         >
           <span className={`material-symbols-outlined text-[16px] ${isLoading ? 'animate-spin' : ''}`}>
             sync
@@ -78,7 +78,7 @@ export const DatabaseOverviewCard: React.FC<DatabaseOverviewCardProps> = ({
 
       {/* Maintenance Mode Alert if active */}
       {isMaintenance && (
-        <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl flex items-start gap-3 text-amber-900">
+        <div className="p-4 bg-amber-50 border border-amber-200 rounded flex items-start gap-3 text-amber-900">
           <span className="material-symbols-outlined text-[20px] text-amber-600 shrink-0 mt-0.5">
             warning
           </span>
@@ -96,7 +96,7 @@ export const DatabaseOverviewCard: React.FC<DatabaseOverviewCardProps> = ({
       {/* Metrics Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
         {/* Database Size */}
-        <div className="p-4 bg-[#fbf9f6] rounded-xl border border-[#eae8e5]">
+        <div className="p-4 bg-[#fbf9f6] rounded border border-[#eae8e5]">
           <div className="flex items-center justify-between text-[#8f6f6c] mb-1">
             <span className="text-[11px] font-bold uppercase tracking-wider">Database Size</span>
             <span className="material-symbols-outlined text-[18px] text-[#af101a]">hard_drive</span>
@@ -108,7 +108,7 @@ export const DatabaseOverviewCard: React.FC<DatabaseOverviewCardProps> = ({
         </div>
 
         {/* Public Tables */}
-        <div className="p-4 bg-[#fbf9f6] rounded-xl border border-[#eae8e5]">
+        <div className="p-4 bg-[#fbf9f6] rounded border border-[#eae8e5]">
           <div className="flex items-center justify-between text-[#8f6f6c] mb-1">
             <span className="text-[11px] font-bold uppercase tracking-wider">Active Tables</span>
             <span className="material-symbols-outlined text-[18px] text-[#feae2c]">table_chart</span>
@@ -120,7 +120,7 @@ export const DatabaseOverviewCard: React.FC<DatabaseOverviewCardProps> = ({
         </div>
 
         {/* Total Records */}
-        <div className="p-4 bg-[#fbf9f6] rounded-xl border border-[#eae8e5]">
+        <div className="p-4 bg-[#fbf9f6] rounded border border-[#eae8e5]">
           <div className="flex items-center justify-between text-[#8f6f6c] mb-1">
             <span className="text-[11px] font-bold uppercase tracking-wider">Total Records</span>
             <span className="material-symbols-outlined text-[18px] text-emerald-600">data_array</span>
@@ -132,7 +132,7 @@ export const DatabaseOverviewCard: React.FC<DatabaseOverviewCardProps> = ({
         </div>
 
         {/* Last Backup */}
-        <div className="p-4 bg-[#fbf9f6] rounded-xl border border-[#eae8e5]">
+        <div className="p-4 bg-[#fbf9f6] rounded border border-[#eae8e5]">
           <div className="flex items-center justify-between text-[#8f6f6c] mb-1">
             <span className="text-[11px] font-bold uppercase tracking-wider">Last Backup</span>
             <span className="material-symbols-outlined text-[18px] text-blue-600">verified</span>

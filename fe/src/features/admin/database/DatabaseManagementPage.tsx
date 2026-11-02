@@ -117,7 +117,7 @@ export const DatabaseManagementPage: React.FC = () => {
       {/* Global Feedback Banner */}
       {feedbackMessage && (
         <div
-          className={`p-4 rounded-xl border flex items-center justify-between gap-3 text-xs ${
+          className={`p-4 rounded border flex items-center justify-between gap-3 text-xs ${
             feedbackMessage.type === 'success'
               ? 'bg-emerald-50 text-emerald-900 border-emerald-200'
               : 'bg-red-50 text-red-900 border-red-200'

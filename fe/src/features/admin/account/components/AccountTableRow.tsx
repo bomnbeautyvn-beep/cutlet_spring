@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { AdminAccount } from '@/services/admin.service';
 
 interface AccountTableRowProps {
@@ -30,7 +30,7 @@ export const AccountTableRow: React.FC<AccountTableRowProps> = ({
       <td className="py-3.5 px-4">
         <div className="flex items-center gap-3">
           <div
-            className={`w-9 h-9 rounded-xl flex items-center justify-center text-white font-bold text-xs uppercase ${
+            className={`w-9 h-9 rounded flex items-center justify-center text-white font-bold text-xs uppercase ${
               isAdminRole ? 'bg-[#af101a]' : 'bg-amber-600'
             }`}
           >
@@ -42,7 +42,7 @@ export const AccountTableRow: React.FC<AccountTableRowProps> = ({
                 {account.fullName || 'Atelier Operator'}
               </span>
               {isCurrent && (
-                <span className="px-2 py-0.5 bg-[#af101a]/10 text-[#af101a] font-bold text-[9px] uppercase tracking-wider rounded-md">
+                <span className="px-2 py-0.5 bg-[#af101a]/10 text-[#af101a] font-bold text-[9px] uppercase tracking-wider rounded">
                   Current Session
                 </span>
               )}
@@ -55,7 +55,7 @@ export const AccountTableRow: React.FC<AccountTableRowProps> = ({
       <td className="py-3.5 px-4">
         <div className="flex items-center gap-1.5">
           <span
-            className={`px-2.5 py-1 rounded-lg font-bold text-[10px] uppercase tracking-wider ${
+            className={`px-2.5 py-1 rounded font-bold text-[10px] uppercase tracking-wider ${
               isAdminRole
                 ? 'bg-rose-50 text-rose-800 border border-rose-200'
                 : 'bg-amber-50 text-amber-800 border border-amber-200'
@@ -107,14 +107,14 @@ export const AccountTableRow: React.FC<AccountTableRowProps> = ({
           <button
             onClick={() => onEdit(account)}
             title="Edit Full Name & Role"
-            className="p-1.5 text-[#585757] hover:text-[#af101a] hover:bg-[#f5f3f0] rounded-lg transition-colors cursor-pointer"
+            className="p-1.5 text-[#585757] hover:text-[#af101a] hover:bg-[#f5f3f0] rounded transition-colors cursor-pointer"
           >
             <span className="material-symbols-outlined text-[18px]">edit</span>
           </button>
           <button
             onClick={() => onResetPassword(account)}
             title="Administrative Password Reset"
-            className="p-1.5 text-[#585757] hover:text-amber-700 hover:bg-amber-50 rounded-lg transition-colors cursor-pointer"
+            className="p-1.5 text-[#585757] hover:text-amber-700 hover:bg-amber-50 rounded transition-colors cursor-pointer"
           >
             <span className="material-symbols-outlined text-[18px]">lock_reset</span>
           </button>

@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Ingredient } from '@/types';
 
 interface IngredientCardProps {
@@ -18,13 +18,13 @@ export const IngredientCard: React.FC<IngredientCardProps> = ({
 }) => {
   return (
     <div
-      className={`flex flex-col justify-between rounded-2xl border bg-white p-5 shadow-xs transition-all duration-300 relative ${
+      className={`flex flex-col justify-between rounded border bg-white p-5 shadow-xs transition-all duration-300 relative ${
         item.isActive ? 'border-[#eae8e5]' : 'border-gray-300 opacity-60 bg-gray-50'
       }`}
     >
       <div>
         {/* Visual Frame - 30% longer with subtle rounded corners */}
-        <div className="w-full h-52 rounded-lg overflow-hidden bg-[#f3f1ec] border border-[#eae6df] mb-4 relative flex items-center justify-center group shadow-2xs">
+        <div className="w-full h-52 rounded overflow-hidden bg-[#f3f1ec] border border-[#eae6df] mb-4 relative flex items-center justify-center group shadow-2xs">
           {item.imageUrl ? (
             <img
               src={item.imageUrl}
@@ -92,7 +92,7 @@ export const IngredientCard: React.FC<IngredientCardProps> = ({
           type="button"
           onClick={() => onToggleStatus(item.id)}
           disabled={isBusy}
-          className={`text-[11px] font-bold px-2.5 py-1.5 rounded-lg border transition-all cursor-pointer ${
+          className={`text-[11px] font-bold px-2.5 py-1.5 rounded border transition-all cursor-pointer ${
             item.isActive
               ? 'border-gray-300 text-gray-600 hover:bg-gray-100'
               : 'border-emerald-300 text-emerald-700 bg-emerald-50 hover:bg-emerald-100'
@@ -105,7 +105,7 @@ export const IngredientCard: React.FC<IngredientCardProps> = ({
           <button
             type="button"
             onClick={() => onEdit(item)}
-            className="p-1.5 rounded-lg text-[#5b403d] hover:bg-[#eae8e5] transition-colors cursor-pointer"
+            className="p-1.5 rounded text-[#5b403d] hover:bg-[#eae8e5] transition-colors cursor-pointer"
             title="Edit Ingredient"
           >
             <span className="material-symbols-outlined text-[18px]">edit</span>
@@ -114,7 +114,7 @@ export const IngredientCard: React.FC<IngredientCardProps> = ({
             type="button"
             onClick={() => onDelete(item.id, item.nameEn)}
             disabled={isBusy}
-            className="p-1.5 rounded-lg text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
+            className="p-1.5 rounded text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
             title="Delete Ingredient"
           >
             <span className="material-symbols-outlined text-[18px]">delete</span>

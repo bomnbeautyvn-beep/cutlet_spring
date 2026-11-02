@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useHeroCmsForm } from './hero/hooks/useHeroCmsForm';
 import { HeroVisualStatusCard } from './hero/components/HeroVisualStatusCard';
 import { HeroLanguageTabContent } from './hero/components/HeroLanguageTabContent';
@@ -44,7 +44,7 @@ export const HeroCmsTab: React.FC = () => {
       {/* Toast Alert */}
       {message && (
         <div
-          className={`p-4 rounded-xl flex items-center justify-between text-sm font-medium ${
+          className={`p-4 rounded flex items-center justify-between text-sm font-medium ${
             message.type === 'success'
               ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
               : 'bg-red-50 text-red-800 border border-red-200'

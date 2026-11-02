@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 interface SetPasswordStepProps {
   newPassword: string;
@@ -48,7 +48,7 @@ export const SetPasswordStep: React.FC<SetPasswordStepProps> = ({
             value={newPassword}
             onChange={(e) => onNewPasswordChange(e.target.value)}
             placeholder="Enter secure password"
-            className="w-full pr-10 pl-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-xl focus:outline-none focus:border-[#af101a]"
+            className="w-full pr-10 pl-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a]"
           />
           <button
             type="button"
@@ -73,7 +73,7 @@ export const SetPasswordStep: React.FC<SetPasswordStepProps> = ({
             value={confirmNewPassword}
             onChange={(e) => onConfirmNewPasswordChange(e.target.value)}
             placeholder="Confirm new password"
-            className="w-full pr-10 pl-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-xl focus:outline-none focus:border-[#af101a]"
+            className="w-full pr-10 pl-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a]"
           />
           <button
             type="button"
@@ -88,7 +88,7 @@ export const SetPasswordStep: React.FC<SetPasswordStepProps> = ({
       </div>
 
       {/* Password Policy Live Requirements */}
-      <div className="p-3 bg-[#fbf9f6] rounded-xl border border-[#eae8e5] space-y-1.5 text-[11px]">
+      <div className="p-3 bg-[#fbf9f6] rounded border border-[#eae8e5] space-y-1.5 text-[11px]">
         <div className="font-bold text-[#585757] uppercase tracking-wider text-[10px]">
           Password Requirements:
         </div>
@@ -177,7 +177,7 @@ export const SetPasswordStep: React.FC<SetPasswordStepProps> = ({
         <button
           type="submit"
           disabled={isLoading || !policy.isPasswordValid}
-          className="px-6 py-2.5 bg-[#af101a] hover:bg-[#d32f2f] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-md flex items-center gap-2 cursor-pointer disabled:opacity-50"
+          className="px-6 py-2.5 bg-[#af101a] hover:bg-[#d32f2f] text-white text-xs font-bold uppercase tracking-wider rounded transition-all shadow-md flex items-center gap-2 cursor-pointer disabled:opacity-50"
         >
           {isLoading ? (
             <>

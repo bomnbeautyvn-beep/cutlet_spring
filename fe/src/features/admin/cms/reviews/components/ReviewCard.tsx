@@ -20,7 +20,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
 }) => {
   return (
     <div
-      className={`flex flex-col justify-between rounded-2xl border bg-white p-5 shadow-xs transition-all duration-300 relative ${
+      className={`flex flex-col justify-between rounded border bg-white p-5 shadow-xs transition-all duration-300 relative ${
         rev.isActive ? 'border-[#eae8e5]' : 'border-gray-300 opacity-60 bg-gray-50'
       }`}
     >
@@ -69,7 +69,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
 
         {/* Owner Reply */}
         {rev.ownerResponse && (
-          <div className="mt-3 p-2.5 rounded-xl bg-[#f5f3f0] border-l-2 border-[#af101a] text-[11px] text-[#5b403d] space-y-0.5">
+          <div className="mt-3 p-2.5 rounded bg-[#f5f3f0] border-l-2 border-[#af101a] text-[11px] text-[#5b403d] space-y-0.5">
             <span className="font-bold text-[#af101a] text-[10px] uppercase block tracking-wider">
               Phản hồi từ quán:
             </span>
@@ -87,7 +87,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
             type="button"
             onClick={() => onToggleFeatured(rev.id)}
             disabled={isBusy}
-            className={`text-[10px] font-bold px-2 py-1 rounded-lg border transition-all cursor-pointer ${
+            className={`text-[10px] font-bold px-2 py-1 rounded border transition-all cursor-pointer ${
               rev.isFeatured
                 ? 'border-amber-300 text-amber-700 bg-amber-50 hover:bg-amber-100'
                 : 'border-gray-200 text-gray-500 hover:bg-gray-100'
@@ -100,7 +100,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
             type="button"
             onClick={() => onToggleStatus(rev.id)}
             disabled={isBusy}
-            className={`text-[10px] font-bold px-2 py-1 rounded-lg border transition-all cursor-pointer ${
+            className={`text-[10px] font-bold px-2 py-1 rounded border transition-all cursor-pointer ${
               rev.isActive
                 ? 'border-gray-300 text-gray-600 hover:bg-gray-100'
                 : 'border-emerald-300 text-emerald-700 bg-emerald-50 hover:bg-emerald-100'
@@ -114,7 +114,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
           <button
             type="button"
             onClick={() => onEdit(rev)}
-            className="p-1.5 rounded-lg text-[#5b403d] hover:bg-[#eae8e5] transition-colors cursor-pointer"
+            className="p-1.5 rounded text-[#5b403d] hover:bg-[#eae8e5] transition-colors cursor-pointer"
             title="Edit Review"
           >
             <span className="material-symbols-outlined text-[17px]">edit</span>
@@ -123,7 +123,7 @@ export const ReviewCard: React.FC<ReviewCardProps> = ({
             type="button"
             onClick={() => onDelete(rev.id, rev.reviewerName)}
             disabled={isBusy}
-            className="p-1.5 rounded-lg text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
+            className="p-1.5 rounded text-red-600 hover:bg-red-50 transition-colors cursor-pointer"
             title="Delete Review"
           >
             <span className="material-symbols-outlined text-[17px]">delete</span>

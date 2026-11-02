@@ -54,7 +54,7 @@ export const CounterTheaterSeating: React.FC = () => {
 
       {/* Utilization Summary */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="p-5 bg-white rounded-2xl border border-[#eae8e5] shadow-xs">
+        <div className="p-5 bg-white rounded border border-[#eae8e5] shadow-xs">
           <span className="text-xs font-bold uppercase tracking-wider text-[#8f6f6c] block mb-1">
             Chef Counter Occupancy
           </span>
@@ -66,7 +66,7 @@ export const CounterTheaterSeating: React.FC = () => {
           </div>
         </div>
 
-        <div className="p-5 bg-white rounded-2xl border border-[#eae8e5] shadow-xs">
+        <div className="p-5 bg-white rounded border border-[#eae8e5] shadow-xs">
           <span className="text-xs font-bold uppercase tracking-wider text-[#8f6f6c] block mb-1">
             Main Atelier Hall
           </span>
@@ -78,7 +78,7 @@ export const CounterTheaterSeating: React.FC = () => {
           </div>
         </div>
 
-        <div className="p-5 bg-white rounded-2xl border border-[#eae8e5] shadow-xs">
+        <div className="p-5 bg-white rounded border border-[#eae8e5] shadow-xs">
           <span className="text-xs font-bold uppercase tracking-wider text-[#8f6f6c] block mb-1">
             Counter Theater Experience
           </span>
@@ -92,7 +92,7 @@ export const CounterTheaterSeating: React.FC = () => {
       </div>
 
       {/* Counter Theater Interactive Seat Map */}
-      <div className="p-6 bg-white rounded-2xl border border-[#eae8e5] shadow-xs space-y-4">
+      <div className="p-6 bg-white rounded border border-[#eae8e5] shadow-xs space-y-4">
         <div className="flex items-center justify-between pb-3 border-b border-[#eae8e5]">
           <div>
             <h3 className="font-headline-sm text-sm font-bold uppercase tracking-wider text-[#1b1c1a]">
@@ -115,7 +115,7 @@ export const CounterTheaterSeating: React.FC = () => {
         </div>
 
         {/* Fryer Kitchen Stage Line */}
-        <div className="p-4 bg-[#1b1c1a] text-white rounded-xl text-center space-y-1">
+        <div className="p-4 bg-[#1b1c1a] text-white rounded text-center space-y-1">
           <span className="font-kr-serif text-xs text-[#feae2c] font-bold block">
             오픈 키친 튀김대 • Panko Frying Stage Line
           </span>
@@ -130,7 +130,7 @@ export const CounterTheaterSeating: React.FC = () => {
             <div
               key={seat.id}
               onClick={() => toggleSeat(seat.id)}
-              className={`p-4 rounded-xl border-2 transition-all cursor-pointer text-center space-y-2 ${
+              className={`p-4 rounded border-2 transition-all cursor-pointer text-center space-y-2 ${
                 seat.occupied
                   ? 'border-[#af101a] bg-[#af101a]/5 hover:bg-[#af101a]/10'
                   : 'border-emerald-300 bg-emerald-50/40 hover:bg-emerald-50'

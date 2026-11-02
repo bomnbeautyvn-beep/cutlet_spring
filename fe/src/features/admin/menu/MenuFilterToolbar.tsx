@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { MenuCategory } from '@/types';
 
 interface MenuFilterToolbarProps {
@@ -21,7 +21,7 @@ export const MenuFilterToolbar: React.FC<MenuFilterToolbarProps> = ({
   categories = [],
 }) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-white p-4 rounded-xl border border-[#eae8e5] shadow-xs">
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-white p-4 rounded border border-[#eae8e5] shadow-xs">
       <div>
         <label className="block text-[11px] font-bold uppercase tracking-wider text-[#585757] mb-1">
           Search
@@ -35,7 +35,7 @@ export const MenuFilterToolbar: React.FC<MenuFilterToolbarProps> = ({
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Search by EN, KO, VI, JA or ID..."
-            className="w-full pl-9 pr-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-lg focus:outline-none focus:border-[#af101a]"
+            className="w-full pl-9 pr-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a]"
           />
         </div>
       </div>
@@ -47,7 +47,7 @@ export const MenuFilterToolbar: React.FC<MenuFilterToolbarProps> = ({
         <select
           value={selectedCategory}
           onChange={(e) => onCategoryChange(e.target.value)}
-          className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-lg focus:outline-none focus:border-[#af101a] cursor-pointer"
+          className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a] cursor-pointer"
         >
           <option value="">All Categories</option>
           {/* Temporary placeholder if selectedCategory is loaded from session before categories finish fetching */}
@@ -83,7 +83,7 @@ export const MenuFilterToolbar: React.FC<MenuFilterToolbarProps> = ({
         <select
           value={selectedActive}
           onChange={(e) => onActiveChange(e.target.value)}
-          className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-lg focus:outline-none focus:border-[#af101a] cursor-pointer"
+          className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a] cursor-pointer"
         >
           <option value="all">All Items (Active + Inactive)</option>
           <option value="active">Active Only (Visible to Diners)</option>

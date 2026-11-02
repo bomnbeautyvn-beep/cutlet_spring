@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 interface AccountFilterToolbarProps {
   searchQuery: string;
@@ -18,7 +18,7 @@ export const AccountFilterToolbar: React.FC<AccountFilterToolbarProps> = ({
   onActiveChange,
 }) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-white p-4 rounded-2xl border border-[#eae8e5] shadow-xs">
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 bg-white p-4 rounded border border-[#eae8e5] shadow-xs">
       <div>
         <label className="block text-[11px] font-bold uppercase tracking-wider text-[#585757] mb-1">
           Search Accounts
@@ -32,7 +32,7 @@ export const AccountFilterToolbar: React.FC<AccountFilterToolbarProps> = ({
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Search by email or full name..."
-            className="w-full pl-9 pr-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-xl focus:outline-none focus:border-[#af101a]"
+            className="w-full pl-9 pr-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a]"
           />
         </div>
       </div>
@@ -44,7 +44,7 @@ export const AccountFilterToolbar: React.FC<AccountFilterToolbarProps> = ({
         <select
           value={selectedRole}
           onChange={(e) => onRoleChange(e.target.value)}
-          className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-xl focus:outline-none focus:border-[#af101a]"
+          className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a]"
         >
           <option value="">All Roles</option>
           <option value="ROLE_ADMIN">ROLE_ADMIN (Full Atelier Access)</option>
@@ -59,7 +59,7 @@ export const AccountFilterToolbar: React.FC<AccountFilterToolbarProps> = ({
         <select
           value={selectedActive}
           onChange={(e) => onActiveChange(e.target.value)}
-          className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-xl focus:outline-none focus:border-[#af101a]"
+          className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a]"
         >
           <option value="all">All Accounts (Active &amp; Inactive)</option>
           <option value="active">Active Only</option>

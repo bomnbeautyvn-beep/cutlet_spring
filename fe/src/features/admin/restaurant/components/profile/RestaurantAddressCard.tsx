@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { RestaurantSettings } from '@/services/admin.service';
 
 interface RestaurantAddressCardProps {
@@ -11,7 +11,7 @@ export const RestaurantAddressCard: React.FC<RestaurantAddressCardProps> = ({
   onChange,
 }) => {
   return (
-    <div className="bg-white p-6 rounded-2xl border border-[#eae8e5] shadow-xs space-y-4">
+    <div className="bg-white p-6 rounded border border-[#eae8e5] shadow-xs space-y-4">
       <h3 className="text-xs font-bold uppercase tracking-wider text-[#1b1c1a]">
         Contact &amp; Physical Address (4 Languages)
       </h3>
@@ -24,7 +24,7 @@ export const RestaurantAddressCard: React.FC<RestaurantAddressCardProps> = ({
             type="text"
             value={formData.phoneNumber || ''}
             onChange={(e) => onChange('phoneNumber', e.target.value)}
-            className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-xl focus:outline-none focus:border-[#af101a]"
+            className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a]"
           />
         </div>
         <div>
@@ -35,7 +35,7 @@ export const RestaurantAddressCard: React.FC<RestaurantAddressCardProps> = ({
             type="email"
             value={formData.email || ''}
             onChange={(e) => onChange('email', e.target.value)}
-            className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-xl focus:outline-none focus:border-[#af101a]"
+            className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a]"
           />
         </div>
       </div>
@@ -49,7 +49,7 @@ export const RestaurantAddressCard: React.FC<RestaurantAddressCardProps> = ({
             type="text"
             value={formData.addressEn || ''}
             onChange={(e) => onChange('addressEn', e.target.value)}
-            className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-xl focus:outline-none focus:border-[#af101a]"
+            className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a]"
           />
         </div>
         <div>
@@ -60,7 +60,7 @@ export const RestaurantAddressCard: React.FC<RestaurantAddressCardProps> = ({
             type="text"
             value={formData.addressKr || ''}
             onChange={(e) => onChange('addressKr', e.target.value)}
-            className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-xl focus:outline-none focus:border-[#af101a]"
+            className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a]"
           />
         </div>
         <div>
@@ -71,7 +71,7 @@ export const RestaurantAddressCard: React.FC<RestaurantAddressCardProps> = ({
             type="text"
             value={formData.addressVi || ''}
             onChange={(e) => onChange('addressVi', e.target.value)}
-            className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-xl focus:outline-none focus:border-[#af101a]"
+            className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a]"
           />
         </div>
         <div>
@@ -82,7 +82,7 @@ export const RestaurantAddressCard: React.FC<RestaurantAddressCardProps> = ({
             type="text"
             value={formData.addressJp || ''}
             onChange={(e) => onChange('addressJp', e.target.value)}
-            className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-xl focus:outline-none focus:border-[#af101a]"
+            className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a]"
           />
         </div>
       </div>

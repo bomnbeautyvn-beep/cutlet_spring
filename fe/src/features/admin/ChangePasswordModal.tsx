@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useChangePasswordForm } from './auth/hooks/useChangePasswordForm';
 import { PasswordPolicyChecklist } from './auth/components/PasswordPolicyChecklist';
 
@@ -41,7 +41,7 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
-      <div className="bg-white rounded-2xl max-w-md w-full border border-[#eae8e5] shadow-2xl overflow-hidden">
+      <div className="bg-white rounded max-w-md w-full border border-[#eae8e5] shadow-2xl overflow-hidden">
         {/* Header */}
         <div className="p-6 bg-[#1b1c1a] text-white flex items-center justify-between border-b-2 border-[#af101a]">
           <div className="flex items-center gap-2.5">
@@ -76,7 +76,7 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               {errorMessage && (
-                <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-lg flex items-start gap-2">
+                <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded flex items-start gap-2">
                   <span className="material-symbols-outlined text-[18px] shrink-0 mt-0.5">error</span>
                   <span>{errorMessage}</span>
                 </div>
@@ -94,7 +94,7 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
                     onChange={(e) => setCurrentPassword(e.target.value)}
                     required
                     placeholder="Enter existing password"
-                    className="w-full px-3.5 py-2.5 pr-10 text-sm bg-[#fbf9f6] border border-[#eae8e5] rounded-lg focus:outline-none focus:border-[#af101a] text-[#1b1c1a]"
+                    className="w-full px-3.5 py-2.5 pr-10 text-sm bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a] text-[#1b1c1a]"
                   />
                   <button
                     type="button"
@@ -120,7 +120,7 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
                     onChange={(e) => setNewPassword(e.target.value)}
                     required
                     placeholder="Enter new strong password"
-                    className="w-full px-3.5 py-2.5 pr-10 text-sm bg-[#fbf9f6] border border-[#eae8e5] rounded-lg focus:outline-none focus:border-[#af101a] text-[#1b1c1a]"
+                    className="w-full px-3.5 py-2.5 pr-10 text-sm bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a] text-[#1b1c1a]"
                   />
                   <button
                     type="button"
@@ -146,7 +146,7 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
                     onChange={(e) => setConfirmNewPassword(e.target.value)}
                     required
                     placeholder="Re-enter new password"
-                    className="w-full px-3.5 py-2.5 pr-10 text-sm bg-[#fbf9f6] border border-[#eae8e5] rounded-lg focus:outline-none focus:border-[#af101a] text-[#1b1c1a]"
+                    className="w-full px-3.5 py-2.5 pr-10 text-sm bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a] text-[#1b1c1a]"
                   />
                   <button
                     type="button"
@@ -176,14 +176,14 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
                   type="button"
                   onClick={onClose}
                   disabled={isLoading}
-                  className="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-[#1b1c1a] font-bold text-xs uppercase tracking-wider rounded-lg transition-colors cursor-pointer"
+                  className="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-[#1b1c1a] font-bold text-xs uppercase tracking-wider rounded transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isLoading || !isFormValid}
-                  className="px-5 py-2.5 bg-[#af101a] hover:bg-[#d32f2f] text-white font-bold text-xs uppercase tracking-wider rounded-lg shadow transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
+                  className="px-5 py-2.5 bg-[#af101a] hover:bg-[#d32f2f] text-white font-bold text-xs uppercase tracking-wider rounded shadow transition-all flex items-center gap-2 cursor-pointer disabled:opacity-50"
                 >
                   {isLoading ? (
                     <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />

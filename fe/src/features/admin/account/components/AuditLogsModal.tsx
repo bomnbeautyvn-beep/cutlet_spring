@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { AccountAuditLog, PageResult } from '@/services/admin.service';
 
 interface AuditLogsModalProps {
@@ -17,7 +17,7 @@ export const AuditLogsModal: React.FC<AuditLogsModalProps> = ({
   const logs = auditLogsResult?.content || [];
 
   return (
-    <div className="bg-white p-6 rounded-2xl border border-[#eae8e5] shadow-xs space-y-4">
+    <div className="bg-white p-6 rounded border border-[#eae8e5] shadow-xs space-y-4">
       <div className="flex items-center justify-between pb-3 border-b border-[#eae8e5]">
         <div className="flex items-center gap-2">
           <span className="material-symbols-outlined text-[#af101a] text-[20px]">

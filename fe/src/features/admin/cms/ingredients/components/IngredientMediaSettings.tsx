@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+﻿import React, { useState, useRef } from 'react';
 import { SaveIngredientRequest } from '@/types';
 
 interface IngredientMediaSettingsProps {
@@ -53,7 +53,7 @@ export const IngredientMediaSettings: React.FC<IngredientMediaSettingsProps> = (
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-start bg-[#fbf9f6] p-4 rounded-xl border border-[#eae8e5]">
+    <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-start bg-[#fbf9f6] p-4 rounded border border-[#eae8e5]">
       {/* Visual Frame & Drag-and-Drop Upload */}
       <div className="md:col-span-5 flex flex-col items-center">
         <div
@@ -62,7 +62,7 @@ export const IngredientMediaSettings: React.FC<IngredientMediaSettingsProps> = (
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
           onClick={() => !uploading && fileInputRef.current?.click()}
-          className={`w-full aspect-[4/3] rounded-lg overflow-hidden relative flex items-center justify-center transition-all cursor-pointer group select-none ${
+          className={`w-full aspect-[4/3] rounded overflow-hidden relative flex items-center justify-center transition-all cursor-pointer group select-none ${
             isDragging
               ? 'border-2 border-dashed border-[#af101a] bg-[#af101a]/10 ring-4 ring-[#af101a]/20 scale-[1.01]'
               : 'bg-[#f3f1ec] border border-[#eae6df] hover:border-[#af101a]/60 hover:shadow-xs'
@@ -119,7 +119,7 @@ export const IngredientMediaSettings: React.FC<IngredientMediaSettingsProps> = (
           type="button"
           onClick={() => fileInputRef.current?.click()}
           disabled={uploading}
-          className="mt-2 w-full py-1.5 px-3 border border-[#eae8e5] bg-[#f5f3f0] hover:bg-[#eae8e5] text-xs font-bold text-[#1b1c1a] text-center cursor-pointer transition-colors flex items-center justify-center gap-1.5 rounded-lg shadow-2xs"
+          className="mt-2 w-full py-1.5 px-3 border border-[#eae8e5] bg-[#f5f3f0] hover:bg-[#eae8e5] text-xs font-bold text-[#1b1c1a] text-center cursor-pointer transition-colors flex items-center justify-center gap-1.5 rounded shadow-2xs"
         >
           <span className="material-symbols-outlined text-[15px] text-[#af101a]">cloud_upload</span>
           <span>{uploading ? 'Processing Image...' : currentImageUrl ? 'Thay đổi ảnh nguyên liệu' : 'Chọn hoặc thả ảnh vào đây'}</span>
@@ -154,7 +154,7 @@ export const IngredientMediaSettings: React.FC<IngredientMediaSettingsProps> = (
                   displayOrder: parseInt(e.target.value, 10) || 1,
                 }))
               }
-              className="w-full px-3 py-1.5 rounded-lg border border-[#eae8e5] bg-white text-xs font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3 py-1.5 rounded border border-[#eae8e5] bg-white text-xs font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
             />
             <span className="text-[10px] text-[#8f6f6c] block mt-1 whitespace-nowrap">
               Thứ tự xuất hiện trên trang chủ (1-4)
@@ -165,7 +165,7 @@ export const IngredientMediaSettings: React.FC<IngredientMediaSettingsProps> = (
             <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
               Active Status
             </label>
-            <div className="h-[34px] px-3 py-1.5 rounded-lg border border-[#eae8e5] bg-white flex items-center justify-between">
+            <div className="h-[34px] px-3 py-1.5 rounded border border-[#eae8e5] bg-white flex items-center justify-between">
               <span className="text-xs font-semibold text-[#1b1c1a] whitespace-nowrap">
                 {formData.isActive ? (
                   <span className="text-emerald-700 font-bold">Active on Home</span>

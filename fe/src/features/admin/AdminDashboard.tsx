@@ -55,7 +55,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   return (
     <div className="p-4 sm:p-6 lg:p-8 space-y-5 sm:space-y-6 max-w-7xl mx-auto">
       {/* Live Service Status Banner */}
-      <div className={`p-4 sm:p-6 rounded-2xl border ${sessionDisplay.bg} flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xs`}>
+      <div className={`p-4 sm:p-6 rounded border ${sessionDisplay.bg} flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xs`}>
         <div className="flex items-start sm:items-center gap-3">
           <div className="relative flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
             <span className={`w-3.5 h-3.5 rounded-full ${sessionDisplay.color} inline-block`} />
@@ -81,7 +81,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         <div className="flex items-center gap-2 w-full sm:w-auto">
           <button
             onClick={onOpenNewDish}
-            className="w-full sm:w-auto justify-center px-4 py-2.5 sm:py-2 bg-[#af101a] hover:bg-[#d32f2f] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors shadow-xs cursor-pointer flex items-center gap-1.5 shrink-0"
+            className="w-full sm:w-auto justify-center px-4 py-2.5 sm:py-2 bg-[#af101a] hover:bg-[#d32f2f] text-white rounded text-xs font-bold uppercase tracking-wider transition-colors shadow-xs cursor-pointer flex items-center gap-1.5 shrink-0"
           >
             <span className="material-symbols-outlined text-[16px]">add</span>
             <span>New Dish</span>
@@ -94,7 +94,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         {/* Total Dishes */}
         <div
           onClick={() => onNavigate('menu')}
-          className="p-4 sm:p-5 bg-white rounded-2xl border border-[#eae8e5] shadow-xs hover:border-[#af101a]/40 transition-all cursor-pointer group active:scale-[0.99]"
+          className="p-4 sm:p-5 bg-white rounded border border-[#eae8e5] shadow-xs hover:border-[#af101a]/40 transition-all cursor-pointer group active:scale-[0.99]"
         >
           <div className="flex items-center justify-between text-[#8f6f6c] mb-2">
             <span className="text-xs font-bold uppercase tracking-wider">Dishes Catalog</span>
@@ -118,7 +118,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         {/* Menu Categories */}
         <div
           onClick={() => onNavigate('menu')}
-          className="p-4 sm:p-5 bg-white rounded-2xl border border-[#eae8e5] shadow-xs hover:border-[#af101a]/40 transition-all cursor-pointer group active:scale-[0.99]"
+          className="p-4 sm:p-5 bg-white rounded border border-[#eae8e5] shadow-xs hover:border-[#af101a]/40 transition-all cursor-pointer group active:scale-[0.99]"
         >
           <div className="flex items-center justify-between text-[#8f6f6c] mb-2">
             <span className="text-xs font-bold uppercase tracking-wider">Categories</span>
@@ -135,7 +135,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         {/* Staff & Admins */}
         <div
           onClick={() => onNavigate('accounts')}
-          className="p-4 sm:p-5 bg-white rounded-2xl border border-[#eae8e5] shadow-xs hover:border-[#af101a]/40 transition-all cursor-pointer group active:scale-[0.99]"
+          className="p-4 sm:p-5 bg-white rounded border border-[#eae8e5] shadow-xs hover:border-[#af101a]/40 transition-all cursor-pointer group active:scale-[0.99]"
         >
           <div className="flex items-center justify-between text-[#8f6f6c] mb-2">
             <span className="text-xs font-bold uppercase tracking-wider">Staff Accounts</span>
@@ -154,7 +154,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         {isAdmin && (
           <div
             onClick={() => onNavigate('database')}
-            className="p-4 sm:p-5 bg-white rounded-2xl border border-[#eae8e5] shadow-xs hover:border-[#af101a]/40 transition-all cursor-pointer group active:scale-[0.99]"
+            className="p-4 sm:p-5 bg-white rounded border border-[#eae8e5] shadow-xs hover:border-[#af101a]/40 transition-all cursor-pointer group active:scale-[0.99]"
           >
             <div className="flex items-center justify-between text-[#8f6f6c] mb-2">
               <span className="text-xs font-bold uppercase tracking-wider">Database Engine</span>
@@ -172,7 +172,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       </div>
 
       {/* Category Distribution Grid */}
-      <div className="p-4 sm:p-6 bg-white rounded-2xl border border-[#eae8e5] shadow-xs space-y-4">
+      <div className="p-4 sm:p-6 bg-white rounded border border-[#eae8e5] shadow-xs space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-4">
           <h3 className="font-headline-sm text-sm font-bold uppercase tracking-wider text-[#1b1c1a]">
             Catalog Distribution by Culinary Category
@@ -187,7 +187,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
             Object.entries(stats.categoryDistribution).map(([catName, count]) => (
               <div
                 key={catName}
-                className="p-3 sm:p-3.5 bg-[#fbf9f6] rounded-xl border border-[#eae8e5] flex items-center justify-between gap-3"
+                className="p-3 sm:p-3.5 bg-[#fbf9f6] rounded border border-[#eae8e5] flex items-center justify-between gap-3"
               >
                 <div className="min-w-0 flex-1">
                   <div className="text-xs font-bold text-[#1b1c1a] truncate">{catName}</div>

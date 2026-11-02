@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useSectionsOrder } from './sections/hooks/useSectionsOrder';
 import { SectionOrderItem } from './sections/components/SectionOrderItem';
 import { SectionEditModal } from './sections/components/SectionEditModal';
@@ -42,7 +42,7 @@ export const SectionsOrderCmsTab: React.FC = () => {
       {/* Toast Alert */}
       {message && (
         <div
-          className={`p-4 rounded-xl flex items-center justify-between text-sm font-medium ${
+          className={`p-4 rounded flex items-center justify-between text-sm font-medium ${
             message.type === 'success'
               ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
               : 'bg-red-50 text-red-800 border border-red-200'
@@ -65,7 +65,7 @@ export const SectionsOrderCmsTab: React.FC = () => {
       )}
 
       {/* Header */}
-      <div className="bg-white rounded-2xl border border-[#eae8e5] p-6 shadow-xs">
+      <div className="bg-white rounded border border-[#eae8e5] p-6 shadow-xs">
         <h3 className="font-headline-sm text-lg font-bold text-[#1b1c1a]">
           Section Ordering &amp; Visibility Controls
         </h3>

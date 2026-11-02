@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useHeaderFooterCmsForm } from './header-footer/hooks/useHeaderFooterCmsForm';
 import { HeaderBrandingSection } from './header-footer/components/HeaderBrandingSection';
 import { HeaderFooterLanguageContent } from './header-footer/components/HeaderFooterLanguageContent';
@@ -44,7 +44,7 @@ export const HeaderFooterCmsTab: React.FC = () => {
       {/* Toast Alert */}
       {message && (
         <div
-          className={`p-4 rounded-xl flex items-center justify-between text-sm font-medium ${
+          className={`p-4 rounded flex items-center justify-between text-sm font-medium ${
             message.type === 'success'
               ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
               : 'bg-red-50 text-red-800 border border-red-200'

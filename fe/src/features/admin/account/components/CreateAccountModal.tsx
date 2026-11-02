@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 
 interface CreateAccountModalProps {
   isOpen: boolean;
@@ -35,7 +35,7 @@ export const CreateAccountModal: React.FC<CreateAccountModalProps> = ({
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl border border-[#eae8e5] p-6 space-y-5 animate-scale-in"
+        className="relative w-full max-w-md bg-white rounded shadow-2xl border border-[#eae8e5] p-6 space-y-5 animate-scale-in"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between pb-3 border-b border-[#eae8e5]">
@@ -59,7 +59,7 @@ export const CreateAccountModal: React.FC<CreateAccountModalProps> = ({
               value={email}
               onChange={(e) => onEmailChange(e.target.value)}
               placeholder="e.g. staff@cutletspring.com"
-              className="w-full px-3 py-2 bg-[#fbf9f6] border border-[#eae8e5] rounded-xl focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3 py-2 bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a]"
             />
           </div>
 
@@ -73,7 +73,7 @@ export const CreateAccountModal: React.FC<CreateAccountModalProps> = ({
               value={fullName}
               onChange={(e) => onFullNameChange(e.target.value)}
               placeholder="e.g. Kim Min-jun"
-              className="w-full px-3 py-2 bg-[#fbf9f6] border border-[#eae8e5] rounded-xl focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3 py-2 bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a]"
             />
           </div>
 
@@ -88,7 +88,7 @@ export const CreateAccountModal: React.FC<CreateAccountModalProps> = ({
               value={password}
               onChange={(e) => onPasswordChange(e.target.value)}
               placeholder="Min 8 chars, uppercase, lowercase, digit, symbol"
-              className="w-full px-3 py-2 bg-[#fbf9f6] border border-[#eae8e5] rounded-xl focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3 py-2 bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a]"
             />
           </div>
 
@@ -99,7 +99,7 @@ export const CreateAccountModal: React.FC<CreateAccountModalProps> = ({
             <select
               value={role}
               onChange={(e) => onRoleChange(e.target.value)}
-              className="w-full px-3 py-2 bg-[#fbf9f6] border border-[#eae8e5] rounded-xl focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3 py-2 bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a]"
             >
               <option value="ROLE_STAFF">ROLE_STAFF (Menu Catalog &amp; Counter Operations)</option>
               <option value="ROLE_ADMIN">ROLE_ADMIN (Full Atelier Administration)</option>
@@ -110,13 +110,13 @@ export const CreateAccountModal: React.FC<CreateAccountModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 font-bold uppercase tracking-wider text-gray-600 hover:bg-gray-100 rounded-xl cursor-pointer"
+              className="px-4 py-2 font-bold uppercase tracking-wider text-gray-600 hover:bg-gray-100 rounded cursor-pointer"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="px-5 py-2 bg-[#af101a] hover:bg-[#d32f2f] text-white font-bold uppercase tracking-wider rounded-xl shadow-md cursor-pointer"
+              className="px-5 py-2 bg-[#af101a] hover:bg-[#d32f2f] text-white font-bold uppercase tracking-wider rounded shadow-md cursor-pointer"
             >
               Create Account
             </button>

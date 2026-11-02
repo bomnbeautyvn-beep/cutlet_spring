@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { adminService, EmailConfig, UpdateEmailConfigPayload } from '@/services/admin.service';
 import { SendTestEmailModal } from './SendTestEmailModal';
 import { DisableEmailConfirmModal } from './DisableEmailConfirmModal';
@@ -224,7 +224,7 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
 
   if (isLoading) {
     return (
-      <div className="bg-white p-8 rounded-2xl border border-[#eae8e5] flex flex-col items-center justify-center min-h-[300px] gap-3 text-[#8f6f6c]">
+      <div className="bg-white p-8 rounded border border-[#eae8e5] flex flex-col items-center justify-center min-h-[300px] gap-3 text-[#8f6f6c]">
         <div className="w-7 h-7 border-2 border-[#af101a] border-t-transparent rounded-full animate-spin" />
         <span className="text-xs uppercase tracking-wider font-bold">
           Loading Email &amp; SMTP Settings...
@@ -247,7 +247,7 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
       {/* Floating Feedback Toast */}
       {feedback && (
         <div
-          className={`p-3.5 rounded-xl border text-xs flex items-center gap-2.5 shadow-sm animate-fade-in ${
+          className={`p-3.5 rounded border text-xs flex items-center gap-2.5 shadow-sm animate-fade-in ${
             feedback.isError
               ? 'bg-red-50 border-red-200 text-red-800'
               : 'bg-emerald-50 border-emerald-200 text-emerald-800'
@@ -262,7 +262,7 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
 
       {/* Unsaved Changes Banner */}
       {isDirty && (
-        <div className="p-3.5 bg-amber-50 border-2 border-amber-400 rounded-2xl text-amber-950 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-md animate-gentle-shake">
+        <div className="p-3.5 bg-amber-50 border-2 border-amber-400 rounded text-amber-950 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-md animate-gentle-shake">
           <div className="flex items-center gap-2.5">
             <span className="material-symbols-outlined text-amber-600 text-lg animate-pulse">lock</span>
             <span className="font-bold">
@@ -283,7 +283,7 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
 
       {/* SMTP Incomplete Configuration Warning */}
       {(!config?.passwordConfigured || !formData.username) && (
-        <div className="p-4 bg-amber-50 border border-amber-300 rounded-2xl text-amber-900 text-xs flex items-start gap-3 shadow-xs animate-fade-in">
+        <div className="p-4 bg-amber-50 border border-amber-300 rounded text-amber-900 text-xs flex items-start gap-3 shadow-xs animate-fade-in">
           <span className="material-symbols-outlined text-amber-600 text-xl shrink-0 mt-0.5">warning</span>
           <div className="space-y-1">
             <h4 className="font-bold text-amber-950 uppercase tracking-wider text-[11px]">
@@ -297,7 +297,7 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
       )}
 
       {/* 1. Status & Overview Card */}
-      <div className="bg-white p-6 rounded-2xl border border-[#eae8e5] shadow-xs space-y-5">
+      <div className="bg-white p-6 rounded border border-[#eae8e5] shadow-xs space-y-5">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-[#eae8e5]">
           <div>
             <h3 className="text-xs font-bold uppercase tracking-wider text-[#1b1c1a] flex items-center gap-2">
@@ -326,7 +326,7 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
               />
             </button>
             <span
-              className={`px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider ${
+              className={`px-2.5 py-1 rounded text-[10px] font-bold uppercase tracking-wider ${
                 formData.enabled
                   ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
                   : 'bg-amber-50 text-amber-700 border border-amber-200'
@@ -340,24 +340,24 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
         {/* Status Metrics Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Connection Status */}
-          <div className="p-4 bg-[#fbf9f6] rounded-xl border border-[#eae8e5] space-y-1.5">
+          <div className="p-4 bg-[#fbf9f6] rounded border border-[#eae8e5] space-y-1.5">
             <span className="text-[10px] font-bold uppercase tracking-wider text-[#585757]">
               Transport Connection
             </span>
             <div className="flex items-center gap-2">
               {connectionStatus === 'idle' && (
-                <span className="px-2 py-0.5 text-[10px] font-semibold bg-gray-100 text-gray-700 rounded-md">
+                <span className="px-2 py-0.5 text-[10px] font-semibold bg-gray-100 text-gray-700 rounded">
                   Not tested yet
                 </span>
               )}
               {connectionStatus === 'success' && (
-                <span className="px-2 py-0.5 text-[10px] font-semibold bg-emerald-100 text-emerald-800 rounded-md flex items-center gap-1">
+                <span className="px-2 py-0.5 text-[10px] font-semibold bg-emerald-100 text-emerald-800 rounded flex items-center gap-1">
                   <span className="material-symbols-outlined text-[14px]">check</span>
                   Connected
                 </span>
               )}
               {connectionStatus === 'error' && (
-                <span className="px-2 py-0.5 text-[10px] font-semibold bg-red-100 text-red-800 rounded-md flex items-center gap-1">
+                <span className="px-2 py-0.5 text-[10px] font-semibold bg-red-100 text-red-800 rounded flex items-center gap-1">
                   <span className="material-symbols-outlined text-[14px]">close</span>
                   Failed
                 </span>
@@ -371,7 +371,7 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
           </div>
 
           {/* Active Host & Port */}
-          <div className="p-4 bg-[#fbf9f6] rounded-xl border border-[#eae8e5] space-y-1.5">
+          <div className="p-4 bg-[#fbf9f6] rounded border border-[#eae8e5] space-y-1.5">
             <span className="text-[10px] font-bold uppercase tracking-wider text-[#585757]">
               SMTP Gateway
             </span>
@@ -384,7 +384,7 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
           </div>
 
           {/* Password Security Status */}
-          <div className="p-4 bg-[#fbf9f6] rounded-xl border border-[#eae8e5] space-y-1.5">
+          <div className="p-4 bg-[#fbf9f6] rounded border border-[#eae8e5] space-y-1.5">
             <span className="text-[10px] font-bold uppercase tracking-wider text-[#585757]">
               Stored Password Status
             </span>
@@ -402,7 +402,7 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
           </div>
 
           {/* Last Updated */}
-          <div className="p-4 bg-[#fbf9f6] rounded-xl border border-[#eae8e5] space-y-1.5">
+          <div className="p-4 bg-[#fbf9f6] rounded border border-[#eae8e5] space-y-1.5">
             <span className="text-[10px] font-bold uppercase tracking-wider text-[#585757]">
               Last Configuration Update
             </span>
@@ -415,7 +415,7 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
       </div>
 
       {/* 2. SMTP Server Configuration Card - Simplified Email & Password */}
-      <div className="bg-white p-6 rounded-2xl border border-[#eae8e5] shadow-xs space-y-5">
+      <div className="bg-white p-6 rounded border border-[#eae8e5] shadow-xs space-y-5">
         <div>
           <h3 className="text-xs font-bold uppercase tracking-wider text-[#1b1c1a] flex items-center gap-2">
             <span className="material-symbols-outlined text-[#af101a] text-lg">mail</span>
@@ -427,7 +427,7 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
         </div>
 
         {/* Hướng dẫn lấy Mật khẩu ứng dụng từ Google (Google App Password) */}
-        <div className="p-4 bg-blue-50/70 border border-blue-200/80 rounded-2xl space-y-3">
+        <div className="p-4 bg-blue-50/70 border border-blue-200/80 rounded space-y-3">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
             <div className="flex items-center gap-2 text-blue-950 font-bold text-xs uppercase tracking-wider">
               <span className="material-symbols-outlined text-blue-600 text-lg">key</span>
@@ -444,7 +444,7 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
             </a>
           </div>
 
-          <div className="text-xs text-blue-900 space-y-1.5 leading-relaxed bg-white/70 p-3 rounded-xl border border-blue-100">
+          <div className="text-xs text-blue-900 space-y-1.5 leading-relaxed bg-white/70 p-3 rounded border border-blue-100">
             <div className="flex items-start gap-2">
               <span className="font-bold text-blue-700 shrink-0">Bước 1:</span>
               <span>
@@ -503,7 +503,7 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
               value={formData.username}
               onChange={(e) => handleUsernameChange(e.target.value)}
               placeholder="e.g. myapah7605@gmail.com"
-              className="w-full px-3.5 py-2.5 text-xs bg-white border border-[#eae8e5] rounded-xl focus:border-[#af101a] focus:ring-1 focus:ring-[#af101a] outline-none transition-all placeholder:text-gray-400"
+              className="w-full px-3.5 py-2.5 text-xs bg-white border border-[#eae8e5] rounded focus:border-[#af101a] focus:ring-1 focus:ring-[#af101a] outline-none transition-all placeholder:text-gray-400"
             />
             <p className="text-[10px] text-[#8f6f6c] mt-1">
               Địa chỉ Gmail dùng để xác thực và gửi thư ra bên ngoài
@@ -525,7 +525,7 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
                     ? '•••••••••••••••• (Đã lưu an toàn - để trống nếu không đổi)'
                     : 'Dán 16 ký tự mật khẩu ứng dụng tại đây'
                 }
-                className="w-full pl-3.5 pr-10 py-2.5 text-xs bg-white border border-[#eae8e5] rounded-xl focus:border-[#af101a] focus:ring-1 focus:ring-[#af101a] outline-none font-mono transition-all placeholder:text-[#8f6f6c]"
+                className="w-full pl-3.5 pr-10 py-2.5 text-xs bg-white border border-[#eae8e5] rounded focus:border-[#af101a] focus:ring-1 focus:ring-[#af101a] outline-none font-mono transition-all placeholder:text-[#8f6f6c]"
               />
               <button
                 type="button"
@@ -566,7 +566,7 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
           </button>
 
           {showAdvanced && (
-            <div className="mt-4 p-4 bg-[#fbf9f6] rounded-xl border border-[#eae8e5] space-y-4 animate-fade-in">
+            <div className="mt-4 p-4 bg-[#fbf9f6] rounded border border-[#eae8e5] space-y-4 animate-fade-in">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <span className="text-xs font-bold text-[#1b1c1a] uppercase tracking-wider">
                   Cấu hình kết nối máy chủ
@@ -600,7 +600,7 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
                     value={formData.host}
                     onChange={(e) => handleFieldChange('host', e.target.value)}
                     placeholder="smtp.gmail.com"
-                    className="w-full px-3 py-2 text-xs bg-white border border-[#eae8e5] rounded-xl font-mono outline-none focus:border-[#af101a]"
+                    className="w-full px-3 py-2 text-xs bg-white border border-[#eae8e5] rounded font-mono outline-none focus:border-[#af101a]"
                   />
                 </div>
                 <div>
@@ -618,7 +618,7 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
                     }}
                     min={1}
                     max={65535}
-                    className="w-full px-3 py-2 text-xs bg-white border border-[#eae8e5] rounded-xl font-mono outline-none focus:border-[#af101a]"
+                    className="w-full px-3 py-2 text-xs bg-white border border-[#eae8e5] rounded font-mono outline-none focus:border-[#af101a]"
                   />
                 </div>
               </div>
@@ -656,7 +656,7 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
       </div>
 
       {/* 3. Sender Identity Card */}
-      <div className="bg-white p-6 rounded-2xl border border-[#eae8e5] shadow-xs space-y-4">
+      <div className="bg-white p-6 rounded border border-[#eae8e5] shadow-xs space-y-4">
         <div>
           <h3 className="text-xs font-bold uppercase tracking-wider text-[#1b1c1a] flex items-center gap-2">
             <span className="material-symbols-outlined text-[#af101a] text-lg">badge</span>
@@ -679,7 +679,7 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
               value={formData.fromEmail}
               onChange={(e) => handleFieldChange('fromEmail', e.target.value)}
               placeholder="e.g. noreply@cutletspring.com"
-              className="w-full px-3.5 py-2.5 text-xs bg-white border border-[#eae8e5] rounded-xl focus:border-[#af101a] focus:ring-1 focus:ring-[#af101a] outline-none transition-all"
+              className="w-full px-3.5 py-2.5 text-xs bg-white border border-[#eae8e5] rounded focus:border-[#af101a] focus:ring-1 focus:ring-[#af101a] outline-none transition-all"
             />
           </div>
 
@@ -694,14 +694,14 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
               value={formData.fromName}
               onChange={(e) => handleFieldChange('fromName', e.target.value)}
               placeholder="e.g. Cutlet Spring Security"
-              className="w-full px-3.5 py-2.5 text-xs bg-white border border-[#eae8e5] rounded-xl focus:border-[#af101a] focus:ring-1 focus:ring-[#af101a] outline-none transition-all"
+              className="w-full px-3.5 py-2.5 text-xs bg-white border border-[#eae8e5] rounded focus:border-[#af101a] focus:ring-1 focus:ring-[#af101a] outline-none transition-all"
             />
           </div>
         </div>
       </div>
 
       {/* 4. Action Bar */}
-      <div className="p-4 bg-white rounded-2xl border border-[#eae8e5] shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="p-4 bg-white rounded border border-[#eae8e5] shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-2 text-xs text-[#585757]">
           <span className="material-symbols-outlined text-[#af101a] text-lg">verified_user</span>
           <span>Settings take effect immediately without requiring a backend restart.</span>

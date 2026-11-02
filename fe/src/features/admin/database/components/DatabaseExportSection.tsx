@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { DatabaseBackup } from '@/types/database.types';
 
 interface DatabaseExportSectionProps {
@@ -59,7 +59,7 @@ export const DatabaseExportSection: React.FC<DatabaseExportSectionProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-[#eae8e5] p-5 sm:p-6 space-y-6 shadow-xs">
+    <div className="bg-white rounded border border-[#eae8e5] p-5 sm:p-6 space-y-6 shadow-xs">
       {/* Header and Action */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#eae8e5]">
         <div>
@@ -79,7 +79,7 @@ export const DatabaseExportSection: React.FC<DatabaseExportSectionProps> = ({
           type="button"
           onClick={() => setShowNotesModal(true)}
           disabled={isExporting}
-          className="self-start sm:self-center px-4 py-2.5 bg-[#af101a] hover:bg-[#d32f2f] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all shadow-xs cursor-pointer disabled:opacity-50 flex items-center gap-2 shrink-0 active:scale-98"
+          className="self-start sm:self-center px-4 py-2.5 bg-[#af101a] hover:bg-[#d32f2f] text-white rounded text-xs font-bold uppercase tracking-wider transition-all shadow-xs cursor-pointer disabled:opacity-50 flex items-center gap-2 shrink-0 active:scale-98"
         >
           {isExporting ? (
             <>
@@ -102,7 +102,7 @@ export const DatabaseExportSection: React.FC<DatabaseExportSectionProps> = ({
           <span className="text-xs font-semibold">Loading backup history...</span>
         </div>
       ) : backups.length === 0 ? (
-        <div className="py-12 text-center border-2 border-dashed border-[#eae8e5] rounded-2xl bg-[#fbf9f6] p-6">
+        <div className="py-12 text-center border-2 border-dashed border-[#eae8e5] rounded bg-[#fbf9f6] p-6">
           <span className="material-symbols-outlined text-[36px] text-zinc-400 mb-2">folder_off</span>
           <p className="text-sm font-bold text-[#1b1c1a]">No Backups Found</p>
           <p className="text-xs text-[#8f6f6c] mt-1 max-w-md mx-auto">
@@ -114,13 +114,13 @@ export const DatabaseExportSection: React.FC<DatabaseExportSectionProps> = ({
           <table className="w-full text-left border-collapse min-w-[700px]">
             <thead>
               <tr className="border-b border-[#eae8e5] text-[11px] font-bold uppercase tracking-wider text-[#8f6f6c] bg-[#fbf9f6]">
-                <th className="py-3 px-3 rounded-l-xl">Archive Name & Hash</th>
+                <th className="py-3 px-3 rounded-l">Archive Name & Hash</th>
                 <th className="py-3 px-3">Type</th>
                 <th className="py-3 px-3">Size</th>
                 <th className="py-3 px-3">Tables</th>
                 <th className="py-3 px-3">Created At</th>
                 <th className="py-3 px-3">Status</th>
-                <th className="py-3 px-3 text-right rounded-r-xl">Actions</th>
+                <th className="py-3 px-3 text-right rounded-r">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#eae8e5]/60 text-xs text-[#1b1c1a]">
@@ -230,7 +230,7 @@ export const DatabaseExportSection: React.FC<DatabaseExportSectionProps> = ({
                           type="button"
                           onClick={() => handleDownload(b)}
                           disabled={isFailed || downloadingId === b.id}
-                          className="p-1.5 rounded-lg text-emerald-700 hover:bg-emerald-50 transition-colors cursor-pointer disabled:opacity-40"
+                          className="p-1.5 rounded text-emerald-700 hover:bg-emerald-50 transition-colors cursor-pointer disabled:opacity-40"
                           title="Download .dump archive"
                         >
                           <span
@@ -246,7 +246,7 @@ export const DatabaseExportSection: React.FC<DatabaseExportSectionProps> = ({
                           type="button"
                           onClick={() => handleDelete(b.id, b.filename)}
                           disabled={deletingId === b.id}
-                          className="p-1.5 rounded-lg text-red-600 hover:bg-red-50 transition-colors cursor-pointer disabled:opacity-40"
+                          className="p-1.5 rounded text-red-600 hover:bg-red-50 transition-colors cursor-pointer disabled:opacity-40"
                           title="Delete backup"
                         >
                           <span
@@ -270,7 +270,7 @@ export const DatabaseExportSection: React.FC<DatabaseExportSectionProps> = ({
       {/* Export Notes Modal */}
       {showNotesModal && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-2xl border border-[#eae8e5] p-5 sm:p-6 w-full max-w-md space-y-4 shadow-xl">
+          <div className="bg-white rounded border border-[#eae8e5] p-5 sm:p-6 w-full max-w-md space-y-4 shadow-xl">
             <div className="flex items-center justify-between pb-3 border-b border-[#eae8e5]">
               <h4 className="text-sm font-bold uppercase tracking-wider text-[#1b1c1a] flex items-center gap-2">
                 <span className="material-symbols-outlined text-[18px] text-[#af101a]">download</span>
@@ -298,7 +298,7 @@ export const DatabaseExportSection: React.FC<DatabaseExportSectionProps> = ({
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 placeholder="e.g. Pre-deployment backup before menu update"
-                className="w-full px-3 py-2 text-xs border border-[#eae8e5] rounded-xl focus:outline-none focus:border-[#af101a]"
+                className="w-full px-3 py-2 text-xs border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a]"
                 maxLength={200}
               />
             </div>
@@ -307,14 +307,14 @@ export const DatabaseExportSection: React.FC<DatabaseExportSectionProps> = ({
               <button
                 type="button"
                 onClick={() => setShowNotesModal(false)}
-                className="px-4 py-2 text-xs font-bold text-[#585757] hover:bg-zinc-100 rounded-xl cursor-pointer"
+                className="px-4 py-2 text-xs font-bold text-[#585757] hover:bg-zinc-100 rounded cursor-pointer"
               >
                 Cancel
               </button>
               <button
                 type="button"
                 onClick={handleTriggerExport}
-                className="px-4 py-2 text-xs font-bold uppercase tracking-wider bg-[#af101a] hover:bg-[#d32f2f] text-white rounded-xl shadow-xs cursor-pointer"
+                className="px-4 py-2 text-xs font-bold uppercase tracking-wider bg-[#af101a] hover:bg-[#d32f2f] text-white rounded shadow-xs cursor-pointer"
               >
                 Start Export
               </button>

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+﻿import React, { useState, useMemo } from 'react';
 import { MenuCategory, CategoryPayload } from '@/types';
 import { adminService } from '@/services/admin.service';
 import { UnsavedChangesNotice } from '@/features/admin/components/UnsavedChangesNotice';
@@ -91,7 +91,7 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
       onClick={handleRequestClose}
     >
       <div
-        className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl border border-[#eae8e5] overflow-hidden flex flex-col animate-scale-in"
+        className="relative w-full max-w-lg bg-white rounded shadow-2xl border border-[#eae8e5] overflow-hidden flex flex-col animate-scale-in"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -106,7 +106,7 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
           </div>
           <button
             onClick={handleRequestClose}
-            className="w-8 h-8 rounded-lg hover:bg-[#eae8e5] text-[#585757] hover:text-[#1b1c1a] flex items-center justify-center transition-colors cursor-pointer"
+            className="w-8 h-8 rounded hover:bg-[#eae8e5] text-[#585757] hover:text-[#1b1c1a] flex items-center justify-center transition-colors cursor-pointer"
           >
             <span className="material-symbols-outlined text-[20px]">close</span>
           </button>
@@ -126,7 +126,7 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
               <button
                 type="button"
                 onClick={() => setShowExitConfirm(false)}
-                className="px-3 py-1 bg-[#af101a] text-white text-[11px] font-bold rounded-lg cursor-pointer"
+                className="px-3 py-1 bg-[#af101a] text-white text-[11px] font-bold rounded cursor-pointer"
               >
                 Tiếp tục sửa
               </button>
@@ -154,7 +154,7 @@ export const CategoryModal: React.FC<CategoryModalProps> = ({
           )}
 
           {error && (
-            <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded-xl flex items-center gap-2">
+            <div className="p-3 bg-red-50 border border-red-200 text-red-700 text-xs rounded flex items-center gap-2">
               <span className="material-symbols-outlined text-[16px]">error</span>
               <span className="font-medium">{error}</span>
             </div>

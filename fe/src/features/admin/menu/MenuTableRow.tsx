@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { MenuItem } from '@/types';
 
 interface MenuTableRowProps {
@@ -34,7 +34,7 @@ export const MenuTableRow: React.FC<MenuTableRowProps> = ({
       {/* Dish Preview & 4-Language Name Stack */}
       <td className="py-3 px-4">
         <div className="flex items-start gap-3">
-          <div className="w-12 h-12 rounded-xl bg-[#f5f3f0] overflow-hidden shrink-0 border border-[#eae8e5] flex items-center justify-center mt-0.5">
+          <div className="w-12 h-12 rounded bg-[#f5f3f0] overflow-hidden shrink-0 border border-[#eae8e5] flex items-center justify-center mt-0.5">
             {hasImage ? (
               <img
                 src={dish.image}
@@ -73,7 +73,7 @@ export const MenuTableRow: React.FC<MenuTableRowProps> = ({
                 dish.badges.map((b) => (
                   <span
                     key={b.id}
-                    className="px-2 py-0.5 text-white text-[9px] font-bold uppercase rounded-md tracking-wider shadow-2xs flex items-center gap-1"
+                    className="px-2 py-0.5 text-white text-[9px] font-bold uppercase rounded tracking-wider shadow-2xs flex items-center gap-1"
                     style={{ backgroundColor: b.badgeColor || '#af101a' }}
                   >
                     {b.icon && (
@@ -85,22 +85,22 @@ export const MenuTableRow: React.FC<MenuTableRowProps> = ({
               ) : (
                 <>
                   {(dish.isChefSignature ?? dish.chefSignature) && (
-                    <span className="px-2 py-0.5 bg-[#af101a] text-white text-[9px] font-bold uppercase rounded-md tracking-wider shadow-2xs">
+                    <span className="px-2 py-0.5 bg-[#af101a] text-white text-[9px] font-bold uppercase rounded tracking-wider shadow-2xs">
                       Signature
                     </span>
                   )}
                   {(dish.isBestSeller ?? dish.bestSeller) && (
-                    <span className="px-2 py-0.5 bg-[#feae2c] text-[#291800] text-[9px] font-bold uppercase rounded-md tracking-wider shadow-2xs">
+                    <span className="px-2 py-0.5 bg-[#feae2c] text-[#291800] text-[9px] font-bold uppercase rounded tracking-wider shadow-2xs">
                       Best Seller
                     </span>
                   )}
                   {(dish.isLimited ?? dish.limited) && (
-                    <span className="px-2 py-0.5 bg-[#1b1c1a] text-white text-[9px] font-bold uppercase rounded-md tracking-wider shadow-2xs">
+                    <span className="px-2 py-0.5 bg-[#1b1c1a] text-white text-[9px] font-bold uppercase rounded tracking-wider shadow-2xs">
                       Limited
                     </span>
                   )}
                   {(dish.isSpicy ?? dish.spicy) && (
-                    <span className="px-2 py-0.5 bg-red-600 text-white text-[9px] font-bold uppercase rounded-md tracking-wider shadow-2xs flex items-center gap-0.5">
+                    <span className="px-2 py-0.5 bg-red-600 text-white text-[9px] font-bold uppercase rounded tracking-wider shadow-2xs flex items-center gap-0.5">
                       <span className="material-symbols-outlined text-[10px]">local_fire_department</span>
                       <span>Spicy</span>
                     </span>
@@ -114,7 +114,7 @@ export const MenuTableRow: React.FC<MenuTableRowProps> = ({
 
       {/* Category */}
       <td className="py-3 px-4">
-        <span className="px-2.5 py-1 bg-[#f5f3f0] text-[#5b403d] rounded-md font-bold text-[11px] uppercase tracking-wider border border-[#eae8e5]">
+        <span className="px-2.5 py-1 bg-[#f5f3f0] text-[#5b403d] rounded font-bold text-[11px] uppercase tracking-wider border border-[#eae8e5]">
           {dish.category}
         </span>
       </td>
@@ -171,14 +171,14 @@ export const MenuTableRow: React.FC<MenuTableRowProps> = ({
           <button
             onClick={() => onEdit(dish)}
             title="Edit Multilingual Dish & Cloudinary Asset"
-            className="p-1.5 text-[#585757] hover:text-[#af101a] hover:bg-[#f5f3f0] rounded-lg transition-colors cursor-pointer"
+            className="p-1.5 text-[#585757] hover:text-[#af101a] hover:bg-[#f5f3f0] rounded transition-colors cursor-pointer"
           >
             <span className="material-symbols-outlined text-[18px]">edit</span>
           </button>
           <button
             onClick={() => onDelete(dish)}
             title="Deactivate Dish"
-            className="p-1.5 text-[#585757] hover:text-red-700 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
+            className="p-1.5 text-[#585757] hover:text-red-700 hover:bg-red-50 rounded transition-colors cursor-pointer"
           >
             <span className="material-symbols-outlined text-[18px]">delete</span>
           </button>

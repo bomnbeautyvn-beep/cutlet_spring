@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { RestaurantSettings } from '@/services/admin.service';
 import { PublicPlacementGuide } from '@/features/admin/components/PublicPlacementGuide';
 
@@ -23,7 +23,7 @@ export const RestaurantPoliciesTab: React.FC<RestaurantPoliciesTabProps> = ({
       />
 
       {/* Capacities & Operating Metrics */}
-      <div className="bg-white p-6 rounded-2xl border border-[#eae8e5] shadow-xs space-y-4">
+      <div className="bg-white p-6 rounded border border-[#eae8e5] shadow-xs space-y-4">
         <h3 className="text-xs font-bold uppercase tracking-wider text-[#1b1c1a]">
           Sức Chứa Chỗ Ngồi &amp; Vận Hành Bếp (Operational Capacities)
         </h3>
@@ -36,7 +36,7 @@ export const RestaurantPoliciesTab: React.FC<RestaurantPoliciesTabProps> = ({
               type="number"
               value={formData.capacityCounter ?? 10}
               onChange={(e) => onChange('capacityCounter', Number(e.target.value))}
-              className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-xl focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a]"
             />
             <span className="text-[10px] text-[#8f6f6c]">Ghế quầy bar trước bếp mở chiên katsu</span>
           </div>
@@ -48,7 +48,7 @@ export const RestaurantPoliciesTab: React.FC<RestaurantPoliciesTabProps> = ({
               type="number"
               value={formData.capacityHall ?? 30}
               onChange={(e) => onChange('capacityHall', Number(e.target.value))}
-              className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-xl focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a]"
             />
             <span className="text-[10px] text-[#8f6f6c]">Tổng số ghế bàn tại sảnh dùng bữa</span>
           </div>
@@ -60,7 +60,7 @@ export const RestaurantPoliciesTab: React.FC<RestaurantPoliciesTabProps> = ({
               type="number"
               value={formData.defaultPrepMinutes ?? 18}
               onChange={(e) => onChange('defaultPrepMinutes', Number(e.target.value))}
-              className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-xl focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a]"
             />
             <span className="text-[10px] text-[#8f6f6c]">Thời gian chiên &amp; chuẩn bị set mặc định</span>
           </div>
@@ -73,7 +73,7 @@ export const RestaurantPoliciesTab: React.FC<RestaurantPoliciesTabProps> = ({
               step="0.01"
               value={formData.vatRate ?? 8.0}
               onChange={(e) => onChange('vatRate', Number(e.target.value))}
-              className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-xl focus:outline-none focus:border-[#af101a]"
+              className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a]"
             />
             <span className="text-[10px] text-[#8f6f6c]">Tỷ lệ thuế GTGT tính trong bill</span>
           </div>
@@ -81,7 +81,7 @@ export const RestaurantPoliciesTab: React.FC<RestaurantPoliciesTabProps> = ({
       </div>
 
       {/* Sync Notice for Text Policies */}
-      <div className="bg-[#fbf9f6] border border-[#eae8e5] p-5 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+      <div className="bg-[#fbf9f6] border border-[#eae8e5] p-5 rounded flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-start gap-3">
           <span className="material-symbols-outlined text-[22px] text-emerald-600 shrink-0 mt-0.5">
             verified
