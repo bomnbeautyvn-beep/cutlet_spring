@@ -2,6 +2,7 @@ import React from 'react';
 import { useIngredientsCms } from './ingredients/hooks/useIngredientsCms';
 import { IngredientCard } from './ingredients/components/IngredientCard';
 import { IngredientModal } from './IngredientModal';
+import { PublicPlacementGuide } from '@/features/admin/components/PublicPlacementGuide';
 
 export const IngredientsCmsTab: React.FC = () => {
   const {
@@ -30,6 +31,14 @@ export const IngredientsCmsTab: React.FC = () => {
 
   return (
     <div className="space-y-6">
+      {/* Visual Website Placement Guide */}
+      <PublicPlacementGuide
+        locationTitle="Trang Chủ > Khối Triết Lý Nguyên Liệu (Atelier Philosophy)"
+        publicUrl="/#ingredients"
+        description="Hiển thị ngay bên dưới khối Hero trên trang chủ. Bao gồm 4 thẻ trụ cột nguyên liệu thủ công: Thịt heo tuyển chọn, Bột chiên Panko tươi, Dầu chiên nhiệt kép và Gạo ngọc dẻo thơm."
+        previewHint="Mỗi nguyên liệu có ảnh chụp cận cảnh, huy hiệu xuất xứ và mô tả chi tiết bằng 4 ngôn ngữ (EN, KO, VI, JA)."
+      />
+
       {/* Toast Alert */}
       {message && (
         <div

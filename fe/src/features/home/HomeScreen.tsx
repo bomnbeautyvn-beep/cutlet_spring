@@ -29,6 +29,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
   const renderSectionByKey = (key: string) => {
     switch (key) {
       case 'hero':
+        if (data?.hero?.isActive === false) return null;
         return (
           <HeroSection
             key="hero"
@@ -91,11 +92,13 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
       ) : (
         <>
           {/* Default fallback order when loading or offline */}
-          <HeroSection
-            setCurrentView={setCurrentView}
-            language={language}
-            hero={data?.hero}
-          />
+          {data?.hero?.isActive !== false && (
+            <HeroSection
+              setCurrentView={setCurrentView}
+              language={language}
+              hero={data?.hero}
+            />
+          )}
           <PhilosophySection
             language={language}
             ingredients={data?.ingredients}

@@ -92,7 +92,9 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onExitToPublicSite }) 
 
           {currentSection === 'homepage' && isAdmin && <HomepageCmsPage />}
 
-          {currentSection === 'settings' && isAdmin && <RestaurantSettingsPage />}
+          {currentSection === 'settings' && isAdmin && (
+            <RestaurantSettingsPage onNavigateToHomepage={() => setCurrentSection('homepage')} />
+          )}
 
           {currentSection === 'accounts' && isAdmin && <AccountManagementPage />}
 

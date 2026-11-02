@@ -2,6 +2,7 @@ import React from 'react';
 import { useHeaderFooterCmsForm } from './header-footer/hooks/useHeaderFooterCmsForm';
 import { HeaderBrandingSection } from './header-footer/components/HeaderBrandingSection';
 import { HeaderFooterLanguageContent } from './header-footer/components/HeaderFooterLanguageContent';
+import { PublicPlacementGuide } from '@/features/admin/components/PublicPlacementGuide';
 
 export const HeaderFooterCmsTab: React.FC = () => {
   const {
@@ -29,7 +30,15 @@ export const HeaderFooterCmsTab: React.FC = () => {
   }
 
   return (
-    <form onSubmit={handleSave} className="space-y-8">
+    <form onSubmit={handleSave} className="space-y-6">
+      {/* Visual Website Placement Guide */}
+      <PublicPlacementGuide
+        locationTitle="Toàn Bộ Website > Thanh Điều Hướng Header & Chân Trang Footer"
+        publicUrl="/"
+        description="Hiển thị xuyên suốt ở thanh điều hướng trên cùng (Logo, Hotline) và chân trang (Footer) của tất cả các trang: Trang chủ, Thực đơn, Giới thiệu. Bao gồm Tên nhãn hiệu, Slogan, Địa chỉ nhà hàng, Giờ mở cửa, Quy định dùng bữa tại chỗ và Bản quyền website."
+        previewHint="Đây là nguồn quản lý thương hiệu & địa chỉ chuẩn của Cutlet Spring (thay thế và đồng bộ tập trung cho các trường trùng lặp trước đây bên Restaurant Settings)."
+      />
+
       {/* Toast Alert */}
       {message && (
         <div

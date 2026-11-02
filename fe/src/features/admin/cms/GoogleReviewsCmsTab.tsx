@@ -3,6 +3,7 @@ import { useGoogleReviews } from './reviews/hooks/useGoogleReviews';
 import { ReviewStatsHeader } from './reviews/components/ReviewStatsHeader';
 import { ReviewCard } from './reviews/components/ReviewCard';
 import { ReviewModal } from './ReviewModal';
+import { PublicPlacementGuide } from '@/features/admin/components/PublicPlacementGuide';
 
 export const GoogleReviewsCmsTab: React.FC = () => {
   const {
@@ -33,6 +34,14 @@ export const GoogleReviewsCmsTab: React.FC = () => {
 
   return (
     <div className="space-y-6">
+      {/* Visual Website Placement Guide */}
+      <PublicPlacementGuide
+        locationTitle="Trang Chủ > Khối Đánh Giá Khách Hàng (Google Reviews)"
+        publicUrl="/#reviews"
+        description="Hiển thị tại phần đánh giá khách hàng trên trang chủ (ngay trên khối Bản đồ). Giúp khách hàng mới thấy các phản hồi chân thực từ Google Maps, điểm xếp hạng trung bình và số lượng review."
+        previewHint="Chỉ các bài đánh giá được bật 'Hiển thị công khai' mới xuất hiện trên trang chủ."
+      />
+
       {/* Toast Alert */}
       {message && (
         <div

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { adminService, EmailConfig, UpdateEmailConfigPayload } from '@/services/admin.service';
 import { SendTestEmailModal } from './SendTestEmailModal';
 import { DisableEmailConfirmModal } from './DisableEmailConfirmModal';
+import { PublicPlacementGuide } from '@/features/admin/components/PublicPlacementGuide';
 
 interface EmailSmtpSettingsTabProps {
   onDirtyChange?: (isDirty: boolean) => void;
@@ -236,6 +237,13 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
 
   return (
     <div className="space-y-6">
+      {/* Website Placement Guide */}
+      <PublicPlacementGuide
+        locationTitle="Hệ Thống Email Tự Động (Backend Gateway)"
+        description="Cấu hình kết nối máy chủ gửi mail SMTP (Host, Port, SSL/TLS, Tài khoản mã hóa bảo mật AES-256). Sử dụng để gửi email tự động tới khách hàng (Xác nhận đặt bàn) và gửi mã OTP đặt lại mật khẩu cho tài khoản quản trị viên."
+        previewHint="Bạn có thể nhấn 'Send Test Email' bên dưới để kiểm tra gửi thử một email thực tế tới hộp thư của bạn."
+      />
+
       {/* Floating Feedback Toast */}
       {feedback && (
         <div

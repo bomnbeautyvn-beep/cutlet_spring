@@ -83,38 +83,40 @@ export const HomepageCmsPage: React.FC<HomepageCmsPageProps> = ({ initialTab = '
         </a>
       </div>
 
-      {/* CMS Sub-navigation Tabs */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 p-1.5 bg-[#f5f3f0] rounded-2xl border border-[#eae8e5]">
-        {tabs.map((tab) => {
-          const isActive = activeTab === tab.id;
-          return (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`p-3 rounded-xl transition-all flex flex-col items-start gap-1 text-left cursor-pointer ${
-                isActive
-                  ? 'bg-white text-[#1b1c1a] shadow-xs border border-[#eae8e5]'
-                  : 'text-[#5b403d] hover:bg-white/60 hover:text-[#1b1c1a]'
-              }`}
-            >
-              <div className="flex items-center gap-2 w-full">
-                <span
-                  className={`material-symbols-outlined text-[19px] ${
-                    isActive ? 'text-[#af101a]' : 'text-[#8f6f6c]'
-                  }`}
-                >
-                  {tab.icon}
+      {/* CMS Sub-navigation Tabs (Sticky bar) */}
+      <div className="sticky top-14 sm:top-16 z-20 bg-[#fbf9f6]/95 backdrop-blur-xs py-1.5 -mx-1 px-1">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 p-1.5 bg-[#f5f3f0] rounded-2xl border border-[#eae8e5] shadow-xs">
+          {tabs.map((tab) => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`p-3 rounded-xl transition-all flex flex-col items-start gap-1 text-left cursor-pointer ${
+                  isActive
+                    ? 'bg-white text-[#1b1c1a] shadow-xs border border-[#eae8e5]'
+                    : 'text-[#5b403d] hover:bg-white/60 hover:text-[#1b1c1a]'
+                }`}
+              >
+                <div className="flex items-center gap-2 w-full">
+                  <span
+                    className={`material-symbols-outlined text-[19px] ${
+                      isActive ? 'text-[#af101a]' : 'text-[#8f6f6c]'
+                    }`}
+                  >
+                    {tab.icon}
+                  </span>
+                  <span className="font-title-md text-xs font-bold truncate">
+                    {tab.label}
+                  </span>
+                </div>
+                <span className="text-[10px] text-[#786659] truncate w-full hidden sm:block">
+                  {tab.sublabel}
                 </span>
-                <span className="font-title-md text-xs font-bold truncate">
-                  {tab.label}
-                </span>
-              </div>
-              <span className="text-[10px] text-[#786659] truncate w-full hidden sm:block">
-                {tab.sublabel}
-              </span>
-            </button>
-          );
-        })}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* Active Tab Panel */}

@@ -4,7 +4,7 @@ import { SettingsTab } from '../components/RestaurantSettingsTabs';
 
 export function useRestaurantSettingsForm() {
   const [settings, setSettings] = useState<RestaurantSettings | null>(null);
-  const [activeTab, setActiveTab] = useState<SettingsTab>('profile');
+  const [activeTab, setActiveTab] = useState<SettingsTab>('hours');
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [feedback, setFeedback] = useState<{ message: string; isError?: boolean } | null>(null);

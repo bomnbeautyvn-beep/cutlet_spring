@@ -2,6 +2,7 @@ import React from 'react';
 import { useHeroCmsForm } from './hero/hooks/useHeroCmsForm';
 import { HeroVisualStatusCard } from './hero/components/HeroVisualStatusCard';
 import { HeroLanguageTabContent } from './hero/components/HeroLanguageTabContent';
+import { PublicPlacementGuide } from '@/features/admin/components/PublicPlacementGuide';
 
 export const HeroCmsTab: React.FC = () => {
   const {
@@ -29,7 +30,15 @@ export const HeroCmsTab: React.FC = () => {
   }
 
   return (
-    <form onSubmit={handleSave} className="space-y-8">
+    <form onSubmit={handleSave} className="space-y-6">
+      {/* Visual Website Placement Guide */}
+      <PublicPlacementGuide
+        locationTitle="Đầu Trang Chủ (Hero Banner)"
+        publicUrl="/#hero"
+        description="Màn hình đầu tiên xuất hiện ngay khi thực khách vừa truy cập website Cutlet Spring (https://cutletspring.com/). Bao gồm Tiêu đề lớn 4 thứ tiếng, Khẩu hiệu triết lý Tonkatsu, Nút bấm CTA dẫn tới Thực đơn, Khung ảnh minh họa món cắt lát đặc trưng và 3 chỉ số cam kết (Wet Aging 120h, 100% Thịt mát, Bột chiên tươi)."
+        previewHint="Khi tắt công tắc 'Hero Section Status', toàn bộ khối Hero này sẽ được ẩn khỏi màn hình trang chủ của thực khách."
+      />
+
       {/* Toast Alert */}
       {message && (
         <div

@@ -70,7 +70,7 @@ export const AdminSidebar: React.FC<AdminSidebarProps> = ({
 
   return (
     <aside
-      className={`fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] lg:w-64 bg-[#1b1c1a] text-[#fbf9f6] flex flex-col shrink-0 border-r border-[#2b2a28] min-h-screen transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 ${
+      className={`fixed inset-y-0 left-0 z-50 w-72 max-w-[85vw] lg:w-64 bg-[#1b1c1a] text-[#fbf9f6] flex flex-col shrink-0 border-r border-[#2b2a28] h-screen transition-transform duration-300 ease-in-out lg:sticky lg:top-0 lg:translate-x-0 overflow-y-auto ${
         isOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'
       }`}
     >

@@ -6,7 +6,13 @@ import { RestaurantHoursTab } from './restaurant/components/RestaurantHoursTab';
 import { RestaurantPoliciesTab } from './restaurant/components/RestaurantPoliciesTab';
 import { EmailSmtpSettingsTab } from './restaurant/components/EmailSmtpSettingsTab';
 
-export const RestaurantSettingsPage: React.FC = () => {
+interface RestaurantSettingsPageProps {
+  onNavigateToHomepage?: () => void;
+}
+
+export const RestaurantSettingsPage: React.FC<RestaurantSettingsPageProps> = ({
+  onNavigateToHomepage,
+}) => {
   const [isEmailDirty, setIsEmailDirty] = React.useState(false);
 
   const {
@@ -59,7 +65,7 @@ export const RestaurantSettingsPage: React.FC = () => {
           </p>
         </div>
 
-        {activeTab !== 'email' && (
+        {activeTab !== 'email' && activeTab !== 'profile' && (
           <button
             onClick={handleSave}
             disabled={isSaving}
@@ -96,8 +102,10 @@ export const RestaurantSettingsPage: React.FC = () => {
         </div>
       )}
 
-      {/* Navigation Tabs */}
-      <RestaurantSettingsTabs activeTab={activeTab} onTabChange={handleTabChange} />
+      {/* Navigation Tabs (Sticky) */}
+      <div className="sticky top-14 sm:top-16 z-20 bg-[#fbf9f6]/95 backdrop-blur-xs py-1.5 -mx-1 px-1">
+        <RestaurantSettingsTabs activeTab={activeTab} onTabChange={handleTabChange} />
+      </div>
 
       {/* Form Content */}
       {activeTab === 'email' ? (
@@ -110,6 +118,7 @@ export const RestaurantSettingsPage: React.FC = () => {
               onChange={handleChange}
               onLogoUpload={handleLogoUpload}
               onBannerUpload={handleBannerUpload}
+              onNavigateToHomepage={onNavigateToHomepage}
             />
           )}
 
@@ -118,7 +127,11 @@ export const RestaurantSettingsPage: React.FC = () => {
           )}
 
           {activeTab === 'policies' && (
-            <RestaurantPoliciesTab formData={formData} onChange={handleChange} />
+            <RestaurantPoliciesTab
+              formData={formData}
+              onChange={handleChange}
+              onNavigateToHomepage={onNavigateToHomepage}
+            />
           )}
         </form>
       )}

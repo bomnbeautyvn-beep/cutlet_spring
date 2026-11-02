@@ -2,6 +2,7 @@ import React from 'react';
 import { useSectionsOrder } from './sections/hooks/useSectionsOrder';
 import { SectionOrderItem } from './sections/components/SectionOrderItem';
 import { SectionEditModal } from './sections/components/SectionEditModal';
+import { PublicPlacementGuide } from '@/features/admin/components/PublicPlacementGuide';
 
 export const SectionsOrderCmsTab: React.FC = () => {
   const {
@@ -30,6 +31,14 @@ export const SectionsOrderCmsTab: React.FC = () => {
 
   return (
     <div className="space-y-6">
+      {/* Visual Website Placement Guide */}
+      <PublicPlacementGuide
+        locationTitle="Trang Chủ > Bố Cục & Thứ Tự Khối Nội Dung"
+        publicUrl="/"
+        description="Quản lý thứ tự xuất hiện từ trên xuống dưới và quyền bật/tắt (ẩn/hiện) của từng khối nội dung trên Trang Chủ công khai (Hero, Nguyên liệu, Đánh giá, Bản đồ)."
+        previewHint="Sử dụng nút mũi tên Lên/Xuống hoặc bật/tắt trạng thái Active để cấu trúc lại trang chủ theo nhu cầu vận hành."
+      />
+
       {/* Toast Alert */}
       {message && (
         <div

@@ -1,5 +1,6 @@
 import React from 'react';
 import { RestaurantSettings } from '@/services/admin.service';
+import { PublicPlacementGuide } from '@/features/admin/components/PublicPlacementGuide';
 
 interface RestaurantHoursTabProps {
   formData: Partial<RestaurantSettings>;
@@ -8,10 +9,19 @@ interface RestaurantHoursTabProps {
 
 export const RestaurantHoursTab: React.FC<RestaurantHoursTabProps> = ({ formData, onChange }) => {
   return (
-    <div className="bg-white p-6 rounded-2xl border border-[#eae8e5] shadow-xs space-y-6">
-      <h3 className="text-xs font-bold uppercase tracking-wider text-[#1b1c1a]">
-        Service Shifts &amp; Kitchen Timings
-      </h3>
+    <div className="space-y-6">
+      {/* Website Placement Guide */}
+      <PublicPlacementGuide
+        locationTitle="Trang Chủ (Khối Bản Đồ/Địa Chỉ), Chân Trang Footer &amp; Popup Đặt Món"
+        publicUrl="/#location"
+        description="Hiển thị giờ phục vụ ca trưa (Lunch), ca tối (Dinner), giờ gọi món cuối cùng (Kitchen Last Call) và các ngày đóng cửa hàng tuần bằng 4 ngôn ngữ. Xuất hiện tại khối Bản đồ vị trí ở trang chủ, trong Chân trang Footer, và tại popup thông tin nhà hàng khi khách chọn món."
+        previewHint="Giờ bếp nhận đơn cuối cùng (Kitchen Last Call) là mốc thời gian chốt đơn chiên trong ngày."
+      />
+
+      <div className="bg-white p-6 rounded-2xl border border-[#eae8e5] shadow-xs space-y-6">
+        <h3 className="text-xs font-bold uppercase tracking-wider text-[#1b1c1a]">
+          Service Shifts &amp; Kitchen Timings
+        </h3>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {/* Lunch */}
@@ -123,6 +133,7 @@ export const RestaurantHoursTab: React.FC<RestaurantHoursTabProps> = ({ formData
         </div>
       </div>
     </div>
+  </div>
   );
 };
 

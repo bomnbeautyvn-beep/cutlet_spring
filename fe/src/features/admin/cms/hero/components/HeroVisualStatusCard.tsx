@@ -71,19 +71,39 @@ export const HeroVisualStatusCard: React.FC<HeroVisualStatusCardProps> = ({
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label className="block text-xs font-bold text-[#5b403d] uppercase tracking-wider mb-1">
-              CTA Target Route
+              CTA Target Route (Đích đến khi bấm nút)
             </label>
-            <input
-              type="text"
-              value={formData.ctaTarget}
-              onChange={(e) => onFormDataChange((prev) => ({ ...prev, ctaTarget: e.target.value }))}
-              placeholder="menu"
-              className="w-full px-3 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs font-medium focus:outline-none focus:border-[#af101a]"
-            />
+            <div className="flex gap-2">
+              <select
+                value={['menu', 'about-us', 'reviews', 'location'].includes(formData.ctaTarget) ? formData.ctaTarget : 'custom'}
+                onChange={(e) => {
+                  if (e.target.value !== 'custom') {
+                    onFormDataChange((prev) => ({ ...prev, ctaTarget: e.target.value }));
+                  }
+                }}
+                className="w-1/2 px-2.5 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs font-medium focus:outline-none focus:border-[#af101a] cursor-pointer"
+              >
+                <option value="menu">menu (Xem Thực Đơn)</option>
+                <option value="about-us">about-us (Về Cutlet Spring)</option>
+                <option value="reviews">reviews (Đánh Giá)</option>
+                <option value="location">location (Bản Đồ)</option>
+                <option value="custom">Tùy chỉnh...</option>
+              </select>
+              <input
+                type="text"
+                value={formData.ctaTarget}
+                onChange={(e) => onFormDataChange((prev) => ({ ...prev, ctaTarget: e.target.value }))}
+                placeholder="e.g. menu"
+                className="w-1/2 px-3 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs font-medium focus:outline-none focus:border-[#af101a]"
+              />
+            </div>
+            <span className="text-[10px] text-[#8f6f6c] mt-1 block">
+              Mặc định: 'menu' để chuyển hướng sang thực đơn khi khách click nút kêu gọi
+            </span>
           </div>
           <div>
             <label className="block text-xs font-bold text-[#5b403d] uppercase tracking-wider mb-1">
-              Metric 1 (Wet Aging)
+              Metric 1 (Wet Aging - Thời gian ủ thịt)
             </label>
             <input
               type="text"
@@ -92,6 +112,9 @@ export const HeroVisualStatusCard: React.FC<HeroVisualStatusCardProps> = ({
               placeholder="120h"
               className="w-full px-3 py-2 rounded-xl border border-[#eae8e5] bg-[#fbf9f6] text-xs font-medium focus:outline-none focus:border-[#af101a]"
             />
+            <span className="text-[10px] text-[#8f6f6c] mt-1 block">
+              Hiển thị số liệu nổi bật ở góc dưới bên trái của khối Hero
+            </span>
           </div>
         </div>
       </div>
