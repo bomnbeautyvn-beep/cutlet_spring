@@ -13,10 +13,9 @@ export const ItemDetailHero: React.FC<ItemDetailHeroProps> = ({ item }) => {
 
   const hasImage = Boolean(
     item.image &&
-      (item.image.startsWith('/images/menu/') ||
-        item.image.startsWith('http://') ||
+      (item.image.startsWith('http://') ||
         item.image.startsWith('https://') ||
-        item.image.startsWith('/'))
+        item.image.startsWith('//'))
   );
 
   return (

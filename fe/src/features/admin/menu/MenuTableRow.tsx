@@ -18,6 +18,13 @@ export const MenuTableRow: React.FC<MenuTableRowProps> = ({
 }) => {
   const isActive = dish.active !== false;
 
+  const hasImage = Boolean(
+    dish.image &&
+      (dish.image.startsWith('http://') ||
+        dish.image.startsWith('https://') ||
+        dish.image.startsWith('//'))
+  );
+
   return (
     <tr
       className={`hover:bg-[#fbf9f6] transition-colors ${
@@ -28,7 +35,7 @@ export const MenuTableRow: React.FC<MenuTableRowProps> = ({
       <td className="py-3 px-4">
         <div className="flex items-start gap-3">
           <div className="w-12 h-12 rounded-xl bg-[#f5f3f0] overflow-hidden shrink-0 border border-[#eae8e5] flex items-center justify-center mt-0.5">
-            {dish.image ? (
+            {hasImage ? (
               <img
                 src={dish.image}
                 alt={dish.nameEn}

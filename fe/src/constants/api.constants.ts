@@ -2,9 +2,6 @@ const rawBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/a
 const cleanBaseUrl = rawBaseUrl.replace(/\/+$/, '');
 export const API_BASE_URL = cleanBaseUrl.endsWith('/api') ? cleanBaseUrl : `${cleanBaseUrl}/api`;
 
-export const USE_MOCK_DATA =
-  import.meta.env.VITE_USE_MOCK === 'true';
-
 export const API_ENDPOINTS = {
   AUTH: {
     CSRF: '/auth/csrf',

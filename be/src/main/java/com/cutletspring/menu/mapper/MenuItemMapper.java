@@ -39,7 +39,7 @@ public class MenuItemMapper {
                 .price(entity.getBasePrice())
                 .priceFormatted(priceFormatted)
                 .prepTimeMinutes(entity.getPrepTimeMinutes())
-                .image(entity.getImageUrl() != null ? entity.getImageUrl() : "")
+                .image(resolveRemoteImageUrl(entity.getImageUrl()))
                 .imagePublicId(entity.getImagePublicId())
                 .altText(entity.getAltText() != null ? entity.getAltText() : "")
                 .isBestSeller(entity.isBestSeller())
@@ -73,6 +73,17 @@ public class MenuItemMapper {
                 .active(entity.isActive())
                 .displayOrder(entity.getDisplayOrder())
                 .build();
+    }
+
+    private String resolveRemoteImageUrl(String imageUrl) {
+        if (imageUrl == null || imageUrl.isBlank()) {
+            return "";
+        }
+        String trimmed = imageUrl.trim();
+        if (trimmed.startsWith("http://") || trimmed.startsWith("https://") || trimmed.startsWith("//")) {
+            return trimmed;
+        }
+        return "";
     }
 
     private String formatPrice(int priceInThousands) {

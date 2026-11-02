@@ -14,10 +14,9 @@ export const DishImageFrame: React.FC<DishImageFrameProps> = ({ item, isFeatured
 
   const hasImage = Boolean(
     item.image &&
-      (item.image.startsWith('/images/menu/') ||
-        item.image.startsWith('http://') ||
+      (item.image.startsWith('http://') ||
         item.image.startsWith('https://') ||
-        item.image.startsWith('/'))
+        item.image.startsWith('//'))
   );
 
   const objectPosition = item.imagePosition || 'center 60%';

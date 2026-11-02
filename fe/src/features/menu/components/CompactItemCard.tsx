@@ -12,10 +12,9 @@ export const CompactItemCard: React.FC<CompactItemCardProps> = ({ item, onSelect
 
   const hasImage = Boolean(
     item.image &&
-    (item.image.startsWith('/images/menu/') ||
-      item.image.startsWith('http://') ||
-      item.image.startsWith('https://') ||
-      item.image.startsWith('/'))
+      (item.image.startsWith('http://') ||
+        item.image.startsWith('https://') ||
+        item.image.startsWith('//'))
   );
 
   return (
