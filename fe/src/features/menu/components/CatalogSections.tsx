@@ -1,6 +1,7 @@
 import React from 'react';
 import { MenuItem } from '@/types';
 import { DishCard, CompactItemCard, MenuSection } from '@/features/menu/components';
+import { isSignatureDish } from '@/features/menu/hooks/useMenuCatalog';
 
 interface CatalogSectionsProps {
   japaneseItems: MenuItem[];
@@ -37,7 +38,7 @@ export const CatalogSections: React.FC<CatalogSectionsProps> = ({
             <DishCard
               key={item.id}
               item={item}
-              isFeatured={Boolean(item.isChefSignature ?? item.chefSignature)}
+              isFeatured={isSignatureDish(item)}
               onSelectItem={onSelectItem}
             />
           ))}
@@ -56,6 +57,7 @@ export const CatalogSections: React.FC<CatalogSectionsProps> = ({
             <DishCard
               key={item.id}
               item={item}
+              isFeatured={isSignatureDish(item)}
               onSelectItem={onSelectItem}
             />
           ))}
@@ -73,6 +75,7 @@ export const CatalogSections: React.FC<CatalogSectionsProps> = ({
             <DishCard
               key={item.id}
               item={item}
+              isFeatured={isSignatureDish(item)}
               onSelectItem={onSelectItem}
             />
           ))}
@@ -90,6 +93,7 @@ export const CatalogSections: React.FC<CatalogSectionsProps> = ({
             <DishCard
               key={item.id}
               item={item}
+              isFeatured={isSignatureDish(item)}
               onSelectItem={onSelectItem}
             />
           ))}

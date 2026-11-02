@@ -19,37 +19,56 @@ export interface UseMenuCatalogReturn {
   drinkItems: MenuItem[];
 }
 
+export const isSignatureDish = (item: MenuItem): boolean => {
+  if (Boolean(item.isChefSignature ?? item.chefSignature)) return true;
+  if (Array.isArray(item.badges)) {
+    return item.badges.some(
+      (b) => b.code === 'chef-signature' || b.name?.toLowerCase().includes('signature')
+    );
+  }
+  return false;
+};
+
+const sortBySignatureFirst = (list: MenuItem[]): MenuItem[] => {
+  return [...list].sort((a, b) => {
+    const aSig = isSignatureDish(a) ? 1 : 0;
+    const bSig = isSignatureDish(b) ? 1 : 0;
+    if (aSig !== bSig) return bSig - aSig; // Signature dishes prioritized at top
+    return (a.displayOrder ?? 0) - (b.displayOrder ?? 0);
+  });
+};
+
 export const useMenuCatalog = (): UseMenuCatalogReturn => {
   const { items, isLoading, error, refetch } = useMenu();
   const [activeCategory, setActiveCategory] = useState<string>('cat-japanese');
   const isClickScrolling = useRef(false);
 
   const japaneseItems = useMemo(
-    () => items.filter((i) => i.category === 'japanese'),
+    () => sortBySignatureFirst(items.filter((i) => i.category === 'japanese')),
     [items]
   );
   const koreanItems = useMemo(
-    () => items.filter((i) => i.category === 'korean'),
+    () => sortBySignatureFirst(items.filter((i) => i.category === 'korean')),
     [items]
   );
   const curryItems = useMemo(
-    () => items.filter((i) => i.category === 'curry'),
+    () => sortBySignatureFirst(items.filter((i) => i.category === 'curry')),
     [items]
   );
   const noodleItems = useMemo(
-    () => items.filter((i) => i.category === 'noodles'),
+    () => sortBySignatureFirst(items.filter((i) => i.category === 'noodles')),
     [items]
   );
   const addonItems = useMemo(
-    () => items.filter((i) => i.category === 'addons'),
+    () => sortBySignatureFirst(items.filter((i) => i.category === 'addons')),
     [items]
   );
   const sauceItems = useMemo(
-    () => items.filter((i) => i.category === 'sauces'),
+    () => sortBySignatureFirst(items.filter((i) => i.category === 'sauces')),
     [items]
   );
   const drinkItems = useMemo(
-    () => items.filter((i) => i.category === 'drinks'),
+    () => sortBySignatureFirst(items.filter((i) => i.category === 'drinks')),
     [items]
   );
 

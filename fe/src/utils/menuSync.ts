@@ -85,3 +85,4 @@ export function subscribeToMenuUpdates(callback: MenuSyncCallback): () => void {
     window.removeEventListener('storage', handleStorageEvent);
   };
 }
+

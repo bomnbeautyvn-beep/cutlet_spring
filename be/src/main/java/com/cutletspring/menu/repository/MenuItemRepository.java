@@ -15,9 +15,10 @@ import java.util.Optional;
 @Repository
 public interface MenuItemRepository extends JpaRepository<MenuItem, String>, JpaSpecificationExecutor<MenuItem> {
 
+    @Query("SELECT m FROM MenuItem m WHERE m.active = true ORDER BY CASE WHEN m.isChefSignature = true THEN 0 ELSE 1 END, m.displayOrder ASC")
     List<MenuItem> findAllByActiveTrueOrderByDisplayOrderAsc();
 
-    @Query("SELECT m FROM MenuItem m WHERE (m.category.id = :categoryId OR m.category.code = :categoryId) AND m.active = true ORDER BY m.displayOrder ASC")
+    @Query("SELECT m FROM MenuItem m WHERE (m.category.id = :categoryId OR m.category.code = :categoryId) AND m.active = true ORDER BY CASE WHEN m.isChefSignature = true THEN 0 ELSE 1 END, m.displayOrder ASC")
     List<MenuItem> findAllByCategoryIdAndActiveTrueOrderByDisplayOrderAsc(@Param("categoryId") String categoryId);
 
     @Query("SELECT m FROM MenuItem m WHERE m.active = true AND (m.isBestSeller = true OR m.isChefSignature = true) ORDER BY m.displayOrder ASC")
