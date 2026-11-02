@@ -134,15 +134,15 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
 
       {/* Language Form Fields */}
       {activeLang === 'VI' && (
-        <div className="space-y-3 sm:space-y-4 animate-fade-in">
-          <div className="flex items-center justify-between text-[11px] sm:text-xs text-[#8f6f6c] pb-1 border-b border-[#f3f1ec]">
+        <div className="space-y-3 sm:space-y-3.5 animate-fade-in">
+          <div className="flex items-center justify-between text-xs text-[#8f6f6c] pb-1 border-b border-[#f3f1ec]">
             <span className="font-bold text-[#1b1c1a]">🇻🇳 Thông tin Tiếng Việt (Bắt buộc)</span>
             <span>Hiển thị trên thực đơn Tiếng Việt</span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 items-start">
             <div>
-              <label className="block text-[10px] sm:text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1">
+              <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
                 Tên món ăn (VI) *
               </label>
               <input
@@ -150,16 +150,16 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
                 value={nameVi}
                 onChange={(e) => onNameViChange(e.target.value)}
                 placeholder="Ví dụ: Set Cơm Thịt Heo Nạc Lưng Chiên Xù"
-                className={`w-full px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg border bg-[#fbf9f6] text-xs sm:text-sm font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
+                className={`w-full px-3 py-1.5 rounded-lg border bg-[#fbf9f6] text-xs font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
                   errors.nameVi ? 'border-red-500 bg-red-50/20' : 'border-[#eae8e5]'
                 }`}
                 required
               />
-              {errors.nameVi && <span className="text-[9px] sm:text-[10px] text-red-600 block mt-1">{errors.nameVi}</span>}
+              {errors.nameVi && <span className="text-[10px] text-red-600 block mt-1">{errors.nameVi}</span>}
             </div>
 
             <div>
-              <label className="block text-[10px] sm:text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1">
+              <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
                 Định lượng khẩu phần (VI) *
               </label>
               <input
@@ -167,17 +167,17 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
                 value={portionVi}
                 onChange={(e) => onPortionViChange(e.target.value)}
                 placeholder="Ví dụ: Phần 1 người (6 miếng nạc thăn mềm)"
-                className={`w-full px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg border bg-[#fbf9f6] text-xs sm:text-sm text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
+                className={`w-full px-3 py-1.5 rounded-lg border bg-[#fbf9f6] text-xs font-medium text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
                   errors.portionVi ? 'border-red-500 bg-red-50/20' : 'border-[#eae8e5]'
                 }`}
                 required
               />
-              {errors.portionVi && <span className="text-[9px] sm:text-[10px] text-red-600 block mt-1">{errors.portionVi}</span>}
+              {errors.portionVi && <span className="text-[10px] text-red-600 block mt-1">{errors.portionVi}</span>}
             </div>
           </div>
 
           <div>
-            <label className="block text-[10px] sm:text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1">
+            <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
               Mô tả ẩm thực &amp; hương vị (VI) *
             </label>
             <textarea
@@ -185,26 +185,26 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
               value={descriptionVi}
               onChange={(e) => onDescriptionViChange(e.target.value)}
               placeholder="Mô tả hương vị, nguyên liệu tuyển chọn và nghệ thuật tẩm bột..."
-              className={`w-full px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg border bg-[#fbf9f6] text-xs sm:text-sm leading-relaxed text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
+              className={`w-full px-3 py-1.5 rounded-lg border bg-[#fbf9f6] text-xs leading-relaxed text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
                 errors.descriptionVi ? 'border-red-500 bg-red-50/20' : 'border-[#eae8e5]'
               }`}
               required
             />
-            {errors.descriptionVi && <span className="text-[9px] sm:text-[10px] text-red-600 block mt-1">{errors.descriptionVi}</span>}
+            {errors.descriptionVi && <span className="text-[10px] text-red-600 block mt-1">{errors.descriptionVi}</span>}
           </div>
         </div>
       )}
 
       {activeLang === 'EN' && (
-        <div className="space-y-3 sm:space-y-4 animate-fade-in">
-          <div className="flex items-center justify-between text-[11px] sm:text-xs text-[#8f6f6c] pb-1 border-b border-[#f3f1ec]">
+        <div className="space-y-3 sm:space-y-3.5 animate-fade-in">
+          <div className="flex items-center justify-between text-xs text-[#8f6f6c] pb-1 border-b border-[#f3f1ec]">
             <span className="font-bold text-[#1b1c1a]">🇺🇸 English Profile (Mandatory)</span>
             <span>Displayed for international guests</span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 items-start">
             <div>
-              <label className="block text-[10px] sm:text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1">
+              <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
                 Dish Name (EN) *
               </label>
               <input
@@ -212,16 +212,16 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
                 value={nameEn}
                 onChange={(e) => onNameEnChange(e.target.value)}
                 placeholder="e.g. Pork Tenderloin Cutlet Set"
-                className={`w-full px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg border bg-[#fbf9f6] text-xs sm:text-sm font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
+                className={`w-full px-3 py-1.5 rounded-lg border bg-[#fbf9f6] text-xs font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
                   errors.nameEn ? 'border-red-500 bg-red-50/20' : 'border-[#eae8e5]'
                 }`}
                 required
               />
-              {errors.nameEn && <span className="text-[9px] sm:text-[10px] text-red-600 block mt-1">{errors.nameEn}</span>}
+              {errors.nameEn && <span className="text-[10px] text-red-600 block mt-1">{errors.nameEn}</span>}
             </div>
 
             <div>
-              <label className="block text-[10px] sm:text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1">
+              <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
                 Portion Specification (EN) *
               </label>
               <input
@@ -229,17 +229,17 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
                 value={portionEn}
                 onChange={(e) => onPortionEnChange(e.target.value)}
                 placeholder="e.g. 1 serving (6 tenderloin pieces)"
-                className={`w-full px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg border bg-[#fbf9f6] text-xs sm:text-sm text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
+                className={`w-full px-3 py-1.5 rounded-lg border bg-[#fbf9f6] text-xs font-medium text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
                   errors.portionEn ? 'border-red-500 bg-red-50/20' : 'border-[#eae8e5]'
                 }`}
                 required
               />
-              {errors.portionEn && <span className="text-[9px] sm:text-[10px] text-red-600 block mt-1">{errors.portionEn}</span>}
+              {errors.portionEn && <span className="text-[10px] text-red-600 block mt-1">{errors.portionEn}</span>}
             </div>
           </div>
 
           <div>
-            <label className="block text-[10px] sm:text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1">
+            <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
               Culinary Description (EN) *
             </label>
             <textarea
@@ -247,26 +247,26 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
               value={descriptionEn}
               onChange={(e) => onDescriptionEnChange(e.target.value)}
               placeholder="Detailed culinary notes, ingredients, and preparation techniques in English..."
-              className={`w-full px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg border bg-[#fbf9f6] text-xs sm:text-sm leading-relaxed text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
+              className={`w-full px-3 py-1.5 rounded-lg border bg-[#fbf9f6] text-xs leading-relaxed text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
                 errors.descriptionEn ? 'border-red-500 bg-red-50/20' : 'border-[#eae8e5]'
               }`}
               required
             />
-            {errors.descriptionEn && <span className="text-[9px] sm:text-[10px] text-red-600 block mt-1">{errors.descriptionEn}</span>}
+            {errors.descriptionEn && <span className="text-[10px] text-red-600 block mt-1">{errors.descriptionEn}</span>}
           </div>
         </div>
       )}
 
       {activeLang === 'KR' && (
-        <div className="space-y-3 sm:space-y-4 animate-fade-in">
-          <div className="flex items-center justify-between text-[11px] sm:text-xs text-[#8f6f6c] pb-1 border-b border-[#f3f1ec]">
+        <div className="space-y-3 sm:space-y-3.5 animate-fade-in">
+          <div className="flex items-center justify-between text-xs text-[#8f6f6c] pb-1 border-b border-[#f3f1ec]">
             <span className="font-bold text-[#1b1c1a]">🇰🇷 한국어 정보 (Mandatory)</span>
             <span>한국인 고객 및 헤리티지 표기</span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 items-start">
             <div>
-              <label className="block text-[10px] sm:text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1">
+              <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
                 메뉴명 (KO) *
               </label>
               <input
@@ -274,17 +274,17 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
                 value={nameKr}
                 onChange={(e) => onNameKrChange(e.target.value)}
                 placeholder="예: 안심카츠 정식"
-                className={`w-full px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg border bg-[#fbf9f6] text-xs sm:text-sm font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
+                className={`w-full px-3 py-1.5 rounded-lg border bg-[#fbf9f6] text-xs font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
                   errors.nameKr ? 'border-red-500 bg-red-50/20' : 'border-[#eae8e5]'
                 }`}
                 required
               />
-              {errors.nameKr && <span className="text-[9px] sm:text-[10px] text-red-600 block mt-1">{errors.nameKr}</span>}
+              {errors.nameKr && <span className="text-[10px] text-red-600 block mt-1">{errors.nameKr}</span>}
             </div>
 
             {onNameKrSubtitleChange && (
               <div>
-                <label className="block text-[10px] sm:text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1">
+                <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
                   소제목 / 부제 (Optional)
                 </label>
                 <input
@@ -292,13 +292,13 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
                   value={nameKrSubtitle}
                   onChange={(e) => onNameKrSubtitleChange(e.target.value)}
                   placeholder="예: (히레카츠)"
-                  className="w-full px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs sm:text-sm text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
+                  className="w-full px-3 py-1.5 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs font-medium text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
                 />
               </div>
             )}
 
             <div>
-              <label className="block text-[10px] sm:text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1">
+              <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
                 포션 정보 (KO) *
               </label>
               <input
@@ -306,17 +306,17 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
                 value={portionKr}
                 onChange={(e) => onPortionKrChange(e.target.value)}
                 placeholder="예: 1인분 (안심 6조각)"
-                className={`w-full px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg border bg-[#fbf9f6] text-xs sm:text-sm text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
+                className={`w-full px-3 py-1.5 rounded-lg border bg-[#fbf9f6] text-xs font-medium text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
                   errors.portionKr ? 'border-red-500 bg-red-50/20' : 'border-[#eae8e5]'
                 }`}
                 required
               />
-              {errors.portionKr && <span className="text-[9px] sm:text-[10px] text-red-600 block mt-1">{errors.portionKr}</span>}
+              {errors.portionKr && <span className="text-[10px] text-red-600 block mt-1">{errors.portionKr}</span>}
             </div>
           </div>
 
           <div>
-            <label className="block text-[10px] sm:text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1">
+            <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
               메뉴 설명 (KO) *
             </label>
             <textarea
@@ -324,26 +324,26 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
               value={descriptionKr}
               onChange={(e) => onDescriptionKrChange(e.target.value)}
               placeholder="한국어로 메뉴의 특징, 튀김 기법과 조리법을 상세히 입력하세요..."
-              className={`w-full px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg border bg-[#fbf9f6] text-xs sm:text-sm leading-relaxed text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
+              className={`w-full px-3 py-1.5 rounded-lg border bg-[#fbf9f6] text-xs leading-relaxed text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
                 errors.descriptionKr ? 'border-red-500 bg-red-50/20' : 'border-[#eae8e5]'
               }`}
               required
             />
-            {errors.descriptionKr && <span className="text-[9px] sm:text-[10px] text-red-600 block mt-1">{errors.descriptionKr}</span>}
+            {errors.descriptionKr && <span className="text-[10px] text-red-600 block mt-1">{errors.descriptionKr}</span>}
           </div>
         </div>
       )}
 
       {activeLang === 'JP' && (
-        <div className="space-y-3 sm:space-y-4 animate-fade-in">
-          <div className="flex items-center justify-between text-[11px] sm:text-xs text-[#8f6f6c] pb-1 border-b border-[#f3f1ec]">
+        <div className="space-y-3 sm:space-y-3.5 animate-fade-in">
+          <div className="flex items-center justify-between text-xs text-[#8f6f6c] pb-1 border-b border-[#f3f1ec]">
             <span className="font-bold text-[#1b1c1a]">🇯🇵 日本語情報 (必須)</span>
             <span>日本人のお客様向け・職人技の紹介</span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 items-start">
             <div>
-              <label className="block text-[10px] sm:text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1">
+              <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
                 料理名 (JA) *
               </label>
               <input
@@ -351,16 +351,16 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
                 value={nameJp}
                 onChange={(e) => onNameJpChange(e.target.value)}
                 placeholder="例: ヒレかつ定食"
-                className={`w-full px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg border bg-[#fbf9f6] text-xs sm:text-sm font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
+                className={`w-full px-3 py-1.5 rounded-lg border bg-[#fbf9f6] text-xs font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
                   errors.nameJp ? 'border-red-500 bg-red-50/20' : 'border-[#eae8e5]'
                 }`}
                 required
               />
-              {errors.nameJp && <span className="text-[9px] sm:text-[10px] text-red-600 block mt-1">{errors.nameJp}</span>}
+              {errors.nameJp && <span className="text-[10px] text-red-600 block mt-1">{errors.nameJp}</span>}
             </div>
 
             <div>
-              <label className="block text-[10px] sm:text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1">
+              <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
                 ボリューム / 前数 (JA) *
               </label>
               <input
@@ -368,17 +368,17 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
                 value={portionJp}
                 onChange={(e) => onPortionJpChange(e.target.value)}
                 placeholder="例: 1人前 (ヒレ 6個)"
-                className={`w-full px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg border bg-[#fbf9f6] text-xs sm:text-sm text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
+                className={`w-full px-3 py-1.5 rounded-lg border bg-[#fbf9f6] text-xs font-medium text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
                   errors.portionJp ? 'border-red-500 bg-red-50/20' : 'border-[#eae8e5]'
                 }`}
                 required
               />
-              {errors.portionJp && <span className="text-[9px] sm:text-[10px] text-red-600 block mt-1">{errors.portionJp}</span>}
+              {errors.portionJp && <span className="text-[10px] text-red-600 block mt-1">{errors.portionJp}</span>}
             </div>
           </div>
 
           <div>
-            <label className="block text-[10px] sm:text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1">
+            <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
               料理説明 (JA) *
             </label>
             <textarea
@@ -386,12 +386,12 @@ export const DishMultilingualSection: React.FC<DishMultilingualSectionProps> = (
               value={descriptionJp}
               onChange={(e) => onDescriptionJpChange(e.target.value)}
               placeholder="日本語で料理のこだわり、低温調理や揚げ上がりの特徴を入力してください..."
-              className={`w-full px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-lg border bg-[#fbf9f6] text-xs sm:text-sm leading-relaxed text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
+              className={`w-full px-3 py-1.5 rounded-lg border bg-[#fbf9f6] text-xs leading-relaxed text-[#1b1c1a] focus:outline-none focus:border-[#af101a] ${
                 errors.descriptionJp ? 'border-red-500 bg-red-50/20' : 'border-[#eae8e5]'
               }`}
               required
             />
-            {errors.descriptionJp && <span className="text-[9px] sm:text-[10px] text-red-600 block mt-1">{errors.descriptionJp}</span>}
+            {errors.descriptionJp && <span className="text-[10px] text-red-600 block mt-1">{errors.descriptionJp}</span>}
           </div>
         </div>
       )}

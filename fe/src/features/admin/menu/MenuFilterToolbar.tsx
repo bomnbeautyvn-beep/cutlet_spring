@@ -50,6 +50,12 @@ export const MenuFilterToolbar: React.FC<MenuFilterToolbarProps> = ({
           className="w-full px-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded-lg focus:outline-none focus:border-[#af101a] cursor-pointer"
         >
           <option value="">All Categories</option>
+          {/* Temporary placeholder if selectedCategory is loaded from session before categories finish fetching */}
+          {selectedCategory &&
+            !categories.some((c) => (c.code || c.id) === selectedCategory) &&
+            !['japanese', 'korean', 'curry', 'noodles', 'addons', 'sauces', 'drinks'].includes(selectedCategory) && (
+              <option value={selectedCategory}>{selectedCategory}</option>
+            )}
           {categories.length > 0 ? (
             categories.map((c) => (
               <option key={c.id} value={c.code || c.id}>

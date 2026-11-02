@@ -173,11 +173,11 @@ export const DishPricingAndImageSection: React.FC<DishPricingAndImageSectionProp
         </div>
 
         {/* Right Column: Pricing, VND Display, Prep Time & Sizes */}
-        <div className="md:col-span-7 space-y-3.5 sm:space-y-4">
+        <div className="md:col-span-7 space-y-3 sm:space-y-3.5">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             {/* Base Price */}
             <div>
-              <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1">
+              <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
                 Base Price (Thousands VND) *
               </label>
               <div className="relative">
@@ -188,21 +188,21 @@ export const DishPricingAndImageSection: React.FC<DishPricingAndImageSectionProp
                   value={basePrice || ''}
                   onChange={(e) => onBasePriceChange(Number(e.target.value))}
                   placeholder="e.g. 180"
-                  className="w-full px-3 py-1.5 sm:py-2 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs sm:text-sm font-semibold focus:outline-none focus:border-[#af101a]"
+                  className="w-full pl-3 pr-12 py-1.5 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
                   required
                 />
-                <span className="absolute right-3 top-2 sm:top-2.5 text-[11px] sm:text-xs text-[#8f6f6c] font-medium pointer-events-none">
+                <span className="absolute right-3 top-2 text-[11px] text-[#8f6f6c] font-semibold pointer-events-none whitespace-nowrap">
                   k VND
                 </span>
               </div>
-              <div className="mt-1 text-[11px] sm:text-xs text-[#af101a] font-price-numeral font-bold">
+              <div className="mt-1 text-xs text-[#af101a] font-price-numeral font-bold whitespace-nowrap">
                 = {formattedVnd}
               </div>
             </div>
 
             {/* Prep Time (No increase/decrease stepper, purely direct entry) */}
             <div>
-              <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1">
+              <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
                 Prep Time (Minutes)
               </label>
               <div className="relative">
@@ -216,13 +216,13 @@ export const DishPricingAndImageSection: React.FC<DishPricingAndImageSectionProp
                     onPrepTimeChange(clean ? Number(clean) : 0);
                   }}
                   placeholder="15"
-                  className="w-full px-3 py-1.5 sm:py-2 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs sm:text-sm font-semibold focus:outline-none focus:border-[#af101a] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  className="w-full pl-3 pr-10 py-1.5 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs font-semibold text-[#1b1c1a] focus:outline-none focus:border-[#af101a] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                 />
-                <span className="absolute right-3 top-2 sm:top-2.5 text-[11px] sm:text-xs text-[#8f6f6c] font-medium pointer-events-none">
+                <span className="absolute right-3 top-2 text-[11px] text-[#8f6f6c] font-semibold pointer-events-none whitespace-nowrap">
                   min
                 </span>
               </div>
-              <span className="text-[9px] sm:text-[10px] text-[#8f6f6c] block mt-1">
+              <span className="text-[10px] text-[#8f6f6c] block mt-1 whitespace-nowrap">
                 Thời gian chiên và chuẩn bị tại bếp
               </span>
             </div>

@@ -97,7 +97,8 @@ public class MenuItemServiceImpl implements MenuItemService {
         }
 
         MenuCategory category = categoryRepository.findById(request.getCategoryId())
-                .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + request.getCategoryId()));
+                .orElseGet(() -> categoryRepository.findByCode(request.getCategoryId())
+                        .orElseThrow(() -> new ResourceNotFoundException("Category not found with id or code: " + request.getCategoryId())));
 
         MenuItem item = MenuItem.builder()
                 .id(itemId)
@@ -190,7 +191,8 @@ public class MenuItemServiceImpl implements MenuItemService {
                 .orElseThrow(() -> new ResourceNotFoundException("Menu item not found with id: " + id));
 
         MenuCategory category = categoryRepository.findById(request.getCategoryId())
-                .orElseThrow(() -> new ResourceNotFoundException("Category not found with id: " + request.getCategoryId()));
+                .orElseGet(() -> categoryRepository.findByCode(request.getCategoryId())
+                        .orElseThrow(() -> new ResourceNotFoundException("Category not found with id or code: " + request.getCategoryId())));
 
         item.setCategory(category);
         item.setNameEn(request.getNameEn().trim());

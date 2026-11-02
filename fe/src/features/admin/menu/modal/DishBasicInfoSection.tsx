@@ -35,10 +35,10 @@ export const DishBasicInfoSection: React.FC<DishBasicInfoSectionProps> = ({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 items-start">
         {/* Identifier / Slug */}
         <div>
-          <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1">
+          <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
             Identifier (Slug / ID) *
           </label>
           <input
@@ -47,42 +47,45 @@ export const DishBasicInfoSection: React.FC<DishBasicInfoSectionProps> = ({
             onChange={(e) => onIdChange(e.target.value)}
             disabled={isEditing}
             placeholder="e.g. spring-signature-set"
-            className="w-full px-3 py-1.5 sm:py-2 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs sm:text-sm font-mono text-[#1b1c1a] focus:outline-none focus:border-[#af101a] disabled:opacity-60 disabled:bg-gray-100 cursor-text"
+            className="w-full px-3 py-1.5 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs font-mono text-[#1b1c1a] focus:outline-none focus:border-[#af101a] disabled:opacity-60 disabled:bg-gray-100 cursor-text"
             required
           />
-          <span className="text-[9px] sm:text-[10px] text-[#8f6f6c] block mt-1">
+          <span className="text-[10px] text-[#8f6f6c] block mt-1 whitespace-nowrap truncate">
             {isEditing ? 'ID cannot be changed after creation' : 'Unique URL slug (auto-generated if blank)'}
           </span>
         </div>
 
         {/* Category Dropdown */}
         <div>
-          <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1">
+          <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
             Menu Category *
           </label>
           <select
             value={categoryId}
             onChange={(e) => onCategoryChange(e.target.value)}
-            className="w-full px-3 py-1.5 sm:py-2 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs sm:text-sm font-bold text-[#1b1c1a] focus:outline-none focus:border-[#af101a] cursor-pointer"
+            className="w-full px-3 py-1.5 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] text-xs font-bold text-[#1b1c1a] focus:outline-none focus:border-[#af101a] cursor-pointer"
             required
           >
+            {categoryId && !categories.some((c) => (c.code || c.id) === categoryId) && (
+              <option value={categoryId}>{categoryId}</option>
+            )}
             {categories.map((cat) => (
               <option key={cat.id} value={cat.code || cat.id}>
                 {cat.name} ({cat.code})
               </option>
             ))}
           </select>
-          <span className="text-[9px] sm:text-[10px] text-[#8f6f6c] block mt-1">
+          <span className="text-[10px] text-[#8f6f6c] block mt-1 whitespace-nowrap">
             Loaded dynamically from backend categories
           </span>
         </div>
 
         {/* Visibility on Public Menu */}
-        <div className="flex flex-col justify-center">
-          <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1">
+        <div>
+          <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
             Public Menu Visibility
           </label>
-          <div className="flex items-center gap-2.5 sm:gap-3 pt-1">
+          <div className="flex items-center gap-2.5 pt-1">
             <label className="relative inline-flex items-center cursor-pointer">
               <input
                 type="checkbox"
@@ -90,9 +93,9 @@ export const DishBasicInfoSection: React.FC<DishBasicInfoSectionProps> = ({
                 onChange={(e) => onActiveChange(e.target.checked)}
                 className="sr-only peer"
               />
-              <div className="w-10 h-5 sm:w-11 sm:h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:h-4 after:w-4 sm:after:h-5 sm:after:w-5 after:rounded-full after:transition-all peer-checked:bg-[#af101a]"></div>
+              <div className="w-10 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:h-4 after:w-4 after:rounded-full after:transition-all peer-checked:bg-[#af101a]"></div>
             </label>
-            <span className="text-[11px] sm:text-xs font-semibold text-[#1b1c1a]">
+            <span className="text-xs font-semibold text-[#1b1c1a] whitespace-nowrap">
               {active ? (
                 <span className="text-emerald-700 font-bold">Active (Visible)</span>
               ) : (

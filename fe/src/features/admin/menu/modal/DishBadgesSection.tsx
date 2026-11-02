@@ -119,15 +119,15 @@ export const DishBadgesSection: React.FC<DishBadgesSectionProps> = ({
 
       {/* Spicy Options if Spicy Glaze / Spicy Badge is Selected */}
       {isSpicySelected && onSpiceLevelChange && (
-        <div className="mt-3 sm:mt-4 p-3 sm:p-4 bg-[#fdf8f6] border border-[#f5d0c5] rounded-xl space-y-2.5 sm:space-y-3 animate-fade-in">
-          <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-bold text-[#b43419] uppercase tracking-wider">
-            <span className="material-symbols-outlined text-[16px] sm:text-[18px]">local_fire_department</span>
+        <div className="mt-3 p-3 sm:p-3.5 bg-[#fdf8f6] border border-[#f5d0c5] rounded-xl space-y-2.5 animate-fade-in">
+          <div className="flex items-center gap-1.5 text-xs font-bold text-[#b43419] uppercase tracking-wider whitespace-nowrap">
+            <span className="material-symbols-outlined text-[16px]">local_fire_department</span>
             <span>Spicy Level Configuration</span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 items-start">
             <div>
-              <label className="block text-[10px] sm:text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1">
+              <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
                 Spice Level (1 - 5)
               </label>
               <div className="flex items-center gap-1 sm:gap-1.5">
@@ -136,7 +136,7 @@ export const DishBadgesSection: React.FC<DishBadgesSectionProps> = ({
                     key={lvl}
                     type="button"
                     onClick={() => onSpiceLevelChange(lvl)}
-                    className={`flex-1 py-1 sm:py-1.5 text-xs font-bold rounded-lg border transition-all cursor-pointer ${
+                    className={`flex-1 py-1 text-xs font-bold rounded-lg border transition-all cursor-pointer ${
                       spiceLevel >= lvl
                         ? 'bg-[#af101a] text-white border-[#af101a] shadow-xs'
                         : 'bg-white text-[#585757] border-[#eae8e5] hover:bg-gray-50'
@@ -150,7 +150,7 @@ export const DishBadgesSection: React.FC<DishBadgesSectionProps> = ({
 
             {onSpiceNoteChange && (
               <div>
-                <label className="block text-[10px] sm:text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1">
+                <label className="block text-[11px] font-bold text-[#5b403d] uppercase tracking-wider mb-1 whitespace-nowrap">
                   Spice Profile Note (Optional)
                 </label>
                 <input
@@ -158,7 +158,7 @@ export const DishBadgesSection: React.FC<DishBadgesSectionProps> = ({
                   value={spiceNote}
                   onChange={(e) => onSpiceNoteChange(e.target.value)}
                   placeholder="e.g. Sốt ớt Togarashi cay nồng dịu nhẹ"
-                  className="w-full px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg border border-[#eae8e5] bg-white text-xs text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
+                  className="w-full px-2.5 py-1.5 rounded-lg border border-[#eae8e5] bg-white text-xs font-medium text-[#1b1c1a] focus:outline-none focus:border-[#af101a]"
                 />
               </div>
             )}

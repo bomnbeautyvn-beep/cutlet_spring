@@ -24,13 +24,50 @@ export interface UseAdminMenuReturn {
   filteredDishes: MenuItem[];
 }
 
+const SESSION_CATEGORY_KEY = 'admin_menu_selected_category';
+const SESSION_ACTIVE_KEY = 'admin_menu_selected_active';
+
 export function useAdminMenu(): UseAdminMenuReturn {
   const [pageResult, setPageResult] = useState<PageResult<MenuItem> | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(0);
-  const [selectedCategory, setSelectedCategory] = useState<string>('');
-  const [selectedActive, setSelectedActive] = useState<string>('all');
+  const [selectedCategory, setSelectedCategoryState] = useState<string>(() => {
+    try {
+      return sessionStorage.getItem(SESSION_CATEGORY_KEY) || '';
+    } catch {
+      return '';
+    }
+  });
+  const [selectedActive, setSelectedActiveState] = useState<string>(() => {
+    try {
+      return sessionStorage.getItem(SESSION_ACTIVE_KEY) || 'all';
+    } catch {
+      return 'all';
+    }
+  });
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  const setSelectedCategory = useCallback((cat: string) => {
+    setSelectedCategoryState(cat);
+    try {
+      if (cat) {
+        sessionStorage.setItem(SESSION_CATEGORY_KEY, cat);
+      } else {
+        sessionStorage.removeItem(SESSION_CATEGORY_KEY);
+      }
+    } catch {}
+  }, []);
+
+  const setSelectedActive = useCallback((active: string) => {
+    setSelectedActiveState(active);
+    try {
+      if (active && active !== 'all') {
+        sessionStorage.setItem(SESSION_ACTIVE_KEY, active);
+      } else {
+        sessionStorage.removeItem(SESSION_ACTIVE_KEY);
+      }
+    } catch {}
+  }, []);
 
   const [editingDish, setEditingDish] = useState<MenuItem | null>(null);
   const [togglingDishId, setTogglingDishId] = useState<string | null>(null);
