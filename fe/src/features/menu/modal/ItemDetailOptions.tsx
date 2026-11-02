@@ -86,26 +86,6 @@ export const ItemDetailOptions: React.FC<ItemDetailOptionsProps> = ({ item }) =>
           </div>
         </div>
       )}
-
-      {/* Addons / Pairings */}
-      {item.addons && item.addons.length > 0 && (
-        <div className="space-y-2">
-          <span className="font-label-md text-xs uppercase tracking-wider text-[#585757] font-semibold block">
-            Recommended Atelier Add-ons:
-          </span>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            {item.addons.map((addon) => (
-              <div
-                key={addon.name}
-                className="p-2 rounded-lg border border-[#eae8e5] bg-[#fbf9f6] flex items-center justify-between text-xs text-[#5b403d]"
-              >
-                <span>{addon.name}</span>
-                <span className="font-bold text-[#af101a]">+{addon.price}k</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
     </>
   );
 };

@@ -36,7 +36,7 @@ export const ItemDetailModal: React.FC<ItemDetailModalProps> = ({ item, onClose 
           {/* Header Title Block */}
           <ItemDetailHeader item={item} />
 
-          {/* Options, Sauces & Addons */}
+          {/* Options & Sauces */}
           <ItemDetailOptions item={item} />
 
           {/* Close Action Button */}
