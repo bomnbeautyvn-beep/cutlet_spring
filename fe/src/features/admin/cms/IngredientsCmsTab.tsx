@@ -1,8 +1,9 @@
-﻿import React from 'react';
+import React from 'react';
 import { useIngredientsCms } from './ingredients/hooks/useIngredientsCms';
 import { IngredientCard } from './ingredients/components/IngredientCard';
 import { IngredientModal } from './IngredientModal';
 import { PublicPlacementGuide } from '@/features/admin/components/PublicPlacementGuide';
+import { ConfirmDeleteModal } from '@/features/admin/components/ConfirmDeleteModal';
 
 export const IngredientsCmsTab: React.FC = () => {
   const {
@@ -18,6 +19,9 @@ export const IngredientsCmsTab: React.FC = () => {
     setMessage,
     handleToggleStatus,
     handleDelete,
+    deletingIngredient,
+    setDeletingIngredient,
+    confirmDeleteIngredient,
   } = useIngredientsCms();
 
   if (loading) {
@@ -113,6 +117,19 @@ export const IngredientsCmsTab: React.FC = () => {
           ingredient={selectedIngredient}
         />
       )}
+
+      {/* Delete Ingredient Confirmation Modal */}
+      <ConfirmDeleteModal
+        isOpen={Boolean(deletingIngredient)}
+        title="Xác Nhận Xóa Nguyên Liệu"
+        itemType="Nguyên liệu triết lý"
+        itemName={deletingIngredient?.name || ''}
+        warningMessage="Hành động này sẽ xóa vĩnh viễn thẻ nguyên liệu này khỏi trang chủ. Thao tác không thể hoàn tác."
+        confirmLabel="Xác Nhận Xóa"
+        isLoading={Boolean(actionLoadingId)}
+        onConfirm={confirmDeleteIngredient}
+        onClose={() => setDeletingIngredient(null)}
+      />
     </div>
   );
 };

@@ -1,5 +1,6 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { DatabaseBackup } from '@/types/database.types';
+import { ConfirmDeleteModal } from '@/features/admin/components/ConfirmDeleteModal';
 
 interface DatabaseExportSectionProps {
   backups: DatabaseBackup[];
@@ -22,6 +23,7 @@ export const DatabaseExportSection: React.FC<DatabaseExportSectionProps> = ({
   const [showNotesModal, setShowNotesModal] = useState(false);
   const [downloadingId, setDownloadingId] = useState<string | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [deletingBackup, setDeletingBackup] = useState<{ id: string; filename: string } | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
   const handleTriggerExport = async () => {
@@ -39,13 +41,16 @@ export const DatabaseExportSection: React.FC<DatabaseExportSectionProps> = ({
     }
   };
 
-  const handleDelete = async (id: string, filename: string) => {
-    if (!window.confirm(`Are you sure you want to delete backup file "${filename}"? This action cannot be undone.`)) {
-      return;
-    }
+  const handleDelete = (id: string, filename: string) => {
+    setDeletingBackup({ id, filename });
+  };
+
+  const confirmDeleteBackup = async () => {
+    if (!deletingBackup) return;
     try {
-      setDeletingId(id);
-      await onDelete(id);
+      setDeletingId(deletingBackup.id);
+      await onDelete(deletingBackup.id);
+      setDeletingBackup(null);
     } finally {
       setDeletingId(null);
     }
@@ -322,6 +327,19 @@ export const DatabaseExportSection: React.FC<DatabaseExportSectionProps> = ({
           </div>
         </div>
       )}
+
+      {/* Delete Backup Confirmation Modal */}
+      <ConfirmDeleteModal
+        isOpen={Boolean(deletingBackup)}
+        title="Xác Nhận Xóa Bản Sao Lưu"
+        itemType="Tệp sao lưu database (.dump)"
+        itemName={deletingBackup ? deletingBackup.filename : ''}
+        warningMessage="Hành động này sẽ xóa vĩnh viễn tệp sao lưu này khỏi máy chủ. Bạn sẽ không thể khôi phục dữ liệu từ bản này."
+        confirmLabel="Xác Nhận Xóa"
+        isLoading={Boolean(deletingId)}
+        onConfirm={confirmDeleteBackup}
+        onClose={() => setDeletingBackup(null)}
+      />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AdminDishModal } from '@/features/admin/AdminDishModal';
 import { useAdminMenu } from './menu/hooks/useAdminMenu';
 import { MenuFilterToolbar } from './menu/MenuFilterToolbar';
@@ -6,6 +6,7 @@ import { MenuTable } from './menu/MenuTable';
 import { MenuPagination } from './menu/MenuPagination';
 import { CategoryManagementTab } from './category/CategoryManagementTab';
 import { BadgeManagementTab } from './badge/BadgeManagementTab';
+import { ConfirmDeleteModal } from '@/features/admin/components/ConfirmDeleteModal';
 import { adminService } from '@/services/admin.service';
 import { MenuCategory } from '@/types';
 
@@ -42,6 +43,10 @@ export const MenuManagementPage: React.FC<MenuManagementPageProps> = ({
     fetchDishes,
     handleToggleStatus,
     handleDelete,
+    deletingDish,
+    setDeletingDish,
+    isDeleting,
+    confirmDeleteDish,
     filteredDishes,
   } = useAdminMenu();
 
@@ -211,6 +216,19 @@ export const MenuManagementPage: React.FC<MenuManagementPageProps> = ({
           }}
         />
       )}
+
+      {/* Delete Dish Confirmation Modal */}
+      <ConfirmDeleteModal
+        isOpen={Boolean(deletingDish)}
+        title="Xác Nhận Ngừng Phục Vụ / Xóa Món"
+        itemType="Món ăn"
+        itemName={deletingDish ? `${deletingDish.nameEn} ${deletingDish.nameVi ? `(${deletingDish.nameVi})` : ''}` : ''}
+        warningMessage="Món ăn này sẽ bị xóa khỏi thực đơn công khai và chuyển sang trạng thái ngưng phục vụ."
+        confirmLabel="Xác Nhận Xóa"
+        isLoading={isDeleting}
+        onConfirm={confirmDeleteDish}
+        onClose={() => setDeletingDish(null)}
+      />
     </div>
   );
 };

@@ -21,7 +21,11 @@ export interface UseAdminMenuReturn {
   showToast: (message: string, isError?: boolean) => void;
   fetchDishes: (silent?: boolean) => Promise<void>;
   handleToggleStatus: (dish: MenuItem) => Promise<void>;
-  handleDelete: (dish: MenuItem) => Promise<void>;
+  handleDelete: (dish: MenuItem) => void;
+  deletingDish: MenuItem | null;
+  setDeletingDish: (dish: MenuItem | null) => void;
+  isDeleting: boolean;
+  confirmDeleteDish: () => Promise<void>;
   filteredDishes: MenuItem[];
 }
 
@@ -72,6 +76,8 @@ export function useAdminMenu(): UseAdminMenuReturn {
 
   const [editingDish, setEditingDish] = useState<MenuItem | null>(null);
   const [togglingDishId, setTogglingDishId] = useState<string | null>(null);
+  const [deletingDish, setDeletingDish] = useState<MenuItem | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [feedbackToast, setFeedbackToast] = useState<{ message: string; isError?: boolean } | null>(null);
 
   const showToast = useCallback((message: string, isError = false) => {
@@ -175,17 +181,23 @@ export function useAdminMenu(): UseAdminMenuReturn {
     }
   };
 
-  const handleDelete = async (dish: MenuItem) => {
-    if (!window.confirm(`Are you sure you want to deactivate "${dish.nameEn}"?`)) {
-      return;
-    }
+  const handleDelete = (dish: MenuItem) => {
+    setDeletingDish(dish);
+  };
+
+  const confirmDeleteDish = async () => {
+    if (!deletingDish) return;
     try {
-      await adminService.deleteMenuItem(dish.id);
-      showToast(`Dish "${dish.nameEn}" deactivated successfully`);
+      setIsDeleting(true);
+      await adminService.deleteMenuItem(deletingDish.id);
+      showToast(`Món "${deletingDish.nameEn}" đã được chuyển sang trạng thái ngưng phục vụ`);
       notifyMenuUpdated();
       fetchDishes();
+      setDeletingDish(null);
     } catch (err: any) {
-      showToast(`Failed to delete dish: ${err.message}`, true);
+      showToast(`Không thể xóa món ăn: ${err.message}`, true);
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -218,6 +230,10 @@ export function useAdminMenu(): UseAdminMenuReturn {
     fetchDishes,
     handleToggleStatus,
     handleDelete,
+    deletingDish,
+    setDeletingDish,
+    isDeleting,
+    confirmDeleteDish,
     filteredDishes,
   };
 }

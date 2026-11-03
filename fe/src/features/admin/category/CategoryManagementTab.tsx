@@ -1,8 +1,9 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MenuCategory } from '@/types';
 import { adminService } from '@/services/admin.service';
 import { notifyMenuUpdated } from '@/utils/menuSync';
 import { CategoryModal } from './CategoryModal';
+import { ConfirmDeleteModal } from '@/features/admin/components/ConfirmDeleteModal';
 
 export const CategoryManagementTab: React.FC = () => {
   const [categories, setCategories] = useState<MenuCategory[]>([]);
@@ -12,6 +13,7 @@ export const CategoryManagementTab: React.FC = () => {
 
   const [modalCategory, setModalCategory] = useState<MenuCategory | null | 'NEW'>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [deletingCategory, setDeletingCategory] = useState<MenuCategory | null>(null);
   const [togglingId, setTogglingId] = useState<string | null>(null);
 
   const loadCategories = async () => {
@@ -49,25 +51,26 @@ export const CategoryManagementTab: React.FC = () => {
     }
   };
 
-  const handleDelete = async (cat: MenuCategory) => {
+  const handleDelete = (cat: MenuCategory) => {
     if (cat.assignedCount && cat.assignedCount > 0) {
-      alert(`Cannot delete category "${cat.name}" because it has ${cat.assignedCount} assigned dish(es). Reassign dishes first.`);
+      setError(`Không thể xóa danh mục "${cat.name}" vì đang có ${cat.assignedCount} món ăn liên kết. Vui lòng chuyển các món sang danh mục khác trước.`);
       return;
     }
+    setDeletingCategory(cat);
+  };
 
-    if (!window.confirm(`Are you sure you want to permanently delete category "${cat.name}"?`)) {
-      return;
-    }
-
+  const confirmDeleteCategory = async () => {
+    if (!deletingCategory) return;
     try {
-      setDeletingId(cat.id);
-      await adminService.deleteCategory(cat.id);
-      setCategories((prev) => prev.filter((c) => c.id !== cat.id));
+      setDeletingId(deletingCategory.id);
+      await adminService.deleteCategory(deletingCategory.id);
+      setCategories((prev) => prev.filter((c) => c.id !== deletingCategory.id));
       notifyMenuUpdated();
-      setSuccessToast(`Category "${cat.name}" deleted successfully`);
+      setSuccessToast(`Danh mục "${deletingCategory.name}" đã được xóa thành công`);
       setTimeout(() => setSuccessToast(null), 3000);
+      setDeletingCategory(null);
     } catch (err: any) {
-      alert(err?.response?.data?.message || err?.message || 'Failed to delete category');
+      setError(err?.response?.data?.message || err?.message || 'Không thể xóa danh mục');
     } finally {
       setDeletingId(null);
     }
@@ -229,6 +232,19 @@ export const CategoryManagementTab: React.FC = () => {
           }}
         />
       )}
+
+      {/* Delete Category Confirmation Modal */}
+      <ConfirmDeleteModal
+        isOpen={Boolean(deletingCategory)}
+        title="Xác Nhận Xóa Danh Mục"
+        itemType="Danh mục thực đơn"
+        itemName={deletingCategory ? deletingCategory.name : ''}
+        warningMessage="Hành động này sẽ xóa vĩnh viễn danh mục này khỏi hệ thống. Thao tác không thể hoàn tác."
+        confirmLabel="Xác Nhận Xóa"
+        isLoading={Boolean(deletingId)}
+        onConfirm={confirmDeleteCategory}
+        onClose={() => setDeletingCategory(null)}
+      />
     </div>
   );
 };

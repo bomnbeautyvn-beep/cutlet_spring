@@ -4,6 +4,7 @@ import { ReviewStatsHeader } from './reviews/components/ReviewStatsHeader';
 import { ReviewCard } from './reviews/components/ReviewCard';
 import { ReviewModal } from './ReviewModal';
 import { PublicPlacementGuide } from '@/features/admin/components/PublicPlacementGuide';
+import { ConfirmDeleteModal } from '@/features/admin/components/ConfirmDeleteModal';
 
 export const GoogleReviewsCmsTab: React.FC = () => {
   const {
@@ -21,6 +22,9 @@ export const GoogleReviewsCmsTab: React.FC = () => {
     handleToggleStatus,
     handleToggleFeatured,
     handleDelete,
+    deletingReview,
+    setDeletingReview,
+    confirmDeleteReview,
   } = useGoogleReviews();
 
   if (loading) {
@@ -103,6 +107,19 @@ export const GoogleReviewsCmsTab: React.FC = () => {
           review={selectedReview}
         />
       )}
+
+      {/* Delete Review Confirmation Modal */}
+      <ConfirmDeleteModal
+        isOpen={Boolean(deletingReview)}
+        title="Xác Nhận Xóa Đánh Giá"
+        itemType="Đánh giá khách hàng"
+        itemName={deletingReview ? `Đánh giá từ ${deletingReview.author}` : ''}
+        warningMessage="Hành động này sẽ xóa vĩnh viễn đánh giá này khỏi danh sách tuyển chọn trên website. Thao tác không thể hoàn tác."
+        confirmLabel="Xác Nhận Xóa"
+        isLoading={Boolean(actionLoadingId)}
+        onConfirm={confirmDeleteReview}
+        onClose={() => setDeletingReview(null)}
+      />
     </div>
   );
 };

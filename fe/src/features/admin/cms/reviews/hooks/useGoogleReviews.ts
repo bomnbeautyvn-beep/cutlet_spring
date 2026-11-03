@@ -16,7 +16,10 @@ export interface UseGoogleReviewsReturn {
   setMessage: (msg: { text: string; type: 'success' | 'error' } | null) => void;
   handleToggleStatus: (id: string) => Promise<void>;
   handleToggleFeatured: (id: string) => Promise<void>;
-  handleDelete: (id: string, author: string) => Promise<void>;
+  handleDelete: (id: string, author: string) => void;
+  deletingReview: { id: string; author: string } | null;
+  setDeletingReview: (item: { id: string; author: string } | null) => void;
+  confirmDeleteReview: () => Promise<void>;
 }
 
 export const useGoogleReviews = (): UseGoogleReviewsReturn => {
@@ -27,6 +30,7 @@ export const useGoogleReviews = (): UseGoogleReviewsReturn => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [message, setMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
   const [actionLoadingId, setActionLoadingId] = useState<string | null>(null);
+  const [deletingReview, setDeletingReview] = useState<{ id: string; author: string } | null>(null);
 
   const loadData = async () => {
     try {
@@ -83,19 +87,22 @@ export const useGoogleReviews = (): UseGoogleReviewsReturn => {
     }
   };
 
-  const handleDelete = async (id: string, author: string) => {
-    if (!window.confirm(`Are you sure you want to delete review by "${author}"?`)) {
-      return;
-    }
+  const handleDelete = (id: string, author: string) => {
+    setDeletingReview({ id, author });
+  };
 
+  const confirmDeleteReview = async () => {
+    if (!deletingReview) return;
+    const { id, author } = deletingReview;
     try {
       setActionLoadingId(id);
       await cmsService.deleteAdminReview(id);
       setReviews((prev) => prev.filter((r) => r.id !== id));
-      setMessage({ text: `Review by "${author}" deleted successfully`, type: 'success' });
+      setMessage({ text: `Đánh giá từ "${author}" đã được xóa thành công`, type: 'success' });
+      setDeletingReview(null);
     } catch (err: unknown) {
       console.error(err);
-      setMessage({ text: 'Failed to delete review', type: 'error' });
+      setMessage({ text: 'Không thể xóa đánh giá', type: 'error' });
     } finally {
       setActionLoadingId(null);
     }
@@ -116,6 +123,9 @@ export const useGoogleReviews = (): UseGoogleReviewsReturn => {
     handleToggleStatus,
     handleToggleFeatured,
     handleDelete,
+    deletingReview,
+    setDeletingReview,
+    confirmDeleteReview,
   };
 };
 

@@ -14,7 +14,10 @@ export interface UseIngredientsCmsReturn {
   setIsModalOpen: (open: boolean) => void;
   setMessage: (msg: { text: string; type: 'success' | 'error' } | null) => void;
   handleToggleStatus: (id: string) => Promise<void>;
-  handleDelete: (id: string, name: string) => Promise<void>;
+  handleDelete: (id: string, name: string) => void;
+  deletingIngredient: { id: string; name: string } | null;
+  setDeletingIngredient: (item: { id: string; name: string } | null) => void;
+  confirmDeleteIngredient: () => Promise<void>;
 }
 
 export const useIngredientsCms = (): UseIngredientsCmsReturn => {
@@ -24,6 +27,7 @@ export const useIngredientsCms = (): UseIngredientsCmsReturn => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [message, setMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
   const [actionLoadingId, setActionLoadingId] = useState<string | null>(null);
+  const [deletingIngredient, setDeletingIngredient] = useState<{ id: string; name: string } | null>(null);
 
   const loadIngredients = async () => {
     try {
@@ -59,19 +63,22 @@ export const useIngredientsCms = (): UseIngredientsCmsReturn => {
     }
   };
 
-  const handleDelete = async (id: string, name: string) => {
-    if (!window.confirm(`Are you sure you want to delete "${name}"? This cannot be undone.`)) {
-      return;
-    }
+  const handleDelete = (id: string, name: string) => {
+    setDeletingIngredient({ id, name });
+  };
 
+  const confirmDeleteIngredient = async () => {
+    if (!deletingIngredient) return;
+    const { id, name } = deletingIngredient;
     try {
       setActionLoadingId(id);
       await cmsService.deleteAdminIngredient(id);
       setIngredients((prev) => prev.filter((item) => item.id !== id));
-      setMessage({ text: `Ingredient "${name}" deleted successfully`, type: 'success' });
+      setMessage({ text: `Nguyên liệu "${name}" đã được xóa thành công`, type: 'success' });
+      setDeletingIngredient(null);
     } catch (err: unknown) {
       console.error(err);
-      setMessage({ text: 'Failed to delete ingredient', type: 'error' });
+      setMessage({ text: 'Không thể xóa nguyên liệu', type: 'error' });
     } finally {
       setActionLoadingId(null);
     }
@@ -90,6 +97,9 @@ export const useIngredientsCms = (): UseIngredientsCmsReturn => {
     setMessage,
     handleToggleStatus,
     handleDelete,
+    deletingIngredient,
+    setDeletingIngredient,
+    confirmDeleteIngredient,
   };
 };
 

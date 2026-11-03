@@ -1,8 +1,9 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MenuBadge } from '@/types';
 import { badgeService } from '@/services/badge.service';
 import { notifyMenuUpdated } from '@/utils/menuSync';
 import { BadgeModal } from './BadgeModal';
+import { ConfirmDeleteModal } from '@/features/admin/components/ConfirmDeleteModal';
 
 export const BadgeManagementTab: React.FC = () => {
   const [badges, setBadges] = useState<MenuBadge[]>([]);
@@ -12,6 +13,7 @@ export const BadgeManagementTab: React.FC = () => {
 
   const [modalBadge, setModalBadge] = useState<MenuBadge | null | 'NEW'>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [deletingBadge, setDeletingBadge] = useState<MenuBadge | null>(null);
   const [togglingId, setTogglingId] = useState<string | null>(null);
 
   const loadBadges = async () => {
@@ -49,27 +51,28 @@ export const BadgeManagementTab: React.FC = () => {
     }
   };
 
-  const handleDelete = async (badge: MenuBadge) => {
+  const handleDelete = (badge: MenuBadge) => {
     if (badge.assignedCount && badge.assignedCount > 0) {
-      alert(
-        `Cannot delete badge "${badge.name}" because it is currently assigned to ${badge.assignedCount} dish(es). Remove it from those dishes first.`
+      setError(
+        `Không thể xóa badge "${badge.name}" vì đang có ${badge.assignedCount} món ăn được gán nhãn này. Vui lòng gỡ nhãn khỏi các món đó trước.`
       );
       return;
     }
+    setDeletingBadge(badge);
+  };
 
-    if (!window.confirm(`Are you sure you want to permanently delete badge "${badge.name}"?`)) {
-      return;
-    }
-
+  const confirmDeleteBadge = async () => {
+    if (!deletingBadge) return;
     try {
-      setDeletingId(badge.id);
-      await badgeService.deleteBadge(badge.id);
-      setBadges((prev) => prev.filter((b) => b.id !== badge.id));
+      setDeletingId(deletingBadge.id);
+      await badgeService.deleteBadge(deletingBadge.id);
+      setBadges((prev) => prev.filter((b) => b.id !== deletingBadge.id));
       notifyMenuUpdated();
-      setSuccessToast(`Badge "${badge.name}" deleted successfully`);
+      setSuccessToast(`Đã xóa badge "${deletingBadge.name}" thành công`);
       setTimeout(() => setSuccessToast(null), 3000);
+      setDeletingBadge(null);
     } catch (err: any) {
-      alert(err?.response?.data?.message || err?.message || 'Failed to delete badge');
+      setError(err?.response?.data?.message || err?.message || 'Không thể xóa badge');
     } finally {
       setDeletingId(null);
     }
@@ -244,6 +247,19 @@ export const BadgeManagementTab: React.FC = () => {
           }}
         />
       )}
+
+      {/* Delete Badge Confirmation Modal */}
+      <ConfirmDeleteModal
+        isOpen={Boolean(deletingBadge)}
+        title="Xác Nhận Xóa Badge"
+        itemType="Nhãn đặc trưng (Badge)"
+        itemName={deletingBadge ? deletingBadge.name : ''}
+        warningMessage="Hành động này sẽ xóa vĩnh viễn nhãn đặc trưng này khỏi hệ thống. Thao tác không thể hoàn tác."
+        confirmLabel="Xác Nhận Xóa"
+        isLoading={Boolean(deletingId)}
+        onConfirm={confirmDeleteBadge}
+        onClose={() => setDeletingBadge(null)}
+      />
     </div>
   );
 };
