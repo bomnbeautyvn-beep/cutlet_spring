@@ -155,37 +155,37 @@
   font-family: "Plus Jakarta Sans", sans-serif;
 }
 
-/* Gentle shake / wiggle animation for unsaved changes lock */
+/* Gentle shake / wiggle animation for unsaved changes lock (shakes 1 time only) */
 @keyframes gentle-shake {
   0%, 100% {
-    transform: translateX(0);
+    transform: translateX(0) rotate(0);
   }
   15% {
-    transform: translateX(-3px) rotate(-0.5deg);
+    transform: translateX(-4px) rotate(-0.5deg);
   }
   30% {
-    transform: translateX(3px) rotate(0.5deg);
+    transform: translateX(4px) rotate(0.5deg);
   }
   45% {
-    transform: translateX(-2.5px) rotate(-0.3deg);
+    transform: translateX(-3px) rotate(-0.3deg);
   }
   60% {
-    transform: translateX(2.5px) rotate(0.3deg);
+    transform: translateX(3px) rotate(0.3deg);
   }
   75% {
-    transform: translateX(-1px);
+    transform: translateX(-1.5px) rotate(0);
   }
   90% {
-    transform: translateX(1px);
+    transform: translateX(1.5px) rotate(0);
   }
 }
 
 .animate-gentle-shake {
-  animation: gentle-shake 1.4s ease-in-out infinite;
+  animation: gentle-shake 0.6s ease-in-out 1;
 }
 
 .animate-shake-attention {
-  animation: gentle-shake 0.5s ease-in-out 3;
+  animation: gentle-shake 0.5s ease-in-out 1;
 }
 
 /* All rectangular buttons standardized to 4px border-radius */
