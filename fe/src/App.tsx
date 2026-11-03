@@ -7,6 +7,7 @@ import React, { useState, useEffect } from 'react';
 import { useUIStore } from '@/stores';
 import { useAuthStore } from '@/stores/auth.store';
 import { Header, Footer } from '@/components/layout';
+import { ErrorBoundary } from '@/components/common';
 import { HomeScreen } from '@/features/home';
 import { MenuScreen } from '@/features/menu';
 import { AdminLayout, AdminLogin } from '@/features/admin';
@@ -77,12 +78,14 @@ export default function App() {
     }
 
     return (
-      <AdminLayout
-        onExitToPublicSite={() => {
-          window.history.pushState(null, '', '/');
-          setRoutePath('/');
-        }}
-      />
+      <ErrorBoundary sectionName="Khu vực Quản trị (Admin Portal)">
+        <AdminLayout
+          onExitToPublicSite={() => {
+            window.history.pushState(null, '', '/');
+            setRoutePath('/');
+          }}
+        />
+      </ErrorBoundary>
     );
   }
 
@@ -99,25 +102,27 @@ export default function App() {
 
       {/* Main Content View Container */}
       <main className="w-full pt-14 sm:pt-20 flex-1">
-        {currentView === 'home' && (
-          <HomeScreen
-            setCurrentView={setCurrentView}
-            language={language}
-          />
-        )}
+        <ErrorBoundary sectionName="Trang Thực Khách (Public Site)">
+          {currentView === 'home' && (
+            <HomeScreen
+              setCurrentView={setCurrentView}
+              language={language}
+            />
+          )}
 
-        {currentView === 'menu' && (
-          <MenuScreen
-            language={language}
-          />
-        )}
+          {currentView === 'menu' && (
+            <MenuScreen
+              language={language}
+            />
+          )}
 
-        {currentView === 'about-us' && (
-          <HomeScreen
-            setCurrentView={setCurrentView}
-            language={language}
-          />
-        )}
+          {currentView === 'about-us' && (
+            <HomeScreen
+              setCurrentView={setCurrentView}
+              language={language}
+            />
+          )}
+        </ErrorBoundary>
       </main>
 
       {/* Shared Editorial Footer */}

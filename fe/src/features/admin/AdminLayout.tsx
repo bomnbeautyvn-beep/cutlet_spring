@@ -8,6 +8,7 @@ import { AccountManagementPage } from '@/features/admin/AccountManagementPage';
 import { HomepageCmsPage } from '@/features/admin/cms/HomepageCmsPage';
 import { DatabaseManagementPage } from '@/features/admin/database/DatabaseManagementPage';
 import { ChangePasswordModal } from '@/features/admin/ChangePasswordModal';
+import { ErrorBoundary } from '@/components/common';
 import { useAuthStore } from '@/stores/auth.store';
 
 interface AdminLayoutProps {
@@ -73,32 +74,38 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onExitToPublicSite }) 
 
         {/* Dynamic Section Content */}
         <main className="flex-1 pb-12">
-          {currentSection === 'dashboard' && (
-            <AdminDashboard
-              onNavigate={handleSelectSection}
-              onOpenNewDish={() => {
-                setCurrentSection('menu');
-                setIsNewDishModalOpen(true);
-              }}
-            />
-          )}
+          <ErrorBoundary
+            key={currentSection}
+            sectionName={sectionTitles[currentSection]}
+            isFullScreen={false}
+          >
+            {currentSection === 'dashboard' && (
+              <AdminDashboard
+                onNavigate={handleSelectSection}
+                onOpenNewDish={() => {
+                  setCurrentSection('menu');
+                  setIsNewDishModalOpen(true);
+                }}
+              />
+            )}
 
-          {currentSection === 'menu' && (
-            <MenuManagementPage
-              onOpenNewDishModal={setIsNewDishModalOpen}
-              isNewDishModalOpen={isNewDishModalOpen}
-            />
-          )}
+            {currentSection === 'menu' && (
+              <MenuManagementPage
+                onOpenNewDishModal={setIsNewDishModalOpen}
+                isNewDishModalOpen={isNewDishModalOpen}
+              />
+            )}
 
-          {currentSection === 'homepage' && isAdmin && <HomepageCmsPage />}
+            {currentSection === 'homepage' && isAdmin && <HomepageCmsPage />}
 
-          {currentSection === 'settings' && isAdmin && (
-            <RestaurantSettingsPage onNavigateToHomepage={() => setCurrentSection('homepage')} />
-          )}
+            {currentSection === 'settings' && isAdmin && (
+              <RestaurantSettingsPage onNavigateToHomepage={() => setCurrentSection('homepage')} />
+            )}
 
-          {currentSection === 'accounts' && isAdmin && <AccountManagementPage />}
+            {currentSection === 'accounts' && isAdmin && <AccountManagementPage />}
 
-          {currentSection === 'database' && isAdmin && <DatabaseManagementPage />}
+            {currentSection === 'database' && isAdmin && <DatabaseManagementPage />}
+          </ErrorBoundary>
         </main>
       </div>
 
