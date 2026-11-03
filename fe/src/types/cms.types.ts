@@ -163,17 +163,17 @@ export interface Ingredient {
 export interface SaveIngredientRequest {
   id?: string;
   nameEn: string;
-  nameKr: string;
-  nameVi: string;
-  nameJp: string;
+  nameKr?: string;
+  nameVi?: string;
+  nameJp?: string;
   subtitleEn?: string;
   subtitleKr?: string;
   subtitleVi?: string;
   subtitleJp?: string;
   descriptionEn: string;
-  descriptionKr: string;
-  descriptionVi: string;
-  descriptionJp: string;
+  descriptionKr?: string;
+  descriptionVi?: string;
+  descriptionJp?: string;
   displayOrder?: number;
   isActive?: boolean;
 }

@@ -292,7 +292,7 @@ export function useAdminDishForm({ dish, onSaved, onClose }: UseAdminDishFormPro
         descriptionKr.trim() ||
         descriptionJp.trim() ||
         basePrice > 0 ||
-        selectedFile ||
+        imageFile ||
         sizes.length > 0
       );
     }
@@ -309,20 +309,20 @@ export function useAdminDishForm({ dish, onSaved, onClose }: UseAdminDishFormPro
       portionVi !== (dish.portionVi || '') ||
       portionKr !== (dish.portionKr || '') ||
       portionJp !== (dish.portionJp || '') ||
-      basePrice !== dish.basePrice ||
+      basePrice !== ((dish as any).basePrice ?? dish.price) ||
       prepTimeMinutes !== (dish.prepTimeMinutes || 15) ||
-      categoryId !== dish.categoryId ||
+      categoryId !== ((dish as any).categoryId ?? dish.category) ||
       active !== dish.active ||
       isChefSignature !== Boolean(dish.isChefSignature) ||
       isBestSeller !== Boolean(dish.isBestSeller) ||
       isLimited !== Boolean(dish.isLimited) ||
-      Boolean(selectedFile)
+      Boolean(imageFile)
     );
   }, [
     dish, nameEn, nameVi, nameKr, nameJp, descriptionEn, descriptionVi,
     descriptionKr, descriptionJp, portionEn, portionVi, portionKr, portionJp,
     basePrice, prepTimeMinutes, categoryId, active, isChefSignature,
-    isBestSeller, isLimited, selectedFile, sizes
+    isBestSeller, isLimited, imageFile, sizes
   ]);
 
   const handleSubmit = async (e: React.FormEvent) => {
