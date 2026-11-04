@@ -14,11 +14,11 @@ export const DishCard: React.FC<DishCardProps> = ({ item, isFeatured, onSelectIt
   return (
     <div
       onClick={() => onSelectItem?.(item)}
-      className={`group flex flex-col justify-between h-full pb-4 cursor-pointer ${
+      className={`group flex flex-col h-full pb-4 cursor-pointer ${
         isFeatured ? 'col-span-1 md:col-span-2' : ''
       }`}
     >
-      <div className="space-y-4">
+      <div className="space-y-3.5">
         {/* Top Image Frame */}
         <DishImageFrame item={item} isFeatured={isFeatured} />
 
@@ -72,10 +72,13 @@ export const DishCard: React.FC<DishCardProps> = ({ item, isFeatured, onSelectIt
           {/* Portions & Big Red Price */}
           <DishPricing item={item} isFeatured={isFeatured} />
         </div>
+
+        {/* 4-Language Description: Hàn -> Anh -> Việt -> Nhật (Liền kề trực tiếp ngay sau tên món) */}
+        <DishDescriptions item={item} isFeatured={isFeatured} />
       </div>
 
-      {/* 4-Language Description: Hàn -> Anh -> Việt -> Nhật */}
-      <DishDescriptions item={item} isFeatured={isFeatured} />
+      {/* Khoảng trống co giãn nằm ở dưới cùng của thẻ */}
+      <div className="flex-1" />
     </div>
   );
 };

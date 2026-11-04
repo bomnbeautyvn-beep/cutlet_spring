@@ -23,6 +23,9 @@ public class DefaultEmailSenderService implements EmailSenderService {
     private final DynamicJavaMailSenderFactory mailSenderFactory;
     private final EmailTemplateService templateService;
 
+    @org.springframework.beans.factory.annotation.Value("${app.portal-url:http://localhost:3000/admin}")
+    private String portalUrl;
+
     @Override
     public void sendPasswordResetOtp(String toEmail, String recipientName, String otp, int expiryMinutes) {
         String masked = maskEmail(toEmail);
@@ -127,6 +130,46 @@ public class DefaultEmailSenderService implements EmailSenderService {
         } catch (Exception e) {
             log.error("Unexpected error sending test email to {}: {}", masked, e.getMessage());
             throw new IllegalStateException("Email delivery service error: " + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public void sendAccountWelcomeEmail(String toEmail, String recipientName, String role, String initialPassword) {
+        String masked = maskEmail(toEmail);
+        log.info("Preparing welcome email for new account [{}] ({}) with role [{}]", recipientName, masked, role);
+
+        EmailConfiguration config = configService.getConfiguration();
+        if (!config.isEnabled()) {
+            log.warn("Dynamic email service is currently disabled in settings. Skipping welcome email dispatch to {}", masked);
+            return;
+        }
+
+        try {
+            JavaMailSenderImpl sender = getSender(config);
+            MimeMessage message = sender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+            helper.setFrom(config.getFromEmail(), config.getFromName());
+            helper.setTo(toEmail);
+            helper.setSubject("[Cutlet Spring] Welcome to the Atelier - Your Account Credentials");
+
+            String normalizedRole = (role != null && (role.contains("ADMIN") || role.equalsIgnoreCase("ROLE_ADMIN")))
+                    ? "Administrator"
+                    : "Staff";
+
+            String htmlBody = templateService.buildWelcomeEmailHtml(
+                    recipientName,
+                    toEmail,
+                    normalizedRole,
+                    initialPassword,
+                    portalUrl
+            );
+            helper.setText(htmlBody, true);
+
+            sender.send(message);
+            log.info("Welcome email successfully dispatched to {} via {}:{}", masked, config.getHost(), config.getPort());
+        } catch (Exception e) {
+            log.warn("Non-fatal: Failed to deliver welcome email to {}: {}", masked, e.getMessage());
         }
     }
 

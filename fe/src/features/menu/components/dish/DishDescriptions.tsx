@@ -9,7 +9,7 @@ interface DishDescriptionsProps {
 export const DishDescriptions: React.FC<DishDescriptionsProps> = ({ item, isFeatured }) => {
   if (isFeatured) {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 text-sm leading-relaxed pt-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 text-sm leading-relaxed pt-0.5">
         {item.descriptionKr && (
           <div className="font-kr-serif text-[#1b1c1a] text-xs sm:text-sm leading-relaxed text-left">
             {item.descriptionKr}
@@ -35,7 +35,7 @@ export const DishDescriptions: React.FC<DishDescriptionsProps> = ({ item, isFeat
   }
 
   return (
-    <div className="hidden md:block space-y-1.5 text-xs sm:text-sm leading-relaxed pt-3">
+    <div className="hidden md:block space-y-1.5 text-xs sm:text-sm leading-relaxed pt-0.5">
       {item.descriptionKr && (
         <div className="font-kr-serif text-[#1b1c1a] text-xs sm:text-sm leading-relaxed text-left">
           {item.descriptionKr}

@@ -28,6 +28,7 @@ spring:
 app:
   config:
     encryption-key: ${APP_CONFIG_ENCRYPTION_KEY:CutletSpringSecretAesEncryptionKey2026!}
+  portal-url: ${APP_PORTAL_URL:http://localhost:3000/admin}
   mail:
     from: ${APP_MAIL_FROM:noreply@cutletspring.com}
     from-name: ${APP_MAIL_FROM_NAME:Cutlet Spring Security}

@@ -16,5 +16,11 @@ public interface EmailSenderService {
      * Sends a diagnostic test email to verify end-to-end SMTP dispatch.
      */
     void sendTestEmail(String recipientEmail);
+
+    /**
+     * Sends a welcome notification email to a newly created administrative or staff account,
+     * including login credentials, portal access link, and recommendations to change password.
+     */
+    void sendAccountWelcomeEmail(String toEmail, String recipientName, String role, String initialPassword);
 }
 

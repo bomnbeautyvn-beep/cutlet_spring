@@ -169,5 +169,101 @@ public class EmailTemplateService {
             </html>
             """.formatted(host, port, senderName, recipientEmail, timestamp);
     }
+
+    public String buildWelcomeEmailHtml(
+            String recipientName,
+            String email,
+            String role,
+            String initialPassword,
+            String loginUrl
+    ) {
+        String safeName = recipientName != null && !recipientName.isBlank() ? recipientName : "Team Member";
+        String safeUrl = loginUrl != null && !loginUrl.isBlank() ? loginUrl : "http://localhost:3000/admin";
+        return """
+            <!DOCTYPE html>
+            <html>
+            <head>
+              <meta charset="utf-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <style>
+                body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f7f5f0; margin: 0; padding: 24px; color: #1b1c1a; }
+                .container { max-width: 580px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; border: 1px solid #e8e3d8; overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
+                .header { background-color: #1b1c1a; padding: 32px 24px; text-align: center; border-bottom: 3px solid #af101a; }
+                .header h1 { color: #fbf9f6; margin: 0; font-size: 22px; font-weight: 700; letter-spacing: 2px; }
+                .header p { color: #feae2c; margin: 6px 0 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; }
+                .content { padding: 36px 32px; }
+                .status-badge { background-color: #eafaf1; color: #27ae60; padding: 10px 16px; border-radius: 6px; font-weight: 700; display: inline-block; margin-bottom: 20px; font-size: 13px; }
+                .info-table { width: 100%%; border-collapse: collapse; margin: 20px 0; font-size: 13px; background-color: #fcfbf8; border: 1px solid #eee8df; border-radius: 8px; overflow: hidden; }
+                .info-table td { padding: 10px 16px; border-bottom: 1px solid #eee8df; }
+                .info-table td.label { font-weight: 600; color: #7f7b75; width: 38%%; }
+                .info-table td.value { color: #1b1c1a; font-family: monospace; font-size: 13px; }
+                .info-table tr:last-child td { border-bottom: none; }
+                .notice-box { background-color: #fffbf0; border-left: 4px solid #feae2c; border-radius: 4px; padding: 14px 16px; margin: 24px 0; }
+                .cta-btn { display: inline-block; background-color: #af101a; color: #ffffff; padding: 12px 28px; border-radius: 4px; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; }
+                .footer { background-color: #faf8f5; padding: 20px 32px; border-top: 1px solid #eee8df; font-size: 11px; color: #7f7b75; line-height: 1.5; }
+              </style>
+            </head>
+            <body>
+              <div class="container">
+                <div class="header">
+                  <h1>봄돈까스 • CUTLET SPRING</h1>
+                  <p>Artisanal Tonkatsu Atelier • Account Provisioned</p>
+                </div>
+                <div class="content">
+                  <div class="status-badge">✓ Tài khoản đã được tạo / Account Provisioned</div>
+                  <p style="font-size: 15px; margin-top: 0;">Xin chào / Hello <strong>%s</strong>,</p>
+                  <p style="line-height: 1.6; color: #3c3a37; font-size: 14px;">
+                    Chào mừng bạn gia nhập đội ngũ <strong>Cutlet Spring Atelier</strong>! Quản trị viên vừa khởi tạo tài khoản truy cập hệ thống quản lý nội bộ dành riêng cho bạn.
+                  </p>
+                  <p style="line-height: 1.6; color: #66615b; font-size: 13px;">
+                    An administrative back-office account has been created for you with the following credentials:
+                  </p>
+
+                  <table class="info-table">
+                    <tr>
+                      <td class="label">Cổng đăng nhập (Portal)</td>
+                      <td class="value"><a href="%s" style="color: #af101a; text-decoration: underline; font-weight: 700;">%s</a></td>
+                    </tr>
+                    <tr>
+                      <td class="label">Email đăng nhập</td>
+                      <td class="value" style="font-weight: bold; color: #1b1c1a;">%s</td>
+                    </tr>
+                    <tr>
+                      <td class="label">Vai trò được cấp (Role)</td>
+                      <td class="value"><strong style="color: #835500;">%s</strong></td>
+                    </tr>
+                    <tr>
+                      <td class="label">Mật khẩu ban đầu</td>
+                      <td class="value" style="color: #af101a; font-weight: bold; font-size: 15px;"><code style="background-color: #fff2f0; border: 1px solid #ffdad6; padding: 3px 8px; border-radius: 4px;">%s</code></td>
+                    </tr>
+                  </table>
+
+                  <!-- Gợi ý đổi mật khẩu ở thư -->
+                  <div class="notice-box">
+                    <div style="font-weight: 700; color: #835500; font-size: 13px; margin-bottom: 4px;">
+                      🔒 Khuyến nghị đổi mật khẩu (Recommended Security Action):
+                    </div>
+                    <p style="margin: 0; font-size: 12px; color: #6b4500; line-height: 1.6;">
+                      Để bảo vệ an toàn cho tài khoản và dữ liệu nhà hàng, sau khi đăng nhập lần đầu tiên bằng mật khẩu tạm trên, vui lòng nhấp vào biểu tượng <strong>chìa khóa (Password)</strong> ở góc trên bên phải màn hình để <strong>đổi sang mật khẩu cá nhân</strong> của bạn.
+                    </p>
+                    <p style="margin: 6px 0 0; font-size: 11px; color: #835500; line-height: 1.5; font-style: italic;">
+                      For your security, please update your temporary password after logging in by clicking the key icon (Password) in the top right corner of the back-office header.
+                    </p>
+                  </div>
+
+                  <div style="text-align: center; margin: 30px 0 10px;">
+                    <a href="%s" class="cta-btn" style="color: #ffffff;">
+                      Đăng Nhập Cổng Quản Trị / Access Portal
+                    </a>
+                  </div>
+                </div>
+                <div class="footer">
+                  <p style="margin: 0;">Cutlet Spring Atelier • Back-Office Security Operations &amp; Team Administration</p>
+                </div>
+              </div>
+            </body>
+            </html>
+            """.formatted(safeName, safeUrl, safeUrl, email, role, initialPassword, safeUrl);
+    }
 }
 

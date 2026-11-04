@@ -6,6 +6,7 @@ import com.cutletspring.account.dto.UpdateAdminAccountRequest;
 import com.cutletspring.auth.entity.Admin;
 import com.cutletspring.auth.repository.AdminRepository;
 import com.cutletspring.auth.service.PasswordValidator;
+import com.cutletspring.email.service.EmailSenderService;
 import com.cutletspring.shared.exception.BadRequestException;
 import com.cutletspring.shared.exception.ConflictException;
 import com.cutletspring.shared.exception.ResourceNotFoundException;
@@ -29,6 +30,7 @@ public class AdminAccountServiceImpl implements AdminAccountService {
     private final AdminRepository adminRepository;
     private final PasswordEncoder passwordEncoder;
     private final AccountAuditLogService auditLogService;
+    private final EmailSenderService emailSenderService;
 
     @Override
     @Transactional(readOnly = true)
@@ -91,6 +93,17 @@ public class AdminAccountServiceImpl implements AdminAccountService {
                 "Created new account: " + saved.getEmail() + " with role " + saved.getRole(),
                 null
         );
+
+        try {
+            emailSenderService.sendAccountWelcomeEmail(
+                    saved.getEmail(),
+                    saved.getFullName(),
+                    saved.getRole(),
+                    request.getPassword()
+            );
+        } catch (Exception ex) {
+            log.warn("Non-fatal: Failed to dispatch welcome email to {}: {}", saved.getEmail(), ex.getMessage());
+        }
 
         return toDto(saved);
     }
