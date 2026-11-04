@@ -68,3 +68,4 @@ class EmailTemplateServiceTests {
         assertTrue(html.contains("Khuyến nghị đổi mật khẩu"));
     }
 }
+
