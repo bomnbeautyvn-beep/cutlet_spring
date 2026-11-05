@@ -222,3 +222,4 @@ flowchart LR
 - [ ] Nginx + Certbot: `https://api.domaincuaban.com` có ổ khóa xanh hợp lệ.
 - [ ] Backend: `https://api.domaincuaban.com/actuator/health` trả về `{"status":"UP"}`.
 - [ ] Frontend: Đăng nhập Admin và gọi Menu không bị lỗi CORS hay Mixed Content.
+

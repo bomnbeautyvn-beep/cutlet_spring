@@ -1,4 +1,9 @@
-const rawBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api';
+const rawBaseUrl =
+  import.meta.env.VITE_API_BASE_URL !== undefined && import.meta.env.VITE_API_BASE_URL !== ''
+    ? import.meta.env.VITE_API_BASE_URL
+    : import.meta.env.PROD
+    ? '/api'
+    : 'http://localhost:8080/api';
 const cleanBaseUrl = rawBaseUrl.replace(/\/+$/, '');
 export const API_BASE_URL = cleanBaseUrl.endsWith('/api') ? cleanBaseUrl : `${cleanBaseUrl}/api`;
 
