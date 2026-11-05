@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 
 interface RequestOtpStepProps {
   email: string;
@@ -24,10 +24,10 @@ export const RequestOtpStep: React.FC<RequestOtpStepProps> = ({
 
       <div>
         <label className="block text-[11px] font-bold uppercase tracking-wider text-[#585757] mb-1.5">
-          Admin Email
+          Email
         </label>
         <div className="relative">
-          <span className="material-symbols-outlined absolute left-3 top-2.5 text-gray-400 text-[18px]">
+          <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-[18px] pointer-events-none select-none flex items-center justify-center">
             mail
           </span>
           <input
@@ -35,7 +35,7 @@ export const RequestOtpStep: React.FC<RequestOtpStepProps> = ({
             required
             value={email}
             onChange={(e) => onEmailChange(e.target.value)}
-            placeholder="admin@cutletspring.com"
+            placeholder="example@gmail.com"
             className="w-full pl-9 pr-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a] font-mono"
           />
         </div>
