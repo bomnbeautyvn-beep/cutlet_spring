@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { adminService, EmailConfig, UpdateEmailConfigPayload } from '@/services/admin.service';
 import { SendTestEmailModal } from './SendTestEmailModal';
 import { DisableEmailConfirmModal } from './DisableEmailConfirmModal';
@@ -525,6 +525,7 @@ export const EmailSmtpSettingsTab: React.FC<EmailSmtpSettingsTabProps> = ({ onDi
                     ? '•••••••••••••••• (Đã lưu an toàn - để trống nếu không đổi)'
                     : 'Dán 16 ký tự mật khẩu ứng dụng tại đây'
                 }
+                autoComplete="new-password"
                 className="w-full pl-3.5 pr-10 py-2.5 text-xs bg-white border border-[#eae8e5] rounded focus:border-[#af101a] focus:ring-1 focus:ring-[#af101a] outline-none font-mono transition-all placeholder:text-[#8f6f6c]"
               />
               <button
