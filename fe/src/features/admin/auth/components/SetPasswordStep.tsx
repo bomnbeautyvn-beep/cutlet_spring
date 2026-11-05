@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 
 interface SetPasswordStepProps {
   newPassword: string;
@@ -48,12 +48,14 @@ export const SetPasswordStep: React.FC<SetPasswordStepProps> = ({
             value={newPassword}
             onChange={(e) => onNewPasswordChange(e.target.value)}
             placeholder="Enter secure password"
+            autoComplete="new-password"
             className="w-full pr-10 pl-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a]"
           />
           <button
             type="button"
             onClick={onToggleShowNew}
-            className="absolute right-3 top-2 text-gray-400 hover:text-gray-600 cursor-pointer"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer flex items-center justify-center"
+            title={showNew ? 'Hide password' : 'Show password'}
           >
             <span className="material-symbols-outlined text-[18px]">
               {showNew ? 'visibility_off' : 'visibility'}
@@ -73,12 +75,14 @@ export const SetPasswordStep: React.FC<SetPasswordStepProps> = ({
             value={confirmNewPassword}
             onChange={(e) => onConfirmNewPasswordChange(e.target.value)}
             placeholder="Confirm new password"
+            autoComplete="new-password"
             className="w-full pr-10 pl-3 py-2 text-xs bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a]"
           />
           <button
             type="button"
             onClick={onToggleShowConfirm}
-            className="absolute right-3 top-2 text-gray-400 hover:text-gray-600 cursor-pointer"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer flex items-center justify-center"
+            title={showConfirm ? 'Hide password' : 'Show password'}
           >
             <span className="material-symbols-outlined text-[18px]">
               {showConfirm ? 'visibility_off' : 'visibility'}

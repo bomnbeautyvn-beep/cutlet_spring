@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { useChangePasswordForm } from './auth/hooks/useChangePasswordForm';
 import { PasswordPolicyChecklist } from './auth/components/PasswordPolicyChecklist';
 
@@ -94,12 +94,14 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
                     onChange={(e) => setCurrentPassword(e.target.value)}
                     required
                     placeholder="Enter existing password"
+                    autoComplete="current-password"
                     className="w-full px-3.5 py-2.5 pr-10 text-sm bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a] text-[#1b1c1a]"
                   />
                   <button
                     type="button"
                     onClick={() => setShowCurrent(!showCurrent)}
-                    className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600 cursor-pointer"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer flex items-center justify-center"
+                    title={showCurrent ? 'Hide password' : 'Show password'}
                   >
                     <span className="material-symbols-outlined text-[18px]">
                       {showCurrent ? 'visibility_off' : 'visibility'}
@@ -120,12 +122,14 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
                     onChange={(e) => setNewPassword(e.target.value)}
                     required
                     placeholder="Enter new strong password"
+                    autoComplete="new-password"
                     className="w-full px-3.5 py-2.5 pr-10 text-sm bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a] text-[#1b1c1a]"
                   />
                   <button
                     type="button"
                     onClick={() => setShowNew(!showNew)}
-                    className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600 cursor-pointer"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer flex items-center justify-center"
+                    title={showNew ? 'Hide password' : 'Show password'}
                   >
                     <span className="material-symbols-outlined text-[18px]">
                       {showNew ? 'visibility_off' : 'visibility'}
@@ -146,12 +150,14 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
                     onChange={(e) => setConfirmNewPassword(e.target.value)}
                     required
                     placeholder="Re-enter new password"
+                    autoComplete="new-password"
                     className="w-full px-3.5 py-2.5 pr-10 text-sm bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a] text-[#1b1c1a]"
                   />
                   <button
                     type="button"
                     onClick={() => setShowConfirm(!showConfirm)}
-                    className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600 cursor-pointer"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer flex items-center justify-center"
+                    title={showConfirm ? 'Hide password' : 'Show password'}
                   >
                     <span className="material-symbols-outlined text-[18px]">
                       {showConfirm ? 'visibility_off' : 'visibility'}

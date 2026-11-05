@@ -79,12 +79,14 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onSuccess }) => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              autoComplete="current-password"
               className="w-full px-3.5 py-2.5 pr-10 text-sm bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a] text-[#1b1c1a]"
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600 cursor-pointer"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer flex items-center justify-center"
+              title={showPassword ? 'Hide password' : 'Show password'}
             >
               <span className="material-symbols-outlined text-[18px]">
                 {showPassword ? 'visibility_off' : 'visibility'}
