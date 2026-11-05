@@ -15,6 +15,8 @@ export function useAccountManagement() {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [editingAccount, setEditingAccount] = useState<AdminAccount | null>(null);
   const [resettingAccount, setResettingAccount] = useState<AdminAccount | null>(null);
+  const [deletingAccount, setDeletingAccount] = useState<AdminAccount | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [showAuditLogs, setShowAuditLogs] = useState(false);
   const [auditLogsResult, setAuditLogsResult] = useState<PageResult<AccountAuditLog> | null>(null);
 
@@ -149,6 +151,21 @@ export function useAccountManagement() {
     }
   };
 
+  const handleDeleteAccount = async () => {
+    if (!deletingAccount) return;
+    setIsDeleting(true);
+    try {
+      await adminService.deleteAccount(deletingAccount.id);
+      showFeedback(`Account "${deletingAccount.email}" deleted successfully.`);
+      setDeletingAccount(null);
+      await fetchAccounts();
+    } catch (err: any) {
+      showFeedback(err?.response?.data?.message || err?.message || 'Failed to delete account', true);
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
   const accounts = pageResult?.content || [];
 
   return {
@@ -173,6 +190,9 @@ export function useAccountManagement() {
     setEditingAccount,
     resettingAccount,
     setResettingAccount,
+    deletingAccount,
+    setDeletingAccount,
+    isDeleting,
     showAuditLogs,
     setShowAuditLogs,
     auditLogsResult,
@@ -192,6 +212,7 @@ export function useAccountManagement() {
     handleCreateSubmit,
     handleUpdateSubmit,
     handleResetPasswordSubmit,
+    handleDeleteAccount,
     fetchAccounts,
   };
 }

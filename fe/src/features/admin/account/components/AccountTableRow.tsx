@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { AdminAccount } from '@/services/admin.service';
 
 interface AccountTableRowProps {
@@ -8,6 +8,7 @@ interface AccountTableRowProps {
   onToggleStatus: (acc: AdminAccount) => void;
   onEdit: (acc: AdminAccount) => void;
   onResetPassword: (acc: AdminAccount) => void;
+  onDelete: (acc: AdminAccount) => void;
 }
 
 export const AccountTableRow: React.FC<AccountTableRowProps> = ({
@@ -17,6 +18,7 @@ export const AccountTableRow: React.FC<AccountTableRowProps> = ({
   onToggleStatus,
   onEdit,
   onResetPassword,
+  onDelete,
 }) => {
   const isCurrent = account.email.toLowerCase() === currentAdminEmail?.toLowerCase();
   const isAdminRole = account.role === 'ROLE_ADMIN' || account.role === 'ADMIN';
@@ -117,6 +119,14 @@ export const AccountTableRow: React.FC<AccountTableRowProps> = ({
             className="p-1.5 text-[#585757] hover:text-amber-700 hover:bg-amber-50 rounded transition-colors cursor-pointer"
           >
             <span className="material-symbols-outlined text-[18px]">lock_reset</span>
+          </button>
+          <button
+            onClick={() => onDelete(account)}
+            disabled={isCurrent}
+            title={isCurrent ? 'Cannot delete currently logged-in account' : 'Delete Account'}
+            className="p-1.5 text-[#585757] hover:text-[#ba1a1a] hover:bg-red-50 rounded transition-colors cursor-pointer disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-[#585757] disabled:cursor-not-allowed"
+          >
+            <span className="material-symbols-outlined text-[18px]">delete</span>
           </button>
         </div>
       </td>

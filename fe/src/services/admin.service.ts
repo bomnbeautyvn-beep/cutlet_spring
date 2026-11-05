@@ -315,6 +315,10 @@ export const adminService = {
     return res.data?.data;
   },
 
+  async deleteAccount(id: string): Promise<void> {
+    await apiClient.delete(API_ENDPOINTS.ADMIN.ACCOUNTS.DELETE(id));
+  },
+
   async resetAccountPassword(id: string, newPassword: string): Promise<void> {
     await apiClient.post(API_ENDPOINTS.ADMIN.ACCOUNTS.RESET_PASSWORD(id), { newPassword });
   },

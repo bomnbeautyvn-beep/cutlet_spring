@@ -19,4 +19,6 @@ public interface AdminAccountService {
     AdminAccountDto updateStatus(String id, boolean active, String currentAdminEmail);
 
     void resetPassword(String id, String newPassword, String currentAdminEmail);
+
+    void deleteAccount(String id, String currentAdminEmail);
 }

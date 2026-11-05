@@ -98,6 +98,17 @@ public class AdminAccountController {
         return ResponseEntity.ok(ApiResponse.success("Password reset successfully", null));
     }
 
+    @Operation(summary = "Delete Account", description = "Permanently deletes an administrator or staff account")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse<Void>> deleteAccount(
+            @PathVariable String id,
+            Authentication authentication
+    ) {
+        String adminEmail = authentication != null ? authentication.getName() : "ADMIN";
+        accountService.deleteAccount(id, adminEmail);
+        return ResponseEntity.ok(ApiResponse.success("Account deleted successfully", null));
+    }
+
     @Operation(summary = "List Account Audit Logs", description = "Retrieves recent audit logs for security oversight")
     @GetMapping("/audit-logs")
     public ResponseEntity<ApiResponse<Page<AccountAuditLog>>> getAuditLogs(

@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { AdminAccount, PageResult } from '@/services/admin.service';
 import { AccountTableRow } from './AccountTableRow';
 
@@ -13,6 +13,7 @@ interface AccountTableProps {
   onToggleStatus: (acc: AdminAccount) => void;
   onEdit: (acc: AdminAccount) => void;
   onResetPassword: (acc: AdminAccount) => void;
+  onDelete: (acc: AdminAccount) => void;
 }
 
 export const AccountTable: React.FC<AccountTableProps> = ({
@@ -26,6 +27,7 @@ export const AccountTable: React.FC<AccountTableProps> = ({
   onToggleStatus,
   onEdit,
   onResetPassword,
+  onDelete,
 }) => {
   if (isLoading) {
     return (
@@ -65,6 +67,7 @@ export const AccountTable: React.FC<AccountTableProps> = ({
               onToggleStatus={onToggleStatus}
               onEdit={onEdit}
               onResetPassword={onResetPassword}
+              onDelete={onDelete}
             />
           ))}
         </tbody>

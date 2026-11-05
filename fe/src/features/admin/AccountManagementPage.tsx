@@ -5,6 +5,7 @@ import { AccountTable } from './account/components/AccountTable';
 import { CreateAccountModal } from './account/components/CreateAccountModal';
 import { EditAccountModal } from './account/components/EditAccountModal';
 import { ResetAccountPasswordModal } from './account/components/ResetAccountPasswordModal';
+import { DeleteAccountModal } from './account/components/DeleteAccountModal';
 import { AuditLogsModal } from './account/components/AuditLogsModal';
 
 export const AccountManagementPage: React.FC = () => {
@@ -30,6 +31,9 @@ export const AccountManagementPage: React.FC = () => {
     setEditingAccount,
     resettingAccount,
     setResettingAccount,
+    deletingAccount,
+    setDeletingAccount,
+    isDeleting,
     showAuditLogs,
     setShowAuditLogs,
     auditLogsResult,
@@ -49,6 +53,7 @@ export const AccountManagementPage: React.FC = () => {
     handleCreateSubmit,
     handleUpdateSubmit,
     handleResetPasswordSubmit,
+    handleDeleteAccount,
   } = useAccountManagement();
 
   return (
@@ -138,6 +143,7 @@ export const AccountManagementPage: React.FC = () => {
             setResettingAccount(acc);
             setNewPasswordValue('');
           }}
+          onDelete={(acc) => setDeletingAccount(acc)}
         />
       </div>
 
@@ -179,6 +185,15 @@ export const AccountManagementPage: React.FC = () => {
         newPasswordValue={newPasswordValue}
         onPasswordChange={setNewPasswordValue}
         onSubmit={handleResetPasswordSubmit}
+      />
+
+      {/* Delete Account Confirmation Modal */}
+      <DeleteAccountModal
+        account={deletingAccount}
+        isOpen={!!deletingAccount}
+        isLoading={isDeleting}
+        onClose={() => setDeletingAccount(null)}
+        onConfirm={handleDeleteAccount}
       />
     </div>
   );

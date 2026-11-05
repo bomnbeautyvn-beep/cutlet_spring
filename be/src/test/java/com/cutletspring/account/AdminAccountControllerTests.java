@@ -108,6 +108,27 @@ class AdminAccountControllerTests {
                 .build();
         ResponseEntity<ApiResponse<Void>> resetResp = accountController.resetPassword(staff.getId(), resetReq, auth);
         assertEquals(200, resetResp.getStatusCode().value());
+
+        // 7. Test protection: Self-deletion prevention
+        BadRequestException selfDelEx = assertThrows(BadRequestException.class, () -> {
+            accountController.deleteAccount(mainAdminId, auth);
+        });
+        assertTrue(selfDelEx.getMessage().contains("cannot delete your own"));
+
+        // 8. Test protection: Last active admin deletion prevention
+        BadRequestException lastAdminDelEx = assertThrows(BadRequestException.class, () -> {
+            accountController.deleteAccount(mainAdminId, anotherAuth);
+        });
+        assertTrue(lastAdminDelEx.getMessage().contains("last active administrator"));
+
+        // 9. Delete staff account succeeds
+        ResponseEntity<ApiResponse<Void>> deleteResp = accountController.deleteAccount(staff.getId(), auth);
+        assertEquals(200, deleteResp.getStatusCode().value());
+
+        // Verify account is removed
+        assertThrows(com.cutletspring.shared.exception.ResourceNotFoundException.class, () -> {
+            accountController.getAccountById(staff.getId());
+        });
     }
 }
 

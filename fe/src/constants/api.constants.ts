@@ -117,6 +117,7 @@ export const API_ENDPOINTS = {
       DETAIL: (id: string) => `/admin/accounts/${id}`,
       CREATE: '/admin/accounts',
       UPDATE: (id: string) => `/admin/accounts/${id}`,
+      DELETE: (id: string) => `/admin/accounts/${id}`,
       SET_STATUS: (id: string) => `/admin/accounts/${id}/status`,
       RESET_PASSWORD: (id: string) => `/admin/accounts/${id}/reset-password`,
       AUDIT_LOGS: '/admin/accounts/audit-logs',

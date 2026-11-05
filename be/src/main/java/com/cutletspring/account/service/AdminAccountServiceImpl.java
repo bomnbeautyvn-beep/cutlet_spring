@@ -209,6 +209,38 @@ public class AdminAccountServiceImpl implements AdminAccountService {
         );
     }
 
+    @Override
+    @Transactional
+    public void deleteAccount(String id, String currentAdminEmail) {
+        Admin admin = adminRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Account not found with id: " + id));
+
+        // Protection 1: Self-deletion prevention
+        if (admin.getEmail().equalsIgnoreCase(currentAdminEmail)) {
+            throw new BadRequestException("You cannot delete your own logged-in administrator account");
+        }
+
+        // Protection 2: Last active admin protection
+        if (admin.getRole().contains("ADMIN") && admin.isActive()) {
+            long activeAdminCount = adminRepository.countByRoleInAndActiveTrue(List.of("ROLE_ADMIN", "ADMIN"));
+            if (activeAdminCount <= 1) {
+                throw new BadRequestException("Cannot delete the last active administrator account");
+            }
+        }
+
+        adminRepository.delete(admin);
+
+        auditLogService.record(
+                currentAdminEmail,
+                null,
+                "DELETE_ACCOUNT",
+                "ADMIN_ACCOUNT",
+                id,
+                "Permanently deleted account: " + admin.getEmail() + " (" + admin.getFullName() + ")",
+                null
+        );
+    }
+
     private AdminAccountDto toDto(Admin entity) {
         return AdminAccountDto.builder()
                 .id(entity.getId())
