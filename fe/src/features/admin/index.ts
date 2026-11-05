@@ -13,3 +13,4 @@ export * from './ChangePasswordModal';
 export * from './ForgotPasswordModal';
 export * from './AdminPortal';
 export * from './cms/HomepageCmsPage';
+export * from './adminNavigation';

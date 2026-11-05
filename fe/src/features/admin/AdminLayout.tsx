@@ -1,4 +1,9 @@
-import React, { useState } from 'react';
+/**
+ * @license
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+import React, { useState, useEffect } from 'react';
 import { AdminSidebar, AdminSection } from '@/features/admin/AdminSidebar';
 import { AdminHeader } from '@/features/admin/AdminHeader';
 import { AdminDashboard } from '@/features/admin/AdminDashboard';
@@ -10,36 +15,84 @@ import { DatabaseManagementPage } from '@/features/admin/database/DatabaseManage
 import { ChangePasswordModal } from '@/features/admin/ChangePasswordModal';
 import { ErrorBoundary } from '@/components/common';
 import { useAuthStore } from '@/stores/auth.store';
+import {
+  SECTION_TITLES,
+  getSectionFromPath,
+  getPathFromSection,
+} from '@/features/admin/adminNavigation';
 
 interface AdminLayoutProps {
+  routePath?: string;
+  onNavigatePath?: (path: string) => void;
   onExitToPublicSite: () => void;
 }
 
-export const AdminLayout: React.FC<AdminLayoutProps> = ({ onExitToPublicSite }) => {
+export const AdminLayout: React.FC<AdminLayoutProps> = ({
+  routePath = window.location.pathname,
+  onNavigatePath,
+  onExitToPublicSite,
+}) => {
   const { admin } = useAuthStore();
   const isAdmin = admin?.role === 'ROLE_ADMIN' || admin?.role === 'ADMIN';
 
-  const [currentSection, setCurrentSection] = useState<AdminSection>('dashboard');
+  const [currentSection, setCurrentSection] = useState<AdminSection>(() =>
+    getSectionFromPath(routePath)
+  );
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
   const [isNewDishModalOpen, setIsNewDishModalOpen] = useState(false);
 
-  // Section titles
-  const sectionTitles: Record<AdminSection, string> = {
-    dashboard: 'Atelier Dashboard & Metrics',
-    menu: 'Menu Catalog Management',
-    homepage: 'Homepage Content Management & CMS',
-    settings: 'Restaurant Profile & Operating Settings',
-    accounts: 'Account Credentials & Security Audit',
-    database: 'Database Backup & Disaster Recovery',
-  };
+  // Sync currentSection whenever routePath changes (e.g. browser Back / Forward buttons)
+  useEffect(() => {
+    const resolvedSection = getSectionFromPath(routePath);
+
+    // Permission boundary: Staff cannot enter admin-restricted areas
+    if (
+      (resolvedSection === 'settings' ||
+        resolvedSection === 'accounts' ||
+        resolvedSection === 'homepage' ||
+        resolvedSection === 'database') &&
+      !isAdmin
+    ) {
+      const fallbackSection: AdminSection = 'menu';
+      const fallbackPath = getPathFromSection(fallbackSection);
+      window.history.replaceState(null, '', fallbackPath);
+      setCurrentSection(fallbackSection);
+      sessionStorage.setItem('last_admin_section', fallbackSection);
+      onNavigatePath?.(fallbackPath);
+      return;
+    }
+
+    setCurrentSection(resolvedSection);
+    sessionStorage.setItem('last_admin_section', resolvedSection);
+
+    // If on base /admin without slug, normalize URL to canonical /admin/slug
+    const canonicalPath = getPathFromSection(resolvedSection);
+    if (window.location.pathname === '/admin' || window.location.pathname === '/admin/') {
+      window.history.replaceState(null, '', canonicalPath);
+      onNavigatePath?.(canonicalPath);
+    }
+  }, [routePath, isAdmin, onNavigatePath]);
 
   const handleSelectSection = (section: AdminSection) => {
     // If staff tries to access admin-only sections, prevent
-    if ((section === 'settings' || section === 'accounts' || section === 'homepage' || section === 'database') && !isAdmin) {
+    if (
+      (section === 'settings' ||
+        section === 'accounts' ||
+        section === 'homepage' ||
+        section === 'database') &&
+      !isAdmin
+    ) {
       return;
     }
+
+    const targetPath = getPathFromSection(section);
+    if (window.location.pathname !== targetPath) {
+      window.history.pushState(null, '', targetPath);
+    }
     setCurrentSection(section);
+    sessionStorage.setItem('last_admin_section', section);
+    onNavigatePath?.(targetPath);
     setIsMobileSidebarOpen(false);
   };
 
@@ -66,7 +119,7 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onExitToPublicSite }) 
       <div className="flex-1 flex flex-col min-w-0 min-h-screen overflow-x-hidden">
         {/* Top Header */}
         <AdminHeader
-          currentSectionTitle={sectionTitles[currentSection]}
+          currentSectionTitle={SECTION_TITLES[currentSection]}
           onChangePasswordClick={() => setIsChangePasswordOpen(true)}
           onExitToPublicSite={onExitToPublicSite}
           onToggleSidebar={() => setIsMobileSidebarOpen((prev) => !prev)}
@@ -76,14 +129,14 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onExitToPublicSite }) 
         <main className="flex-1 pb-12">
           <ErrorBoundary
             key={currentSection}
-            sectionName={sectionTitles[currentSection]}
+            sectionName={SECTION_TITLES[currentSection]}
             isFullScreen={false}
           >
             {currentSection === 'dashboard' && (
               <AdminDashboard
                 onNavigate={handleSelectSection}
                 onOpenNewDish={() => {
-                  setCurrentSection('menu');
+                  handleSelectSection('menu');
                   setIsNewDishModalOpen(true);
                 }}
               />
@@ -99,7 +152,9 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ onExitToPublicSite }) 
             {currentSection === 'homepage' && isAdmin && <HomepageCmsPage />}
 
             {currentSection === 'settings' && isAdmin && (
-              <RestaurantSettingsPage onNavigateToHomepage={() => setCurrentSection('homepage')} />
+              <RestaurantSettingsPage
+                onNavigateToHomepage={() => handleSelectSection('homepage')}
+              />
             )}
 
             {currentSection === 'accounts' && isAdmin && <AccountManagementPage />}

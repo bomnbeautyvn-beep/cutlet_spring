@@ -37,16 +37,26 @@ export default function App() {
   // When unauthenticated, entering any admin route navigates to /admin/login
   useEffect(() => {
     if (isAdminRoute && !isAuthenticated && routePath !== '/admin/login') {
+      // Save intended target so user is returned to the exact section after authentication
+      sessionStorage.setItem('admin_redirect_after_login', routePath);
       window.history.replaceState(null, '', '/admin/login');
       setRoutePath('/admin/login');
     }
   }, [isAdminRoute, isAuthenticated, routePath]);
 
-  // When authenticated, if at /admin/login or /fe/admin, normalize to /admin
+  // When authenticated, if at /admin/login or has /fe/ prefix, redirect to intended target
   useEffect(() => {
     if (isAdminRoute && isAuthenticated && (routePath === '/admin/login' || routePath.startsWith('/fe/admin'))) {
-      window.history.replaceState(null, '', '/admin');
-      setRoutePath('/admin');
+      const savedTarget =
+        sessionStorage.getItem('admin_redirect_after_login') ||
+        sessionStorage.getItem('last_admin_section');
+      let target = '/admin/dashboard';
+      if (savedTarget && savedTarget !== '/admin/login') {
+        target = savedTarget.startsWith('/admin') ? savedTarget : `/admin/${savedTarget}`;
+        sessionStorage.removeItem('admin_redirect_after_login');
+      }
+      window.history.replaceState(null, '', target);
+      setRoutePath(target);
     }
   }, [isAdminRoute, isAuthenticated, routePath]);
 
@@ -57,8 +67,16 @@ export default function App() {
           <div className="w-full max-w-md">
             <AdminLogin
               onSuccess={() => {
-                window.history.replaceState(null, '', '/admin');
-                setRoutePath('/admin');
+                const savedTarget =
+                  sessionStorage.getItem('admin_redirect_after_login') ||
+                  sessionStorage.getItem('last_admin_section');
+                let target = '/admin/dashboard';
+                if (savedTarget && savedTarget !== '/admin/login') {
+                  target = savedTarget.startsWith('/admin') ? savedTarget : `/admin/${savedTarget}`;
+                  sessionStorage.removeItem('admin_redirect_after_login');
+                }
+                window.history.replaceState(null, '', target);
+                setRoutePath(target);
               }}
             />
             <div className="mt-4 text-center">
@@ -80,6 +98,8 @@ export default function App() {
     return (
       <ErrorBoundary sectionName="Khu vực Quản trị (Admin Portal)">
         <AdminLayout
+          routePath={routePath}
+          onNavigatePath={(newPath) => setRoutePath(newPath)}
           onExitToPublicSite={() => {
             window.history.pushState(null, '', '/');
             setRoutePath('/');
