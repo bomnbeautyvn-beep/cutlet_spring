@@ -23,6 +23,11 @@ server:
     session:
       cookie:
         http-only: true
-        secure: true
-        same-site: None
+        secure: ${SESSION_COOKIE_SECURE:true}
+        same-site: ${SESSION_COOKIE_SAME_SITE:None}
+
+management:
+  health:
+    mail:
+      enabled: false
 

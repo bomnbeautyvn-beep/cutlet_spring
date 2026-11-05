@@ -1,0 +1,79 @@
+# ========================================================
+# CUTLET SPRING - PRODUCTION DOCKER COMPOSE (VPS DEPLOYMENT)
+# Target Server: XVPS VN (Ubuntu 20.04, 1 vCPU, 1 GB RAM, 20 GB SSD)
+# Target Directory: /opt/cutletspring
+# ========================================================
+
+services:
+  # --------------------------------------------------------
+  # PostgreSQL 16 Relational Database (Internal Network Only)
+  # Port 5432 is strictly NOT exposed to the public internet
+  # --------------------------------------------------------
+  postgres:
+    image: postgres:16-alpine
+    container_name: cutlet-spring-postgres
+    restart: unless-stopped
+    env_file:
+      - ./be/.env
+    expose:
+      - "5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER:-cutlet_spring_db_user} -d $${POSTGRES_DB:-cutlet_spring_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          memory: 256M
+    networks:
+      - cutlet-network
+
+  # --------------------------------------------------------
+  # Cutlet Spring Backend (Spring Boot 4.x / Java 21)
+  # Prebuilt Docker Image pulled from Docker Hub
+  # --------------------------------------------------------
+  backend:
+    image: ${BACKEND_IMAGE:-myapah/cutletspring-backend:latest}
+    container_name: cutlet-spring-backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file:
+      - ./be/.env
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      MANAGEMENT_HEALTH_MAIL_ENABLED: "false"
+      JAVA_OPTS: "-XX:+UseContainerSupport -XX:MaxRAMPercentage=60.0 -XX:InitialRAMPercentage=30.0 -XX:+ExitOnOutOfMemoryError"
+    volumes:
+      - backend_backups:/app/backups
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/actuator/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 45s
+    deploy:
+      resources:
+        limits:
+          memory: 550M
+    networks:
+      - cutlet-network
+
+volumes:
+  postgres_data:
+    name: cutlet_spring_postgres_data
+  backend_backups:
+    name: cutlet_spring_backend_backups
+
+networks:
+  cutlet-network:
+    name: cutlet_spring_network
+    driver: bridge
+
