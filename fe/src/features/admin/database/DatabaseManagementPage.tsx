@@ -87,13 +87,13 @@ export const DatabaseManagementPage: React.FC = () => {
     }
   };
 
-  const handleRestoreCompleted = () => {
+  const handleRestoreCompleted = useCallback(() => {
     setFeedbackMessage({
       type: 'success',
       text: 'Database restoration verified and completed successfully!',
     });
     loadData();
-  };
+  }, [loadData]);
 
   return (
     <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto">

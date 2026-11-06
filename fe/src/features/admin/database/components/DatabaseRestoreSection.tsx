@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { BackupPreview, DatabaseJob } from '@/types/database.types';
 import { databaseService } from '@/services/database.service';
 
@@ -25,6 +25,9 @@ export const DatabaseRestoreSection: React.FC<DatabaseRestoreSectionProps> = ({
   // Active Job state
   const [activeJob, setActiveJob] = useState<DatabaseJob | null>(null);
   const pollingTimerRef = useRef<number | null>(null);
+  const notifiedCompletedJobsRef = useRef<Set<string>>(new Set());
+  const onRestoreCompletedRef = useRef(onRestoreCompleted);
+  onRestoreCompletedRef.current = onRestoreCompleted;
 
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -57,8 +60,9 @@ export const DatabaseRestoreSection: React.FC<DatabaseRestoreSectionProps> = ({
 
     if (isFinished) {
       if (pollingTimerRef.current) clearInterval(pollingTimerRef.current);
-      if (activeJob.status === 'COMPLETED') {
-        onRestoreCompleted();
+      if (activeJob.status === 'COMPLETED' && !notifiedCompletedJobsRef.current.has(activeJob.jobId)) {
+        notifiedCompletedJobsRef.current.add(activeJob.jobId);
+        onRestoreCompletedRef.current();
       }
       return;
     }
@@ -75,7 +79,7 @@ export const DatabaseRestoreSection: React.FC<DatabaseRestoreSectionProps> = ({
     return () => {
       if (pollingTimerRef.current) clearInterval(pollingTimerRef.current);
     };
-  }, [activeJob?.jobId, activeJob?.status, onRestoreCompleted]);
+  }, [activeJob?.jobId, activeJob?.status]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
