@@ -8,8 +8,8 @@ interface AdminLoginProps {
 
 export const AdminLogin: React.FC<AdminLoginProps> = ({ onSuccess }) => {
   const { login, isLoading, error, clearError } = useAuthStore();
-  const [email, setEmail] = useState('admin@cutletspring.com');
-  const [password, setPassword] = useState('admin123');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isForgotModalOpen, setIsForgotModalOpen] = useState(false);
   const [resetSuccessMessage, setResetSuccessMessage] = useState<string | null>(null);
@@ -56,6 +56,7 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onSuccess }) => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+            placeholder="admin@cutletspring.com"
             className="w-full px-3.5 py-2.5 text-sm bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a] text-[#1b1c1a]"
           />
         </div>
@@ -79,6 +80,7 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onSuccess }) => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              placeholder="••••••••"
               autoComplete="current-password"
               className="w-full px-3.5 py-2.5 pr-10 text-sm bg-[#fbf9f6] border border-[#eae8e5] rounded focus:outline-none focus:border-[#af101a] text-[#1b1c1a]"
             />
@@ -109,10 +111,6 @@ export const AdminLogin: React.FC<AdminLoginProps> = ({ onSuccess }) => {
             </>
           )}
         </button>
-
-        <p className="text-[11px] text-center text-[#8f6f6c]">
-          Default credential: <code className="bg-[#f5f3f0] px-1 py-0.5 rounded">admin@cutletspring.com</code> / <code className="bg-[#f5f3f0] px-1 py-0.5 rounded">admin123</code>
-        </p>
       </form>
 
       {/* Forgot Password Modal */}
