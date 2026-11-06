@@ -1,0 +1,8 @@
+{
+  "name": "cutlet-spring",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "npm --prefix fe install && npm --prefix fe run build"
+  }
+}

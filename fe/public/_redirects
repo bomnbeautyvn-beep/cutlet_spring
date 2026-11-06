@@ -1,3 +1,4 @@
 /api/* https://api.cutletspring.com/api/:splat 200
 /actuator/* https://api.cutletspring.com/actuator/:splat 200
 /* /index.html 200
+
