@@ -6,3 +6,4 @@
     "build": "npm --prefix fe install && npm --prefix fe run build"
   }
 }
+
