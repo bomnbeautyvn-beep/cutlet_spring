@@ -85,7 +85,10 @@ export const cmsService = {
     const response = await api.post<{ success: boolean; data: HomepageHero }>(
       API_ENDPOINTS.ADMIN.CMS.HERO.IMAGE,
       formData,
-      { headers: { 'Content-Type': 'multipart/form-data' } }
+      {
+        headers: { 'Content-Type': 'multipart/form-data' },
+        timeout: 90000,
+      }
     );
     return response.data.data;
   },
@@ -129,7 +132,10 @@ export const cmsService = {
     const response = await api.post<{ success: boolean; data: Ingredient }>(
       API_ENDPOINTS.ADMIN.CMS.INGREDIENTS.IMAGE(id),
       formData,
-      { headers: { 'Content-Type': 'multipart/form-data' } }
+      {
+        headers: { 'Content-Type': 'multipart/form-data' },
+        timeout: 90000,
+      }
     );
     return response.data.data;
   },
@@ -192,7 +198,10 @@ export const cmsService = {
     const response = await api.post<{ success: boolean; data: HeaderFooterSettings }>(
       API_ENDPOINTS.ADMIN.CMS.HEADER_FOOTER.LOGO,
       formData,
-      { headers: { 'Content-Type': 'multipart/form-data' } }
+      {
+        headers: { 'Content-Type': 'multipart/form-data' },
+        timeout: 90000,
+      }
     );
     return response.data.data;
   },

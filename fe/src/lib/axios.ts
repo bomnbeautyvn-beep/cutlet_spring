@@ -7,7 +7,7 @@ export const api: AxiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 15000,
+  timeout: 30000,
 });
 
 let inMemoryCsrfToken: string | null = null;

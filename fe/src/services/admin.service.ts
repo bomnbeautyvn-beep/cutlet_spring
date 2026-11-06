@@ -169,6 +169,7 @@ export const adminService = {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
+      timeout: 90000,
     });
     return res.data?.data;
   },
@@ -254,6 +255,7 @@ export const adminService = {
     formData.append('file', file);
     const res = await api.post(API_ENDPOINTS.ADMIN.RESTAURANT.LOGO, formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
+      timeout: 90000,
     });
     return res.data?.data;
   },
@@ -263,6 +265,7 @@ export const adminService = {
     formData.append('file', file);
     const res = await api.post(API_ENDPOINTS.ADMIN.RESTAURANT.BANNER, formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
+      timeout: 90000,
     });
     return res.data?.data;
   },
