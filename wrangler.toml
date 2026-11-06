@@ -1,6 +1,8 @@
 name = "cutlet-spring"
 main = "worker.js"
 compatibility_date = "2024-11-01"
+account_id = "9928955d3b24782843b6df65d8131b02"
+send_metrics = false
 
 [build]
 command = "npm --prefix fe install && npm --prefix fe run build"
