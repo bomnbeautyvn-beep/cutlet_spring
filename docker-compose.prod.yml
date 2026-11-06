@@ -28,7 +28,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 256M
+          memory: 384M
     networks:
       - cutlet-network
 
@@ -48,7 +48,7 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: prod
       MANAGEMENT_HEALTH_MAIL_ENABLED: "false"
-      JAVA_OPTS: "-XX:+UseContainerSupport -XX:MaxRAMPercentage=60.0 -XX:InitialRAMPercentage=30.0 -XX:+ExitOnOutOfMemoryError"
+      JAVA_OPTS: "-XX:+UseContainerSupport -XX:MaxRAMPercentage=70.0 -XX:InitialRAMPercentage=35.0 -XX:+ExitOnOutOfMemoryError"
     volumes:
       - backend_backups:/app/backups
     ports:
@@ -62,7 +62,7 @@ services:
     deploy:
       resources:
         limits:
-          memory: 550M
+          memory: 1024M
     networks:
       - cutlet-network
 
