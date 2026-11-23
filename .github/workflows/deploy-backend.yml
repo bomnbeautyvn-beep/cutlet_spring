@@ -14,9 +14,6 @@ concurrency:
   group: backend-production
   cancel-in-progress: true
 
-env:
-  IMAGE_NAME: myapah/cutletspring-backend
-
 jobs:
   test:
     name: Build & Test Backend
@@ -42,6 +39,8 @@ jobs:
     name: Build & Push Docker Image
     needs: test
     runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/cutletspring-backend
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -71,6 +70,8 @@ jobs:
     name: Deploy to XVPS VN
     needs: build-and-push
     runs-on: ubuntu-latest
+    env:
+      IMAGE_NAME: ${{ secrets.DOCKERHUB_USERNAME }}/cutletspring-backend
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4

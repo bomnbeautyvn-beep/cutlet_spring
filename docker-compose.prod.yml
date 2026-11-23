@@ -37,7 +37,7 @@ services:
   # Prebuilt Docker Image pulled from Docker Hub
   # --------------------------------------------------------
   backend:
-    image: ${BACKEND_IMAGE:-myapah/cutletspring-backend:latest}
+    image: ${BACKEND_IMAGE:-${DOCKERHUB_USERNAME:-cutletspring}/cutletspring-backend:latest}
     container_name: cutlet-spring-backend
     restart: unless-stopped
     depends_on:
