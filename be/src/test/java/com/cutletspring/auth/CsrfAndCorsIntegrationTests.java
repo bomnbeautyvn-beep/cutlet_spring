@@ -65,25 +65,25 @@ public class CsrfAndCorsIntegrationTests {
     }
 
     @Test
-    @DisplayName("GET /auth/csrf with Vercel origin returns correct CORS headers")
-    void testCsrfCorsWithVercelOrigin() throws Exception {
+    @DisplayName("GET /auth/csrf with production origin returns correct CORS headers")
+    void testCsrfCorsWithProductionOrigin() throws Exception {
         mockMvc.perform(get("/auth/csrf")
-                        .header("Origin", "https://cutletspring.vercel.app")
+                        .header("Origin", "https://cutletspring.com")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(header().string("Access-Control-Allow-Origin", "https://cutletspring.vercel.app"))
+                .andExpect(header().string("Access-Control-Allow-Origin", "https://cutletspring.com"))
                 .andExpect(header().string("Access-Control-Allow-Credentials", "true"));
     }
 
     @Test
-    @DisplayName("OPTIONS /auth/csrf preflight with Vercel origin returns 200 and CORS headers")
-    void testCsrfPreflightWithVercelOrigin() throws Exception {
+    @DisplayName("OPTIONS /auth/csrf preflight with production origin returns 200 and CORS headers")
+    void testCsrfPreflightWithProductionOrigin() throws Exception {
         mockMvc.perform(options("/auth/csrf")
-                        .header("Origin", "https://cutletspring.vercel.app")
+                        .header("Origin", "https://cutletspring.com")
                         .header("Access-Control-Request-Method", "GET")
                         .header("Access-Control-Request-Headers", "Content-Type,X-XSRF-TOKEN"))
                 .andExpect(status().isOk())
-                .andExpect(header().string("Access-Control-Allow-Origin", "https://cutletspring.vercel.app"))
+                .andExpect(header().string("Access-Control-Allow-Origin", "https://cutletspring.com"))
                 .andExpect(header().string("Access-Control-Allow-Credentials", "true"));
     }
 
@@ -296,7 +296,7 @@ public class CsrfAndCorsIntegrationTests {
         mockMvc.perform(put("/api/admin/menu/spring-signature-set")
                         .session(session)
                         .header("X-XSRF-TOKEN", csrfToken)
-                        .header("Origin", "https://cutletspring.vercel.app")
+                        .header("Origin", "https://cutletspring.com")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(updatePayload)))
                 .andExpect(status().isOk())

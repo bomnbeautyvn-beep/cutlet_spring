@@ -43,7 +43,7 @@ import java.util.List;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    @Value("${cors.allowed-origins:${CORSALLOWS:http://localhost:5173,http://localhost:3000,http://localhost:80,https://cutletspring.vercel.app}}")
+    @Value("${cors.allowed-origins:${CORSALLOWS:http://localhost:5173,http://localhost:3000,http://localhost:80,https://cutletspring.com}}")
     private String allowedOrigins;
 
     @Value("${server.servlet.session.cookie.same-site:${SESSION_COOKIE_SAME_SITE:Lax}}")

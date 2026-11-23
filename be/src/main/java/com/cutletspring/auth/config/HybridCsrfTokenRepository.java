@@ -11,7 +11,7 @@ import org.springframework.security.web.csrf.CsrfTokenRepository;
 /**
  * Hybrid CSRF token repository supporting both cookie-based and session-based token persistence.
  *
- * In cross-site SPA architectures (e.g. Vercel frontend calling Render backend),
+ * In cross-site SPA architectures (e.g. Cloudflare frontend calling VPS backend),
  * modern browsers may reject or drop third-party XSRF-TOKEN cookies while preserving
  * the authenticated session cookie (JSESSIONID). This repository persists the CSRF token
  * to both the XSRF-TOKEN cookie and the active HttpSession, and loads from either source.
