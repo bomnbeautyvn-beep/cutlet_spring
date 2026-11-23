@@ -1,6 +1,9 @@
 # 🍱 Cutlet Spring — 봄돈까스
 ### Artisanal Japanese-Korean Tonkatsu Atelier — Full-Stack Monorepo
 
+🌐 **Live Website:** [https://cutletspring.com](https://cutletspring.com)
+
+[![Live Site](https://img.shields.io/badge/Live_Site-cutletspring.com-af101a?style=flat-square&logo=cloudflare)](https://cutletspring.com)
 [![Java](https://img.shields.io/badge/Java-21-orange?style=flat-square&logo=openjdk)](https://openjdk.org/)
 [![Spring Boot](https://img.shields.io/badge/Spring_Boot-4.1.0-6DB33F?style=flat-square&logo=springboot)](https://spring.io/projects/spring-boot)
 [![Spring Security](https://img.shields.io/badge/Spring_Security-Session_Auth-green?style=flat-square&logo=springsecurity)](https://spring.io/projects/spring-security)
